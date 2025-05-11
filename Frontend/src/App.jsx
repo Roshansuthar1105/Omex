@@ -1,4 +1,5 @@
 import "prismjs/themes/prism-tomorrow.css"
+import "./styles/glassmorphism.css"
 import Home from './pages/Home'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
@@ -17,6 +18,13 @@ import CodeBeautifier from "./pages/CodeBeautifier"
 import ErrorDebugger from "./pages/ErrorDebugger"
 import PerformanceAnalyzer from "./pages/PerformanceAnalyzer"
 import ContentSummarizer from "./pages/ContentSummarizer"
+
+// New company pages
+import Team from "./pages/Team"
+import Contact from "./pages/Contact"
+import FAQ from "./pages/FAQ"
+import PrivacyPolicy from "./pages/PrivacyPolicy"
+import TermsOfService from "./pages/TermsOfService"
 
 // Theme context
 import { ThemeProvider } from './context/ThemeContext'
@@ -46,6 +54,13 @@ function App() {
               <Route path="/error-debugger" element={<ErrorDebugger />} />
               <Route path="/performance-analyzer" element={<PerformanceAnalyzer />} />
               <Route path="/content-summarizer" element={<ContentSummarizer />} />
+
+              {/* Company pages routes */}
+              <Route path="/team" element={<Team />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
             </Routes>
           </main>
 

@@ -11,7 +11,11 @@ import {
   FaVial,
   FaMagic,
   FaBug,
-  FaTachometerAlt
+  FaTachometerAlt,
+  FaFileAlt,
+  FaStar,
+  FaUsers,
+  FaComments
 } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 
@@ -20,29 +24,143 @@ function Home() {
   return (
     <div className={`${isDark ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-800'} min-h-screen`}>
       {/* Hero Section */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto text-center">
-          <div className="mb-8 inline-block p-2 bg-blue-600 bg-opacity-20 rounded-full">
-            <FaCode className="text-blue-400 text-2xl" />
+      <section className="py-20 px-4 relative overflow-hidden animated-bg">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 opacity-10"></div>
+          <div className="absolute top-20 left-10 w-40 h-40 bg-yellow-400 rounded-full filter blur-3xl opacity-10"></div>
+          <div className="absolute bottom-20 right-10 w-60 h-60 bg-blue-600 rounded-full filter blur-3xl opacity-10"></div>
+          <div className="absolute inset-0 bg-cover bg-center opacity-5"
+               style={{backgroundImage: "url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"}}></div>
+        </div>
+        <div className="container mx-auto text-center relative z-10">
+          <div className={`${isDark ? 'glass-dark' : 'glass'} rounded-3xl py-12 px-6 max-w-4xl mx-auto`}>
+            <div className="mb-8 inline-block p-3 bg-blue-600 bg-opacity-20 rounded-full">
+              <FaCode className="text-blue-400 text-3xl" />
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              Elevate Your Code with <span className="text-blue-400">OMEX</span>
+            </h1>
+            <p className={`text-xl md:text-2xl ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto mb-10`}>
+              The AI-powered platform for developers to optimize, generate, and analyze code with confidence.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                to="/code-tools"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 flex items-center"
+              >
+                Explore Tools <FaArrowRight className="ml-2" />
+              </Link>
+              <Link
+                to="/about"
+                className={`${isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-white hover:bg-gray-100 border border-gray-200'} text-${isDark ? 'white' : 'gray-800'} px-8 py-3 rounded-lg font-medium transition-all duration-200`}
+              >
+                Learn More
+              </Link>
+            </div>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Welcome to <span className="text-blue-400">OMEX</span> - AI Code Optimizer
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10">
-            Unlock your code's full potential with our AI-powered tools for optimization, analysis, and generation.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
+        </div>
+      </section>
+
+      {/* Featured Services Section */}
+      <section className={`py-16 px-4 ${isDark ? 'bg-gray-800' : 'bg-white'} relative overflow-hidden`}>
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 right-0 w-full h-full bg-cover bg-center"
+               style={{backgroundImage: "url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"}}></div>
+        </div>
+        <div className="container mx-auto relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Featured Services</h2>
+            <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto`}>
+              Discover our most popular tools that help developers write better code
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className={`rounded-lg overflow-hidden ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}`}>
+              <div className={`h-3 ${isDark ? 'bg-blue-500' : 'bg-blue-600'}`}></div>
+              <div className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className={`p-3 rounded-full ${isDark ? 'bg-blue-500 bg-opacity-20' : 'bg-blue-100'}`}>
+                    <FaRobot className="text-blue-500 text-xl" />
+                  </div>
+                  <h3 className="ml-4 text-xl font-bold">Code Generator</h3>
+                </div>
+                <div className="relative h-40 mb-6 rounded-lg overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                    alt="Code Generator"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                </div>
+                <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                  Generate clean, efficient code in multiple languages based on your requirements. Perfect for boilerplate code, algorithms, and common patterns.
+                </p>
+                <Link to="/codegenerator" className="flex items-center text-blue-400 font-medium hover:text-blue-500 transition-colors">
+                  Try Code Generator <FaArrowRight className="ml-2" size={14} />
+                </Link>
+              </div>
+            </div>
+
+            <div className={`rounded-lg overflow-hidden ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}`}>
+              <div className={`h-3 ${isDark ? 'bg-purple-500' : 'bg-purple-600'}`}></div>
+              <div className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className={`p-3 rounded-full ${isDark ? 'bg-purple-500 bg-opacity-20' : 'bg-purple-100'}`}>
+                    <FaLightbulb className="text-purple-500 text-xl" />
+                  </div>
+                  <h3 className="ml-4 text-xl font-bold">Code Optimizer</h3>
+                </div>
+                <div className="relative h-40 mb-6 rounded-lg overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                    alt="Code Optimizer"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                </div>
+                <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                  Improve your code's performance, readability, and maintainability with AI-powered suggestions and best practices.
+                </p>
+                <Link to="/optimiser" className="flex items-center text-blue-400 font-medium hover:text-blue-500 transition-colors">
+                  Try Code Optimizer <FaArrowRight className="ml-2" size={14} />
+                </Link>
+              </div>
+            </div>
+
+            <div className={`rounded-lg overflow-hidden ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}`}>
+              <div className={`h-3 ${isDark ? 'bg-green-500' : 'bg-green-600'}`}></div>
+              <div className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className={`p-3 rounded-full ${isDark ? 'bg-green-500 bg-opacity-20' : 'bg-green-100'}`}>
+                    <FaFileAlt className="text-green-500 text-xl" />
+                  </div>
+                  <h3 className="ml-4 text-xl font-bold">Content Summarizer</h3>
+                </div>
+                <div className="relative h-40 mb-6 rounded-lg overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                    alt="Content Summarizer"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                </div>
+                <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                  Extract key information from various sources including text, images, PDFs, and YouTube videos with our AI summarization tool.
+                </p>
+                <Link to="/content-summarizer" className="flex items-center text-blue-400 font-medium hover:text-blue-500 transition-colors">
+                  Try Content Summarizer <FaArrowRight className="ml-2" size={14} />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-10">
             <Link
-              to="/optimiser"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 flex items-center"
+              to="/code-tools"
+              className={`inline-flex items-center ${isDark ? 'glass-dark' : 'glass'} px-6 py-3 rounded-lg font-medium transition-all duration-200`}
             >
-              Get Started <FaArrowRight className="ml-2" />
-            </Link>
-            <Link
-              to="/about"
-              className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200"
-            >
-              Learn More
+              View All Tools <FaArrowRight className="ml-2" />
             </Link>
           </div>
         </div>
@@ -152,19 +270,138 @@ function Home() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className={`py-16 px-4 ${isDark ? 'bg-gray-900' : 'bg-gray-50'} relative overflow-hidden`}>
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 opacity-5"></div>
+          <div className="absolute inset-0 bg-cover bg-center opacity-5"
+               style={{backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"}}></div>
+        </div>
+        <div className="container mx-auto relative z-10">
+          <div className="text-center mb-12">
+            <div className="flex justify-center mb-4">
+              <div className={`p-4 rounded-full ${isDark ? 'glass-dark' : 'glass'}`}>
+                <FaStar className="text-yellow-400 text-3xl" />
+              </div>
+            </div>
+            <h2 className="text-3xl font-bold mb-4">What Developers Say</h2>
+            <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto`}>
+              Trusted by developers around the world to improve their coding workflow
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className={`rounded-lg p-6 ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}`}>
+              <div className="flex text-yellow-400 mb-4">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+              <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                "OMEX has completely transformed my coding workflow. The code optimization tool helped me improve performance by 40% on a critical project. Highly recommended!"
+              </p>
+              <div className="flex items-center">
+                <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
+                  <img
+                    src="https://randomuser.me/api/portraits/men/32.jpg"
+                    alt="User"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className={`absolute inset-0 rounded-full border-2 ${isDark ? 'border-blue-400' : 'border-blue-500'}`}></div>
+                </div>
+                <div>
+                  <h4 className="font-medium">Michael Chen</h4>
+                  <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Senior Developer, TechCorp</p>
+                </div>
+              </div>
+            </div>
+
+            <div className={`rounded-lg p-6 ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}`}>
+              <div className="flex text-yellow-400 mb-4">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+              <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                "The code generation feature is a game-changer. It saves me hours of work by creating boilerplate code and helping with complex algorithms. OMEX is now an essential part of my toolkit."
+              </p>
+              <div className="flex items-center">
+                <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
+                  <img
+                    src="https://randomuser.me/api/portraits/women/44.jpg"
+                    alt="User"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className={`absolute inset-0 rounded-full border-2 ${isDark ? 'border-purple-400' : 'border-purple-500'}`}></div>
+                </div>
+                <div>
+                  <h4 className="font-medium">Sarah Johnson</h4>
+                  <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Freelance Developer</p>
+                </div>
+              </div>
+            </div>
+
+            <div className={`rounded-lg p-6 ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}`}>
+              <div className="flex text-yellow-400 mb-4">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+              <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                "As a team lead, I've implemented OMEX across our development department. The consistency in code quality and the time saved on reviews has been invaluable. A must-have for any dev team."
+              </p>
+              <div className="flex items-center">
+                <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
+                  <img
+                    src="https://randomuser.me/api/portraits/men/22.jpg"
+                    alt="User"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className={`absolute inset-0 rounded-full border-2 ${isDark ? 'border-green-400' : 'border-green-500'}`}></div>
+                </div>
+                <div>
+                  <h4 className="font-medium">David Rodriguez</h4>
+                  <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Lead Developer, StartupX</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className={`py-16 px-4 ${isDark ? 'bg-blue-600 bg-opacity-10' : 'bg-blue-50'}`}>
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Optimize Your Code?</h2>
-          <p className={`text-xl ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto mb-8`}>
-            Join thousands of developers who are writing better, cleaner, and more efficient code with OMEX.
-          </p>
-          <Link
-            to="/optimiser"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 inline-flex items-center"
-          >
-            Try It Now <FaArrowRight className="ml-2" />
-          </Link>
+      <section className={`py-16 px-4 ${isDark ? 'bg-slate-600 bg-opacity-10 ' : 'bg-blue-50'} relative overflow-hidden`}>
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-cover bg-center opacity-10"
+               style={{backgroundImage: "url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"}}></div>
+        </div>
+        <div className="container mx-auto text-center relative z-10">
+          <div className={`${isDark ? 'glass-dark' : 'glass'} rounded-2xl py-12 px-6 max-w-4xl mx-auto`}>
+            <h2 className="text-3xl font-bold mb-6">Ready to Elevate Your Code?</h2>
+            <p className={`text-xl ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto mb-8`}>
+              Join thousands of developers who are writing better, cleaner, and more efficient code with OMEX.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                to="/code-tools"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 inline-flex items-center"
+              >
+                Explore Our Tools <FaArrowRight className="ml-2" />
+              </Link>
+              <Link
+                to="/contact"
+                className={`${isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-white hover:bg-gray-100 border border-gray-200'} text-${isDark ? 'white' : 'gray-800'} px-8 py-3 rounded-lg font-medium transition-all duration-200`}
+              >
+                Contact Us
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>
