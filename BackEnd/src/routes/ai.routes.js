@@ -8,4 +8,10 @@ router.post("/get-code", aiController.getCode)
 router.post("/get-complexity", aiController.getComplexity)
 router.post("/compare-code", aiController.compareCode)
 
+// New routes for code tools
+router.post("/generate-test-cases", aiController.getTestCases)
+router.post("/beautify-code", aiController.beautifyCode)
+router.post("/debug-code", aiController.debugCode)
+router.post("/analyze-performance", aiController.analyzePerformance)
+
 module.exports = router;

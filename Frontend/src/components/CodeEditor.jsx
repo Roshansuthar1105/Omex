@@ -9,6 +9,7 @@ import { MdDone, MdSettings } from "react-icons/md";
 import Loader from "../components/Loader.jsx"
 import Editor from 'react-simple-code-editor';
 import toast from 'react-hot-toast';
+import { useTheme } from '../context/ThemeContext';
 
 function CodeEditor(props) {
   const URL = props.URL;
@@ -29,8 +30,7 @@ function CodeEditor(props) {
     }
   }, [props.prompt]);
 
-  const theme = props.theme || 'dark';
-  const isDark = theme === 'dark';
+  const { isDark } = useTheme();
 
   const languages = ["Java", "JavaScript", "C", "C++", "Python", "Go"];
 

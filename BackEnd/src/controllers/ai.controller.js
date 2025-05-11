@@ -59,4 +59,73 @@ const compareCode = async (req, res) => {
     }
 }
 
-module.exports = { getReview, getCode, getComplexity, compareCode }
+const getTestCases = async (req, res) => {
+    try {
+        const { code, language } = req.body;
+        if (!code) {
+            return res.status(400).send("Code is required");
+        }
+
+        const response = await aiService.generateTestCases(code, language);
+        res.send(response);
+    } catch (error) {
+        console.error("Error in getTestCases:", error);
+        res.status(500).send("An error occurred while generating test cases");
+    }
+}
+
+const beautifyCode = async (req, res) => {
+    try {
+        const { code, language } = req.body;
+        if (!code) {
+            return res.status(400).send("Code is required");
+        }
+
+        const response = await aiService.beautifyCode(code, language);
+        res.send(response);
+    } catch (error) {
+        console.error("Error in beautifyCode:", error);
+        res.status(500).send("An error occurred while beautifying the code");
+    }
+}
+
+const debugCode = async (req, res) => {
+    try {
+        const { code, language } = req.body;
+        if (!code) {
+            return res.status(400).send("Code is required");
+        }
+
+        const response = await aiService.debugCode(code, language);
+        res.send(response);
+    } catch (error) {
+        console.error("Error in debugCode:", error);
+        res.status(500).send("An error occurred while debugging the code");
+    }
+}
+
+const analyzePerformance = async (req, res) => {
+    try {
+        const { code, language } = req.body;
+        if (!code) {
+            return res.status(400).send("Code is required");
+        }
+
+        const response = await aiService.analyzePerformance(code, language);
+        res.send(response);
+    } catch (error) {
+        console.error("Error in analyzePerformance:", error);
+        res.status(500).send("An error occurred while analyzing code performance");
+    }
+}
+
+module.exports = {
+    getReview,
+    getCode,
+    getComplexity,
+    compareCode,
+    getTestCases,
+    beautifyCode,
+    debugCode,
+    analyzePerformance
+}

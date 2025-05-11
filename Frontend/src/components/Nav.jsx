@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaCode, FaLightbulb, FaRobot, FaChartLine, FaExchangeAlt, FaBars, FaTimes } from 'react-icons/fa';
+import { FaCode, FaLightbulb, FaRobot, FaChartLine, FaExchangeAlt, FaBars, FaTimes, FaTools, FaSun, FaMoon } from 'react-icons/fa';
+import { useTheme } from '../context/ThemeContext';
 
 function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { isDark, toggleTheme } = useTheme();
 
   const isActive = (path) => {
     return location.pathname === path ? 'text-blue-400 border-b-2 border-blue-400' : 'hover:text-blue-400';
@@ -15,7 +17,7 @@ function Nav() {
   };
 
   return (
-    <nav className="bg-gray-900 text-white py-4 px-4 md:px-8 w-full shadow-lg">
+    <nav className={`${isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'} py-4 px-4 md:px-8 w-full shadow-lg transition-colors duration-300`}>
       <div className="container mx-auto">
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -46,16 +48,53 @@ function Nav() {
               <FaExchangeAlt className="text-red-400" />
               <span>Compare</span>
             </Link>
+            <Link to="/code-tools" className={`flex items-center space-x-1 py-2 ${isActive('/code-tools')}`}>
+              <FaTools className="text-blue-400" />
+              <span>Tools</span>
+            </Link>
             <Link to="/about" className={`flex items-center space-x-1 py-2 ${isActive('/about')}`}>
               <span>About</span>
             </Link>
+
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className={`flex items-center space-x-1 py-2 px-3 rounded-md transition-colors duration-200 ${
+                isDark
+                  ? 'bg-gray-800 hover:bg-gray-700'
+                  : 'bg-gray-100 hover:bg-gray-200'
+              }`}
+              aria-label="Toggle theme"
+            >
+              {isDark ? (
+                <FaSun className="text-yellow-400" />
+              ) : (
+                <FaMoon className="text-blue-600" />
+              )}
+            </button>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          {/* Mobile menu button and theme toggle */}
+          <div className="md:hidden flex items-center space-x-2">
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-md transition-colors duration-200 ${
+                isDark
+                  ? 'bg-gray-800 hover:bg-gray-700'
+                  : 'bg-gray-100 hover:bg-gray-200'
+              }`}
+              aria-label="Toggle theme"
+            >
+              {isDark ? (
+                <FaSun className="text-yellow-400" />
+              ) : (
+                <FaMoon className="text-blue-600" />
+              )}
+            </button>
+
             <button
               onClick={toggleMenu}
-              className="text-white focus:outline-none"
+              className={`${isDark ? 'text-white' : 'text-gray-800'} focus:outline-none`}
             >
               {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
             </button>
@@ -64,10 +103,10 @@ function Nav() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 py-2 space-y-3 border-t border-gray-700">
+          <div className={`md:hidden mt-4 py-2 space-y-3 border-t ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
             <Link
               to="/optimiser"
-              className={`block py-2 px-2 rounded ${isActive('/optimiser')} hover:bg-gray-800`}
+              className={`block py-2 px-2 rounded ${isActive('/optimiser')} ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}`}
               onClick={toggleMenu}
             >
               <div className="flex items-center space-x-2">
@@ -77,7 +116,7 @@ function Nav() {
             </Link>
             <Link
               to="/codegenerator"
-              className={`block py-2 px-2 rounded ${isActive('/codegenerator')} hover:bg-gray-800`}
+              className={`block py-2 px-2 rounded ${isActive('/codegenerator')} ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}`}
               onClick={toggleMenu}
             >
               <div className="flex items-center space-x-2">
@@ -87,7 +126,7 @@ function Nav() {
             </Link>
             <Link
               to="/codecomplexity"
-              className={`block py-2 px-2 rounded ${isActive('/codecomplexity')} hover:bg-gray-800`}
+              className={`block py-2 px-2 rounded ${isActive('/codecomplexity')} ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}`}
               onClick={toggleMenu}
             >
               <div className="flex items-center space-x-2">
@@ -97,7 +136,7 @@ function Nav() {
             </Link>
             <Link
               to="/codecompare"
-              className={`block py-2 px-2 rounded ${isActive('/codecompare')} hover:bg-gray-800`}
+              className={`block py-2 px-2 rounded ${isActive('/codecompare')} ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}`}
               onClick={toggleMenu}
             >
               <div className="flex items-center space-x-2">
@@ -106,8 +145,18 @@ function Nav() {
               </div>
             </Link>
             <Link
+              to="/code-tools"
+              className={`block py-2 px-2 rounded ${isActive('/code-tools')} ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}`}
+              onClick={toggleMenu}
+            >
+              <div className="flex items-center space-x-2">
+                <FaTools className="text-blue-400" />
+                <span>Tools</span>
+              </div>
+            </Link>
+            <Link
               to="/about"
-              className={`block py-2 px-2 rounded ${isActive('/about')} hover:bg-gray-800`}
+              className={`block py-2 px-2 rounded ${isActive('/about')} ${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'}`}
               onClick={toggleMenu}
             >
               <div className="flex items-center space-x-2">

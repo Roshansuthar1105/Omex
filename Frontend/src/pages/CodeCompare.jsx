@@ -9,6 +9,7 @@ import Markdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css';
 import Loader from '../components/Loader';
+import { useTheme } from '../context/ThemeContext';
 
 const CodeCompare = () => {
   const [leftCode, setLeftCode] = useState('// Enter your first code snippet here');
@@ -16,10 +17,9 @@ const CodeCompare = () => {
   const [comparison, setComparison] = useState('');
   const [loading, setLoading] = useState(false);
   const [language, setLanguage] = useState('javascript');
-  const [theme, setTheme] = useState('dark');
   const [fontSize, setFontSize] = useState(14);
 
-  const isDark = theme === 'dark';
+  const { isDark } = useTheme();
 
   const languages = [
     { value: 'javascript', label: 'JavaScript' },
@@ -91,7 +91,8 @@ const CodeCompare = () => {
               <select
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
-                className="bg-gray-700 text-white px-3 py-2 rounded-lg"
+                className={`${isDark ? 'bg-gray-700 text-white' : 'bg-white text-gray-800'} px-3 py-2 rounded-lg`}
+                // className="bg-gray-700 text-white px-3 py-2 rounded-lg"
               >
                 {languages.map((lang) => (
                   <option key={lang.value} value={lang.value}>
@@ -102,7 +103,7 @@ const CodeCompare = () => {
               <select
                 value={fontSize}
                 onChange={(e) => setFontSize(parseInt(e.target.value))}
-                className="bg-gray-700 text-white px-3 py-2 rounded-lg"
+                className={`${isDark ? 'bg-gray-700 text-white' : 'bg-white text-gray-800'} px-3 py-2 rounded-lg`}
               >
                 {[12, 14, 16, 18, 20].map((size) => (
                   <option key={size} value={size}>
@@ -110,16 +111,7 @@ const CodeCompare = () => {
                   </option>
                 ))}
               </select>
-              <button
-                onClick={() => setTheme(isDark ? 'light' : 'dark')}
-                className={`px-3 py-2 rounded-lg transition-colors duration-200 ${
-                  isDark
-                    ? 'bg-yellow-400 hover:bg-yellow-500 text-gray-900'
-                    : 'bg-gray-700 hover:bg-gray-800 text-white'
-                }`}
-              >
-                {isDark ? 'Light Mode' : 'Dark Mode'}
-              </button>
+
             </div>
           </div>
           <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -237,47 +229,49 @@ const CodeCompare = () => {
                 </button>
               )}
             </div>
-            <div className={`p-6 ${isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'}`}>
+            <div className={`p-6 ${isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'} overflow-hidden`} style={{ maxHeight: '500px' }}>
               {loading ? (
                 <div className="flex justify-center py-12">
                   <Loader size="large" color="blue" text="Analyzing code differences..." />
                 </div>
               ) : (
-                <Markdown
-                  rehypePlugins={[rehypeHighlight]}
-                  components={{
-                    code: ({ node, ...props }) => (
-                      <pre {...props} className={`p-4 rounded-lg ${
-                        isDark ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-800'
-                      }`}>
-                        <code {...props} />
-                      </pre>
-                    ),
-                    p: ({ node, ...props }) => (
-                      <p {...props} className="mb-4" />
-                    ),
-                    h1: ({ node, ...props }) => (
-                      <h1 {...props} className="text-2xl font-bold mb-4" />
-                    ),
-                    h2: ({ node, ...props }) => (
-                      <h2 {...props} className="text-xl font-bold mb-3" />
-                    ),
-                    h3: ({ node, ...props }) => (
-                      <h3 {...props} className="text-lg font-bold mb-2" />
-                    ),
-                    ul: ({ node, ...props }) => (
-                      <ul {...props} className="list-disc pl-5 mb-4" />
-                    ),
-                    ol: ({ node, ...props }) => (
-                      <ol {...props} className="list-decimal pl-5 mb-4" />
-                    ),
-                    li: ({ node, ...props }) => (
-                      <li {...props} className="mb-1" />
-                    ),
-                  }}
-                >
-                  {comparison}
-                </Markdown>
+                <div className="overflow-y-auto" style={{ maxHeight: '450px' }}>
+                  <Markdown
+                    rehypePlugins={[rehypeHighlight]}
+                    components={{
+                      code: ({ node, ...props }) => (
+                        <pre {...props} className={`p-4 rounded-lg ${
+                          isDark ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-800'
+                        }`}>
+                          <code {...props} />
+                        </pre>
+                      ),
+                      p: ({ node, ...props }) => (
+                        <p {...props} className="mb-4" />
+                      ),
+                      h1: ({ node, ...props }) => (
+                        <h1 {...props} className="text-2xl font-bold mb-4" />
+                      ),
+                      h2: ({ node, ...props }) => (
+                        <h2 {...props} className="text-xl font-bold mb-3" />
+                      ),
+                      h3: ({ node, ...props }) => (
+                        <h3 {...props} className="text-lg font-bold mb-2" />
+                      ),
+                      ul: ({ node, ...props }) => (
+                        <ul {...props} className="list-disc pl-5 mb-4" />
+                      ),
+                      ol: ({ node, ...props }) => (
+                        <ol {...props} className="list-decimal pl-5 mb-4" />
+                      ),
+                      li: ({ node, ...props }) => (
+                        <li {...props} className="mb-1" />
+                      ),
+                    }}
+                  >
+                    {comparison}
+                  </Markdown>
+                </div>
               )}
             </div>
           </div>

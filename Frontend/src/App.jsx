@@ -10,29 +10,48 @@ import CodeComplexity from "./pages/CodeComplexity"
 import CodeCompare from "./pages/CodeCompare"
 import About from "./pages/About"
 
+// New code tools pages
+import CodeTools from "./pages/CodeTools"
+import TestCaseGenerator from "./pages/TestCaseGenerator"
+import CodeBeautifier from "./pages/CodeBeautifier"
+import ErrorDebugger from "./pages/ErrorDebugger"
+import PerformanceAnalyzer from "./pages/PerformanceAnalyzer"
+
+// Theme context
+import { ThemeProvider } from './context/ThemeContext'
+
 function App() {
   return (
-    <Router>
-      <div className="flex flex-col min-h-screen">
-        <nav className="w-full fixed top-0 left-0 z-50">
-          <Nav />
-        </nav>
+    <ThemeProvider>
+      <Router>
+        <div className="flex flex-col min-h-screen">
+          <nav className="w-full fixed top-0 left-0 z-50">
+            <Nav />
+          </nav>
 
-        <main className="flex-grow pt-20 bg-gray-800">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/optimiser" element={<CodeOptimizer />} />
-            <Route path="/codegenerator" element={<CodeGenerator />} />
-            <Route path="/codecomplexity" element={<CodeComplexity />} />
-            <Route path="/codecompare" element={<CodeCompare />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
-        </main>
+          <main className="flex-grow pt-20">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/optimiser" element={<CodeOptimizer />} />
+              <Route path="/codegenerator" element={<CodeGenerator />} />
+              <Route path="/codecomplexity" element={<CodeComplexity />} />
+              <Route path="/codecompare" element={<CodeCompare />} />
+              <Route path="/about" element={<About />} />
 
-        <Footer />
-        <Toaster position="top-right" />
-      </div>
-    </Router>
+              {/* New code tools routes */}
+              <Route path="/code-tools" element={<CodeTools />} />
+              <Route path="/test-case-generator" element={<TestCaseGenerator />} />
+              <Route path="/code-beautifier" element={<CodeBeautifier />} />
+              <Route path="/error-debugger" element={<ErrorDebugger />} />
+              <Route path="/performance-analyzer" element={<PerformanceAnalyzer />} />
+            </Routes>
+          </main>
+
+          <Footer />
+          <Toaster position="top-right" />
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 
