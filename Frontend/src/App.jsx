@@ -1,4 +1,5 @@
 import "prismjs/themes/prism-tomorrow.css"
+import "./styles/glassmorphism.css"
 import Home from './pages/Home'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
