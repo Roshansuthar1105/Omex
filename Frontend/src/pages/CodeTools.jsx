@@ -6,7 +6,8 @@ import {
   FaMagic,
   FaBug,
   FaTachometerAlt,
-  FaArrowRight
+  FaArrowRight,
+  FaFileAlt
 } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 
@@ -60,7 +61,7 @@ function CodeTools() {
         </div>
 
         {/* Tools Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           <ToolCard
             icon={<FaVial className="text-blue-400 text-2xl" />}
             title="Test Case Generator"
@@ -87,6 +88,13 @@ function CodeTools() {
             title="Performance Analyzer"
             description="Analyze execution time and memory usage of your code and get optimization recommendations."
             link="/performance-analyzer"
+            isDark={isDark}
+          />
+          <ToolCard
+            icon={<FaFileAlt className="text-orange-400 text-2xl" />}
+            title="Content Summarizer"
+            description="Upload media files (images, PDFs, videos, text) and get AI-generated summaries of their content."
+            link="/content-summarizer"
             isDark={isDark}
           />
         </div>
@@ -117,6 +125,12 @@ function CodeTools() {
             </li>
             <li className="flex items-center">
               <span className="mr-2 text-green-400">•</span> API Documentation Generator
+            </li>
+            <li className="flex items-center">
+              <span className="mr-2 text-green-400">•</span> Code Explanation Tool
+            </li>
+            <li className="flex items-center">
+              <span className="mr-2 text-green-400">•</span> Algorithm Visualizer
             </li>
           </ul>
         </div>

@@ -16,6 +16,7 @@ import TestCaseGenerator from "./pages/TestCaseGenerator"
 import CodeBeautifier from "./pages/CodeBeautifier"
 import ErrorDebugger from "./pages/ErrorDebugger"
 import PerformanceAnalyzer from "./pages/PerformanceAnalyzer"
+import ContentSummarizer from "./pages/ContentSummarizer"
 
 // Theme context
 import { ThemeProvider } from './context/ThemeContext'
@@ -44,6 +45,7 @@ function App() {
               <Route path="/code-beautifier" element={<CodeBeautifier />} />
               <Route path="/error-debugger" element={<ErrorDebugger />} />
               <Route path="/performance-analyzer" element={<PerformanceAnalyzer />} />
+              <Route path="/content-summarizer" element={<ContentSummarizer />} />
             </Routes>
           </main>
 

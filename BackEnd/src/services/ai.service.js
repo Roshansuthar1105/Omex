@@ -50,6 +50,11 @@ const performanceAnalyzer = genAI.getGenerativeModel({
     systemInstruction: systemInstructions.performanceAnalyzer
 });
 
+const contentSummarizer = genAI.getGenerativeModel({
+    model: "gemini-2.0-flash",
+    systemInstruction: systemInstructions.contentSummarizer
+});
+
 /**
  * Generate code based on a prompt
  * @param {string} prompt - The prompt to generate code from
@@ -184,6 +189,26 @@ Please provide a detailed analysis of time complexity, space complexity, and sug
     return result.response.text();
 }
 
+/**
+ * Summarize content from text
+ * @param {string} content - The content to summarize
+ * @param {string} summaryLength - The desired length of the summary (short, medium, long)
+ * @param {string} summaryType - The type of summary (general, academic, business)
+ * @returns {Promise<string>} - The summary
+ */
+async function summarizeContent(content, summaryLength = 'medium', summaryType = 'general') {
+    const prompt = `Please summarize the following content:
+
+\`\`\`
+${content}
+\`\`\`
+
+Please provide a ${summaryLength} summary in ${summaryType} style.`;
+
+    const result = await contentSummarizer.generateContent(prompt);
+    return result.response.text();
+}
+
 module.exports = {
     generateReview,
     generateCode,
@@ -192,5 +217,6 @@ module.exports = {
     generateTestCases,
     beautifyCode,
     debugCode,
-    analyzePerformance
+    analyzePerformance,
+    summarizeContent
 };

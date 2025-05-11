@@ -13,9 +13,13 @@
   "description": "",
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
+    "axios": "^1.6.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "nodemon": "^3.1.9"
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.9",
+    "pdf-parse": "^1.1.1",
+    "tesseract.js": "^5.0.5"
   }
 }
