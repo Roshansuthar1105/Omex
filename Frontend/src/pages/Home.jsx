@@ -76,7 +76,16 @@ function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className={`rounded-lg overflow-hidden ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}`}>
+            <div className={`rounded-lg overflow-hidden ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}
+                  transition duration-300
+                  hover:shadow-lg
+                  hover:shadow-gray-900
+                  hover:scale-102
+                  hover:border-2
+                  hover:border-blue-500
+                  focus-within:shadow-lg
+                  focus-within:scale-102
+                  `} tabIndex={0}>
               <div className={`h-3 ${isDark ? 'bg-blue-500' : 'bg-blue-600'}`}></div>
               <div className="p-6">
                 <div className="flex items-center mb-4">
@@ -93,16 +102,34 @@ function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
                 </div>
-                <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}
+                `}>
                   Generate clean, efficient code in multiple languages based on your requirements. Perfect for boilerplate code, algorithms, and common patterns.
                 </p>
-                <Link to="/codegenerator" className="flex items-center text-blue-400 font-medium hover:text-blue-500 transition-colors">
-                  Try Code Generator <FaArrowRight className="ml-2" size={14} />
+                <Link to="/codegenerator" className={`inline-block px-6 py-2 rounded-md font-semibold text-base transition duration-200
+                  ${isDark ? "bg-gray-900 text-blue-300 border border-blue-600 hover:bg-blue-800" : "bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100"
+                  } cursor-pointer select-none `}
+                  tabIndex={0}
+                  role="button"
+                  aria-label="Try Content Summarizer"
+                   >
+                  <span className="flex items-center gap-2">
+                                  Try Code Generator <FaArrowRight size={14} />
+                  </span>
                 </Link>
               </div>
             </div>
 
-            <div className={`rounded-lg overflow-hidden ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}`}>
+            <div className={`rounded-lg overflow-hidden ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}
+                  transition duration-300
+                  hover:shadow-lg
+                  hover:shadow-gray-900
+                  hover:scale-102
+                  hover:border-2
+                  hover:border-blue-500
+                  focus-within:shadow-lg
+                  focus-within:scale-102`}
+                  tabIndex={0}>
               <div className={`h-3 ${isDark ? 'bg-purple-500' : 'bg-purple-600'}`}></div>
               <div className="p-6">
                 <div className="flex items-center mb-4">
@@ -122,13 +149,30 @@ function Home() {
                 <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                   Improve your code's performance, readability, and maintainability with AI-powered suggestions and best practices.
                 </p>
-                <Link to="/optimiser" className="flex items-center text-blue-400 font-medium hover:text-blue-500 transition-colors">
-                  Try Code Optimizer <FaArrowRight className="ml-2" size={14} />
+                <Link to="/optimiser" className={`inline-block px-6 py-2 rounded-md font-semibold text-base transition duration-200
+                  ${isDark ? "bg-gray-900 text-blue-300 border border-blue-600 hover:bg-blue-800" : "bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100"
+                  } cursor-pointer select-none `}
+                  tabIndex={0}
+                  role="button"
+                  aria-label="Try Content Summarizer"
+                   >
+                  <span className="flex items-center gap-2">
+                                  Try Code Optimizer <FaArrowRight size={14} />
+                  </span>
                 </Link>
               </div>
             </div>
 
-            <div className={`rounded-lg overflow-hidden ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}`}>
+            <div className={`rounded-lg overflow-hidden ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}
+                  transition duration-300
+                  hover:shadow-lg
+                  hover:shadow-gray-900
+                  hover:scale-102
+                  hover:border-2
+                  hover:border-blue-500
+                  focus-within:shadow-lg
+                  focus-within:scale-102`}
+                  tabIndex={0}>
               <div className={`h-3 ${isDark ? 'bg-green-500' : 'bg-green-600'}`}></div>
               <div className="p-6">
                 <div className="flex items-center mb-4">
@@ -148,103 +192,421 @@ function Home() {
                 <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                   Extract key information from various sources including text, images, PDFs, and YouTube videos with our AI summarization tool.
                 </p>
-                <Link to="/content-summarizer" className="flex items-center text-blue-400 font-medium hover:text-blue-500 transition-colors">
-                  Try Content Summarizer <FaArrowRight className="ml-2" size={14} />
+              
+                <Link to="/content-summarizer" className={`inline-block px-6 py-2 rounded-md font-semibold text-base transition duration-200
+                  ${isDark ? "bg-gray-900 text-blue-300 border border-blue-600 hover:bg-blue-800" : "bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100"
+                  } cursor-pointer select-none `}
+                  tabIndex={0}
+                  role="button"
+                  aria-label="Try Content Summarizer"
+                   >
+                  <span className="flex items-center gap-2">
+                                  Try Content Summarize <FaArrowRight size={14} />
+                  </span>
                 </Link>
+
               </div>
             </div>
           </div>
 
           <div className="text-center mt-10">
-            <Link
-              to="/code-tools"
-              className={`inline-flex items-center ${isDark ? 'glass-dark' : 'glass'} px-6 py-3 rounded-lg font-medium transition-all duration-200`}
-            >
-              View All Tools <FaArrowRight className="ml-2" />
-            </Link>
+          <Link to="/code-tools" className={`inline-flex items-center gap-2 px-6 py-2 rounded-full font-semibold  transition-all duration-200 border-2
+            ${isDark ? 'border-gray-700 text-blue-200 bg-black/30 hover:bg-blue-900 hover:border-blue-700' : 'border-blue-300 text-blue-700 bg-blue-50/60 hover:bg-blue-100 hover:border-blue-600' }
+            hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 `}>
+                 View All Tools <FaArrowRight size={16} />
+          </Link>
+
+
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className={`py-16 px-4 ${isDark ? 'bg-gray-800' : 'bg-gray-200'}`}>
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Our Features</h2>
+      
+      <section className={`py-16 px-4 ${isDark ? 'bg-gray-900/95' : 'bg-gray-200'}`}>
+          <div className="container mx-auto">
+          <h2 className={`text-4xl font-extrabold text-center mb-10 ${isDark ? "text-blue-200" : "text-blue-800"}`}>
+                    Our Features
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <FeatureCard
-              icon={<FaLightbulb className="text-yellow-400" />}
-              title="Code Optimization"
-              description="Get AI-powered suggestions to improve your code's performance, readability, and maintainability."
-              link="/optimiser"
-            />
-            <FeatureCard
-              icon={<FaRobot className="text-green-400" />}
-              title="Code Generation"
-              description="Generate code snippets and solutions based on your requirements and specifications."
-              link="/codegenerator"
-            />
-            <FeatureCard
-              icon={<FaChartLine className="text-purple-400" />}
-              title="Complexity Analysis"
-              description="Understand the time and space complexity of your algorithms and identify bottlenecks."
-              link="/codecomplexity"
-            />
-            <FeatureCard
-              icon={<FaExchangeAlt className="text-red-400" />}
-              title="Code Comparison"
-              description="Compare different versions of your code to identify changes and improvements."
-              link="/codecompare"
-            />
-          </div>
+
+      
+      <div
+        className={`
+          flex flex-col items-center p-8
+          rounded-2xl
+          ${isDark ? "bg-gray-900" : "bg-white"}
+          shadow-md
+          border border-transparent
+          transition-all duration-300
+          hover:shadow-2xl hover:shadow-black/30
+          hover:scale-[1.03] hover:border-blue-500
+          focus-within:shadow-2xl focus-within:scale-[1.03]
+        `} tabIndex={0}>
+        <div className="mb-4">
+          <FaLightbulb className="text-yellow-400 text-3xl drop-shadow-lg" />
         </div>
-      </section>
+        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
+          Code Optimization
+        </h3>
+        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
+          Get AI-powered suggestions to improve your code's performance, readability, and maintainability.
+        </p>
+        <a
+          href="/optimiser"
+          tabIndex={0}
+          role="button"
+          aria-label="Learn more about Code Optimization">
+          <span
+            className={`
+              inline-flex items-center gap-2
+              px-5 py-2 rounded-md font-semibold text-base
+              transition-colors duration-200
+              ${isDark
+                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+              }
+              cursor-pointer select-none `}>
+            Learn More <FaArrowRight size={16} />
+          </span>
+        </a>
+      </div>
+
+      {/* Card 2 */}
+      <div className={`
+        flex flex-col items-center p-8
+        rounded-2xl
+        ${isDark ? "bg-gray-900" : "bg-white"}
+        shadow-md
+        border border-transparent
+        transition-all duration-300
+        hover:shadow-2xl hover:shadow-black/30
+        hover:scale-[1.03] hover:border-blue-500
+        focus-within:shadow-2xl focus-within:scale-[1.03] `}
+      tabIndex={0}>
+        <div className="mb-4">
+          <FaRobot className="text-green-400 text-3xl drop-shadow-lg" />
+        </div>
+        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
+          Code Generation
+        </h3>
+        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
+          Generate code snippets and solutions based on your requirements and specifications.
+        </p>
+        <a
+          href="/codegenerator"
+          tabIndex={0}
+          role="button"
+          aria-label="Learn more about Code Generation" >
+          <span
+            className={`
+              inline-flex items-center gap-2
+              px-5 py-2 rounded-md font-semibold text-base
+              transition-colors duration-200
+              ${isDark
+                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+              }
+              cursor-pointer select-none
+            `} >
+            Learn More <FaArrowRight size={16} />
+          </span>
+        </a>
+      </div>
+
+     
+      <div className={`
+        flex flex-col items-center p-8
+        rounded-2xl
+        ${isDark ? "bg-gray-900" : "bg-white"}
+        shadow-md
+        border border-transparent
+        transition-all duration-300
+        hover:shadow-2xl hover:shadow-black/30
+        hover:scale-[1.03] hover:border-blue-500
+        focus-within:shadow-2xl focus-within:scale-[1.03]
+      `} tabIndex={0}>
+        <div className="mb-4">
+          <FaChartLine className="text-purple-400 text-3xl drop-shadow-lg" />
+        </div>
+        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
+          Complexity Analysis
+        </h3>
+        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
+          Understand the time and space complexity of your algorithms and identify bottlenecks.
+        </p>
+        <a
+          href="/codecomplexity"
+          tabIndex={0}
+          role="button"
+          aria-label="Learn more about Complexity Analysis">
+          <span
+            className={`
+              inline-flex items-center gap-2
+              px-5 py-2 rounded-md font-semibold text-base
+              transition-colors duration-200
+              ${isDark
+                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+              }
+              cursor-pointer select-none`}>
+            Learn More <FaArrowRight size={16} />
+          </span>
+        </a>
+      </div>
+
+      
+      <div className={`
+        flex flex-col items-center p-8
+        rounded-2xl
+        ${isDark ? "bg-gray-900" : "bg-white"}
+        shadow-md
+        border border-transparent
+        transition-all duration-300
+        hover:shadow-2xl hover:shadow-black/30
+        hover:scale-[1.03] hover:border-blue-500
+        focus-within:shadow-2xl focus-within:scale-[1.03]
+      `}tabIndex={0}>
+        <div className="mb-4">
+          <FaExchangeAlt className="text-red-400 text-3xl drop-shadow-lg" />
+        </div>
+        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
+          Code Comparison
+        </h3>
+        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
+          Compare different versions of your code to identify changes and improvements.
+        </p>
+        <a
+          href="/codecompare"
+          tabIndex={0}
+          role="button"
+          aria-label="Learn more about Code Comparison">
+          <span className={`
+              inline-flex items-center gap-2
+              px-5 py-2 rounded-md font-semibold text-base
+              transition-colors duration-200
+              ${isDark
+                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+              }
+              cursor-pointer select-none
+            `}>
+            Learn More <FaArrowRight size={16} />
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* Code Tools Section */}
       <section className={`py-16 px-4 ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
         <div className="container mx-auto">
           <div className="flex items-center justify-center mb-6">
-            <FaTools className="text-blue-400 text-3xl mr-3" />
-            <h2 className="text-3xl font-bold text-center">New Code Tools</h2>
-          </div>
-          <p className={`text-xl ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto text-center mb-12`}>
-            Explore our latest AI-powered tools to enhance your coding experience
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <FeatureCard
-              icon={<FaVial className="text-blue-400" />}
-              title="Test Case Generator"
-              description="Automatically generate comprehensive test cases for your code."
-              link="/test-case-generator"
-            />
-            <FeatureCard
-              icon={<FaMagic className="text-purple-400" />}
-              title="Code Beautifier"
-              description="Transform messy code into clean, well-structured code that follows best practices."
-              link="/code-beautifier"
-            />
-            <FeatureCard
-              icon={<FaBug className="text-red-400" />}
-              title="Error Debugger"
-              description="Identify and fix bugs, syntax errors, and logical issues in your code."
-              link="/error-debugger"
-            />
-            <FeatureCard
-              icon={<FaTachometerAlt className="text-green-400" />}
-              title="Performance Analyzer"
-              description="Analyze execution time and memory usage of your code and get optimization recommendations."
-              link="/performance-analyzer"
-            />
-          </div>
-          <div className="text-center mt-10">
-            <Link
-              to="/code-tools"
-              className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200"
-            >
-              View All Tools <FaArrowRight className="ml-2" />
-            </Link>
-          </div>
+        <FaTools className="text-blue-400 text-3xl mr-3" />
+         <h2 className="text-3xl font-bold text-center">New Code Tools</h2>
+           </div>
+         <p className={`text-xl ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto text-center mb-12`}>
+                       Explore our latest AI-powered tools to enhance your coding experience
+           </p>
+
+       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <div
+        className={`
+          flex flex-col items-center p-8
+          rounded-2xl
+          ${isDark ? "bg-gray-900" : "bg-white"}
+          shadow-md
+          border border-transparent
+          transition-all duration-300
+          hover:shadow-2xl hover:shadow-black/30
+          hover:scale-[1.03] hover:border-blue-500
+          focus-within:shadow-2xl focus-within:scale-[1.03]`}
+        tabIndex={0}>
+        <div className="mb-4">
+          <FaVial className="text-blue-400 text-3xl drop-shadow-lg" />
+        </div>
+        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
+          Test Case Generator
+        </h3>
+        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
+          Automatically generate comprehensive test cases for your code.
+        </p>
+        <a
+          href="/test-case-generator"
+          tabIndex={0}
+          role="button"
+          aria-label="Learn more about Test Case Generator">
+          <span className={`
+              inline-flex items-center gap-2
+              px-5 py-2 rounded-md font-semibold text-base
+              transition-colors duration-200
+              ${isDark
+                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+              }
+              cursor-pointer select-none`}>
+            Learn More <FaArrowRight size={16} />
+          </span>
+        </a>
+      </div>
+      
+      
+      <div
+        className={`
+          flex flex-col items-center p-8
+          rounded-2xl
+          ${isDark ? "bg-gray-900" : "bg-white"}
+          shadow-md
+          border border-transparent
+          transition-all duration-300
+          hover:shadow-2xl hover:shadow-black/30
+          hover:scale-[1.03] hover:border-blue-500
+          focus-within:shadow-2xl focus-within:scale-[1.03]
+        `}
+        tabIndex={0}>
+        <div className="mb-4">
+          <FaMagic className="text-purple-400 text-3xl drop-shadow-lg" />
+        </div>
+        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
+          Code Beautifier
+        </h3>
+        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
+          Transform messy code into clean, well-structured code that follows best practices.
+        </p>
+        <a
+          href="/code-beautifier"
+          tabIndex={0}
+          role="button"
+          aria-label="Learn more about Code Beautifier">
+          <span
+            className={`
+              inline-flex items-center gap-2
+              px-5 py-2 rounded-md font-semibold text-base
+              transition-colors duration-200
+              ${isDark
+                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+              }
+              cursor-pointer select-none
+            `}
+          >
+            Learn More <FaArrowRight size={16} />
+          </span>
+        </a>
+      </div>
+
+      
+      <div
+        className={`
+          flex flex-col items-center p-8
+          rounded-2xl
+          ${isDark ? "bg-gray-900" : "bg-white"}
+          shadow-md
+          border border-transparent
+          transition-all duration-300
+          hover:shadow-2xl hover:shadow-black/30
+          hover:scale-[1.03] hover:border-blue-500
+          focus-within:shadow-2xl focus-within:scale-[1.03]
+        `}
+        tabIndex={0}>
+        <div className="mb-4">
+          <FaBug className="text-red-400 text-3xl drop-shadow-lg" />
+        </div>
+        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
+          Error Debugger
+        </h3>
+        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
+          Identify and fix bugs, syntax errors, and logical issues in your code.
+        </p>
+        <a
+          href="/error-debugger"
+          tabIndex={0}
+          role="button"
+          aria-label="Learn more about Error Debugger">
+          <span
+            className={`
+              inline-flex items-center gap-2
+              px-5 py-2 rounded-md font-semibold text-base
+              transition-colors duration-200
+              ${isDark
+                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+              }
+              cursor-pointer select-none`}>
+            Learn More <FaArrowRight size={16} />
+          </span>
+        </a>
+      </div>
+
+      <div
+        className={`
+          flex flex-col items-center p-8
+          rounded-2xl
+          ${isDark ? "bg-gray-900" : "bg-white"}
+          shadow-md
+          border border-transparent
+          transition-all duration-300
+          hover:shadow-2xl hover:shadow-black/30
+          hover:scale-[1.03] hover:border-blue-500
+          focus-within:shadow-2xl focus-within:scale-[1.03]
+        `}
+        tabIndex={0}
+      >
+        <div className="mb-4">
+          <FaTachometerAlt className="text-green-400 text-3xl drop-shadow-lg" />
+        </div>
+        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
+          Performance Analyzer
+        </h3>
+        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
+          Analyze execution time and memory usage of your code and get optimization recommendations.
+        </p>
+        <a
+          href="/performance-analyzer"
+          tabIndex={0}
+          role="button"
+          aria-label="Learn more about Performance Analyzer"
+        >
+          <span
+            className={`
+              inline-flex items-center gap-2
+              px-5 py-2 rounded-md font-semibold text-base
+              transition-colors duration-200
+              ${isDark
+                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+              }
+              cursor-pointer select-none
+            `}
+          >
+            Learn More <FaArrowRight size={16} />
+          </span>
+        </a>
+      </div>
+
+    </div>
+    <div className="text-center mt-10">
+      <a
+        href="/code-tools"
+        className={`
+          inline-flex items-center gap-2
+          bg-blue-600 hover:bg-blue-700
+          text-white px-6 py-3 rounded-lg font-semibold
+          shadow-md hover:shadow-xl
+          transition-all duration-200
+          focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2
+        `}
+        tabIndex={0}
+        role="button">
+        View All Tools <FaArrowRight size={18} />
+        </a>
+        </div>
         </div>
       </section>
+
 
       {/* How It Works Section */}
       <section className={`py-16 px-4 ${isDark ? '' : 'bg-white'}`}>
