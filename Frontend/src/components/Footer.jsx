@@ -55,19 +55,19 @@ const Footer = () => {
             <h3 className={`text-lg font-semibold mb-4 border-b ${isDark ? 'border-gray-700' : 'border-gray-300'} pb-2`}>Main Features</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/optimiser" className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Code Optimizer</Link>
+                <Link to="/optimiser"  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}  className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Code Optimizer</Link>
               </li>
               <li>
-                <Link to="/codegenerator" className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Code Generator</Link>
+                <Link to="/codegenerator" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Code Generator</Link>
               </li>
               <li>
-                <Link to="/codecomplexity" className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Code Complexity</Link>
+                <Link to="/codecomplexity" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Code Complexity</Link>
               </li>
               <li>
-                <Link to="/codecompare" className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Code Compare</Link>
+                <Link to="/codecompare" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Code Compare</Link>
               </li>
               <li>
-                <Link to="/code-tools" className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>All Tools</Link>
+                <Link to="/code-tools" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>All Tools</Link>
               </li>
             </ul>
           </div>
@@ -77,19 +77,19 @@ const Footer = () => {
             <h3 className={`text-lg font-semibold mb-4 border-b ${isDark ? 'border-gray-700' : 'border-gray-300'} pb-2`}>Code Tools</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/test-case-generator" className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Test Case Generator</Link>
+                <Link to="/test-case-generator" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Test Case Generator</Link>
               </li>
               <li>
-                <Link to="/code-beautifier" className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Code Beautifier</Link>
+                <Link to="/code-beautifier" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Code Beautifier</Link>
               </li>
               <li>
-                <Link to="/error-debugger" className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Error Debugger</Link>
+                <Link to="/error-debugger" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Error Debugger</Link>
               </li>
               <li>
-                <Link to="/performance-analyzer" className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Performance Analyzer</Link>
+                <Link to="/performance-analyzer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Performance Analyzer</Link>
               </li>
               <li>
-                <Link to="/content-summarizer" className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Content Summarizer</Link>
+                <Link to="/content-summarizer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Content Summarizer</Link>
               </li>
             </ul>
           </div>
@@ -104,23 +104,23 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/team" className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Our Team</Link>
+                <Link to="/team" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Our Team</Link>
               </li>
               <li>
-                <Link to="/contact" className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Contact Us</Link>
+                <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Contact Us</Link>
               </li>
               <li>
-                <Link to="/faq" className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
+                <Link to="/faq" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
                   <FaQuestionCircle className="mr-2 text-sm" /> FAQ
                 </Link>
               </li>
               <li>
-                <Link to="/privacy-policy" className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
+                <Link to="/privacy-policy" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
                   <FaShieldAlt className="mr-2 text-sm" /> Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/terms-of-service" className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
+                <Link to="/terms-of-service" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
                   <FaFileContract className="mr-2 text-sm" /> Terms of Service
                 </Link>
               </li>
