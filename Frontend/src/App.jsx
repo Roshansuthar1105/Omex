@@ -29,6 +29,9 @@ import TermsOfService from "./pages/TermsOfService"
 // Theme context
 import { ThemeProvider } from './context/ThemeContext'
 
+// Import the BackToTopButton component
+import BackToTopButton from "./components/BackToTopButton";
+
 function App() {
   return (
     <ThemeProvider>
@@ -65,6 +68,7 @@ function App() {
           </main>
 
           <Footer />
+          <BackToTopButton />
           <Toaster position="top-right" />
         </div>
       </Router>
