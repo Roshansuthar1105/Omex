@@ -7,7 +7,7 @@ import {
   FaBug,
   FaTachometerAlt,
   FaArrowRight,
-  FaFileAlt
+  FaFileAlt,FaShieldAlt
 } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 
@@ -97,6 +97,16 @@ function CodeTools() {
             link="/content-summarizer"
             isDark={isDark}
           />
+
+          <ToolCard
+  icon={<FaShieldAlt
+ className="text-red-500 text-2xl" />}  // use FaShieldAlt for security
+  title="Security Vulnerability Scanner"
+  description="Scan your code for security flaws like SQL injection, XSS, and hardcoded secrets with remediation suggestions."
+  link="/security-scanner"
+  isDark={isDark}
+/>
+
         </div>
 
         {/* Coming Soon Section */}

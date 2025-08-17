@@ -119,6 +119,21 @@ const analyzePerformance = async (req, res) => {
     }
 }
 
+const analyzeSecurity = async (req, res) => {
+    try {
+        const { code, language } = req.body;
+        if (!code) {
+            return res.status(400).send("Code is required");
+        }
+
+        const response = await aiService.analyzeSecurity(code, language);
+        res.send(response);
+    } catch (error) {
+        console.error("Error in analyzeSecurity:", error);
+        res.status(500).send("An error occurred during security analysis");
+    }
+}
+
 module.exports = {
     getReview,
     getCode,
@@ -127,5 +142,6 @@ module.exports = {
     getTestCases,
     beautifyCode,
     debugCode,
-    analyzePerformance
+    analyzePerformance,
+    analyzeSecurity,
 }
