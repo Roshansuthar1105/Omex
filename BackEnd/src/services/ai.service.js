@@ -55,6 +55,11 @@ const contentSummarizer = genAI.getGenerativeModel({
     systemInstruction: systemInstructions.contentSummarizer
 });
 
+const securityAnalyzer = genAI.getGenerativeModel({
+    model: "gemini-2.0-flash",
+    systemInstruction: systemInstructions.securityAnalyzer
+});
+
 /**
  * Generate code based on a prompt
  * @param {string} prompt - The prompt to generate code from
@@ -209,6 +214,26 @@ Please provide a ${summaryLength} summary in ${summaryType} style.`;
     return result.response.text();
 }
 
+
+/**
+ * Analyze code for security vulnerabilities
+ * @param {string} code - The code to analyze
+ * @param {string} language - The programming language
+ * @returns {Promise<string>} - The security analysis
+ */
+async function analyzeSecurity(code, language) {
+    const prompt = `Analyze the following ${language || 'code'} for security vulnerabilities:
+
+\`\`\`
+${code}
+\`\`\`
+
+Please provide a detailed security analysis including vulnerability types, severity levels, line numbers, and recommended fixes.`;
+
+    const result = await securityAnalyzer.generateContent(prompt);
+    return result.response.text();
+}
+
 module.exports = {
     generateReview,
     generateCode,
@@ -218,5 +243,6 @@ module.exports = {
     beautifyCode,
     debugCode,
     analyzePerformance,
-    summarizeContent
+    summarizeContent,
+    analyzeSecurity,
 };

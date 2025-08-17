@@ -18,6 +18,7 @@ import CodeBeautifier from "./pages/CodeBeautifier"
 import ErrorDebugger from "./pages/ErrorDebugger"
 import PerformanceAnalyzer from "./pages/PerformanceAnalyzer"
 import ContentSummarizer from "./pages/ContentSummarizer"
+import SecurityScanner from "./pages/SecurityScanner"
 
 // New company pages
 import Team from "./pages/Team"
@@ -57,6 +58,7 @@ function App() {
               <Route path="/error-debugger" element={<ErrorDebugger />} />
               <Route path="/performance-analyzer" element={<PerformanceAnalyzer />} />
               <Route path="/content-summarizer" element={<ContentSummarizer />} />
+              <Route path="/security-scanner" element={<SecurityScanner />} />
 
               {/* Company pages routes */}
               <Route path="/team" element={<Team />} />
