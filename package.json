@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "frontend":"cd ./Frontend && npm run dev",
-    "backend":"cd ./BackEnd && npm run server",
-    "dev":"npm run frontend && npm run backend"
+    "frontend": "cd ./Frontend && npm run dev",
+    "backend": "cd ./BackEnd && npm run server",
+    "dev": "npm run frontend && npm run backend"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1"
+  }
 }
