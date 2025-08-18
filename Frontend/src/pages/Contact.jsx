@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaCheck } from 'react-icons/fa';
+import emailjs from "@emailjs/browser";
+import { useState } from 'react';
+import { FaCheck, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaPhone } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 
 const Contact = () => {
@@ -58,25 +59,40 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle form submission
+  // Handle form submission with EmailJS integration
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (validateForm()) {
       setIsSubmitting(true);
 
-      // Simulate API call
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        // Reset form
-        setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
+      emailjs
+        .send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+          {
+            from_name: formData.name,
+            from_email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+          },
+          import.meta.env.VITE_EMAILJS_USER_ID
+        )
+        .then(() => {
+          setIsSubmitting(false);
+          setIsSubmitted(true);
+          setFormData({
+            name: '',
+            email: '',
+            subject: '',
+            message: ''
+          });
+          setErrors({});
+        })
+        .catch(() => {
+          setIsSubmitting(false);
+          alert("Failed to send! Please try again.");
         });
-      }, 1500);
     }
   };
 
@@ -85,7 +101,7 @@ const Contact = () => {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 opacity-5"></div>
         <div className="absolute inset-0 bg-cover bg-center opacity-5"
-             style={{backgroundImage: "url('https://images.unsplash.com/photo-1596524430615-b46475ddff6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"}}></div>
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1596524430615-b46475ddff6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')" }}></div>
       </div>
       <div className="container mx-auto px-4 py-12 relative z-10">
         {/* Header */}
@@ -113,7 +129,6 @@ const Contact = () => {
                 </div>
                 <div className="relative z-10">
                   <h2 className="text-xl font-bold mb-6">Contact Information</h2>
-
                   <div className="space-y-6">
                     <div className="flex items-start">
                       <div className={`p-3 rounded-full ${isDark ? 'bg-blue-500 bg-opacity-20' : 'bg-blue-100'} mr-4`}>
@@ -126,7 +141,6 @@ const Contact = () => {
                         </a>
                       </div>
                     </div>
-
                     <div className="flex items-start">
                       <div className={`p-3 rounded-full ${isDark ? 'bg-green-500 bg-opacity-20' : 'bg-green-100'} mr-4`}>
                         <FaPhone className="text-green-400" />
@@ -138,7 +152,6 @@ const Contact = () => {
                         </p>
                       </div>
                     </div>
-
                     <div className="flex items-start">
                       <div className={`p-3 rounded-full ${isDark ? 'bg-red-500 bg-opacity-20' : 'bg-red-100'} mr-4`}>
                         <FaMapMarkerAlt className="text-red-400" />
@@ -153,7 +166,6 @@ const Contact = () => {
                       </div>
                     </div>
                   </div>
-
                   <div className="mt-8 p-4 rounded-lg border border-opacity-20 border-blue-400">
                     <h3 className="font-medium mb-2 flex items-center">
                       <svg className="w-5 h-5 text-blue-400 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -221,18 +233,16 @@ const Contact = () => {
                               name="name"
                               value={formData.name}
                               onChange={handleChange}
-                              className={`w-full px-4 py-2 rounded-md ${
-                                isDark
-                                  ? 'bg-gray-800 bg-opacity-50 border-gray-700 text-white'
-                                  : 'bg-white bg-opacity-70 border-gray-300 text-gray-900'
-                              } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                              className={`w-full px-4 py-2 rounded-md ${isDark
+                                ? 'bg-gray-800 bg-opacity-50 border-gray-700 text-white'
+                                : 'bg-white bg-opacity-70 border-gray-300 text-gray-900'
+                                } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
                               placeholder="John Doe"
                             />
                             {errors.name && (
                               <p className="mt-1 text-red-500 text-sm">{errors.name}</p>
                             )}
                           </div>
-
                           {/* Email */}
                           <div>
                             <label htmlFor="email" className="block mb-2 font-medium">
@@ -244,11 +254,10 @@ const Contact = () => {
                               name="email"
                               value={formData.email}
                               onChange={handleChange}
-                              className={`w-full px-4 py-2 rounded-md ${
-                                isDark
-                                  ? 'bg-gray-800 bg-opacity-50 border-gray-700 text-white'
-                                  : 'bg-white bg-opacity-70 border-gray-300 text-gray-900'
-                              } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                              className={`w-full px-4 py-2 rounded-md ${isDark
+                                ? 'bg-gray-800 bg-opacity-50 border-gray-700 text-white'
+                                : 'bg-white bg-opacity-70 border-gray-300 text-gray-900'
+                                } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
                               placeholder="john@example.com"
                             />
                             {errors.email && (
@@ -256,7 +265,6 @@ const Contact = () => {
                             )}
                           </div>
                         </div>
-
                         {/* Subject */}
                         <div className="mb-6">
                           <label htmlFor="subject" className="block mb-2 font-medium">
@@ -268,18 +276,16 @@ const Contact = () => {
                             name="subject"
                             value={formData.subject}
                             onChange={handleChange}
-                            className={`w-full px-4 py-2 rounded-md ${
-                              isDark
-                                ? 'bg-gray-800 bg-opacity-50 border-gray-700 text-white'
-                                : 'bg-white bg-opacity-70 border-gray-300 text-gray-900'
-                            } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            className={`w-full px-4 py-2 rounded-md ${isDark
+                              ? 'bg-gray-800 bg-opacity-50 border-gray-700 text-white'
+                              : 'bg-white bg-opacity-70 border-gray-300 text-gray-900'
+                              } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
                             placeholder="How can we help you?"
                           />
                           {errors.subject && (
                             <p className="mt-1 text-red-500 text-sm">{errors.subject}</p>
                           )}
                         </div>
-
                         {/* Message */}
                         <div className="mb-6">
                           <label htmlFor="message" className="block mb-2 font-medium">
@@ -291,27 +297,24 @@ const Contact = () => {
                             value={formData.message}
                             onChange={handleChange}
                             rows="5"
-                            className={`w-full px-4 py-2 rounded-md ${
-                              isDark
-                                ? 'bg-gray-800 bg-opacity-50 border-gray-700 text-white'
-                                : 'bg-white bg-opacity-70 border-gray-300 text-gray-900'
-                            } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            className={`w-full px-4 py-2 rounded-md ${isDark
+                              ? 'bg-gray-800 bg-opacity-50 border-gray-700 text-white'
+                              : 'bg-white bg-opacity-70 border-gray-300 text-gray-900'
+                              } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
                             placeholder="Your message here..."
                           ></textarea>
                           {errors.message && (
                             <p className="mt-1 text-red-500 text-sm">{errors.message}</p>
                           )}
                         </div>
-
                         {/* Submit Button */}
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className={`flex items-center justify-center px-8 py-3 rounded-md font-medium ${
-                            isSubmitting
-                              ? 'bg-gray-500 cursor-not-allowed'
-                              : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
-                          } text-white transition duration-200`}
+                          className={`flex items-center justify-center px-8 py-3 rounded-md font-medium ${isSubmitting
+                            ? 'bg-gray-500 cursor-not-allowed'
+                            : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
+                            } text-white transition duration-200`}
                         >
                           {isSubmitting ? (
                             <>
