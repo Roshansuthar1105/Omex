@@ -109,7 +109,7 @@ function Nav() {
             </Link>
             <Link
               to="/optimiser"
-              className={`flex items-center space-x-1 py-2 ${isActive(
+              className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${isActive(
                 "/optimiser"
               )}`}
             >
@@ -118,7 +118,7 @@ function Nav() {
             </Link>
             <Link
               to="/codegenerator"
-              className={`flex items-center space-x-1 py-2 ${isActive(
+              className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${isActive(
                 "/codegenerator"
               )}`}
             >
@@ -127,7 +127,7 @@ function Nav() {
             </Link>
             <Link
               to="/codecomplexity"
-              className={`flex items-center space-x-1 py-2 ${isActive(
+              className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${isActive(
                 "/codecomplexity"
               )}`}
             >
@@ -136,7 +136,7 @@ function Nav() {
             </Link>
             <Link
               to="/codecompare"
-              className={`flex items-center space-x-1 py-2 ${isActive(
+              className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${isActive(
                 "/codecompare"
               )}`}
             >
@@ -148,7 +148,7 @@ function Nav() {
             <div className="relative">
               <button
                 onClick={toggleToolsDropdown}
-                className={`flex items-center space-x-1 py-2 ${
+                className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${
                   isToolsActive()
                     ? "text-blue-400 border-b-2 border-blue-400"
                     : "hover:text-blue-400"
@@ -172,7 +172,7 @@ function Nav() {
                   <div className="py-1" role="menu" aria-orientation="vertical">
                     <Link
                       to="/code-tools"
-                      className={`block px-4 py-2 text-sm ${
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${
                         isDark
                           ? "text-gray-300 hover:bg-gray-700"
                           : "text-gray-700 hover:bg-gray-100"
@@ -183,7 +183,7 @@ function Nav() {
                     </Link>
                     <Link
                       to="/test-case-generator"
-                      className={`block px-4 py-2 text-sm ${
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${
                         isDark
                           ? "text-gray-300 hover:bg-gray-700"
                           : "text-gray-700 hover:bg-gray-100"
@@ -194,7 +194,7 @@ function Nav() {
                     </Link>
                     <Link
                       to="/code-beautifier"
-                      className={`block px-4 py-2 text-sm ${
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${
                         isDark
                           ? "text-gray-300 hover:bg-gray-700"
                           : "text-gray-700 hover:bg-gray-100"
@@ -205,7 +205,7 @@ function Nav() {
                     </Link>
                     <Link
                       to="/error-debugger"
-                      className={`block px-4 py-2 text-sm ${
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${
                         isDark
                           ? "text-gray-300 hover:bg-gray-700"
                           : "text-gray-700 hover:bg-gray-100"
@@ -216,7 +216,7 @@ function Nav() {
                     </Link>
                     <Link
                       to="/performance-analyzer"
-                      className={`block px-4 py-2 text-sm ${
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${
                         isDark
                           ? "text-gray-300 hover:bg-gray-700"
                           : "text-gray-700 hover:bg-gray-100"
@@ -227,7 +227,7 @@ function Nav() {
                     </Link>
                     <Link
                       to="/content-summarizer"
-                      className={`block px-4 py-2 text-sm ${
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${
                         isDark
                           ? "text-gray-300 hover:bg-gray-700"
                           : "text-gray-700 hover:bg-gray-100"
@@ -239,7 +239,7 @@ function Nav() {
 
                     <Link
                       to="/security-scanner"
-                      className={`block px-4 py-2 text-sm ${
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${
                         isDark
                           ? "text-gray-300 hover:bg-gray-700"
                           : "text-gray-700 hover:bg-gray-100"
@@ -257,7 +257,7 @@ function Nav() {
             <div className="relative">
               <button
                 onClick={toggleCompanyDropdown}
-                className={`flex items-center space-x-1 py-2 ${
+                className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${
                   isCompanyActive()
                     ? "text-blue-400 border-b-2 border-blue-400"
                     : "hover:text-blue-400"
@@ -280,7 +280,7 @@ function Nav() {
                   <div className="py-1" role="menu" aria-orientation="vertical">
                     <Link
                       to="/about"
-                      className={`block px-4 py-2 text-sm ${
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${
                         isDark
                           ? "text-gray-300 hover:bg-gray-700"
                           : "text-gray-700 hover:bg-gray-100"
@@ -292,7 +292,7 @@ function Nav() {
                     </Link>
                     <Link
                       to="/team"
-                      className={`block px-4 py-2 text-sm ${
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${
                         isDark
                           ? "text-gray-300 hover:bg-gray-700"
                           : "text-gray-700 hover:bg-gray-100"
@@ -303,7 +303,7 @@ function Nav() {
                     </Link>
                     <Link
                       to="/contact"
-                      className={`block px-4 py-2 text-sm ${
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${
                         isDark
                           ? "text-gray-300 hover:bg-gray-700"
                           : "text-gray-700 hover:bg-gray-100"
@@ -315,7 +315,7 @@ function Nav() {
                     </Link>
                     <Link
                       to="/faq"
-                      className={`block px-4 py-2 text-sm ${
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${
                         isDark
                           ? "text-gray-300 hover:bg-gray-700"
                           : "text-gray-700 hover:bg-gray-100"
@@ -327,7 +327,7 @@ function Nav() {
                     </Link>
                     <Link
                       to="/privacy-policy"
-                      className={`block px-4 py-2 text-sm ${
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${
                         isDark
                           ? "text-gray-300 hover:bg-gray-700"
                           : "text-gray-700 hover:bg-gray-100"
@@ -339,7 +339,7 @@ function Nav() {
                     </Link>
                     <Link
                       to="/terms-of-service"
-                      className={`block px-4 py-2 text-sm ${
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${
                         isDark
                           ? "text-gray-300 hover:bg-gray-700"
                           : "text-gray-700 hover:bg-gray-100"
