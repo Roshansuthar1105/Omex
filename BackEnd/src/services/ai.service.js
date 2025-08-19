@@ -67,9 +67,11 @@ const securityAnalyzer = genAI.getGenerativeModel({
  * @returns {Promise<string>} - The generated code
  */
 async function generateCode(prompt, lang) {
-    const result = await codeGenerator.generateContent(prompt, lang);
+    const fullPrompt = `Generate ${lang || "code"} for the following requirement:\n\n${prompt}`;
+    const result = await codeGenerator.generateContent(fullPrompt);
     return result.response.text();
 }
+
 
 /**
  * Generate a code review
@@ -234,6 +236,43 @@ Please provide a detailed security analysis including vulnerability types, sever
     return result.response.text();
 }
 
+/**
+ * Detect intent and generate instant reply for contact messages
+ * @param {string} message - The user’s message from the contact form
+ * @returns {Promise<object>} - Detected intent and AI-generated reply
+ */
+async function detectIntent(message) {
+    const intentModel = genAI.getGenerativeModel({
+        model: "gemini-2.0-flash",
+        systemInstruction: `You are an assistant that classifies user queries into categories:
+        - Bug Report
+        - Feature Request
+        - Pricing Inquiry
+        - General Question
+        - Support
+        Then, provide a short and helpful AI reply in a friendly tone.`
+    });
+
+    const prompt = `User message: "${message}"
+
+    Respond ONLY in JSON format:
+    
+    {
+  "intent": "Bug Report" | "Feature Request" | "Pricing Inquiry" | "General Question" | "Support",
+  "reply": "short helpful AI-generated reply"
+}`;
+
+
+    const result = await intentModel.generateContent(prompt);
+    const text = result.response.text();
+
+    try {
+    return JSON.parse(text);
+  } catch (err) {
+    console.error("Failed to parse AI response:", text);
+    return { intent: "Unknown", reply: text };
+  }
+}
 module.exports = {
     generateReview,
     generateCode,
@@ -245,4 +284,5 @@ module.exports = {
     analyzePerformance,
     summarizeContent,
     analyzeSecurity,
+    detectIntent, 
 };

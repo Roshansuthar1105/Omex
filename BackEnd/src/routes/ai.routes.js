@@ -14,5 +14,6 @@ router.post("/beautify-code", aiController.beautifyCode)
 router.post("/debug-code", aiController.debugCode)
 router.post("/analyze-performance", aiController.analyzePerformance)
 router.post("/analyze-security", aiController.analyzeSecurity);
+router.post("/intent-detect", aiController.intentDetect);
 
 module.exports = router;

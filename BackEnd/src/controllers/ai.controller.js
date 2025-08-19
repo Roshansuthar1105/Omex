@@ -133,6 +133,25 @@ const analyzeSecurity = async (req, res) => {
         res.status(500).send("An error occurred during security analysis");
     }
 }
+const intentDetect = async (req, res) => {
+  try {
+    const { message } = req.body;
+
+    if (!message) {
+      return res.status(400).json({ error: "Message is required" });
+    }
+
+    // Call AI service
+    const result = await aiService.detectIntent(message);
+
+    return res.status(200).json(result);
+  } catch (err) {
+    console.error("Error in intentDetect:", err.message);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
 
 module.exports = {
     getReview,
@@ -144,4 +163,5 @@ module.exports = {
     debugCode,
     analyzePerformance,
     analyzeSecurity,
+    intentDetect,
 }
