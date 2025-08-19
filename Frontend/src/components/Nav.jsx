@@ -7,6 +7,7 @@ import {
   FaEnvelope,
   FaExchangeAlt,
   FaFileContract,
+  FaHandsHelping,
   FaLightbulb,
   FaMoon,
   FaQuestionCircle,
@@ -14,6 +15,7 @@ import {
   FaShieldAlt,
   FaSun,
   FaTools,
+  FaUserFriends,
   FaUsers
 } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
@@ -146,8 +148,8 @@ function Nav() {
               <button
                 onClick={toggleToolsDropdown}
                 className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${isToolsActive()
-                    ? "text-blue-400 border-b-2 border-blue-400"
-                    : "hover:text-blue-400"
+                  ? "text-blue-400 border-b-2 border-blue-400"
+                  : "hover:text-blue-400"
                   }`}
               >
                 <FaTools className="text-blue-400" />
@@ -168,8 +170,8 @@ function Nav() {
                     <Link
                       to="/code-tools"
                       className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                          ? "text-gray-300 hover:bg-gray-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
                         }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
@@ -178,8 +180,8 @@ function Nav() {
                     <Link
                       to="/test-case-generator"
                       className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                          ? "text-gray-300 hover:bg-gray-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
                         }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
@@ -188,8 +190,8 @@ function Nav() {
                     <Link
                       to="/code-beautifier"
                       className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                          ? "text-gray-300 hover:bg-gray-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
                         }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
@@ -198,8 +200,8 @@ function Nav() {
                     <Link
                       to="/error-debugger"
                       className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                          ? "text-gray-300 hover:bg-gray-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
                         }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
@@ -208,8 +210,8 @@ function Nav() {
                     <Link
                       to="/performance-analyzer"
                       className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                          ? "text-gray-300 hover:bg-gray-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
                         }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
@@ -218,8 +220,8 @@ function Nav() {
                     <Link
                       to="/content-summarizer"
                       className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                          ? "text-gray-300 hover:bg-gray-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
                         }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
@@ -229,8 +231,8 @@ function Nav() {
                     <Link
                       to="/security-scanner"
                       className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                          ? "text-gray-300 hover:bg-gray-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
                         }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
@@ -246,8 +248,8 @@ function Nav() {
               <button
                 onClick={toggleCompanyDropdown}
                 className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${isCompanyActive()
-                    ? "text-blue-400 border-b-2 border-blue-400"
-                    : "hover:text-blue-400"
+                  ? "text-blue-400 border-b-2 border-blue-400"
+                  : "hover:text-blue-400"
                   }`}
               >
                 <span>Company</span>
@@ -267,8 +269,8 @@ function Nav() {
                     <Link
                       to="/about"
                       className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                          ? "text-gray-300 hover:bg-gray-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
                         }`}
                       onClick={() => setIsCompanyDropdownOpen(false)}
                     >
@@ -278,12 +280,12 @@ function Nav() {
                     <Link
                       to="/team"
                       className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                          ? "text-gray-300 hover:bg-gray-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
                         }`}
                       onClick={() => setIsCompanyDropdownOpen(false)}
                     >
-                      Our Team
+                      <FaUserFriends className="inline mr-2" />Our Team
                     </Link>
                     <Link
                       to="/contribute"
@@ -293,13 +295,13 @@ function Nav() {
                         }`}
                       onClick={() => setIsCompanyDropdownOpen(false)}
                     >
-                      Contribute
+                      <FaHandsHelping className="inline mr-2" />Contribute
                     </Link>
                     <Link
                       to="/contact"
                       className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                          ? "text-gray-300 hover:bg-gray-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
                         }`}
                       onClick={() => setIsCompanyDropdownOpen(false)}
                     >
@@ -309,8 +311,8 @@ function Nav() {
                     <Link
                       to="/faq"
                       className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                          ? "text-gray-300 hover:bg-gray-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
                         }`}
                       onClick={() => setIsCompanyDropdownOpen(false)}
                     >
@@ -320,8 +322,8 @@ function Nav() {
                     <Link
                       to="/privacy-policy"
                       className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                          ? "text-gray-300 hover:bg-gray-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
                         }`}
                       onClick={() => setIsCompanyDropdownOpen(false)}
                     >
@@ -331,8 +333,8 @@ function Nav() {
                     <Link
                       to="/terms-of-service"
                       className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                          ? "text-gray-300 hover:bg-gray-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
                         }`}
                       onClick={() => setIsCompanyDropdownOpen(false)}
                     >
@@ -348,8 +350,8 @@ function Nav() {
             <button
               onClick={toggleTheme}
               className={`flex items-center space-x-1 py-2 px-3 rounded-md transition-colors duration-200 ${isDark
-                  ? "bg-gray-800 hover:bg-gray-700"
-                  : "bg-gray-100 hover:bg-gray-200"
+                ? "bg-gray-800 hover:bg-gray-700"
+                : "bg-gray-100 hover:bg-gray-200"
                 }`}
               aria-label="Toggle theme"
             >
@@ -366,8 +368,8 @@ function Nav() {
             <button
               onClick={toggleTheme}
               className={`p-2 rounded-md transition-colors duration-200 ${isDark
-                  ? "bg-gray-800 hover:bg-gray-700"
-                  : "bg-gray-100 hover:bg-gray-200"
+                ? "bg-gray-800 hover:bg-gray-700"
+                : "bg-gray-100 hover:bg-gray-200"
                 }`}
               aria-label="Toggle theme"
             >
@@ -381,8 +383,8 @@ function Nav() {
             <button
               onClick={toggleMenu}
               className={`p-2 rounded-lg ${isDark
-                  ? "bg-gray-800/70 text-white"
-                  : "bg-gray-100/70 text-gray-800"
+                ? "bg-gray-800/70 text-white"
+                : "bg-gray-100/70 text-gray-800"
                 } focus:outline-none relative z-50`}
               aria-label="Toggle mobile menu"
             >
@@ -426,8 +428,8 @@ function Nav() {
             <button
               onClick={toggleMenu}
               className={`p-2 rounded-lg ${isDark
-                  ? "bg-gray-800/70 hover:bg-gray-700/70"
-                  : "bg-gray-100/70 hover:bg-gray-200/70"
+                ? "bg-gray-800/70 hover:bg-gray-700/70"
+                : "bg-gray-100/70 hover:bg-gray-200/70"
                 } focus:outline-none`}
               aria-label="Close menu"
             >
@@ -448,12 +450,12 @@ function Nav() {
             <Link
               to="/"
               className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/")
-                  ? isDark
-                    ? "bg-blue-900/30 text-blue-400"
-                    : "bg-blue-50 text-blue-600"
-                  : isDark
-                    ? "hover:bg-gray-800/70"
-                    : "hover:bg-gray-100/70"
+                ? isDark
+                  ? "bg-blue-900/30 text-blue-400"
+                  : "bg-blue-50 text-blue-600"
+                : isDark
+                  ? "hover:bg-gray-800/70"
+                  : "hover:bg-gray-100/70"
                 }`}
               onClick={toggleMenu}
             >
@@ -465,12 +467,12 @@ function Nav() {
             <Link
               to="/optimiser"
               className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/optimiser")
-                  ? isDark
-                    ? "bg-yellow-900/30 text-yellow-400"
-                    : "bg-yellow-50 text-yellow-600"
-                  : isDark
-                    ? "hover:bg-gray-800/70"
-                    : "hover:bg-gray-100/70"
+                ? isDark
+                  ? "bg-yellow-900/30 text-yellow-400"
+                  : "bg-yellow-50 text-yellow-600"
+                : isDark
+                  ? "hover:bg-gray-800/70"
+                  : "hover:bg-gray-100/70"
                 }`}
               onClick={toggleMenu}
             >
@@ -480,12 +482,12 @@ function Nav() {
             <Link
               to="/codegenerator"
               className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/codegenerator")
-                  ? isDark
-                    ? "bg-green-900/30 text-green-400"
-                    : "bg-green-50 text-green-600"
-                  : isDark
-                    ? "hover:bg-gray-800/70"
-                    : "hover:bg-gray-100/70"
+                ? isDark
+                  ? "bg-green-900/30 text-green-400"
+                  : "bg-green-50 text-green-600"
+                : isDark
+                  ? "hover:bg-gray-800/70"
+                  : "hover:bg-gray-100/70"
                 }`}
               onClick={toggleMenu}
             >
@@ -495,12 +497,12 @@ function Nav() {
             <Link
               to="/codecomplexity"
               className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/codecomplexity")
-                  ? isDark
-                    ? "bg-purple-900/30 text-purple-400"
-                    : "bg-purple-50 text-purple-600"
-                  : isDark
-                    ? "hover:bg-gray-800/70"
-                    : "hover:bg-gray-100/70"
+                ? isDark
+                  ? "bg-purple-900/30 text-purple-400"
+                  : "bg-purple-50 text-purple-600"
+                : isDark
+                  ? "hover:bg-gray-800/70"
+                  : "hover:bg-gray-100/70"
                 }`}
               onClick={toggleMenu}
             >
@@ -510,12 +512,12 @@ function Nav() {
             <Link
               to="/codecompare"
               className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/codecompare")
-                  ? isDark
-                    ? "bg-red-900/30 text-red-400"
-                    : "bg-red-50 text-red-600"
-                  : isDark
-                    ? "hover:bg-gray-800/70"
-                    : "hover:bg-gray-100/70"
+                ? isDark
+                  ? "bg-red-900/30 text-red-400"
+                  : "bg-red-50 text-red-600"
+                : isDark
+                  ? "hover:bg-gray-800/70"
+                  : "hover:bg-gray-100/70"
                 }`}
               onClick={toggleMenu}
             >
@@ -528,12 +530,12 @@ function Nav() {
               <button
                 onClick={toggleToolsDropdown}
                 className={`flex items-center justify-between w-full p-3 rounded-lg ${isToolsActive()
-                    ? isDark
-                      ? "bg-blue-900/30 text-blue-400"
-                      : "bg-blue-50 text-blue-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
+                  ? isDark
+                    ? "bg-blue-900/30 text-blue-400"
+                    : "bg-blue-50 text-blue-600"
+                  : isDark
+                    ? "hover:bg-gray-800/70"
+                    : "hover:bg-gray-100/70"
                   }`}
               >
                 <div className="flex items-center space-x-3">
@@ -560,12 +562,12 @@ function Nav() {
                 <Link
                   to="/code-tools"
                   className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/code-tools")
-                      ? isDark
-                        ? "bg-blue-900/30 text-blue-400"
-                        : "bg-blue-50 text-blue-600"
-                      : isDark
-                        ? "hover:bg-gray-800/70"
-                        : "hover:bg-gray-100/70"
+                    ? isDark
+                      ? "bg-blue-900/30 text-blue-400"
+                      : "bg-blue-50 text-blue-600"
+                    : isDark
+                      ? "hover:bg-gray-800/70"
+                      : "hover:bg-gray-100/70"
                     }`}
                   onClick={toggleMenu}
                 >
@@ -574,12 +576,12 @@ function Nav() {
                 <Link
                   to="/test-case-generator"
                   className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/test-case-generator")
-                      ? isDark
-                        ? "bg-blue-900/30 text-blue-400"
-                        : "bg-blue-50 text-blue-600"
-                      : isDark
-                        ? "hover:bg-gray-800/70"
-                        : "hover:bg-gray-100/70"
+                    ? isDark
+                      ? "bg-blue-900/30 text-blue-400"
+                      : "bg-blue-50 text-blue-600"
+                    : isDark
+                      ? "hover:bg-gray-800/70"
+                      : "hover:bg-gray-100/70"
                     }`}
                   onClick={toggleMenu}
                 >
@@ -588,12 +590,12 @@ function Nav() {
                 <Link
                   to="/code-beautifier"
                   className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/code-beautifier")
-                      ? isDark
-                        ? "bg-blue-900/30 text-blue-400"
-                        : "bg-blue-50 text-blue-600"
-                      : isDark
-                        ? "hover:bg-gray-800/70"
-                        : "hover:bg-gray-100/70"
+                    ? isDark
+                      ? "bg-blue-900/30 text-blue-400"
+                      : "bg-blue-50 text-blue-600"
+                    : isDark
+                      ? "hover:bg-gray-800/70"
+                      : "hover:bg-gray-100/70"
                     }`}
                   onClick={toggleMenu}
                 >
@@ -602,12 +604,12 @@ function Nav() {
                 <Link
                   to="/error-debugger"
                   className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/error-debugger")
-                      ? isDark
-                        ? "bg-blue-900/30 text-blue-400"
-                        : "bg-blue-50 text-blue-600"
-                      : isDark
-                        ? "hover:bg-gray-800/70"
-                        : "hover:bg-gray-100/70"
+                    ? isDark
+                      ? "bg-blue-900/30 text-blue-400"
+                      : "bg-blue-50 text-blue-600"
+                    : isDark
+                      ? "hover:bg-gray-800/70"
+                      : "hover:bg-gray-100/70"
                     }`}
                   onClick={toggleMenu}
                 >
@@ -616,12 +618,12 @@ function Nav() {
                 <Link
                   to="/performance-analyzer"
                   className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/performance-analyzer")
-                      ? isDark
-                        ? "bg-blue-900/30 text-blue-400"
-                        : "bg-blue-50 text-blue-600"
-                      : isDark
-                        ? "hover:bg-gray-800/70"
-                        : "hover:bg-gray-100/70"
+                    ? isDark
+                      ? "bg-blue-900/30 text-blue-400"
+                      : "bg-blue-50 text-blue-600"
+                    : isDark
+                      ? "hover:bg-gray-800/70"
+                      : "hover:bg-gray-100/70"
                     }`}
                   onClick={toggleMenu}
                 >
@@ -630,12 +632,12 @@ function Nav() {
                 <Link
                   to="/content-summarizer"
                   className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/content-summarizer")
-                      ? isDark
-                        ? "bg-blue-900/30 text-blue-400"
-                        : "bg-blue-50 text-blue-600"
-                      : isDark
-                        ? "hover:bg-gray-800/70"
-                        : "hover:bg-gray-100/70"
+                    ? isDark
+                      ? "bg-blue-900/30 text-blue-400"
+                      : "bg-blue-50 text-blue-600"
+                    : isDark
+                      ? "hover:bg-gray-800/70"
+                      : "hover:bg-gray-100/70"
                     }`}
                   onClick={toggleMenu}
                 >
@@ -645,12 +647,12 @@ function Nav() {
                 <Link
                   to="/security-scanner"
                   className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/security-scanner")
-                      ? isDark
-                        ? "bg-blue-900/30 text-blue-400"
-                        : "bg-blue-50 text-blue-600"
-                      : isDark
-                        ? "hover:bg-gray-800/70"
-                        : "hover:bg-gray-100/70"
+                    ? isDark
+                      ? "bg-blue-900/30 text-blue-400"
+                      : "bg-blue-50 text-blue-600"
+                    : isDark
+                      ? "hover:bg-gray-800/70"
+                      : "hover:bg-gray-100/70"
                     }`}
                   onClick={toggleMenu}
                 >
@@ -665,12 +667,12 @@ function Nav() {
               <button
                 onClick={toggleCompanyDropdown}
                 className={`flex items-center justify-between w-full p-3 rounded-lg ${isCompanyActive()
-                    ? isDark
-                      ? "bg-purple-900/30 text-purple-400"
-                      : "bg-purple-50 text-purple-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
+                  ? isDark
+                    ? "bg-purple-900/30 text-purple-400"
+                    : "bg-purple-50 text-purple-600"
+                  : isDark
+                    ? "hover:bg-gray-800/70"
+                    : "hover:bg-gray-100/70"
                   }`}
               >
                 <div className="flex items-center space-x-3">
@@ -697,12 +699,12 @@ function Nav() {
                 <Link
                   to="/about"
                   className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/about")
-                      ? isDark
-                        ? "bg-purple-900/30 text-purple-400"
-                        : "bg-purple-50 text-purple-600"
-                      : isDark
-                        ? "hover:bg-gray-800/70"
-                        : "hover:bg-gray-100/70"
+                    ? isDark
+                      ? "bg-purple-900/30 text-purple-400"
+                      : "bg-purple-50 text-purple-600"
+                    : isDark
+                      ? "hover:bg-gray-800/70"
+                      : "hover:bg-gray-100/70"
                     }`}
                   onClick={toggleMenu}
                 >
@@ -712,12 +714,12 @@ function Nav() {
                 <Link
                   to="/team"
                   className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/team")
-                      ? isDark
-                        ? "bg-purple-900/30 text-purple-400"
-                        : "bg-purple-50 text-purple-600"
-                      : isDark
-                        ? "hover:bg-gray-800/70"
-                        : "hover:bg-gray-100/70"
+                    ? isDark
+                      ? "bg-purple-900/30 text-purple-400"
+                      : "bg-purple-50 text-purple-600"
+                    : isDark
+                      ? "hover:bg-gray-800/70"
+                      : "hover:bg-gray-100/70"
                     }`}
                   onClick={toggleMenu}
                 >
@@ -727,12 +729,12 @@ function Nav() {
                 <Link
                   to="/contact"
                   className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/contact")
-                      ? isDark
-                        ? "bg-purple-900/30 text-purple-400"
-                        : "bg-purple-50 text-purple-600"
-                      : isDark
-                        ? "hover:bg-gray-800/70"
-                        : "hover:bg-gray-100/70"
+                    ? isDark
+                      ? "bg-purple-900/30 text-purple-400"
+                      : "bg-purple-50 text-purple-600"
+                    : isDark
+                      ? "hover:bg-gray-800/70"
+                      : "hover:bg-gray-100/70"
                     }`}
                   onClick={toggleMenu}
                 >
@@ -742,12 +744,12 @@ function Nav() {
                 <Link
                   to="/faq"
                   className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/faq")
-                      ? isDark
-                        ? "bg-purple-900/30 text-purple-400"
-                        : "bg-purple-50 text-purple-600"
-                      : isDark
-                        ? "hover:bg-gray-800/70"
-                        : "hover:bg-gray-100/70"
+                    ? isDark
+                      ? "bg-purple-900/30 text-purple-400"
+                      : "bg-purple-50 text-purple-600"
+                    : isDark
+                      ? "hover:bg-gray-800/70"
+                      : "hover:bg-gray-100/70"
                     }`}
                   onClick={toggleMenu}
                 >
@@ -757,12 +759,12 @@ function Nav() {
                 <Link
                   to="/privacy-policy"
                   className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/privacy-policy")
-                      ? isDark
-                        ? "bg-purple-900/30 text-purple-400"
-                        : "bg-purple-50 text-purple-600"
-                      : isDark
-                        ? "hover:bg-gray-800/70"
-                        : "hover:bg-gray-100/70"
+                    ? isDark
+                      ? "bg-purple-900/30 text-purple-400"
+                      : "bg-purple-50 text-purple-600"
+                    : isDark
+                      ? "hover:bg-gray-800/70"
+                      : "hover:bg-gray-100/70"
                     }`}
                   onClick={toggleMenu}
                 >
@@ -772,12 +774,12 @@ function Nav() {
                 <Link
                   to="/terms-of-service"
                   className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/terms-of-service")
-                      ? isDark
-                        ? "bg-purple-900/30 text-purple-400"
-                        : "bg-purple-50 text-purple-600"
-                      : isDark
-                        ? "hover:bg-gray-800/70"
-                        : "hover:bg-gray-100/70"
+                    ? isDark
+                      ? "bg-purple-900/30 text-purple-400"
+                      : "bg-purple-50 text-purple-600"
+                    : isDark
+                      ? "hover:bg-gray-800/70"
+                      : "hover:bg-gray-100/70"
                     }`}
                   onClick={toggleMenu}
                 >
@@ -794,8 +796,8 @@ function Nav() {
                 <button
                   onClick={toggleTheme}
                   className={`p-3 rounded-lg ${isDark
-                      ? "bg-gray-800/70 text-yellow-400"
-                      : "bg-gray-100/70 text-blue-600"
+                    ? "bg-gray-800/70 text-yellow-400"
+                    : "bg-gray-100/70 text-blue-600"
                     }`}
                 >
                   {isDark ? (

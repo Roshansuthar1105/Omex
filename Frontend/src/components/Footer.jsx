@@ -1,27 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import {
-  FaGithub,
-  FaTwitter,
-  FaLinkedin,
-  FaCode,
-  FaHeart,
-  FaEnvelope,
-  FaQuestionCircle,
-  FaShieldAlt,
-  FaFileContract,
-  FaUsers,
-  FaRocket,
-  FaMagic,
-  FaChartLine,
-  FaExchangeAlt,
-  FaTools,
-  FaVial,
-  FaPaintBrush,
+  FaAlignLeft,
   FaBug,
+  FaChartLine,
+  FaCode,
+  FaEnvelope,
+  FaExchangeAlt,
+  FaFileContract,
+  FaGithub,
+  FaHandsHelping,
+  FaHeart,
+  FaLinkedin,
+  FaMagic,
+  FaPaintBrush,
+  FaQuestionCircle,
+  FaRocket,
+  FaShieldAlt,
   FaTachometerAlt,
-  FaAlignLeft
+  FaTools,
+  FaTwitter,
+  FaUserFriends,
+  FaUsers,
+  FaVial
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 
 const Footer = () => {
@@ -172,51 +173,38 @@ const Footer = () => {
             <h3 className={`text-lg font-semibold mb-4 border-b ${isDark ? 'border-gray-700' : 'border-gray-300'} pb-2`}>Company & Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/about" className={`flex items-center ${linkBase}`}>
-                  <FaUsers className={iconClass} /> About Us
+                <Link to="/about" className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
+                  <FaUsers className="mr-2 text-sm" /> About Us
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/team"
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className={`flex items-center ${linkBase}`}
-                >
-                  <FaUsers className={iconClass} /> Our Team
+                <Link to="/team" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
+                  <FaUserFriends className="mr-2 text-sm" /> Our Team
                 </Link>
               </li>
               <li>
-                <Link to="/contribute" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Contribute</Link>
-              </li>
-              <li>
-                <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Contact Us</Link>
-          
-              </li>
-              <li>
-                <Link
-                  to="/faq"
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className={`flex items-center ${linkBase}`}
-                >
-                  <FaQuestionCircle className={iconClass} /> FAQ
+                <Link to="/contribute" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
+                  <FaHandsHelping className="mr-2 text-sm" /> Contribute
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/privacy-policy"
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className={`flex items-center ${linkBase}`}
-                >
-                  <FaShieldAlt className={iconClass} /> Privacy Policy
+                <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
+                  <FaEnvelope className="mr-2 text-sm" /> Contact Us
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/terms-of-service"
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className={`flex items-center ${linkBase}`}
-                >
-                  <FaFileContract className={iconClass} /> Terms of Service
+                <Link to="/faq" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
+                  <FaQuestionCircle className="mr-2 text-sm" /> FAQ
+                </Link>
+              </li>
+              <li>
+                <Link to="/privacy-policy" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
+                  <FaShieldAlt className="mr-2 text-sm" /> Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms-of-service" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
+                  <FaFileContract className="mr-2 text-sm" /> Terms of Service
                 </Link>
               </li>
             </ul>
@@ -234,11 +222,10 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Your email address"
-                className={`px-4 py-2 rounded-md ${
-                  isDark
+                className={`px-4 py-2 rounded-md ${isDark
                     ? 'bg-gray-800 border-gray-700 text-white'
                     : 'bg-white border-gray-300 text-gray-800'
-                } border focus:outline-none focus:ring-2 focus:ring-blue-500 max-w-xs w-full mx-auto sm:mx-0`}
+                  } border focus:outline-none focus:ring-2 focus:ring-blue-500 max-w-xs w-full mx-auto sm:mx-0`}
               />
               <button
                 className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-200 font-medium"
