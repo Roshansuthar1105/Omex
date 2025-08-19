@@ -32,7 +32,7 @@ const Footer = () => {
               Elevate your code with AI-powered optimization, analysis, and generation tools. OMEX helps developers write better, cleaner, and more efficient code.
             </p>
             <div className="flex space-x-4 mb-6">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition duration-200`}>
+              <a href="https://github.com/Roshansuthar1105/Omex" target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition duration-200`}>
                 <FaGithub size={20} />
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition duration-200`}>
@@ -166,3 +166,6 @@ const Footer = () => {
 };
 
 export default Footer;
+
+
+
