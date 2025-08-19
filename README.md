@@ -183,8 +183,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 **🤝👤 Contribution Guidelines**
@@ -227,7 +225,7 @@ Feel free to open issues or discussions if you have any feedback, feature sugges
 
 **🙌 Support & Star**
 
-***If you find this project helpful, please give it a star! ⭐ to support more such educational initiatives!***
+***If you find this project helpful, please give it a star⭐ to support more such educational initiatives!***
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
@@ -275,10 +273,8 @@ This project is licensed under the MIT License - see the [`License`](https://git
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="150%">
 
-<h2 align="center">
 **👨‍💻 Built with ❤️ by the OMEX Team**
-**❤️ Rupesh Kumar and Contributors ❤️**  [open an issue](https://github.com/Roshansuthar1105/Omex/issues) | [Watch Demo](https://omexai.netlify.app/)
-</h2>
+**❤️ Rupesh Kumar and Contributors ❤️** [open an issue](https://github.com/Roshansuthar1105/Omex/issues) | [Watch Demo](https://omexai.netlify.app/)
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="150%">
 
@@ -289,5 +285,6 @@ This project is licensed under the MIT License - see the [`License`](https://git
 </div>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=65&section=footer"/>
+
 
 **Ready to show off your coding achievements? Get started with Omex today! 🚀**
