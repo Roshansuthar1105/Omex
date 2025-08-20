@@ -60,6 +60,11 @@ const securityAnalyzer = genAI.getGenerativeModel({
     systemInstruction: systemInstructions.securityAnalyzer
 });
 
+const intentModel = genAI.getGenerativeModel({
+  model: "gemini-2.0-flash",
+  systemInstruction: "You are an AI assistant that classifies customer contact messages into intents (Bug Report, Feature Request, Pricing Inquiry, Support, General Question) and provides a helpful reply in JSON format: { intent: string, reply: string }"
+});
+
 /**
  * Generate code based on a prompt
  * @param {string} prompt - The prompt to generate code from
@@ -242,37 +247,64 @@ Please provide a detailed security analysis including vulnerability types, sever
  * @returns {Promise<object>} - Detected intent and AI-generated reply
  */
 async function detectIntent(message) {
-    const intentModel = genAI.getGenerativeModel({
-        model: "gemini-2.0-flash",
-        systemInstruction: `You are an assistant that classifies user queries into categories:
-        - Bug Report
-        - Feature Request
-        - Pricing Inquiry
-        - General Question
-        - Support
-        Then, provide a short and helpful AI reply in a friendly tone.`
-    });
+  // unified fallback function
+  function fallback(message) {
+    const lower = message.toLowerCase();
+    let intent = "General Question";
 
-    const prompt = `User message: "${message}"
+    if (lower.includes("bug") || lower.includes("error") || lower.includes("issue"))
+      intent = "Bug Report";
+    else if (lower.includes("feature") || lower.includes("add") || lower.includes("support request"))
+      intent = "Feature Request";
+    else if (lower.includes("price") || lower.includes("cost") || lower.includes("plan"))
+      intent = "Pricing Inquiry";
+    else if (lower.includes("help") || lower.includes("support"))
+      intent = "Support";
 
-    Respond ONLY in JSON format:
-    
-    {
-  "intent": "Bug Report" | "Feature Request" | "Pricing Inquiry" | "General Question" | "Support",
-  "reply": "short helpful AI-generated reply"
-}`;
+    const replyMap = {
+      "Bug Report": "Thanks for flagging this. Could you share steps to reproduce, expected vs actual behavior, and screenshots/logs if possible?",
+      "Feature Request": "Great idea! Could you describe the use-case and priority? We’ll review and update our roadmap.",
+      "Pricing Inquiry": "Here’s a quick overview of our plans. Tell me your expected usage and I can recommend the best fit.",
+      "Support": "Happy to help. What environment and version are you using? Any error messages or logs?",
+      "General Question": "I can help with docs, integration tips, or troubleshooting—what would you like to know?",
+    };
 
+    return { intent, reply: replyMap[intent] };
+  }
 
-    const result = await intentModel.generateContent(prompt);
-    const text = result.response.text();
-
+  try {
+    // Case 1: user directly sends JSON
+    const parsed = JSON.parse(message);
+    return { intent: parsed.intent, reply: parsed.reply };
+  } catch {
+    // not JSON, try AI
     try {
-    return JSON.parse(text);
-  } catch (err) {
-    console.error("Failed to parse AI response:", text);
-    return { intent: "Unknown", reply: text };
+      const prompt = `Classify intent and reply: ${message}`;
+      const result = await intentModel.generateContent(prompt);
+      const text = result.response.text().trim();
+
+      try {
+        // Try to parse JSON output
+        const parsed = JSON.parse(text);
+        return { intent: parsed.intent, reply: parsed.reply };
+      } catch {
+        // Try to salvage JSON from text
+        const m = text.match(/\{[\s\S]*\}/);
+        if (m) {
+          const parsed = JSON.parse(m[0]);
+          return { intent: parsed.intent, reply: parsed.reply };
+        }
+        // If model just returns text
+        return { intent: "General Question", reply: text };
+      }
+    } catch (e) {
+      console.warn("AI call failed, fallback:", e?.message);
+      return fallback(message);
+    }
   }
 }
+
+
 module.exports = {
     generateReview,
     generateCode,

@@ -71,6 +71,7 @@ function Nav() {
       "/about",
       "/team",
       "/contact",
+      "/aicontact",
       "/faq",
       "/privacy-policy",
       "/terms-of-service",
@@ -784,6 +785,22 @@ function Nav() {
                 >
                   <FaEnvelope className="text-purple-400" />
                   <span>Contact Us</span>
+                </Link>
+                <Link
+                  to="/aicontact"
+                  className={`flex items-center space-x-3 p-3 rounded-lg ${
+                    isActive("/aicontact")
+                      ? isDark
+                        ? "bg-purple-900/30 text-purple-400"
+                       : "bg-purple-50 text-purple-600"
+                      : isDark
+                       ? "hover:bg-gray-800/70"
+                       : "hover:bg-gray-100/70"
+                    }`}
+                     onClick={toggleMenu}
+                 >
+                    <FaRobot className="text-purple-400" />   {/* ✅ AI-themed icon */}
+                    <span>AI Contact</span>
                 </Link>
                 <Link
                   to="/faq"

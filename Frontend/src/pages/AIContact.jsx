@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { sendAIMessage } from "../services/ai.services"; // make sure path is correct
 
 export default function AIContact() {
   const [formData, setFormData] = useState({
@@ -25,8 +24,21 @@ export default function AIContact() {
     setResponse("");
 
     try {
-      const aiResponse = await sendAIMessage(formData.message);
-      setResponse(aiResponse);
+      // Send request to backend
+      const res = await fetch("http://localhost:5000/api/ai/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      const data = await res.json();
+      setResponse(data.reply || "AI did not return a response.");
     } catch (err) {
       setResponse("Something went wrong, please try again.");
       console.error(err);

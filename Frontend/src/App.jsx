@@ -23,6 +23,7 @@ import SecurityScanner from "./pages/SecurityScanner"
 // New company pages
 import Team from "./pages/Team"
 import Contact from "./pages/Contact"
+import AIContact from "./pages/AIContact"
 import FAQ from "./pages/FAQ"
 import PrivacyPolicy from "./pages/PrivacyPolicy"
 import TermsOfService from "./pages/TermsOfService"
@@ -63,6 +64,7 @@ function App() {
               {/* Company pages routes */}
               <Route path="/team" element={<Team />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/aicontact" element={<AIContact />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />

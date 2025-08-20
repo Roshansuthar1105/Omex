@@ -135,19 +135,22 @@ const analyzeSecurity = async (req, res) => {
 }
 const intentDetect = async (req, res) => {
   try {
-    const { message } = req.body;
-
-    if (!message) {
-      return res.status(400).json({ error: "Message is required" });
+    const { message } = req.body || {};
+    if (!message || !message.trim()) {
+      return res.status(400).json({ error: "message is required" });
     }
-
-    // Call AI service
-    const result = await aiService.detectIntent(message);
-
-    return res.status(200).json(result);
+    const out = await aiService.detectIntent(message);
+    // normalize shape
+    return res.json({
+      intent: out?.intent || "General Question",
+      reply: out?.reply || out?.response || "Thanks — how can I help further?",
+    });
   } catch (err) {
-    console.error("Error in intentDetect:", err.message);
-    return res.status(500).json({ error: "Internal server error" });
+    console.error("Error in intentDetect:", err);
+    return res.status(200).json({
+      intent: "General Question",
+      reply: "I couldn’t analyze that just now. Please submit the form and we’ll follow up.",
+    });
   }
 };
 
@@ -164,4 +167,4 @@ module.exports = {
     analyzePerformance,
     analyzeSecurity,
     intentDetect,
-}
+};

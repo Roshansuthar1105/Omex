@@ -110,6 +110,9 @@ const Footer = () => {
                 <Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>Contact Us</Link>
               </li>
               <li>
+                <Link to="/ai-contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}> AI Contact</Link>
+              </li>
+              <li>
                 <Link to="/faq" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
                   <FaQuestionCircle className="mr-2 text-sm" /> FAQ
                 </Link>
