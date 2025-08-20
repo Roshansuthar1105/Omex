@@ -78,7 +78,7 @@
   <b>This project is now OFFICIALLY accepted for:</b>
 </p>
 
-![GSSoC Logo](/Omex/Frontend/public/gssoc%20logo.png)
+![GSSoC Logo](https://github.com/Roshansuthar1105/Omex/blob/main/Frontend/public/gssoc%20logo.png)
 
 🌟 **Exciting News...**
 
@@ -288,3 +288,4 @@ This project is licensed under the MIT License - see the [`License`](https://git
 
 
 **Ready to show off your coding achievements? Get started with Omex today! 🚀**
+
