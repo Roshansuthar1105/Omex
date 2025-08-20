@@ -71,7 +71,7 @@ function Nav() {
       "/about",
       "/team",
       "/contact",
-      "/aicontact",
+      "/ai-contact",
       "/faq",
       "/privacy-policy",
       "/terms-of-service",
@@ -313,6 +313,18 @@ function Nav() {
                     >
                       <FaEnvelope className="inline mr-2" />
                       Contact Us
+                    </Link>
+                    <Link
+                       to="/ai-contact"
+                        className={`block px-4 py-2 text-sm ${
+                           isDark
+                            ? "text-gray-300 hover:bg-gray-700"
+                            : "text-gray-700 hover:bg-gray-100"
+                        }`}
+                        onClick={() => setIsCompanyDropdownOpen(false)}
+                      >
+                        <FaRobot className="inline mr-2" />
+                        AI Contact
                     </Link>
                     <Link
                       to="/faq"

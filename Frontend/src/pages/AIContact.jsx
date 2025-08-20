@@ -25,12 +25,12 @@ export default function AIContact() {
 
     try {
       // Send request to backend
-      const res = await fetch("http://localhost:5000/api/ai/contact", {
+      const res = await fetch("http://localhost:5000/ai/intent-detect", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ message: formData.message }),
       });
 
       if (!res.ok) {
@@ -40,7 +40,7 @@ export default function AIContact() {
       const data = await res.json();
       setResponse(data.reply || "AI did not return a response.");
     } catch (err) {
-      setResponse("Something went wrong, please try again.");
+      setResponse("Something went wrong, please try again.");  
       console.error(err);
     } finally {
       setLoading(false);
@@ -53,7 +53,7 @@ export default function AIContact() {
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-lg rounded-xl p-6 space-y-4"
+        className="bg-gray-900 text-white shadow-lg rounded-xl p-6 space-y-4"
       >
         <div>
           <label className="block font-medium">Name</label>
@@ -63,7 +63,7 @@ export default function AIContact() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full border rounded-lg px-3 py-2 mt-1"
+            className="w-full bg-gray-800 text-white border border-gray-600 rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -75,7 +75,7 @@ export default function AIContact() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full border rounded-lg px-3 py-2 mt-1"
+           className="w-full bg-gray-800 text-white border border-gray-600 rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -87,7 +87,7 @@ export default function AIContact() {
             onChange={handleChange}
             required
             rows="4"
-            className="w-full border rounded-lg px-3 py-2 mt-1"
+            className="w-full bg-gray-800 text-white border border-gray-600 rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -101,7 +101,7 @@ export default function AIContact() {
       </form>
 
       {response && (
-        <div className="mt-6 p-4 bg-gray-100 rounded-lg shadow">
+        <div className="mt-6 p-4 bg-gray-800 text-white rounded-lg shadow">
           <h2 className="font-semibold mb-2">AI Response:</h2>
           <p>{response}</p>
         </div>

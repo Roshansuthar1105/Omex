@@ -93,7 +93,26 @@ const extractYouTubeVideoId = (url) => {
   const match = url.match(regExp);
   return (match && match[7].length === 11) ? match[7] : null;
 };
+/**
+ * Handle contact form message and detect intent
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
+const handleContactIntent = async (req, res) => {
+  try {
+    const { message } = req.body;
 
+    if (!message || message.trim() === '') {
+      return res.status(400).json({ error: 'No message provided' });
+    }
+
+    const result = await aiService.detectIntent(message);
+    res.json(result);
+  } catch (error) {
+    console.error('Error in handleContactIntent:', error);
+    res.status(500).json({ error: 'Intent detection failed' });
+  }
+};
 /**
  * Summarize content from text input
  * @param {Object} req - Express request object
@@ -253,5 +272,6 @@ const summarizeContent = async (req, res) => {
 module.exports = {
   summarizeContent,
   summarizeTextInput,
-  summarizeYouTubeUrl
+  summarizeYouTubeUrl,
+  handleContactIntent
 };

@@ -61,5 +61,5 @@ router.post('/summarize-content', upload.single('file'), mediaController.summari
 // Dedicated routes for specific input types (for clarity and potential future enhancements)
 router.post('/summarize-text', mediaController.summarizeTextInput);
 router.post('/summarize-youtube', mediaController.summarizeYouTubeUrl);
-
+router.post('/detect-intent', mediaController.handleContactIntent);
 module.exports = router;

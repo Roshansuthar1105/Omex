@@ -7,7 +7,11 @@ const mediaRoutes = require('./routes/media.routes');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONT_END_URL,
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Static files

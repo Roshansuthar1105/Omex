@@ -153,6 +153,23 @@ const intentDetect = async (req, res) => {
     });
   }
 };
+const contactHandler = async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+    console.log("Contact request received:", { name, email, message });
+    if (!message || !message.trim()) {
+      return res.status(400).json({ reply: "Message is required." });
+    }
+    const response = await aiService.detectIntent(message);
+    return res.json({
+      intent: response?.intent || "General Inquiry",
+      reply: response?.reply || "Thanks for reaching out! We'll get back to you soon.",
+    });
+  } catch (error) {
+    console.error("Error in contactHandler:", error);
+    return res.status(500).json({ reply: "Something went wrong while processing your request." });
+  }
+};
 
 
 
@@ -167,4 +184,5 @@ module.exports = {
     analyzePerformance,
     analyzeSecurity,
     intentDetect,
+    contactHandler,
 };

@@ -64,7 +64,7 @@ function App() {
               {/* Company pages routes */}
               <Route path="/team" element={<Team />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/aicontact" element={<AIContact />} />
+              <Route path="/ai-contact" element={<AIContact />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
