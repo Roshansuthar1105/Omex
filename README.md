@@ -3,7 +3,7 @@
   <b>This project is now OFFICIALLY accepted for:</b>
 </p>
 
-![GSSoC Logo](https://raw.githubusercontent.com/girlscript/gssoc-assets/main/Logos/GS_logo_White.png#gh-dark-mode-only)
+![GSSoC Logo](https://github.com/Roshansuthar1105/Omex/blob/main/Frontend/public/gssoc%20logo.png)
 
  # <img src="Frontend/public/bulb.png" alt="OMEX Banner" width="35" height="35" /> OMEX - AI Code Optimization Platform
 
@@ -288,3 +288,4 @@ This project is licensed under the MIT License - see the [`License`](https://git
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=65&section=footer"/>
 
 **Ready to show off your coding achievements? Get started with Omex today! 🚀**
+
