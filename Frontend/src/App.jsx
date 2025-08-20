@@ -7,14 +7,11 @@ import Nav from './components/Nav'
 import Footer from './components/Footer'
 import { Toaster } from 'react-hot-toast'
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
-import Footer from './components/Footer'
-import Nav from './components/Nav'
 import About from "./pages/About"
 import CodeCompare from "./pages/CodeCompare"
 import CodeComplexity from "./pages/CodeComplexity"
 import CodeGenerator from "./pages/CodeGenerator"
 import CodeOptimizer from "./pages/CodeOptimizer"
-import Home from './pages/Home'
 import "./styles/glassmorphism.css"
 
 // New code tools pages
