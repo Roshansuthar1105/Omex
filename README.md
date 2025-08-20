@@ -258,6 +258,7 @@ This project is licensed under the MIT License - see the [`License`](https://git
 <tr>
 <td align="center">
 <a href="https://github.com/Roshansuthar1105"><img src="https://avatars.githubusercontent.com/u/117620582?v=4" height="140px" width="140px" alt="Roshan Suthar"></a><br><sub><b>Roshan Suthar</b><br><a href="https://www.linkedin.com/in/roshansuthar/"><img src="https://github-production-user-asset-6210df.s3.amazonaws.com/73993775/278833250-adb040ea-e3ef-446e-bcd4-3e8d7d4c0176.png" width="45px" height="45px"></a></sub>
+
 </td>
 </tr>
 </table>
@@ -275,6 +276,7 @@ This project is licensed under the MIT License - see the [`License`](https://git
 **👨‍💻 Built with ❤️ by the OMEX Team**
 **❤️ Roshan Suthar and Contributors ❤️** [open an issue](https://github.com/Roshansuthar1105/Omex/issues) | [Watch Demo](https://omexai.netlify.app/)
 
+
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="150%">
 
 <div align="center">
@@ -285,6 +287,4 @@ This project is licensed under the MIT License - see the [`License`](https://git
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=65&section=footer"/>
 
-
 **Ready to show off your coding achievements? Get started with Omex today! 🚀**
-
