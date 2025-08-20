@@ -1,11 +1,28 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { FaShieldAlt } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
+import Loader from '../components/Loader'
 
 const PrivacyPolicy = () => {
   const { isDark } = useTheme();
+  const [loading, setLoading] = useState(true);
   const lastUpdated = 'June 15, 2023';
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      window.scrollTo(0, 0);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+  if (loading) {
+    return (
+      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+        <Loader fullscreen size="xl" color="purple" text="Our Privacy Policy ..." />
+      </div>
+    );
+  }
   return (
     <div className={`min-h-screen w-full ${isDark ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-800'}`}>
       <div className="container mx-auto px-4 py-12">

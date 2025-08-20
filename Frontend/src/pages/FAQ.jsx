@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaQuestionCircle, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
+import Loader from '../components/Loader';
 
 const FAQ = () => {
   const { isDark } = useTheme();
+  const [loading, setLoading] = useState(true);
 
   // FAQ data
   const faqData = [
@@ -114,6 +116,21 @@ const FAQ = () => {
       [questionId]: !expandedQuestions[questionId]
     });
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      window.scrollTo(0, 0);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+  if (loading) {
+    return (
+      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+        <Loader fullscreen size="xl" color="purple" text="FAQ ..." />
+      </div>
+    );
+  }
 
   return (
     <div className={`min-h-screen w-full ${isDark ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-800'} relative overflow-hidden`}>

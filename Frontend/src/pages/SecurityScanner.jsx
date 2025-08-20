@@ -1,5 +1,5 @@
 // src/pages/SecurityScanner.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaShieldAlt, FaCode, FaBug } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -19,7 +19,7 @@ app.get('/user/:id', (req, res) => {
 });`);
   const [language, setLanguage] = useState("JavaScript");
   const [report, setReport] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { isDark } = useTheme();
 
   const languages = ["JavaScript", "Python", "Java", "C++", "C#", "PHP", "Go", "Ruby"];
@@ -61,6 +61,20 @@ app.get('/user/:id', (req, res) => {
     navigator.clipboard.writeText(report);
     toast.success("Report copied to clipboard!");
   };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      window.scrollTo(0, 0);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+  if (loading) {
+    return (
+      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+        <Loader fullscreen size="xl" color="purple" text="Loading Security Scanner..." />
+      </div>
+    );
+  }
 
   return (
     <div className={`min-h-screen w-full ${isDark ? "bg-gray-800" : "bg-gray-100"}`}>

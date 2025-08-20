@@ -1,41 +1,44 @@
-import "prismjs/themes/prism-tomorrow.css"
+import "prismjs/themes/prism-tomorrow.css";
+import "./styles/glassmorphism.css";
 
-import "./styles/glassmorphism.css"
 import { useState } from "react";
-import Home from './pages/Home'
-import Nav from './components/Nav'
-import Footer from './components/Footer'
-import { Toaster } from 'react-hot-toast'
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
-import About from "./pages/About"
-import CodeCompare from "./pages/CodeCompare"
-import CodeComplexity from "./pages/CodeComplexity"
-import CodeGenerator from "./pages/CodeGenerator"
-import CodeOptimizer from "./pages/CodeOptimizer"
-import "./styles/glassmorphism.css"
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
-// New code tools pages
-import CodeBeautifier from "./pages/CodeBeautifier"
-import CodeTools from "./pages/CodeTools"
-import ContentSummarizer from "./pages/ContentSummarizer"
-import ErrorDebugger from "./pages/ErrorDebugger"
-import PerformanceAnalyzer from "./pages/PerformanceAnalyzer"
-import SecurityScanner from "./pages/SecurityScanner"
-import TestCaseGenerator from "./pages/TestCaseGenerator"
+import Home from './pages/Home';
+import Nav from './components/Nav';
+import Footer from './components/Footer';
+import { Toaster } from 'react-hot-toast';
 
-// New company pages
-import Contact from "./pages/Contact"
-import FAQ from "./pages/FAQ"
-import PrivacyPolicy from "./pages/PrivacyPolicy"
-import Team from "./pages/Team"
-import TermsOfService from "./pages/TermsOfService"
+// New utility
+import ScrollToTop from "./components/ScrollToTop";
+
+// Code tools pages
+import CodeBeautifier from "./pages/CodeBeautifier";
+import CodeTools from "./pages/CodeTools";
+import ContentSummarizer from "./pages/ContentSummarizer";
+import ErrorDebugger from "./pages/ErrorDebugger";
+import PerformanceAnalyzer from "./pages/PerformanceAnalyzer";
+import SecurityScanner from "./pages/SecurityScanner";
+import TestCaseGenerator from "./pages/TestCaseGenerator";
+
+// Other pages
+import About from "./pages/About";
+import CodeCompare from "./pages/CodeCompare";
+import CodeComplexity from "./pages/CodeComplexity";
+import CodeGenerator from "./pages/CodeGenerator";
+import CodeOptimizer from "./pages/CodeOptimizer";
+import Contact from "./pages/Contact";
+import FAQ from "./pages/FAQ";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Team from "./pages/Team";
+import TermsOfService from "./pages/TermsOfService";
+import Contribute from "./pages/Contribute";
 
 // Theme context
-import { ThemeProvider } from './context/ThemeContext'
+import { ThemeProvider } from './context/ThemeContext';
 
-// Import the BackToTopButton component
-import BackToTopButton from "./components/BackToTopButton"
-import Contribute from "./pages/Contribute"
+// Extra components
+import BackToTopButton from "./components/BackToTopButton";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,6 +46,7 @@ function App() {
   return (
     <ThemeProvider>
       <Router>
+        <ScrollToTop /> {/* 👈 ensures every route loads from the top */}
         <div className="flex flex-col min-h-screen">
           <nav className="w-full fixed top-0 left-0 z-50">
             <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
@@ -50,6 +54,7 @@ function App() {
 
           <main className="flex-grow pt-20">
             <Routes>
+              {/* Main routes */}
               <Route path="/" element={<Home />} />
               <Route path="/optimiser" element={<CodeOptimizer />} />
               <Route path="/codegenerator" element={<CodeGenerator />} />
@@ -57,7 +62,7 @@ function App() {
               <Route path="/codecompare" element={<CodeCompare />} />
               <Route path="/about" element={<About />} />
 
-              {/* New code tools routes */}
+              {/* Code tools */}
               <Route path="/code-tools" element={<CodeTools />} />
               <Route path="/test-case-generator" element={<TestCaseGenerator />} />
               <Route path="/code-beautifier" element={<CodeBeautifier />} />
@@ -66,7 +71,7 @@ function App() {
               <Route path="/content-summarizer" element={<ContentSummarizer />} />
               <Route path="/security-scanner" element={<SecurityScanner />} />
 
-              {/* Company pages routes */}
+              {/* Company pages */}
               <Route path="/team" element={<Team />} />
               <Route path="/contribute" element={<Contribute />} />
               <Route path="/contact" element={<Contact />} />
