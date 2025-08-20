@@ -1,45 +1,54 @@
 import "prismjs/themes/prism-tomorrow.css"
+
 import "./styles/glassmorphism.css"
+import { useState } from "react";
 import Home from './pages/Home'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import { Toaster } from 'react-hot-toast'
-import { Routes, BrowserRouter as Router, Route } from "react-router-dom"
-import CodeOptimizer from "./pages/CodeOptimizer"
-import CodeGenerator from "./pages/CodeGenerator"
-import CodeComplexity from "./pages/CodeComplexity"
-import CodeCompare from "./pages/CodeCompare"
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
+import Footer from './components/Footer'
+import Nav from './components/Nav'
 import About from "./pages/About"
+import CodeCompare from "./pages/CodeCompare"
+import CodeComplexity from "./pages/CodeComplexity"
+import CodeGenerator from "./pages/CodeGenerator"
+import CodeOptimizer from "./pages/CodeOptimizer"
+import Home from './pages/Home'
+import "./styles/glassmorphism.css"
 
 // New code tools pages
-import CodeTools from "./pages/CodeTools"
-import TestCaseGenerator from "./pages/TestCaseGenerator"
 import CodeBeautifier from "./pages/CodeBeautifier"
+import CodeTools from "./pages/CodeTools"
+import ContentSummarizer from "./pages/ContentSummarizer"
 import ErrorDebugger from "./pages/ErrorDebugger"
 import PerformanceAnalyzer from "./pages/PerformanceAnalyzer"
-import ContentSummarizer from "./pages/ContentSummarizer"
 import SecurityScanner from "./pages/SecurityScanner"
+import TestCaseGenerator from "./pages/TestCaseGenerator"
 
 // New company pages
-import Team from "./pages/Team"
 import Contact from "./pages/Contact"
 import FAQ from "./pages/FAQ"
 import PrivacyPolicy from "./pages/PrivacyPolicy"
+import Team from "./pages/Team"
 import TermsOfService from "./pages/TermsOfService"
 
 // Theme context
 import { ThemeProvider } from './context/ThemeContext'
 
 // Import the BackToTopButton component
-import BackToTopButton from "./components/BackToTopButton";
+import BackToTopButton from "./components/BackToTopButton"
+import Contribute from "./pages/Contribute"
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <ThemeProvider>
       <Router>
         <div className="flex flex-col min-h-screen">
           <nav className="w-full fixed top-0 left-0 z-50">
-            <Nav />
+            <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
           </nav>
 
           <main className="flex-grow pt-20">
@@ -62,6 +71,7 @@ function App() {
 
               {/* Company pages routes */}
               <Route path="/team" element={<Team />} />
+              <Route path="/contribute" element={<Contribute />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -70,7 +80,7 @@ function App() {
           </main>
 
           <Footer />
-          <BackToTopButton />
+          {!isMenuOpen && <BackToTopButton />}
           <Toaster position="top-right" />
         </div>
       </Router>
