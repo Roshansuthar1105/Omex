@@ -258,20 +258,23 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
 
             {/* Company Dropdown */}
             <div className="relative">
-              <button
-                onClick={toggleCompanyDropdown}
-                className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${isCompanyActive()
-                  ? "text-blue-400 border-b-2 border-blue-400"
-                  : "hover:text-blue-400"
-                  }`}
-              >
-                <span>Company</span>
-                {isCompanyDropdownOpen ? (
-                  <FaChevronUp className="ml-1 text-xs" />
-                ) : (
-                  <FaChevronDown className="ml-1 text-xs" />
-                )}
-              </button>
+
+          <button
+            onClick={toggleCompanyDropdown}
+            className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${
+              isCompanyActive()
+                ? "text-blue-400 border-b-2 border-blue-400"
+                : "hover:text-blue-400"
+            }`}
+          >
+            <FaUsers className="text-purple-400" />
+            <span>Company</span>
+            {isCompanyDropdownOpen ? (
+              <FaChevronUp className="ml-1 text-xs" />
+            ) : (
+              <FaChevronDown className="ml-1 text-xs" />
+            )}
+          </button>
 
               {isCompanyDropdownOpen && (
                 <div
