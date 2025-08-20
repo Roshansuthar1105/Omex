@@ -17,7 +17,13 @@ import {
   FaSun,
   FaTools,
   FaUserFriends,
-  FaUsers
+  FaUsers,
+  FaVial,
+  FaPaintBrush,
+  FaBug,
+  FaTachometerAlt,
+  FaAlignLeft,
+  FaShieldVirus
 } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 
@@ -187,6 +193,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                         }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
+                      <FaTools className="inline mr-2 text-sm"/>
                       All Tools
                     </Link>
                     <Link
@@ -197,6 +204,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                         }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
+                      <FaVial className="inline mr-2" />
                       Test Case Generator
                     </Link>
                     <Link
@@ -207,6 +215,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                         }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
+                      <FaPaintBrush className="inline mr-2" />
                       Code Beautifier
                     </Link>
                     <Link
@@ -217,6 +226,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                         }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
+                      <FaBug className="inline mr-2" />
                       Error Debugger
                     </Link>
                     <Link
@@ -227,6 +237,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                         }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
+                      <FaTachometerAlt className="inline mr-2" />
                       Performance Analyzer
                     </Link>
                     <Link
@@ -237,6 +248,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                         }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
+                      <FaAlignLeft className="inline mr-2" />
                       Content Summarizer
                     </Link>
 
@@ -248,7 +260,8 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                         }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
-                      Security Vulnerability Scanner
+                      <FaShieldVirus className="inline mr-2" />
+                      Security Scanner
                     </Link>
                   </div>
                 </div>
@@ -586,6 +599,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                     }`}
                   onClick={toggleMenu}
                 >
+                  <FaTools className="inline mr-2 text-sm" />
                   <span>All Tools</span>
                 </Link>
                 <Link
@@ -600,6 +614,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                     }`}
                   onClick={toggleMenu}
                 >
+                  <FaVial className="inline mr-2 text-sm" />
                   <span>Test Case Generator</span>
                 </Link>
                 <Link
@@ -614,6 +629,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                     }`}
                   onClick={toggleMenu}
                 >
+                  <FaPaintBrush className="inline mr-2 text-sm" />
                   <span>Code Beautifier</span>
                 </Link>
                 <Link
@@ -628,6 +644,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                     }`}
                   onClick={toggleMenu}
                 >
+                  <FaBug className="inline mr-2 text-sm" />
                   <span>Error Debugger</span>
                 </Link>
                 <Link
@@ -642,6 +659,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                     }`}
                   onClick={toggleMenu}
                 >
+                  <FaTachometerAlt className="inline mr-2 text-sm" />
                   <span>Performance Analyzer</span>
                 </Link>
                 <Link
@@ -656,6 +674,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                     }`}
                   onClick={toggleMenu}
                 >
+                  <FaAlignLeft className="inline mr-2 text-sm" />
                   <span>Content Summarizer</span>
                 </Link>
 
@@ -671,7 +690,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                     }`}
                   onClick={toggleMenu}
                 >
-                  <FaShieldAlt className="text-red-400" />
+                  <FaShieldVirus className="inline mr-2 text-sm" />
                   <span>Security Scanner</span>
                 </Link>
               </div>
