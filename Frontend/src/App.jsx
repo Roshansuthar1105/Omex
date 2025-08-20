@@ -1,4 +1,10 @@
 import "prismjs/themes/prism-tomorrow.css"
+
+import "./styles/glassmorphism.css"
+import { useState } from "react";
+import Home from './pages/Home'
+import Nav from './components/Nav'
+import Footer from './components/Footer'
 import { Toaster } from 'react-hot-toast'
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import Footer from './components/Footer'
@@ -35,12 +41,14 @@ import BackToTopButton from "./components/BackToTopButton"
 import Contribute from "./pages/Contribute"
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <ThemeProvider>
       <Router>
         <div className="flex flex-col min-h-screen">
           <nav className="w-full fixed top-0 left-0 z-50">
-            <Nav />
+            <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
           </nav>
 
           <main className="flex-grow pt-20">
@@ -72,7 +80,7 @@ function App() {
           </main>
 
           <Footer />
-          <BackToTopButton />
+          {!isMenuOpen && <BackToTopButton />}
           <Toaster position="top-right" />
         </div>
       </Router>
