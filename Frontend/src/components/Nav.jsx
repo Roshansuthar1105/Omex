@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   FaCode,
@@ -22,15 +22,14 @@ import {
 } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 
-function Nav() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+function Nav({ isMenuOpen, setIsMenuOpen }) { 
   const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
   const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
   const location = useLocation();
   const { isDark, toggleTheme } = useTheme();
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen(prev => !prev);
   };
 
   const toggleToolsDropdown = () => {
@@ -77,6 +76,19 @@ function Nav() {
     ];
     return companyPaths.some((path) => location.pathname === path);
   };
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   return (
     <nav
