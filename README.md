@@ -1,8 +1,15 @@
-﻿# <img src="Frontend/public/bulb.png" alt="OMEX Banner" width="35" height="35" /> OMEX - AI Code Optimization Platform
+<h2 align="center">🎯 Open Source Programmes ⭐</h2>
+<p align="center">
+  <b>This project is now OFFICIALLY accepted for:</b>
+</p>
+
+![GSSoC Logo](https://raw.githubusercontent.com/girlscript/gssoc-assets/main/Logos/GS_logo_White.png#gh-dark-mode-only)
+
+ # <img src="Frontend/public/bulb.png" alt="OMEX Banner" width="35" height="35" /> OMEX - AI Code Optimization Platform
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
-[![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/harshguptakiet/Cura-Genie)
+[![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/roshansuthar1105/omex)
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
@@ -12,7 +19,6 @@
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-<img width="1053" height="595" alt="image" src="https://github.com/user-attachments/assets/1e8384fc-8da9-4aff-bd9c-3da205f79203" />
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 <div align="center">
@@ -72,13 +78,6 @@
 - **Concise Explanations**: Provides brief, actionable insights about each error
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="150%">
-
-<h2 align="center">🎯 Open Source Programmes ⭐</h2>
-<p align="center">
-  <b>This project is now OFFICIALLY accepted for:</b>
-</p>
-
-![GSSoC Logo](/Omex/Frontend/public/gssoc%20logo.png)
 
 🌟 **Exciting News...**
 
@@ -258,7 +257,8 @@ This project is licensed under the MIT License - see the [`License`](https://git
 <table>
 <tr>
 <td align="center">
-<a href="https://github.com/Roshansuthar1105"><img src="https://avatars.githubusercontent.com/u/117620582?v=4" height="140px" width="140px" alt="Rupesh Kumar"></a><br><sub><b>Rupesh Kumar</b><br><a href="https://www.linkedin.com/in/roshansuthar/"><img src="https://github-production-user-asset-6210df.s3.amazonaws.com/73993775/278833250-adb040ea-e3ef-446e-bcd4-3e8d7d4c0176.png" width="45px" height="45px"></a></sub>
+<a href="https://github.com/Roshansuthar1105"><img src="https://avatars.githubusercontent.com/u/117620582?v=4" height="140px" width="140px" alt="Roshan Suthar"></a><br><sub><b>Roshan Suthar</b><br><a href="https://www.linkedin.com/in/roshansuthar/"><img src="https://github-production-user-asset-6210df.s3.amazonaws.com/73993775/278833250-adb040ea-e3ef-446e-bcd4-3e8d7d4c0176.png" width="45px" height="45px"></a></sub>
+
 </td>
 </tr>
 </table>
@@ -274,7 +274,8 @@ This project is licensed under the MIT License - see the [`License`](https://git
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="150%">
 
 **👨‍💻 Built with ❤️ by the OMEX Team**
-**❤️ Rupesh Kumar and Contributors ❤️** [open an issue](https://github.com/Roshansuthar1105/Omex/issues) | [Watch Demo](https://omexai.netlify.app/)
+**❤️ Roshan Suthar and Contributors ❤️** [open an issue](https://github.com/Roshansuthar1105/Omex/issues) | [Watch Demo](https://omexai.netlify.app/)
+
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="150%">
 
@@ -285,6 +286,5 @@ This project is licensed under the MIT License - see the [`License`](https://git
 </div>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=65&section=footer"/>
-
 
 **Ready to show off your coding achievements? Get started with Omex today! 🚀**
