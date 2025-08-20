@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from '../components/Loader';
 import {
   FaTools,
   FaVial,
@@ -42,6 +43,21 @@ const ToolCard = ({ icon, title, description, link, isDark = true }) => {
 
 function CodeTools() {
   const { isDark } = useTheme();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      window.scrollTo(0, 0);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+    if (loading) {
+    return (
+      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+        <Loader fullscreen size="xl" color="purple" text="Loading Tools..." />
+      </div>
+    );
+  }
 
   return (
     <div className={`min-h-screen w-full ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>

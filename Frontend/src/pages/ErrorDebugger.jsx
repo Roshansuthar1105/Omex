@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaBug, FaCode, FaLightbulb } from 'react-icons/fa';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -18,7 +18,7 @@ function ErrorDebugger() {
 }`);
   const [language, setLanguage] = useState('JavaScript');
   const [debugResult, setDebugResult] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { isDark } = useTheme();
 
   const languages = ["JavaScript", "Python", "Java", "C++", "C#", "PHP", "Go", "Ruby"];
@@ -56,6 +56,20 @@ function ErrorDebugger() {
     setDebugResult('');
     toast.success('All cleared!');
   };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      window.scrollTo(0, 0);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+  if (loading) {
+    return (
+      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+        <Loader fullscreen size="xl" color="purple" text="Loading Error Debugging Tool..." />
+      </div>
+    );
+  }
 
   return (
     <div className={`min-h-screen w-full ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>

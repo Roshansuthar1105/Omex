@@ -1,33 +1,74 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useTheme } from "../context/ThemeContext";
 
-const Loader = ({ size = 'medium', color = 'blue', centered = true, text = 'Loading...' }) => {
+const Loader = ({ 
+  size = "medium", 
+  color = "blue", 
+  centered = true, 
+  text = "Loading...", 
+  fullscreen = false 
+}) => {
+  const { isDark } = useTheme();
+
   // Size classes
   const sizeClasses = {
-    small: 'w-6 h-6',
-    medium: 'w-8 h-8',
-    large: 'w-12 h-12',
-    xl: 'w-16 h-16'
+    small: "w-6 h-6",
+    medium: "w-8 h-8",
+    large: "w-12 h-12",
+    xl: "w-16 h-16",
   };
 
-  // Color classes
+  // Color classes (spinner fill)
   const colorClasses = {
-    blue: 'text-gray-200 dark:text-gray-600 fill-blue-600',
-    green: 'text-gray-200 dark:text-gray-600 fill-green-500',
-    purple: 'text-gray-200 dark:text-gray-600 fill-purple-600',
-    red: 'text-gray-200 dark:text-gray-600 fill-red-600',
-    yellow: 'text-gray-200 dark:text-gray-600 fill-yellow-400'
+    blue: isDark
+      ? "text-gray-600 fill-blue-500"
+      : "text-gray-300 fill-blue-600",
+    green: isDark
+      ? "text-gray-600 fill-green-400"
+      : "text-gray-300 fill-green-600",
+    purple: isDark
+      ? "text-gray-600 fill-purple-400"
+      : "text-gray-300 fill-purple-600",
+    red: isDark
+      ? "text-gray-600 fill-red-400"
+      : "text-gray-300 fill-red-600",
+    yellow: isDark
+      ? "text-gray-600 fill-yellow-300"
+      : "text-gray-300 fill-yellow-400",
   };
 
-  // Container classes based on centered prop
+
   const containerClasses = centered
     ? "flex flex-col items-center justify-center"
     : "inline-flex flex-col items-center";
 
+  useEffect(() => {
+    if (fullscreen) {
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = "auto";
+      };
+    }
+  }, [fullscreen]);
+
   return (
-    <div role="status" className={containerClasses}>
+    <div
+      role="status"
+      className={`${containerClasses} 
+        ${
+          fullscreen
+            ? `fixed inset-0 w-screen h-screen ${
+                isDark ? "bg-[#1a1a2e]" : "bg-[#f5f5f5]"
+              } z-50`
+            : ""
+        }
+      `}
+    >
       <svg
         aria-hidden="true"
-        className={`${sizeClasses[size] || sizeClasses.medium} ${colorClasses[color] || colorClasses.blue} animate-spin`}
+        className={`${sizeClasses[size] || sizeClasses.medium} ${
+          colorClasses[color] || colorClasses.blue
+        } animate-spin`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +82,15 @@ const Loader = ({ size = 'medium', color = 'blue', centered = true, text = 'Load
           fill="currentFill"
         />
       </svg>
-      {text && <span className={`mt-2 text-sm font-medium ${text === 'Loading...' ? 'sr-only' : ''}`}>{text}</span>}
+      {text && (
+        <span
+          className={`mt-2 text-sm font-medium ${
+            text === "Loading..." ? "sr-only" : isDark ? "text-gray-200" : "text-gray-700"
+          }`}
+        >
+          {text}
+        </span>
+      )}
     </div>
   );
 };

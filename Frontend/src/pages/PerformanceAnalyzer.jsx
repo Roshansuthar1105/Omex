@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaTachometerAlt, FaCode, FaLightbulb } from 'react-icons/fa';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -22,7 +22,7 @@ function PerformanceAnalyzer() {
 }`);
   const [language, setLanguage] = useState('JavaScript');
   const [analysisResult, setAnalysisResult] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { isDark } = useTheme();
 
   const languages = ["JavaScript", "Python", "Java", "C++", "C#", "PHP", "Go", "Ruby"];
@@ -60,6 +60,20 @@ function PerformanceAnalyzer() {
     setAnalysisResult('');
     toast.success('All cleared!');
   };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      window.scrollTo(0, 0);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+  if (loading) {
+    return (
+      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+        <Loader fullscreen size="xl" color="purple" text="Loading Performance Analysing Tool..." />
+      </div>
+    );
+  }
 
   return (
     <div className={`min-h-screen w-full ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>

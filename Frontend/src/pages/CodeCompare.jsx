@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Editor from 'react-simple-code-editor';
 import prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
@@ -15,7 +15,7 @@ const CodeCompare = () => {
   const [leftCode, setLeftCode] = useState('// Enter your first code snippet here');
   const [rightCode, setRightCode] = useState('// Enter your second code snippet here');
   const [comparison, setComparison] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [language, setLanguage] = useState('javascript');
   const [fontSize, setFontSize] = useState(14);
 
@@ -74,6 +74,20 @@ const CodeCompare = () => {
     navigator.clipboard.writeText(comparison);
     toast.success('Comparison copied to clipboard!');
   };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      window.scrollTo(0, 0);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+  if (loading) {
+    return (
+      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+        <Loader fullscreen size="xl" color="purple" text="Loading Code Comparision Tool..." />
+      </div>
+    );
+  }
 
   return (
     <div className={`min-h-screen w-full ${isDark ? 'bg-gray-800' : 'bg-gray-100'} py-8 px-4`}>

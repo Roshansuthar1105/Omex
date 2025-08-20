@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaGithub } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
+import Loader from "../components/Loader";
 
 const GITHUB_REPO = "Roshansuthar1105/Omex";
 
@@ -19,6 +20,22 @@ const Contribute = () => {
             })
             .catch(() => setLoading(false));
     }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      window.scrollTo(0, 0);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+        <Loader fullscreen size="xl" color="purple" text="Our Contributors..." />
+      </div>
+    );
+  }
 
     return (
         <div

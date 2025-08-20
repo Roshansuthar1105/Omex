@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaFileAlt, FaLightbulb, FaInfoCircle, FaFileUpload, FaYoutube, FaKeyboard } from 'react-icons/fa';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -7,6 +7,7 @@ import TextInput from '../components/TextInput';
 import YouTubeInput from '../components/YouTubeInput';
 import SummaryDisplay from '../components/SummaryDisplay';
 import { useTheme } from '../context/ThemeContext';
+import Loader from '../components/Loader';
 
 /**
  * Page component for the Content Summarizer feature
@@ -18,7 +19,7 @@ function ContentSummarizer() {
   const [text, setText] = useState('');
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [summary, setSummary] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [summaryLength, setSummaryLength] = useState('medium'); // short, medium, long
   const [summaryType, setSummaryType] = useState('general'); // general, academic, business
@@ -148,7 +149,20 @@ function ContentSummarizer() {
     setSummaryType('general');
     toast.success('All cleared!');
   };
-
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      window.scrollTo(0, 0);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+  if (loading) {
+    return (
+      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+        <Loader fullscreen size="xl" color="purple" text="Loading Content Summarising Tool..." />
+      </div>
+    );
+  }
   return (
     <div className={`min-h-screen w-full ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
       <div className="container mx-auto px-4 py-8">

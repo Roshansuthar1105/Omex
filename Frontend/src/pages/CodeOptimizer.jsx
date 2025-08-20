@@ -1,15 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CodeEditor from '../components/CodeEditor.jsx';
 import CodeExamples from '../components/CodeExamples.jsx';
 import FeedbackForm from '../components/FeedbackForm.jsx';
 import CodeHistory from '../components/CodeHistory.jsx';
 import { FaLightbulb, FaCode } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
+import Loader from '../components/Loader.jsx';
 
 function CodeOptimizer() {
+  const { isDark } = useTheme();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      window.scrollTo(0, 0);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
   const URL = `${import.meta.env.VITE_BACKEND_URL}/ai/get-review`;
   const [showExamples, setShowExamples] = useState(false);
-  const { isDark } = useTheme();
 
   const defaultPrompt = `function add(a, b) {
     return a + b;
@@ -46,6 +55,14 @@ function CodeOptimizer() {
     setPrompt(code);
     setShowExamples(false);
   };
+
+  if (loading) {
+    return (
+      <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+        <Loader fullscreen size="xl" color="purple" text="Loading Code Optimizer Tool..." />
+      </div>
+    );
+  }
 
   return (
     <div className={`min-h-screen w-full ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
