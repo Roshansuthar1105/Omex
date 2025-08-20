@@ -19,7 +19,6 @@ import {
   FaUserFriends,
   FaUsers
 } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 
 function Nav({ isMenuOpen, setIsMenuOpen }) { 
