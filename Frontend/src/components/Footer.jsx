@@ -10,6 +10,7 @@ import {
   FaHandsHelping,
   FaHeart,
   FaLinkedin,
+  FaDiscord,
   FaMagic,
   FaPaintBrush,
   FaQuestionCircle,
@@ -52,8 +53,11 @@ const Footer = () => {
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition duration-200`}>
                 <FaTwitter size={20} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition duration-200`}>
+              <a href="https://linkedin.com/in/roshansuthar" target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition duration-200`}>
                 <FaLinkedin size={20} />
+              </a>
+              <a href="https://discord.com/users/1317732270047498343" target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition duration-200`}>
+                <FaDiscord size={20} />
               </a>
             </div>
             <div className={`flex items-center ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
