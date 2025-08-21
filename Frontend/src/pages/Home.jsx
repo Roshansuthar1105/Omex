@@ -201,7 +201,7 @@ function Home() {
                   aria-label="Try Content Summarizer"
                    >
                   <span className="flex items-center gap-2">
-                                  Try Content Summarize <FaArrowRight size={14} />
+                                  Try Content Summarizer <FaArrowRight size={14} />
                   </span>
                 </Link>
 
