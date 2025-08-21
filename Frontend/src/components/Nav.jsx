@@ -159,7 +159,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
             <div className="relative">
               <button
                 onClick={toggleToolsDropdown}
-                className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${isToolsActive()
+                className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 cursor-pointer ${isToolsActive()
                   ? "text-blue-400 border-b-2 border-blue-400"
                   : "hover:text-blue-400"
                   }`}
@@ -260,7 +260,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
 
           <button
             onClick={toggleCompanyDropdown}
-            className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${
+            className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 cursor-pointer ${
               isCompanyActive()
                 ? "text-blue-400 border-b-2 border-blue-400"
                 : "hover:text-blue-400"
@@ -544,7 +544,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
             <div className="mb-2">
               <button
                 onClick={toggleToolsDropdown}
-                className={`flex items-center justify-between w-full p-3 rounded-lg ${isToolsActive()
+                className={`flex cursor-pointer items-center justify-between w-full p-3 rounded-lg ${isToolsActive()
                   ? isDark
                     ? "bg-blue-900/30 text-blue-400"
                     : "bg-blue-50 text-blue-600"
@@ -681,7 +681,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
             <div className="mb-2">
               <button
                 onClick={toggleCompanyDropdown}
-                className={`flex items-center justify-between w-full p-3 rounded-lg ${isCompanyActive()
+                className={`flex cursor-pointer items-center justify-between w-full p-3 rounded-lg ${isCompanyActive()
                   ? isDark
                     ? "bg-purple-900/30 text-purple-400"
                     : "bg-purple-50 text-purple-600"
