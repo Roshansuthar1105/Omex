@@ -30,7 +30,7 @@ function Home() {
           <div className="absolute top-20 left-10 w-40 h-40 bg-yellow-400 rounded-full filter blur-3xl opacity-10"></div>
           <div className="absolute bottom-20 right-10 w-60 h-60 bg-blue-600 rounded-full filter blur-3xl opacity-10"></div>
           <div className="absolute inset-0 bg-cover bg-center opacity-5"
-               style={{backgroundImage: "url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"}}></div>
+            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')" }}></div>
         </div>
         <div className="container mx-auto text-center relative z-10">
           <div className={`${isDark ? 'glass-dark' : 'glass'} rounded-3xl py-12 px-6 max-w-4xl mx-auto`}>
@@ -65,7 +65,7 @@ function Home() {
       <section className={`py-16 px-4 ${isDark ? 'bg-gray-800' : 'bg-white'} relative overflow-hidden`}>
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-0 right-0 w-full h-full bg-cover bg-center"
-               style={{backgroundImage: "url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"}}></div>
+            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')" }}></div>
         </div>
         <div className="container mx-auto relative z-10">
           <div className="text-center mb-12">
@@ -211,7 +211,7 @@ function Home() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <FeatureCard
-              icon={<FaVial className="text-blue-400" />}
+              icon={<FaMagic className="text-blue-400" />}
               title="Test Case Generator"
               description="Automatically generate comprehensive test cases for your code."
               link="/test-case-generator"
@@ -275,7 +275,7 @@ function Home() {
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 opacity-5"></div>
           <div className="absolute inset-0 bg-cover bg-center opacity-5"
-               style={{backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"}}></div>
+            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')" }}></div>
         </div>
         <div className="container mx-auto relative z-10">
           <div className="text-center mb-12">
@@ -379,7 +379,7 @@ function Home() {
       <section className={`py-16 px-4 ${isDark ? 'bg-slate-600 bg-opacity-10 ' : 'bg-blue-50'} relative overflow-hidden`}>
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-cover bg-center opacity-10"
-               style={{backgroundImage: "url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"}}></div>
+            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')" }}></div>
         </div>
         <div className="container mx-auto text-center relative z-10">
           <div className={`${isDark ? 'glass-dark' : 'glass'} rounded-2xl py-12 px-6 max-w-4xl mx-auto`}>
