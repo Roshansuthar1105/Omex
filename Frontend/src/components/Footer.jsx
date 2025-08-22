@@ -177,7 +177,7 @@ const Footer = () => {
             <h3 className={`text-lg font-semibold mb-4 border-b ${isDark ? 'border-gray-700' : 'border-gray-300'} pb-2`}>Company & Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/about" className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
+                <Link to="/about" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`flex items-center ${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`}>
                   <FaUsers className="mr-2 text-sm" /> About Us
                 </Link>
               </li>
