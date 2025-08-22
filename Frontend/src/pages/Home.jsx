@@ -10,7 +10,8 @@ import {
   FaRobot,
   FaStar,
   FaUsers,
-  FaComments
+  FaComments,
+  FaVial
 } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 import FAQSection from '../components/Faq';
