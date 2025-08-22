@@ -9,12 +9,11 @@ import {
   FaMagic,
   FaRobot,
   FaStar,
-  FaTachometerAlt,
-  FaTools,
-  FaVial,
-} from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { useTheme } from "../context/ThemeContext";
+  FaUsers,
+  FaComments
+} from 'react-icons/fa';
+import { useTheme } from '../context/ThemeContext';
+import FAQSection from '../components/Faq';
 
 function Home() {
   const { isDark } = useTheme();
@@ -780,7 +779,10 @@ function Home() {
             </div>
           </div>
         </div>
+
       </section>
+              <FAQSection/>
+
     </div>
   );
 }
