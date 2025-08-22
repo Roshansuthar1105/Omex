@@ -11,7 +11,8 @@ import {
   FaStar,
   FaUsers,
   FaComments,
-  FaVial
+  FaVial,
+  FaTachometerAlt
 } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 import FAQSection from '../components/Faq';
