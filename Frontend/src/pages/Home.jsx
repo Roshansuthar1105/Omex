@@ -9,6 +9,7 @@ import {
   FaMagic,
   FaRobot,
   FaStar,
+  FaTools,
   FaUsers,
   FaComments,
   FaVial,
@@ -16,6 +17,7 @@ import {
 } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 import FAQSection from '../components/Faq';
+import { Link } from "react-router-dom";
 
 function Home() {
   const { isDark } = useTheme();
