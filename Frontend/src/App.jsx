@@ -33,6 +33,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Team from "./pages/Team";
 import TermsOfService from "./pages/TermsOfService";
 import Contribute from "./pages/Contribute";
+import ContributorGuide from "./pages/ContributorGuide";
 
 // Theme context
 import { ThemeProvider } from './context/ThemeContext';
@@ -78,6 +79,7 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/contributor-guide" element={<ContributorGuide />} />
             </Routes>
           </main>
 
