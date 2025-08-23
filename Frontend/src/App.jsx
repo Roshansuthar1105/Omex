@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import Home from './pages/Home';
-import Nav from './components/Nav';
+import NavBar from './components/Navbar';
 import Footer from './components/Footer';
 import { Toaster } from 'react-hot-toast';
 
@@ -49,7 +49,7 @@ function App() {
         <ScrollToTop /> {/* 👈 ensures every route loads from the top */}
         <div className="flex flex-col min-h-screen">
           <nav className="w-full fixed top-0 left-0 z-50">
-            <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+            <NavBar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
           </nav>
 
           <main className="flex-grow pt-20">
