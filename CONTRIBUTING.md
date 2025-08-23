@@ -34,6 +34,13 @@ By participating, you are expected to uphold this code. Be respectful and profes
 
 ## 🛠 How to Contribute
 
+> **Need help getting started?**
+>
+> On the website, you’ll find a **Contributor Guide** page in the navigation bar under the "Company" section.  
+> This interactive guide covers all the essential steps, Git commands, FAQs, and resources you need to make your first contribution smoothly.
+>
+> Be sure to check it out for a visual walkthrough and quick reference while you contribute!
+
 ### 1. Fork the Repository
 - Navigate to the [OMEX Repository](https://github.com/Roshansuthar1105Omex/Omex)
 - Click **Fork** to create your own copy of the repository.

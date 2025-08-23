@@ -23,7 +23,8 @@ import {
   FaBug,
   FaTachometerAlt,
   FaAlignLeft,
-  FaRegBuilding
+  FaRegBuilding,
+  FaBookOpen 
 } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 
@@ -335,6 +336,16 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                       onClick={() => setIsCompanyDropdownOpen(false)}
                     >
                       <FaHandsHelping className="inline mr-2" />Contribute
+                    </Link>
+                    <Link
+                      to="/contributor-guide"
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
+                        ? "text-gray-300 hover:bg-gray-700"
+                        : "text-gray-700 hover:bg-gray-100"
+                        }`}
+                      onClick={() => setIsCompanyDropdownOpen(false)}
+                    >
+                      <FaBookOpen className="inline mr-2" />Contributor Guide
                     </Link>
                     <Link
                       to="/contact"
