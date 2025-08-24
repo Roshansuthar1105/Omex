@@ -473,7 +473,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
           <div className="flex justify-between items-center p-4 border-b border-gray-700/30">
             <div className="flex items-center space-x-2">
               <FaCode className="text-blue-400 text-xl" />
-              <span className="font-bold text-xl">OMEX</span>
+              <span className="font-bold text-2xl">OMEX</span>
             </div>
             <button
               onClick={toggleMenu}
