@@ -93,7 +93,6 @@ function cleanAIResponse(response) {
         cleanedResponse = cleanedResponse.replace(pattern, '');
     });
     
-    // Remove any leading/trailing whitespace and normalize line breaks
     cleanedResponse = cleanedResponse.trim();
     
     return cleanedResponse;
