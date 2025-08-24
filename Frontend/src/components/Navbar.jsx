@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   FaChartLine,
@@ -24,18 +24,41 @@ import {
   FaTachometerAlt,
   FaAlignLeft,
   FaRegBuilding,
-  FaBookOpen 
+  FaBookOpen,
+  FaStar,
+  FaTimes
 } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 
 function NavBar({ isMenuOpen, setIsMenuOpen }) {
   const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
   const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
+  const [isMobileToolsOpen, setIsMobileToolsOpen] = useState(false);
+  const [isMobileCompanyOpen, setIsMobileCompanyOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { isDark, toggleTheme } = useTheme();
+  const menuRef = useRef(null);
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 20;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(prev => !prev);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    setIsMobileToolsOpen(false);
+    setIsMobileCompanyOpen(false);
   };
 
   const toggleToolsDropdown = () => {
@@ -52,10 +75,24 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
     }
   };
 
+  const toggleMobileTools = () => {
+    setIsMobileToolsOpen(!isMobileToolsOpen);
+    if (!isMobileToolsOpen) {
+      setIsMobileCompanyOpen(false);
+    }
+  };
+
+  const toggleMobileCompany = () => {
+    setIsMobileCompanyOpen(!isMobileCompanyOpen);
+    if (!isMobileCompanyOpen) {
+      setIsMobileToolsOpen(false);
+    }
+  };
+
   const isActive = (path) => {
     return location.pathname === path
-      ? "text-blue-400 border-b-2 border-blue-400"
-      : "hover:text-blue-400";
+      ? "text-blue-400 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-blue-400 after:to-purple-400 after:rounded-full"
+      : "hover:text-blue-400 relative overflow-hidden group";
   };
 
   const isToolsActive = () => {
@@ -84,6 +121,24 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
     return companyPaths.some((path) => location.pathname === path);
   };
 
+  // Handle click outside to close dropdowns
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Close mobile menu if clicking outside
+      if (
+        isMenuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        !event.target.closest('.hamburger-button')
+      ) {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isMenuOpen]);
+
   // Prevent background scroll when mobile menu is open
   useEffect(() => {
     if (isMenuOpen) {
@@ -98,785 +153,561 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
   }, [isMenuOpen]);
 
   return (
-    <nav
-      className={`${isDark ? "bg-gray-900 text-white" : "bg-white text-gray-800"
-        } py-4 px-4 md:px-8 w-full shadow-lg transition-colors duration-300 sticky top-0 z-50`}
-    >
-      <div className="container mx-auto">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <FaCode className="text-blue-400 text-2xl" />
-            <h1 className="text-2xl md:text-3xl font-bold">
+    <>
+      <nav
+        className={`${
+          isDark 
+            ? "bg-gray-900 text-white border-gray-800"
+            : "bg-white text-gray-800 border-gray-200"
+        } ${
+          scrolled 
+            ? "backdrop-blur-xl shadow-2xl border-b" 
+            : "backdrop-blur-md shadow-lg"
+        } py-4 px-4 md:px-8 w-full transition-all duration-500 sticky top-0 z-50`}
+      >
+        <div className="container mx-auto">
+          <div className="flex justify-between items-center">
+            {/* Logo */}
+            <div className="flex items-center space-x-3 group">
+              <div className="relative">
+                <FaCode className="text-blue-400 text-2xl group-hover:text-purple-400 transition-all duration-300 transform group-hover:scale-110" />
+                <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+              <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                <Link
+                  to="/"
+                  className="hover:from-purple-400 hover:via-pink-400 hover:to-blue-400 transition-all duration-500"
+                  onClick={closeMenu}
+                >
+                  OMEX
+                </Link>
+              </h1>
+              <FaStar className="text-yellow-400 text-sm animate-pulse opacity-70" />
+            </div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center space-x-8">
               <Link
                 to="/"
-                className="hover:text-blue-400 transition duration-200"
+                className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 ${isActive("/")}`}
               >
-                OMEX
+                <span className="relative z-10">Home</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
-            </h1>
-          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-6">
-            <Link
-              to="/"
-              className={`flex items-center space-x-1 py-2 ${isActive("/")}`}
-            >
-              <span>Home</span>
-            </Link>
-
-            {/* Optimize: replaced icon -> FaRocket (Footer uses FaRocket) */}
-            <Link
-              to="/optimiser"
-              className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${isActive(
-                "/optimiser"
-              )}`}
-            >
-              <FaRocket className="text-lg" />
-              <span>Optimize</span>
-            </Link>
-
-            {/* Generate: replaced icon -> FaMagic (Footer uses FaMagic) */}
-            <Link
-              to="/codegenerator"
-              className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${isActive(
-                "/codegenerator"
-              )}`}
-            >
-              <FaMagic className="text-lg" />
-              <span>Generate</span>
-            </Link>
-
-            {/* Complexity: keep FaChartLine */}
-            <Link
-              to="/codecomplexity"
-              className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${isActive(
-                "/codecomplexity"
-              )}`}
-            >
-              <FaChartLine className="text-lg" />
-              <span>Complexity</span>
-            </Link>
-
-            {/* Compare: keep FaExchangeAlt */}
-            <Link
-              to="/codecompare"
-              className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${isActive(
-                "/codecompare"
-              )}`}
-            >
-              <FaExchangeAlt className="text-lg" />
-              <span>Compare</span>
-            </Link>
-
-            {/* Tools Dropdown (icon kept FaTools) */}
-            <div className="relative">
-              <button
-                onClick={toggleToolsDropdown}
-                className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${isToolsActive()
-                  ? "text-blue-400 border-b-2 border-blue-400"
-                  : "hover:text-blue-400"
-                  }`}
+              <Link
+                to="/optimiser"
+                className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${isActive("/optimiser")}`}
               >
-                <FaTools className="text-lg" />
-                <span>Tools</span>
-                {isToolsDropdownOpen ? (
-                  <FaChevronUp className="ml-1 text-xs" />
-                ) : (
-                  <FaChevronDown className="ml-1 text-xs" />
-                )}
-              </button>
+                <FaRocket className="text-lg group-hover:text-yellow-400 transition-colors duration-300 transform group-hover:scale-110" />
+                <span className="relative z-10">Optimize</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-orange-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              </Link>
 
-              {isToolsDropdownOpen && (
-                <div
-                  className={`absolute left-0 mt-2 w-56 rounded-md shadow-lg ${isDark ? "bg-gray-800" : "bg-white"
-                    } ring-1 ring-black ring-opacity-5 z-50`}
-                >
-                  <div className="py-1" role="menu" aria-orientation="vertical">
-                    <Link
-                      to="/code-tools"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsToolsDropdownOpen(false)}
-                    >
-                      <FaTools className="inline mr-2" />
-                      All Tools
-                    </Link>
-
-                    <Link
-                      to="/test-case-generator"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsToolsDropdownOpen(false)}
-                    >
-                      <FaVial className="inline mr-2" />
-                      Test Case Generator
-                    </Link>
-
-                    <Link
-                      to="/code-beautifier"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsToolsDropdownOpen(false)}
-                    >
-                      <FaPaintBrush className="inline mr-2" />
-                      Code Beautifier
-                    </Link>
-
-                    <Link
-                      to="/error-debugger"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsToolsDropdownOpen(false)}
-                    >
-                      <FaBug className="inline mr-2" />
-                      Error Debugger
-                    </Link>
-
-                    <Link
-                      to="/performance-analyzer"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsToolsDropdownOpen(false)}
-                    >
-                      <FaTachometerAlt className="inline mr-2" />
-                      Performance Analyzer
-                    </Link>
-
-                    <Link
-                      to="/content-summarizer"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsToolsDropdownOpen(false)}
-                    >
-                      <FaAlignLeft className="inline mr-2" />
-                      Content Summarizer
-                    </Link>
-
-                    <Link
-                      to="/security-scanner"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsToolsDropdownOpen(false)}
-                    >
-                      <FaShieldAlt className="inline mr-2" />
-                      Security Vulnerability Scanner
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Company Dropdown */}
-            <div className="relative">
-              <button
-                onClick={toggleCompanyDropdown}
-                className={`hover:underline hover:underline-offset-10 hover:decoration-2 transition-colors duration-200 flex items-center space-x-1 py-2 ${isCompanyActive()
-                    ? "text-blue-400 border-b-2 border-blue-400"
-                    : "hover:text-blue-400"
-                  }`}
+              <Link
+                to="/codegenerator"
+                className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${isActive("/codegenerator")}`}
               >
-                <FaRegBuilding className="text-lg" />
-                <span>Company</span>
-                {isCompanyDropdownOpen ? (
-                  <FaChevronUp className="ml-1 text-xs" />
-                ) : (
-                  <FaChevronDown className="ml-1 text-xs" />
-                )}
-              </button>
+                <FaMagic className="text-lg group-hover:text-green-400 transition-colors duration-300 transform group-hover:scale-110" />
+                <span className="relative z-10">Generate</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-green-400/10 to-emerald-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              </Link>
 
-              {isCompanyDropdownOpen && (
-                <div
-                  className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg ${isDark ? "bg-gray-800" : "bg-white"
-                    } ring-1 ring-black ring-opacity-5 z-50`}
+              <Link
+                to="/codecomplexity"
+                className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${isActive("/codecomplexity")}`}
+              >
+                <FaChartLine className="text-lg group-hover:text-purple-400 transition-colors duration-300 transform group-hover:scale-110" />
+                <span className="relative z-10">Complexity</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              </Link>
+
+              <Link
+                to="/codecompare"
+                className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${isActive("/codecompare")}`}
+              >
+                <FaExchangeAlt className="text-lg group-hover:text-red-400 transition-colors duration-300 transform group-hover:scale-110" />
+                <span className="relative z-10">Compare</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-red-400/10 to-pink-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              </Link>
+
+              {/* Enhanced Tools Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={toggleToolsDropdown}
+                  className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${
+                    isToolsActive()
+                      ? "text-blue-400 bg-blue-400/10"
+                      : "hover:text-blue-400 hover:bg-blue-400/10"
+                  }`}
                 >
-                  <div className="py-1" role="menu" aria-orientation="vertical">
-                    <Link
-                      to="/about"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsCompanyDropdownOpen(false)}
-                    >
-                      <FaUsers className="inline mr-2" />
-                      About Us
-                    </Link>
-                    <Link
-                      to="/team"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsCompanyDropdownOpen(false)}
-                    >
-                      <FaUserFriends className="inline mr-2" />Our Team
-                    </Link>
-                    <Link
-                      to="/contribute"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsCompanyDropdownOpen(false)}
-                    >
-                      <FaHandsHelping className="inline mr-2" />Contribute
-                    </Link>
-                    <Link
-                      to="/contributor-guide"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsCompanyDropdownOpen(false)}
-                    >
-                      <FaBookOpen className="inline mr-2" />Contributor Guide
-                    </Link>
-                    <Link
-                      to="/contact"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsCompanyDropdownOpen(false)}
-                    >
-                      <FaEnvelope className="inline mr-2" />
-                      Contact Us
-                    </Link>
-                    <Link
-                      to="/faq"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsCompanyDropdownOpen(false)}
-                    >
-                      <FaQuestionCircle className="inline mr-2" />
-                      FAQ
-                    </Link>
-                    <Link
-                      to="/privacy-policy"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsCompanyDropdownOpen(false)}
-                    >
-                      <FaShieldAlt className="inline mr-2" />
-                      Privacy Policy
-                    </Link>
-                    <Link
-                      to="/terms-of-service"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsCompanyDropdownOpen(false)}
-                    >
-                      <FaFileContract className="inline mr-2" />
-                      Terms of Service
-                    </Link>
+                  <FaTools className="text-lg group-hover:text-cyan-400 transition-colors duration-300 transform group-hover:scale-110" />
+                  <span className="relative z-10">Tools</span>
+                  <div className={`transform transition-all duration-300 ${isToolsDropdownOpen ? "rotate-180" : ""}`}>
+                    <FaChevronDown className="text-xs" />
                   </div>
-                </div>
-              )}
-            </div>
+                  <span className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                </button>
 
-            {/* Theme Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              className={`flex items-center space-x-1 py-2 px-3 rounded-md transition-colors duration-200 ${isDark
-                ? "bg-gray-800 hover:bg-gray-700"
-                : "bg-gray-100 hover:bg-gray-200"
-                }`}
-              aria-label="Toggle theme"
-            >
-              {isDark ? (
-                <FaSun className="text-gray-200" />
-              ) : (
-                <FaMoon className="text-gray-800" />
-              )}
-            </button>
-          </div>
-
-          {/* Mobile menu button and theme toggle */}
-          <div className="lg:hidden flex items-center space-x-2">
-            <button
-              onClick={toggleTheme}
-              className={`p-2 rounded-md transition-colors duration-200 ${isDark
-                ? "bg-gray-800 hover:bg-gray-700"
-                : "bg-gray-100 hover:bg-gray-200"
-                }`}
-              aria-label="Toggle theme"
-            >
-              {isDark ? (
-                <FaSun className="text-lg text-gray-700 dark:text-gray-200" />
-              ) : (
-                <FaMoon className="text-lg text-gray-700 dark:text-gray-200" />
-              )}
-            </button>
-
-            <button
-              onClick={toggleMenu}
-              className={`p-2 rounded-lg ${isDark
-                ? "bg-gray-800/70 text-white"
-                : "bg-gray-100/70 text-gray-800"
-                } focus:outline-none relative z-50`}
-              aria-label="Toggle mobile menu"
-            >
-              <div className="w-6 h-6 relative flex items-center justify-center">
-                <span
-                  className={`block absolute h-0.5 w-5 transform transition duration-300 ease-in-out ${isMenuOpen ? "rotate-45" : "-translate-y-1.5"
-                    } ${isDark ? "bg-white" : "bg-gray-800"}`}
-                ></span>
-                <span
-                  className={`block absolute h-0.5 w-5 ${isMenuOpen ? "opacity-0" : "opacity-100"
-                    } ${isDark ? "bg-white" : "bg-gray-800"
-                    } transition-opacity duration-300`}
-                ></span>
-                <span
-                  className={`block absolute h-0.5 w-5 transform transition duration-300 ease-in-out ${isMenuOpen ? "-rotate-45" : "translate-y-1.5"
-                    } ${isDark ? "bg-white" : "bg-gray-800"}`}
-                ></span>
+                {isToolsDropdownOpen && (
+                  <div
+                    className={`absolute left-0 mt-3 w-64 rounded-xl shadow-2xl backdrop-blur-xl border ${
+                      isDark 
+                        ? "bg-gray-800/95 border-gray-700/50" 
+                        : "bg-white/95 border-gray-200/50"
+                    } ring-1 ring-black/5 z-50 animate-in slide-in-from-top-2 duration-200`}
+                  >
+                    <div className="py-2" role="menu">
+                      {[
+                        { to: "/code-tools", icon: FaTools, label: "All Tools", color: "blue" },
+                        { to: "/test-case-generator", icon: FaVial, label: "Test Case Generator", color: "green" },
+                        { to: "/code-beautifier", icon: FaPaintBrush, label: "Code Beautifier", color: "pink" },
+                        { to: "/error-debugger", icon: FaBug, label: "Error Debugger", color: "red" },
+                        { to: "/performance-analyzer", icon: FaTachometerAlt, label: "Performance Analyzer", color: "yellow" },
+                        { to: "/content-summarizer", icon: FaAlignLeft, label: "Content Summarizer", color: "purple" },
+                        { to: "/security-scanner", icon: FaShieldAlt, label: "Security Scanner", color: "red" }
+                      ].map((item) => (
+                        <Link
+                          key={item.to}
+                          to={item.to}
+                          className={`flex items-center space-x-3 px-4 py-3 text-sm transition-all duration-200 group ${
+                            isDark
+                              ? "text-gray-300 hover:bg-gray-700/50 hover:text-white"
+                              : "text-gray-700 hover:bg-gray-50/50 hover:text-gray-900"
+                          }`}
+                          onClick={() => setIsToolsDropdownOpen(false)}
+                        >
+                          <item.icon className={`text-${item.color}-400 text-sm group-hover:scale-110 transition-transform duration-200`} />
+                          <span className="text-sm font-medium">{item.label}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-            </button>
+
+              {/* Enhanced Company Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={toggleCompanyDropdown}
+                  className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${
+                    isCompanyActive()
+                      ? "text-purple-400 bg-purple-400/10"
+                      : "hover:text-purple-400 hover:bg-purple-400/10"
+                  }`}
+                >
+                  <FaRegBuilding className="text-lg group-hover:text-indigo-400 transition-colors duration-300 transform group-hover:scale-110" />
+                  <span className="relative z-10">Company</span>
+                  <div className={`transform transition-all duration-300 ${isCompanyDropdownOpen ? "rotate-180" : ""}`}>
+                    <FaChevronDown className="text-xs" />
+                  </div>
+                  <span className="absolute inset-0 bg-gradient-to-r from-indigo-400/10 to-purple-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                </button>
+
+                {isCompanyDropdownOpen && (
+                  <div
+                    className={`absolute left-0 mt-3 w-56 rounded-xl shadow-2xl backdrop-blur-xl border ${
+                      isDark 
+                        ? "bg-gray-800/95 border-gray-700/50" 
+                        : "bg-white/95 border-gray-200/50"
+                    } ring-1 ring-black/5 z-50 animate-in slide-in-from-top-2 duration-200`}
+                  >
+                    <div className="py-2" role="menu">
+                      {[
+                        { to: "/about", icon: FaUsers, label: "About Us", color: "blue" },
+                        { to: "/team", icon: FaUserFriends, label: "Our Team", color: "green" },
+                        { to: "/contribute", icon: FaHandsHelping, label: "Contribute", color: "yellow" },
+                        { to: "/contributor-guide", icon: FaBookOpen, label: "Contributor Guide", color: "indigo" },
+                        { to: "/contact", icon: FaEnvelope, label: "Contact Us", color: "purple" },
+                        { to: "/faq", icon: FaQuestionCircle, label: "FAQ", color: "pink" },
+                        { to: "/privacy-policy", icon: FaShieldAlt, label: "Privacy Policy", color: "red" },
+                        { to: "/terms-of-service", icon: FaFileContract, label: "Terms of Service", color: "gray" }
+                      ].map((item) => (
+                        <Link
+                          key={item.to}
+                          to={item.to}
+                          className={`flex items-center space-x-3 px-4 py-3 text-sm transition-all duration-200 group ${
+                            isDark
+                              ? "text-gray-300 hover:bg-gray-700/50 hover:text-white"
+                              : "text-gray-700 hover:bg-gray-50/50 hover:text-gray-900"
+                          }`}
+                          onClick={() => setIsCompanyDropdownOpen(false)}
+                        >
+                          <item.icon className={`text-${item.color}-400 group-hover:scale-110 transition-transform duration-200`} />
+                          <span className="relative z-10">{item.label}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Theme Toggle Button */}
+              <button
+                onClick={toggleTheme}
+                className={`relative overflow-hidden p-3 rounded-xl transition-all duration-500 group ${
+                  isDark
+                    ? "bg-gray-800 hover:bg-gray-700"
+                    : "bg-gray-100 hover:bg-gray-200"
+                } shadow-lg hover:shadow-xl transform hover:scale-105`}
+                aria-label="Toggle theme"
+              >
+                <div className="relative z-10 flex items-center">
+                  {isDark ? (
+                    <FaSun className="text-yellow-400 text-lg animate-pulse" />
+                  ) : (
+                    <FaMoon className="text-indigo-600 text-lg" />
+                  )}
+                </div>
+              </button>
+            </div>
+
+            {/* Mobile menu button and theme toggle */}
+            <div className="lg:hidden flex items-center space-x-3">
+              <button
+                onClick={toggleTheme}
+                className={`p-2 rounded-xl transition-all duration-300 group ${
+                  isDark
+                    ? "bg-gray-800 hover:bg-gray-700"
+                    : "bg-gray-100 hover:bg-gray-200"
+                } shadow-md hover:shadow-lg transform hover:scale-105`}
+                aria-label="Toggle theme"
+              >
+                {isDark ? (
+                  <FaSun className="text-lg text-yellow-400 group-hover:animate-spin" />
+                ) : (
+                  <FaMoon className="text-lg text-indigo-600" />
+                )}
+              </button>
+
+              <button
+                onClick={toggleMenu}
+                className={`hamburger-button p-3 rounded-xl ${
+                  isDark
+                    ? "bg-gray-800/90 text-white hover:bg-gray-700/90"
+                    : "bg-gray-100/90 text-gray-800 hover:bg-gray-200/90"
+                } focus:outline-none relative z-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105`}
+                aria-label="Toggle mobile menu"
+              >
+                <div className="w-6 h-6 relative flex items-center justify-center">
+                  <span
+                    className={`block absolute h-0.5 w-5 rounded-full transform transition duration-300 ease-in-out ${
+                      isMenuOpen ? "rotate-45" : "-translate-y-1.5"
+                    } ${isDark ? "bg-white" : "bg-gray-800"}`}
+                  ></span>
+                  <span
+                    className={`block absolute h-0.5 w-5 rounded-full ${
+                      isMenuOpen ? "opacity-0" : "opacity-100"
+                    } ${
+                      isDark ? "bg-white" : "bg-gray-800"
+                    } transition-opacity duration-300`}
+                  ></span>
+                  <span
+                    className={`block absolute h-0.5 w-5 rounded-full transform transition duration-300 ease-in-out ${
+                      isMenuOpen ? "-rotate-45" : "translate-y-1.5"
+                    } ${isDark ? "bg-white" : "bg-gray-800"}`}
+                  ></span>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
+      </nav>
 
-        {/* Mobile Navigation Backdrop */}
-        <div
-          className={`fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden transition-opacity duration-300 ${isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-            }`}
-          onClick={toggleMenu}
-        ></div>
+      {/* Mobile Navigation Backdrop */}
+      <div
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden transition-all duration-300 ${
+          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={closeMenu}
+      ></div>
 
-        {/* Mobile Navigation Sidebar */}
-        <div
-          className={`fixed top-0 right-0 h-full w-4/5 max-w-sm z-50 lg:hidden transform transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"
-            } ${isDark ? "bg-gray-900/95" : "bg-white/95"
-            } backdrop-blur-lg shadow-2xl overflow-y-auto`}
-        >
-          <div className="flex justify-between items-center p-4 border-b border-gray-700/30">
-            <div className="flex items-center space-x-2">
-              <FaCode className="text-blue-400 text-xl" />
-              <span className="font-bold text-2xl">OMEX</span>
-            </div>
-            <button
-              onClick={toggleMenu}
-              className={`p-2 rounded-lg ${isDark
+      {/* Mobile Navigation Sidebar */}
+      <div
+        ref={menuRef}
+        className={`fixed top-0 right-0 h-full w-4/5 max-w-sm z-50 lg:hidden transform transition-all duration-500 ease-out ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        } ${
+          isDark ? "bg-gray-900/98" : "bg-white/98"
+        } backdrop-blur-2xl shadow-2xl overflow-y-auto border-l ${
+          isDark ? "border-gray-800/50" : "border-gray-200/50"
+        }`}
+      >
+        {/* Mobile header */}
+        <div className={`flex justify-between items-center p-6 border-b ${
+          isDark ? "border-gray-800/50" : "border-gray-200/50"
+        }`}>
+          <div className="flex items-center space-x-3">
+            <FaCode className="text-blue-400 text-xl" />
+            <span className="font-bold text-2xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              OMEX
+            </span>
+          </div>
+          <button
+            onClick={closeMenu}
+            className={`p-2 rounded-xl ${
+              isDark
                 ? "bg-gray-800/70 hover:bg-gray-700/70"
                 : "bg-gray-100/70 hover:bg-gray-200/70"
-                } focus:outline-none`}
-              aria-label="Close menu"
-            >
-              <div className="w-6 h-6 relative flex items-center justify-center">
-                <span
-                  className={`block absolute h-0.5 w-5 transform rotate-45 ${isDark ? "bg-white" : "bg-gray-800"
-                    }`}
-                ></span>
-                <span
-                  className={`block absolute h-0.5 w-5 transform -rotate-45 ${isDark ? "bg-white" : "bg-gray-800"
-                    }`}
-                ></span>
-              </div>
-            </button>
-          </div>
+            } focus:outline-none transition-all duration-300 transform hover:scale-105`}
+            aria-label="Close menu"
+          >
+            <FaTimes className={`w-5 h-5 ${isDark ? "text-white" : "text-gray-800"}`} />
+          </button>
+        </div>
 
-          <div className="py-4 px-4 space-y-4">
+        {/* Mobile menu items */}
+        <div className="py-6 px-4 space-y-2">
+          {/* Main Navigation Items */}
+          {[
+            { to: "/", icon: FaCode, label: "Home", color: "blue" },
+            { to: "/optimiser", icon: FaRocket, label: "Optimize", color: "yellow" },
+            { to: "/codegenerator", icon: FaMagic, label: "Generate", color: "green" },
+            { to: "/codecomplexity", icon: FaChartLine, label: "Complexity", color: "purple" },
+            { to: "/codecompare", icon: FaExchangeAlt, label: "Compare", color: "red" }
+          ].map((item) => (
             <Link
-              to="/"
-              className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/")
-                ? isDark
-                  ? "bg-blue-900/30 text-400"
-                  : "bg-blue-50 text-600"
-                : isDark
-                  ? "hover:bg-gray-800/70"
-                  : "hover:bg-gray-100/70"
-                }`}
-              onClick={toggleMenu}
-            >
-              <FaCode className="text-400" />
-              <span>Home</span>
-            </Link>
-
-            <Link
-              to="/optimiser"
-              className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/optimiser")
-                ? isDark
-                  ? "bg-yellow-900/30 text-400"
-                  : "bg-yellow-50 text-600"
-                : isDark
-                  ? "hover:bg-gray-800/70"
-                  : "hover:bg-gray-100/70"
-                }`}
-              onClick={toggleMenu}
-            >
-              <FaRocket className="text-lg" />
-
-              <span>Optimize</span>
-            </Link>
-
-            <Link
-              to="/codegenerator"
-              className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/codegenerator")
-                ? isDark
-                  ? "bg-green-900/30 text-400"
-                  : "bg-green-50 text-600"
-                : isDark
-                  ? "hover:bg-gray-800/70"
-                  : "hover:bg-gray-100/70"
-                }`}
-              onClick={toggleMenu}
-            >
-              <FaMagic className="text-lg" />
-              <span>Generate</span>
-            </Link>
-
-            <Link
-              to="/codecomplexity"
-              className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/codecomplexity")
-                ? isDark
-                  ? "bg-purple-900/30 text-400"
-                  : "bg-purple-50 text-600"
-                : isDark
-                  ? "hover:bg-gray-800/70"
-                  : "hover:bg-gray-100/70"
-                }`}
-              onClick={toggleMenu}
-            >
-              <FaChartLine className="text-lg" />
-              <span>Complexity</span>
-            </Link>
-
-            <Link
-              to="/codecompare"
-              className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/codecompare")
-                ? isDark
-                  ? "bg-red-900/30 text-400"
-                  : "bg-red-50 text-600"
-                : isDark
-                  ? "hover:bg-gray-800/70"
-                  : "hover:bg-gray-100/70"
-                }`}
-              onClick={toggleMenu}
-            >
-              <FaExchangeAlt className="text-lg" />
-              <span>Compare</span>
-            </Link>
-
-            {/* Mobile Tools Dropdown */}
-            <div className="mb-2">
-              <button
-                onClick={toggleToolsDropdown}
-                className={`flex items-center justify-between w-full p-3 rounded-lg ${isToolsActive()
+              key={item.to}
+              to={item.to}
+              className={`flex items-center space-x-3 p-4 rounded-xl transition-all duration-300 group ${
+                location.pathname === item.to
                   ? isDark
-                    ? "bg-blue-900/30 text-400"
-                    : "bg-blue-50 text-600"
+                    ? `bg-${item.color}-900/30 text-${item.color}-400`
+                    : `bg-${item.color}-50 text-${item.color}-600`
                   : isDark
                     ? "hover:bg-gray-800/70"
                     : "hover:bg-gray-100/70"
-                  }`}
-              >
-                <div className="flex items-center space-x-3">
-                  <FaTools className="text-lg" />
-                  <span>Tools</span>
-                </div>
-                <div
-                  className={`transition-transform duration-200 ${isToolsDropdownOpen ? "rotate-180" : ""
-                    }`}
-                >
-                  <FaChevronDown
-                    className={isToolsActive() ? "text-blue-400" : ""}
-                  />
-                </div>
-              </button>
+              } border ${
+                isDark ? "border-transparent hover:border-gray-700/50" : "border-transparent hover:border-gray-200/50"
+              }`}
+              onClick={closeMenu}
+            >
+              <item.icon className={`text-${item.color}-400 group-hover:scale-110 transition-transform duration-200`} />
+              <span className="font-medium">{item.label}</span>
+            </Link>
+          ))}
 
-              <div
-                className={`mt-2 ml-4 pl-4 border-l-2 ${isDark ? "border-gray-700" : "border-gray-300"
-                  } space-y-1 overflow-hidden transition-all duration-300 ease-in-out ${isToolsDropdownOpen
-                    ? "max-h-96 opacity-100"
-                    : "max-h-0 opacity-0"
-                  }`}
-              >
-                <Link
-                  to="/code-tools"
-                  className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/code-tools")
-                    ? isDark
-                      ? "bg-blue-900/30 text-400"
-                      : "bg-blue-50 text-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
-                    }`}
-                  onClick={toggleMenu}
-                >
-                  <FaTools />
-                  <span>All Tools</span>
-                </Link>
-                <Link
-                  to="/test-case-generator"
-                  className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/test-case-generator")
-                    ? isDark
-                      ? "bg-blue-900/30 text-blue-400"
-                      : "bg-blue-50 text-blue-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
-                    }`}
-                  onClick={toggleMenu}
-                >
-                  <FaVial />
-                  <span>Test Case Generator</span>
-                </Link>
-                <Link
-                  to="/code-beautifier"
-                  className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/code-beautifier")
-                    ? isDark
-                      ? "bg-blue-900/30 text-blue-400"
-                      : "bg-blue-50 text-blue-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
-                    }`}
-                  onClick={toggleMenu}
-                >
-                  <FaPaintBrush />
-                  <span>Code Beautifier</span>
-                </Link>
-                <Link
-                  to="/error-debugger"
-                  className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/error-debugger")
-                    ? isDark
-                      ? "bg-blue-900/30 text-blue-400"
-                      : "bg-blue-50 text-blue-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
-                    }`}
-                  onClick={toggleMenu}
-                >
-                  <FaBug />
-                  <span>Error Debugger</span>
-                </Link>
-                <Link
-                  to="/performance-analyzer"
-                  className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/performance-analyzer")
-                    ? isDark
-                      ? "bg-blue-900/30 text-blue-400"
-                      : "bg-blue-50 text-blue-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
-                    }`}
-                  onClick={toggleMenu}
-                >
-                  <FaTachometerAlt />
-                  <span>Performance Analyzer</span>
-                </Link>
-                <Link
-                  to="/content-summarizer"
-                  className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/content-summarizer")
-                    ? isDark
-                      ? "bg-blue-900/30 text-blue-400"
-                      : "bg-blue-50 text-blue-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
-                    }`}
-                  onClick={toggleMenu}
-                >
-                  <FaAlignLeft />
-                  <span>Content Summarizer</span>
-                </Link>
-
-                <Link
-                  to="/security-scanner"
-                  className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/security-scanner")
-                    ? isDark
-                      ? "bg-blue-900/30 text-blue-400"
-                      : "bg-blue-50 text-blue-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
-                    }`}
-                  onClick={toggleMenu}
-                >
-                  <FaShieldAlt className="text-red-400" />
-                  <span>Security Scanner</span>
-                </Link>
+          {/* Mobile Tools Dropdown */}
+          <div className="space-y-2">
+            <button
+              onClick={toggleMobileTools}
+              className={`flex items-center justify-between w-full p-4 rounded-xl transition-all duration-300 group ${
+                isToolsActive()
+                  ? isDark
+                    ? "bg-blue-900/30 text-blue-400"
+                    : "bg-blue-50 text-blue-600"
+                  : isDark
+                    ? "hover:bg-gray-800/70"
+                    : "hover:bg-gray-100/70"
+              } border ${
+                isDark ? "border-transparent hover:border-gray-700/50" : "border-transparent hover:border-gray-200/50"
+              }`}
+            >
+              <div className="flex items-center space-x-3">
+                <FaTools className="text-cyan-400 group-hover:scale-110 transition-transform duration-200" />
+                <span className="font-medium">Tools</span>
               </div>
-            </div>
+              <FaChevronDown className={`transform transition-transform duration-300 ${
+                isMobileToolsOpen ? "rotate-180" : ""
+              }`} />
+            </button>
 
-            {/* Mobile Company Dropdown */}
-            <div className="mb-2">
-              <button
-                onClick={toggleCompanyDropdown}
-                className={`flex items-center justify-between w-full p-3 rounded-lg ${isCompanyActive()
+            {isMobileToolsOpen && (
+              <div className="ml-4 space-y-1">
+                {[
+                  { to: "/code-tools", icon: FaTools, label: "All Tools", color: "blue" },
+                  { to: "/test-case-generator", icon: FaVial, label: "Test Case Generator", color: "green" },
+                  { to: "/code-beautifier", icon: FaPaintBrush, label: "Code Beautifier", color: "pink" },
+                  { to: "/error-debugger", icon: FaBug, label: "Error Debugger", color: "red" },
+                  { to: "/performance-analyzer", icon: FaTachometerAlt, label: "Performance Analyzer", color: "yellow" },
+                  { to: "/content-summarizer", icon: FaAlignLeft, label: "Content Summarizer", color: "purple" },
+                  { to: "/security-scanner", icon: FaShieldAlt, label: "Security Scanner", color: "red" }
+                ].map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 group ${
+                      isDark
+                        ? "hover:bg-gray-800/50 text-gray-300"
+                        : "hover:bg-gray-100/50 text-gray-700"
+                    }`}
+                    onClick={closeMenu}
+                  >
+                    <item.icon className={`text-${item.color}-400 text-sm group-hover:scale-110 transition-transform duration-200`} />
+                    <span className="text-sm font-medium">{item.label}</span>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Company Dropdown */}
+          <div className="space-y-2">
+            <button
+              onClick={toggleMobileCompany}
+              className={`flex items-center justify-between w-full p-4 rounded-xl transition-all duration-300 group ${
+                isCompanyActive()
                   ? isDark
                     ? "bg-purple-900/30 text-purple-400"
                     : "bg-purple-50 text-purple-600"
                   : isDark
-                    ? "hover:bg-purple-800/70"
-                    : "hover:bg-purple-100/70"
-                  }`}
-              >
-                <div className="flex items-center space-x-3">
-                  <FaRegBuilding className="text-lg" />
-                  <span>Company</span>
-                </div>
-                <div
-                  className={`transition-transform duration-200 ${isCompanyDropdownOpen ? "rotate-180" : ""
-                    }`}
-                >
-                  <FaChevronDown
-                    className={isCompanyActive() ? "text-purple-400" : ""}
-                  />
-                </div>
-              </button>
-
-              <div
-                className={`mt-2 ml-4 pl-4 border-l-2 ${isDark ? "border-gray-700" : "border-gray-300"
-                  } space-y-1 overflow-hidden transition-all duration-300 ease-in-out ${isCompanyDropdownOpen
-                    ? "max-h-96 opacity-100"
-                    : "max-h-0 opacity-0"
-                  }`}
-              >
-                <Link
-                  to="/about"
-                  className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/about")
-                    ? isDark
-                      ? "bg-purple-900/30 text-purple-400"
-                      : "bg-purple-50 text-purple-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
-                    }`}
-                  onClick={toggleMenu}
-                >
-                  <FaUsers className="text-purple-400" />
-                  <span>About Us</span>
-                </Link>
-                <Link
-                  to="/team"
-                  className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/team")
-                    ? isDark
-                      ? "bg-purple-900/30 text-purple-400"
-                      : "bg-purple-50 text-purple-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
-                    }`}
-                  onClick={toggleMenu}
-                >
-                  <FaUsers className="text-purple-400" />
-                  <span>Our Team</span>
-                </Link>
-                <Link
-                  to="/contact"
-                  className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/contact")
-                    ? isDark
-                      ? "bg-purple-900/30 text-purple-400"
-                      : "bg-purple-50 text-purple-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
-                    }`}
-                  onClick={toggleMenu}
-                >
-                  <FaEnvelope className="text-purple-400" />
-                  <span>Contact Us</span>
-                </Link>
-                <Link
-                  to="/faq"
-                  className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/faq")
-                    ? isDark
-                      ? "bg-purple-900/30 text-purple-400"
-                      : "bg-purple-50 text-purple-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
-                    }`}
-                  onClick={toggleMenu}
-                >
-                  <FaQuestionCircle className="text-purple-400" />
-                  <span>FAQ</span>
-                </Link>
-                <Link
-                  to="/privacy-policy"
-                  className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/privacy-policy")
-                    ? isDark
-                      ? "bg-purple-900/30 text-purple-400"
-                      : "bg-purple-50 text-purple-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
-                    }`}
-                  onClick={toggleMenu}
-                >
-                  <FaShieldAlt className="text-purple-400" />
-                  <span>Privacy Policy</span>
-                </Link>
-                <Link
-                  to="/terms-of-service"
-                  className={`flex items-center space-x-3 p-3 rounded-lg ${isActive("/terms-of-service")
-                    ? isDark
-                      ? "bg-purple-900/30 text-purple-400"
-                      : "bg-purple-50 text-purple-600"
-                    : isDark
-                      ? "hover:bg-gray-800/70"
-                      : "hover:bg-gray-100/70"
-                    }`}
-                  onClick={toggleMenu}
-                >
-                  <FaFileContract className="text-purple-400" />
-                  <span>Terms of Service</span>
-                </Link>
+                    ? "hover:bg-gray-800/70"
+                    : "hover:bg-gray-100/70"
+              } border ${
+                isDark ? "border-transparent hover:border-gray-700/50" : "border-transparent hover:border-gray-200/50"
+              }`}
+            >
+              <div className="flex items-center space-x-3">
+                <FaRegBuilding className="text-indigo-400 group-hover:scale-110 transition-transform duration-200" />
+                <span className="font-medium">Company</span>
               </div>
-            </div>
-            {/* Theme Toggle in Mobile Menu */}
-            <div className="mt-6 border-t border-gray-700/30 pt-6 px-3">
-              <div className="flex items-center justify-between">
-                <span className="font-medium">Theme</span>
-                <button
-                  onClick={toggleTheme}
-                  className={`p-3 rounded-lg ${isDark
-                      ? "bg-gray-800/70 text-gray-400"
-                     : "bg-gray-100/70 text-gray-400"
-                    }`}
-                >
-                  {isDark ? (
-                    <div className="flex items-center space-x-2">
-                       <FaSun className="text-gray-200" />  {/* Light Mode Icon */}
-                      <span>Light Mode</span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center space-x-2">
-                      <FaMoon className="text-gray-800" /> {/* Dark Mode Icon */}
-                      <span>Dark Mode</span>
-                    </div>
-                  )}
-                </button>
-              </div>
-            </div>
+              <FaChevronDown className={`transform transition-transform duration-300 ${
+                isMobileCompanyOpen ? "rotate-180" : ""
+              }`} />
+            </button>
 
+            {isMobileCompanyOpen && (
+              <div className="ml-4 space-y-1">
+                {[
+                  { to: "/about", icon: FaUsers, label: "About Us", color: "blue" },
+                  { to: "/team", icon: FaUserFriends, label: "Our Team", color: "green" },
+                  { to: "/contribute", icon: FaHandsHelping, label: "Contribute", color: "yellow" },
+                  { to: "/contributor-guide", icon: FaBookOpen, label: "Contributor Guide", color: "indigo" },
+                  { to: "/contact", icon: FaEnvelope, label: "Contact Us", color: "purple" },
+                  { to: "/faq", icon: FaQuestionCircle, label: "FAQ", color: "pink" },
+                  { to: "/privacy-policy", icon: FaShieldAlt, label: "Privacy Policy", color: "red" },
+                  { to: "/terms-of-service", icon: FaFileContract, label: "Terms of Service", color: "gray" }
+                ].map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 group ${
+                      isDark
+                        ? "hover:bg-gray-800/50 text-gray-300"
+                        : "hover:bg-gray-100/50 text-gray-700"
+                    }`}
+                    onClick={closeMenu}
+                  >
+                    <item.icon className={`text-${item.color}-400 text-sm group-hover:scale-110 transition-transform duration-200`} />
+                    <span className="text-sm font-medium">{item.label}</span>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+        {/* End Mobile menu items */}
+        {/* Theme toggle for mobile sidebar */}
+        <div className={`mt-8 pt-6 border-t ${isDark ? "border-gray-800/50" : "border-gray-200/50"}`}>
+          <div className="flex items-center justify-between px-4">
+            <span className="font-medium text-lg">Theme</span>
+            <button
+              onClick={toggleTheme}
+              className={`flex items-center space-x-3 p-3 rounded-xl transition-all duration-300 group ${
+                isDark
+                  ? "bg-gray-800/70 hover:bg-gray-700/70 text-yellow-400"
+                  : "bg-gray-100/70 hover:bg-gray-200/70 text-blue-600"
+              } shadow-lg hover:shadow-xl transform hover:scale-105`}
+            >
+              {isDark ? (
+                <>
+                  <FaSun />
+                  <span>Light Mode</span>
+                </>
+              ) : (
+                <>
+                  <FaMoon />
+                  <span>Dark Mode</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
       </div>
-    </nav>
+      {/* End Mobile Navigation Sidebar */}
+      {/* Custom Styles */}
+      <style jsx>{`
+        @keyframes slideInRight {
+          from {
+            opacity: 0;
+            transform: translateX(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes glow {
+          0%, 100% { 
+            box-shadow: 0 0 15px rgba(147,51,234,0.5),
+                       0 0 30px rgba(147,51,234,0.3); 
+          }
+          50% { 
+            box-shadow: 0 0 25px rgba(147,51,234,0.8),
+                       0 0 40px rgba(147,51,234,0.5); 
+          }
+        }
+
+        .animate-in {
+          animation: slideInRight 0.3s ease-out forwards;
+        }
+
+        .slide-in-from-top-2 {
+          animation: slideInFromTop 0.2s ease-out forwards;
+        }
+
+        @keyframes slideInFromTop {
+          from {
+            opacity: 0;
+            transform: translateY(-8px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Ensure backdrop blur works properly */
+        .backdrop-blur-xl {
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+        }
+
+        .backdrop-blur-md {
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+        }
+
+        .backdrop-blur-2xl {
+          backdrop-filter: blur(40px);
+          -webkit-backdrop-filter: blur(40px);
+        }
+
+        .backdrop-blur-sm {
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
+        }
+
+        /* Custom scrollbar for mobile menu */
+        .overflow-y-auto::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        .overflow-y-auto::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .overflow-y-auto::-webkit-scrollbar-thumb {
+          background: rgba(156, 163, 175, 0.3);
+          border-radius: 2px;
+        }
+
+        .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+          background: rgba(156, 163, 175, 0.5);
+        }
+      `}</style>
+    </>
   );
 }
 
