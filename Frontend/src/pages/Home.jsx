@@ -236,7 +236,7 @@ function Home() {
       {/* Features Section */}
 
       <section
-        className={`py-16 px-4 ${isDark ? "bg-gray-900/95" : "bg-gray-200"}`}
+        className={`py-16 px-4 ${isDark ? "bg-gray-900" : "bg-gray-200"}`}
       >
         <div className="container mx-auto">
           <h2
@@ -248,7 +248,7 @@ function Home() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <FeatureCard key={index} {...feature} isDark={isDark} />
+              <FeatureCard2 key={index} {...feature} isDark={isDark} />
             ))}
           </div>
         </div>
@@ -655,6 +655,72 @@ const FeatureCard = ({
         flex flex-col items-center p-8
         rounded-2xl justify-between
         ${isDark ? "bg-gray-900" : "bg-white"}
+        shadow-md
+        border border-transparent
+        transition-all duration-300
+        hover:shadow-2xl hover:shadow-black/30
+        hover:scale-[1.03] hover:border-blue-500
+        focus-within:shadow-2xl focus-within:scale-[1.03]
+      `}
+      tabIndex={0}
+    >
+      <div className="mb-4">
+        <Icon className={`text-3xl drop-shadow-lg ${iconColor}`} />
+      </div>
+      <h3
+        className={`text-xl font-bold text-center mb-2 ${
+          isDark ? "text-blue-100" : "text-blue-900"
+        }`}
+      >
+        {title}
+      </h3>
+      <p
+        className={`text-center mb-6 px-2 ${
+          isDark ? "text-gray-300" : "text-gray-700"
+        }`}
+      >
+        {description}
+      </p>
+      <a
+        href={href}
+        tabIndex={0}
+        role="button"
+        aria-label={`Learn more about ${title}`}
+      >
+        <span
+          className={`
+            inline-flex items-center gap-2
+            px-5 py-2 rounded-md font-semibold text-base
+            transition-colors duration-200
+            ${
+              isDark
+                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+            }
+            cursor-pointer select-none
+          `}
+        >
+          Learn More <FaArrowRight size={16} />
+        </span>
+      </a>
+    </div>
+  );
+};
+
+const FeatureCard2 = ({
+  icon: Icon,
+  title,
+  description,
+  href,
+  iconColor,
+  isDark,
+}) => {
+  return (
+    <div
+      className={`
+        flex flex-col items-center p-8
+        rounded-2xl justify-between
+        ${isDark ? "bg-gray-800" : "bg-white"}
         shadow-md
         border border-transparent
         transition-all duration-300
