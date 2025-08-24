@@ -107,7 +107,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <FaCode className="text-blue-400 text-2xl" />
-            <h1 className="text-xl md:text-2xl font-bold">
+            <h1 className="text-2xl md:text-3xl font-bold">
               <Link
                 to="/"
                 className="hover:text-blue-400 transition duration-200"
