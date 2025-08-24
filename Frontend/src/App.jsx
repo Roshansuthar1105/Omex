@@ -9,6 +9,11 @@ import Nav from './components/Nav';
 import Footer from './components/Footer';
 import { Toaster } from 'react-hot-toast';
 
+// //GSAP Animations
+// import { useRef } from "react";
+// import gsap from "gsap";
+// import { useGSAP } from "@gsap/react"; 
+
 // New utility
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -34,6 +39,7 @@ import Team from "./pages/Team";
 import TermsOfService from "./pages/TermsOfService";
 import Contribute from "./pages/Contribute";
 
+
 // Theme context
 import { ThemeProvider } from './context/ThemeContext';
 
@@ -42,7 +48,7 @@ import BackToTopButton from "./components/BackToTopButton";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  
   return (
     <ThemeProvider>
       <Router>

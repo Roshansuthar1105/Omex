@@ -1,5 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { TextPlugin } from "gsap/TextPlugin";
+import { useGSAP } from "@gsap/react";
+import { useLocation } from "react-router-dom";
 import {
   FaLightbulb,
   FaRobot,
@@ -15,36 +20,429 @@ import {
   FaFileAlt,
   FaStar,
   FaUsers,
-  FaComments
-} from 'react-icons/fa';
-import { useTheme } from '../context/ThemeContext';
-import FAQSection from '../components/Faq';
+  FaComments,
+} from "react-icons/fa";
+import { useTheme } from "../context/ThemeContext";
+import FAQSection from "../components/Faq";
+gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(TextPlugin);
+
+const features = [
+  {
+    title: "Code Optimization",
+    description:
+      "Get AI-powered suggestions to improve your code's performance, readability, and maintainability.",
+    icon: <FaLightbulb className="text-yellow-400 text-3xl drop-shadow-lg" />,
+    link: "/optimiser",
+  },
+  {
+    title: "Code Generation",
+    description:
+      "Generate code snippets and solutions based on your requirements and specifications.",
+    icon: <FaRobot className="text-green-400 text-3xl drop-shadow-lg" />,
+    link: "/codegenerator",
+  },
+  {
+    title: "Complexity Analysis",
+    description:
+      "Understand the time and space complexity of your algorithms and identify bottlenecks.",
+    icon: <FaChartLine className="text-purple-400 text-3xl drop-shadow-lg" />,
+    link: "/codecomplexity",
+  },
+  {
+    title: "Code Comparison",
+    description:
+      "Compare different versions of your code to identify changes and improvements.",
+    icon: <FaExchangeAlt className="text-red-400 text-3xl drop-shadow-lg" />,
+    link: "/codecompare",
+  },
+];
 
 function Home() {
   const { isDark } = useTheme();
+  // Refs
+  const cardRefs = useRef([]);
+  const iconRefs = useRef([]);
+  const titleRefs = useRef([]);
+  const descRefs = useRef([]);
+  const containerRef = useRef();
+  const howItWorksRef = useRef(null);
+  const ctaSectionRef = useRef(null);
+  const ctaCardRef = useRef(null);
+  const ctaHeadingRef = useRef(null);
+  const ctaParagraphRef = useRef(null);
+  const ctaButtonsRef = useRef([]);
+  const testimonialSectionRef = useRef(null);
+  const testimonialHeadingRef = useRef(null);
+  const testimonialParagraphRef = useRef(null);
+  const testimonialIconRef = useRef(null);
+  const testimonialCardsRef = useRef([]);
+  const testimonialAvatarsRef = useRef([]);
+  const location = useLocation();
+  const pageRef = useRef(null);
+  const navRef = useRef(null);
+
+  useGSAP(
+    () => {
+      // Page load animation
+      gsap.from(".hero-section", {
+        opacity: 0,
+        y: 30,
+        duration: 1,
+        ease: "power3.out",
+      });
+
+      // Stagger hero content
+      gsap.from(".hero-animate", {
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        stagger: 0.2,
+        delay: 0.3,
+        ease: "power3.out",
+      });
+
+      // Scroll-trigger fade-ups
+      gsap.utils.toArray(".fade-up").forEach((el) => {
+        gsap.from(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+          opacity: 0,
+          y: 40,
+          duration: 1,
+          ease: "power3.out",
+        });
+      });
+
+      // Fade in section heading
+      gsap.from(".featured-heading", {
+        opacity: 0,
+        y: 30,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".featured-heading",
+          start: "top 85%",
+        },
+      });
+
+      // CTA button subtle pop
+      gsap.from(".featured-cta", {
+        opacity: 0,
+        scale: 0.95,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".featured-cta",
+          start: "top 95%",
+        },
+      });
+
+      // Parallax background effect
+      gsap.to(".featured-bg > div", {
+        backgroundPositionY: "40%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".featured-bg",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      //Featured Services Cards
+      gsap.from(".card-left", {
+        opacity: 0,
+        x: -100,
+        duration: 1,
+        ease: "circ.out",
+        scrollTrigger: {
+          trigger: ".card-left",
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      gsap.from(".card-bottom", {
+        opacity: 0,
+        y: 100,
+        duration: 1,
+        ease: "circ.out",
+        scrollTrigger: {
+          trigger: ".card-bottom",
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      gsap.from(".card-right", {
+        opacity: 0,
+        x: 100,
+        duration: 1,
+        ease: "circ.out",
+        scrollTrigger: {
+          trigger: ".card-right",
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Feature animations
+      features.forEach((feature, index) => {
+        const card = cardRefs.current[index];
+        const icon = iconRefs.current[index];
+        const title = titleRefs.current[index];
+        const desc = descRefs.current[index];
+
+        // Fade-in card
+        gsap.from(card, {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+          },
+        });
+
+        // Icon pop
+        gsap.from(icon, {
+          scale: 0.5,
+          opacity: 0,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+          },
+        });
+
+        // Typewriter text
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top 85%",
+          once: true,
+          onEnter: () => {
+            gsap.to(title, {
+              duration: 2,
+              text: feature.title,
+              ease: "none",
+            });
+
+            gsap.to(desc, {
+              duration: 3,
+              text: feature.description,
+              ease: "none",
+              delay: 0.5,
+            });
+          },
+        });
+      });
+
+      // How It Works Section
+      gsap.utils.toArray(".how-step-card").forEach((card, index) => {
+        gsap.from(card, {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          ease: "power2.out",
+          delay: index * 0.2, // ripple effect
+          scrollTrigger: {
+            trigger: card,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+
+      // CTA Section Animations
+      gsap.from(ctaSectionRef.current, {
+        opacity: 0,
+        duration: 1.2,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: ctaSectionRef.current,
+          start: "top 85%",
+        },
+      });
+
+      // Slide up glass card
+      gsap.from(ctaCardRef.current, {
+        opacity: 0,
+        y: 60,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ctaCardRef.current,
+          start: "top 85%",
+        },
+      });
+
+      // Stagger heading and paragraph
+      gsap.from([ctaHeadingRef.current, ctaParagraphRef.current], {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: ctaCardRef.current,
+          start: "top 85%",
+        },
+      });
+
+      // Buttons ripple in
+      ctaButtonsRef.current.forEach((btn, index) => {
+        gsap.from(btn, {
+          scale: 0.8,
+          opacity: 0,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+          delay: index * 0.2,
+          scrollTrigger: {
+            trigger: ctaCardRef.current,
+            start: "top 85%",
+          },
+        });
+      });
+
+      //Testimonial Section Animations
+      // Fade in background
+      gsap.from(testimonialSectionRef.current, {
+        opacity: 0,
+        duration: 1.2,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: testimonialSectionRef.current,
+          start: "top 85%",
+        },
+      });
+
+      // Icon pop
+      gsap.from(testimonialIconRef.current, {
+        scale: 0.5,
+        opacity: 0,
+        duration: 0.6,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: testimonialSectionRef.current,
+          start: "top 85%",
+        },
+      });
+
+      // Text-Typing Heading
+      ScrollTrigger.create({
+        trigger: testimonialSectionRef.current,
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          gsap.to(testimonialHeadingRef.current, {
+            duration: 2,
+            text: "What Developers Say",
+            ease: "none",
+          });
+        },
+      });
+
+      // Paragraph fade-up
+      gsap.from(testimonialParagraphRef.current, {
+        opacity: 0,
+        y: 30,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: testimonialSectionRef.current,
+          start: "top 85%",
+        },
+      });
+
+      // Cards staggered slide-in
+      testimonialCardsRef.current.forEach((card, index) => {
+        gsap.from(card, {
+          opacity: 0,
+          y: 60,
+          duration: 1,
+          ease: "circ.out",
+          delay: index * 0.2,
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+          },
+        });
+      });
+
+      // Avatars ripple in
+      testimonialAvatarsRef.current.forEach((avatar, index) => {
+        gsap.from(avatar, {
+          scale: 0.7,
+          opacity: 0,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+          delay: index * 0.3,
+          scrollTrigger: {
+            trigger: avatar,
+            start: "top 85%",
+          },
+        });
+      });
+
+      // Refresh ScrollTrigger on window resize to ensure correct positions
+      ScrollTrigger.refresh();
+    },
+
+    { scope: containerRef } // <-- only scope to the container
+  );
+
   return (
-    <div className={`${isDark ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-800'} min-h-screen`}>
+    <div
+      ref={(el) => {
+        containerRef.current = el;
+        pageRef.current = el;
+      }}
+      className={`${
+        isDark ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"
+      } min-h-screen `}
+    >
       {/* Hero Section */}
-      <section className="py-20 px-4 relative overflow-hidden animated-bg">
-        <div className="absolute inset-0">
+      <section className="hero-section py-20 px-4 relative overflow-hidden animated-bg">
+        <div className="absolute inset-0 featured-bg">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 opacity-10"></div>
           <div className="absolute top-20 left-10 w-40 h-40 bg-yellow-400 rounded-full filter blur-3xl opacity-10"></div>
           <div className="absolute bottom-20 right-10 w-60 h-60 bg-blue-600 rounded-full filter blur-3xl opacity-10"></div>
-          <div className="absolute inset-0 bg-cover bg-center opacity-5"
-               style={{backgroundImage: "url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"}}></div>
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-5"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
+              backgroundPositionY: "0%",
+            }}
+          ></div>
         </div>
         <div className="container mx-auto text-center relative z-10">
-          <div className={`${isDark ? 'glass-dark' : 'glass'} rounded-3xl py-12 px-6 max-w-4xl mx-auto`}>
-            <div className="mb-8 inline-block p-3 bg-blue-600 bg-opacity-20 rounded-full">
+          <div
+            className={`${
+              isDark ? "glass-dark" : "glass"
+            } rounded-3xl py-12 px-6 max-w-4xl mx-auto hero-animate`}
+          >
+            <div className="mb-8 inline-block p-3 bg-blue-600 bg-opacity-20 rounded-full hero-animate">
               <FaCode className="text-blue-400 text-3xl" />
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight hero-animate">
               Elevate Your Code with <span className="text-blue-400">OMEX</span>
             </h1>
-            <p className={`text-xl md:text-2xl ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto mb-10`}>
-              The AI-powered platform for developers to optimize, generate, and analyze code with confidence.
+            <p
+              className={`text-xl md:text-2xl ${
+                isDark ? "text-gray-300" : "text-gray-600"
+              } max-w-3xl mx-auto mb-10 hero-animate`}
+            >
+              The AI-powered platform for developers to optimize, generate, and
+              analyze code with confidence.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4 hero-animate">
               <Link
                 to="/code-tools"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 flex items-center"
@@ -53,7 +451,13 @@ function Home() {
               </Link>
               <Link
                 to="/about"
-                className={`${isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-white hover:bg-gray-100 border border-gray-200'} text-${isDark ? 'white' : 'gray-800'} px-8 py-3 rounded-lg font-medium transition-all duration-200`}
+                className={`${
+                  isDark
+                    ? "bg-gray-700 hover:bg-gray-600"
+                    : "bg-white hover:bg-gray-100 border border-gray-200"
+                } text-${
+                  isDark ? "white" : "gray-800"
+                } px-8 py-3 rounded-lg font-medium transition-all duration-200`}
               >
                 Learn More
               </Link>
@@ -63,21 +467,38 @@ function Home() {
       </section>
 
       {/* Featured Services Section */}
-      <section className={`py-16 px-4 ${isDark ? 'bg-gray-800' : 'bg-white'} relative overflow-hidden`}>
+      <section
+        className={`py-16 px-4 ${
+          isDark ? "bg-gray-800" : "bg-white"
+        } relative overflow-hidden`}
+      >
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 right-0 w-full h-full bg-cover bg-center"
-               style={{backgroundImage: "url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"}}></div>
+          <div
+            className="absolute top-0 right-0 w-full h-full bg-cover bg-center"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
+            }}
+          ></div>
         </div>
         <div className="container mx-auto relative z-10">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 featured-heading">
             <h2 className="text-3xl font-bold mb-4">Featured Services</h2>
-            <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto`}>
-              Discover our most popular tools that help developers write better code
+            <p
+              className={`text-lg ${
+                isDark ? "text-gray-300" : "text-gray-600"
+              } max-w-3xl mx-auto`}
+            >
+              Discover our most popular tools that help developers write better
+              code
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className={`rounded-lg overflow-hidden ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}
+            <div
+              className={`card-left rounded-lg overflow-hidden ${
+                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+              }
                   transition duration-300
                   hover:shadow-lg
                   hover:shadow-gray-900
@@ -86,11 +507,19 @@ function Home() {
                   hover:border-blue-500
                   focus-within:shadow-lg
                   focus-within:scale-102
-                  `} tabIndex={0}>
-              <div className={`h-3 ${isDark ? 'bg-blue-500' : 'bg-blue-600'}`}></div>
+                  `}
+              tabIndex={0}
+            >
+              <div
+                className={`h-3 ${isDark ? "bg-blue-500" : "bg-blue-600"}`}
+              ></div>
               <div className="p-6">
                 <div className="flex items-center mb-4">
-                  <div className={`p-3 rounded-full ${isDark ? 'bg-blue-500 bg-opacity-20' : 'bg-blue-100'}`}>
+                  <div
+                    className={`p-3 rounded-full ${
+                      isDark ? "bg-blue-500 bg-opacity-20" : "bg-blue-100"
+                    }`}
+                  >
                     <FaRobot className="text-blue-500 text-xl" />
                   </div>
                   <h3 className="ml-4 text-xl font-bold">Code Generator</h3>
@@ -103,25 +532,37 @@ function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
                 </div>
-                <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}
-                `}>
-                  Generate clean, efficient code in multiple languages based on your requirements. Perfect for boilerplate code, algorithms, and common patterns.
+                <p
+                  className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}
+                `}
+                >
+                  Generate clean, efficient code in multiple languages based on
+                  your requirements. Perfect for boilerplate code, algorithms,
+                  and common patterns.
                 </p>
-                <Link to="/codegenerator" className={`inline-block px-6 py-2 rounded-md font-semibold text-base transition duration-200
-                  ${isDark ? "bg-gray-900 text-blue-300 border border-blue-600 hover:bg-blue-800" : "bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100"
+                <Link
+                  to="/codegenerator"
+                  className={`inline-block px-6 py-2 rounded-md font-semibold text-base transition duration-200
+                  ${
+                    isDark
+                      ? "bg-gray-900 text-blue-300 border border-blue-600 hover:bg-blue-800"
+                      : "bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100"
                   } cursor-pointer select-none `}
                   tabIndex={0}
                   role="button"
                   aria-label="Try Content Summarizer"
-                   >
+                >
                   <span className="flex items-center gap-2">
-                                  Try Code Generator <FaArrowRight size={14} />
+                    Try Code Generator <FaArrowRight size={14} />
                   </span>
                 </Link>
               </div>
             </div>
 
-            <div className={`rounded-lg overflow-hidden ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}
+            <div
+              className={`card-bottom rounded-lg overflow-hidden ${
+                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+              }
                   transition duration-300
                   hover:shadow-lg
                   hover:shadow-gray-900
@@ -130,11 +571,18 @@ function Home() {
                   hover:border-blue-500
                   focus-within:shadow-lg
                   focus-within:scale-102`}
-                  tabIndex={0}>
-              <div className={`h-3 ${isDark ? 'bg-purple-500' : 'bg-purple-600'}`}></div>
+              tabIndex={0}
+            >
+              <div
+                className={`h-3 ${isDark ? "bg-purple-500" : "bg-purple-600"}`}
+              ></div>
               <div className="p-6">
                 <div className="flex items-center mb-4">
-                  <div className={`p-3 rounded-full ${isDark ? 'bg-purple-500 bg-opacity-20' : 'bg-purple-100'}`}>
+                  <div
+                    className={`p-3 rounded-full ${
+                      isDark ? "bg-purple-500 bg-opacity-20" : "bg-purple-100"
+                    }`}
+                  >
                     <FaLightbulb className="text-purple-500 text-xl" />
                   </div>
                   <h3 className="ml-4 text-xl font-bold">Code Optimizer</h3>
@@ -147,24 +595,38 @@ function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
                 </div>
-                <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                  Improve your code's performance, readability, and maintainability with AI-powered suggestions and best practices.
+                <p
+                  className={`mb-6 ${
+                    isDark ? "text-gray-300" : "text-gray-600"
+                  }`}
+                >
+                  Improve your code's performance, readability, and
+                  maintainability with AI-powered suggestions and best
+                  practices.
                 </p>
-                <Link to="/optimiser" className={`inline-block px-6 py-2 rounded-md font-semibold text-base transition duration-200
-                  ${isDark ? "bg-gray-900 text-blue-300 border border-blue-600 hover:bg-blue-800" : "bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100"
+                <Link
+                  to="/optimiser"
+                  className={`inline-block px-6 py-2 rounded-md font-semibold text-base transition duration-200
+                  ${
+                    isDark
+                      ? "bg-gray-900 text-blue-300 border border-blue-600 hover:bg-blue-800"
+                      : "bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100"
                   } cursor-pointer select-none `}
                   tabIndex={0}
                   role="button"
                   aria-label="Try Content Summarizer"
-                   >
+                >
                   <span className="flex items-center gap-2">
-                                  Try Code Optimizer <FaArrowRight size={14} />
+                    Try Code Optimizer <FaArrowRight size={14} />
                   </span>
                 </Link>
               </div>
             </div>
 
-            <div className={`rounded-lg overflow-hidden ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}
+            <div
+              className={`card-right rounded-lg overflow-hidden ${
+                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+              }
                   transition duration-300
                   hover:shadow-lg
                   hover:shadow-gray-900
@@ -173,11 +635,18 @@ function Home() {
                   hover:border-blue-500
                   focus-within:shadow-lg
                   focus-within:scale-102`}
-                  tabIndex={0}>
-              <div className={`h-3 ${isDark ? 'bg-green-500' : 'bg-green-600'}`}></div>
+              tabIndex={0}
+            >
+              <div
+                className={`h-3 ${isDark ? "bg-green-500" : "bg-green-600"}`}
+              ></div>
               <div className="p-6">
                 <div className="flex items-center mb-4">
-                  <div className={`p-3 rounded-full ${isDark ? 'bg-green-500 bg-opacity-20' : 'bg-green-100'}`}>
+                  <div
+                    className={`p-3 rounded-full ${
+                      isDark ? "bg-green-500 bg-opacity-20" : "bg-green-100"
+                    }`}
+                  >
                     <FaFileAlt className="text-green-500 text-xl" />
                   </div>
                   <h3 className="ml-4 text-xl font-bold">Content Summarizer</h3>
@@ -190,51 +659,127 @@ function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
                 </div>
-                <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                  Extract key information from various sources including text, images, PDFs, and YouTube videos with our AI summarization tool.
+                <p
+                  className={`mb-6 ${
+                    isDark ? "text-gray-300" : "text-gray-600"
+                  }`}
+                >
+                  Extract key information from various sources including text,
+                  images, PDFs, and YouTube videos with our AI summarization
+                  tool.
                 </p>
-              
-                <Link to="/content-summarizer" className={`inline-block px-6 py-2 rounded-md font-semibold text-base transition duration-200
-                  ${isDark ? "bg-gray-900 text-blue-300 border border-blue-600 hover:bg-blue-800" : "bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100"
+
+                <Link
+                  to="/content-summarizer"
+                  className={`inline-block px-6 py-2 rounded-md font-semibold text-base transition duration-200
+                  ${
+                    isDark
+                      ? "bg-gray-900 text-blue-300 border border-blue-600 hover:bg-blue-800"
+                      : "bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100"
                   } cursor-pointer select-none `}
                   tabIndex={0}
                   role="button"
                   aria-label="Try Content Summarizer"
-                   >
+                >
                   <span className="flex items-center gap-2">
-                                  Try Content Summarizer <FaArrowRight size={14} />
+                    Try Content Summarizer <FaArrowRight size={14} />
                   </span>
                 </Link>
-
               </div>
             </div>
           </div>
 
-          <div className="text-center mt-10">
-          <Link to="/code-tools" className={`inline-flex items-center gap-2 px-6 py-2 rounded-full font-semibold  transition-all duration-200 border-2
-            ${isDark ? 'border-gray-700 text-blue-200 bg-black/30 hover:bg-blue-900 hover:border-blue-700' : 'border-blue-300 text-blue-700 bg-blue-50/60 hover:bg-blue-100 hover:border-blue-600' }
-            hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 `}>
-                 View All Tools <FaArrowRight size={16} />
-          </Link>
-
-
+          <div className=" text-center mt-10 featured-cta">
+            <Link
+              to="/code-tools"
+              className={`inline-flex items-center gap-2 px-6 py-2 rounded-full font-semibold  transition-all duration-200 border-2
+            ${
+              isDark
+                ? "border-gray-700 text-blue-200 bg-black/30 hover:bg-blue-900 hover:border-blue-700"
+                : "border-blue-300 text-blue-700 bg-blue-50/60 hover:bg-blue-100 hover:border-blue-600"
+            }
+            hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 `}
+            >
+              View All Tools <FaArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      
-      <section className={`py-16 px-4 ${isDark ? 'bg-gray-900/95' : 'bg-gray-200'}`}>
+      <section
+        className={`py-16 px-4 ${isDark ? "bg-gray-900/95" : "bg-gray-200"}`}
+      >
+        <div className="container mx-auto">
+          <h2
+            className={`text-4xl font-extrabold text-center mb-10 ${
+              isDark ? "text-blue-200" : "text-blue-800"
+            }`}
+          >
+            Our Features
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                ref={(el) => (cardRefs.current[index] = el)}
+                className={`flex flex-col items-center p-8 rounded-2xl ${
+                  isDark ? "bg-gray-900" : "bg-white"
+                } shadow-md border border-transparent transition-all duration-300 hover:shadow-2xl hover:shadow-black/30 hover:scale-[1.03] hover:border-blue-500 focus-within:shadow-2xl focus-within:scale-[1.03]`}
+                tabIndex={0}
+              >
+                <div
+                  className="mb-4"
+                  ref={(el) => (iconRefs.current[index] = el)}
+                >
+                  {feature.icon}
+                </div>
+                <h3
+                  ref={(el) => (titleRefs.current[index] = el)}
+                  className={`text-xl font-bold text-center mb-2 ${
+                    isDark ? "text-blue-100" : "text-blue-900"
+                  }`}
+                ></h3>
+                <p
+                  ref={(el) => (descRefs.current[index] = el)}
+                  className={`text-center mb-6 px-2 ${
+                    isDark ? "text-gray-300" : "text-gray-700"
+                  }`}
+                ></p>
+                <a
+                  href={feature.link}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`Learn more about ${feature.title}`}
+                >
+                  <span
+                    className={`inline-flex items-center gap-2 px-5 py-2 rounded-md font-semibold text-base transition-colors duration-200 ${
+                      isDark
+                        ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                        : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+                    } cursor-pointer select-none`}
+                  >
+                    Learn More <FaArrowRight size={16} />
+                  </span>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div>
+        {/* <section className={`py-16 px-4 ${isDark ? 'bg-gray-900/95' : 'bg-gray-200'}`}>
           <div className="container mx-auto">
           <h2 className={`text-4xl font-extrabold text-center mb-10 ${isDark ? "text-blue-200" : "text-blue-800"}`}>
                     Our Features
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-      
-      <div
+          <div
         className={`
-          flex flex-col items-center p-8
+        flex flex-col items-center p-8
           rounded-2xl
           ${isDark ? "bg-gray-900" : "bg-white"}
           shadow-md
@@ -245,14 +790,14 @@ function Home() {
           focus-within:shadow-2xl focus-within:scale-[1.03]
         `} tabIndex={0}>
         <div className="mb-4">
-          <FaLightbulb className="text-yellow-400 text-3xl drop-shadow-lg" />
+        <FaLightbulb className="text-yellow-400 text-3xl drop-shadow-lg" />
         </div>
-        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
-          Code Optimization
-        </h3>
-        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
-          Get AI-powered suggestions to improve your code's performance, readability, and maintainability.
-        </p>
+        <h3 ref={featureTitleRef} className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
+          {/* Code Optimization */}
+        {/* </h3>
+        <p ref={featureDescRef} className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
+          {/* Get AI-powered suggestions to improve your code's performance, readability, and maintainability. */}
+        {/* </p>
         <a
           href="/optimiser"
           tabIndex={0}
@@ -260,21 +805,20 @@ function Home() {
           aria-label="Learn more about Code Optimization">
           <span
             className={`
-              inline-flex items-center gap-2
+            inline-flex items-center gap-2
               px-5 py-2 rounded-md font-semibold text-base
               transition-colors duration-200
               ${isDark
                 ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
                 : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
-              }
+                }
               cursor-pointer select-none `}>
             Learn More <FaArrowRight size={16} />
           </span>
-        </a>
-      </div>
+        </a> */}
 
-      {/* Card 2 */}
-      <div className={`
+        {/* Card 2 */}
+        {/* <div className={`
         flex flex-col items-center p-8
         rounded-2xl
         ${isDark ? "bg-gray-900" : "bg-white"}
@@ -292,7 +836,7 @@ function Home() {
           Code Generation
         </h3>
         <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
-          Generate code snippets and solutions based on your requirements and specifications.
+        Generate code snippets and solutions based on your requirements and specifications.
         </p>
         <a
           href="/codegenerator"
@@ -305,17 +849,17 @@ function Home() {
               px-5 py-2 rounded-md font-semibold text-base
               transition-colors duration-200
               ${isDark
-                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+              ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
                 : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
-              }
-              cursor-pointer select-none
+                }
+                cursor-pointer select-none
             `} >
             Learn More <FaArrowRight size={16} />
-          </span>
-        </a>
-      </div>
+            </span>
+            </a>
+      </div>  */}
 
-     
+        {/*      
       <div className={`
         flex flex-col items-center p-8
         rounded-2xl
@@ -326,16 +870,16 @@ function Home() {
         hover:shadow-2xl hover:shadow-black/30
         hover:scale-[1.03] hover:border-blue-500
         focus-within:shadow-2xl focus-within:scale-[1.03]
-      `} tabIndex={0}>
+        `} tabIndex={0}>
         <div className="mb-4">
-          <FaChartLine className="text-purple-400 text-3xl drop-shadow-lg" />
+        <FaChartLine className="text-purple-400 text-3xl drop-shadow-lg" />
         </div>
         <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
           Complexity Analysis
         </h3>
         <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
           Understand the time and space complexity of your algorithms and identify bottlenecks.
-        </p>
+          </p>
         <a
           href="/codecomplexity"
           tabIndex={0}
@@ -347,16 +891,16 @@ function Home() {
               px-5 py-2 rounded-md font-semibold text-base
               transition-colors duration-200
               ${isDark
-                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+              ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
                 : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
-              }
+                }
               cursor-pointer select-none`}>
-            Learn More <FaArrowRight size={16} />
+              Learn More <FaArrowRight size={16} />
           </span>
         </a>
-      </div>
+      </div> */}
 
-      
+        {/*       
       <div className={`
         flex flex-col items-center p-8
         rounded-2xl
@@ -367,14 +911,14 @@ function Home() {
         hover:shadow-2xl hover:shadow-black/30
         hover:scale-[1.03] hover:border-blue-500
         focus-within:shadow-2xl focus-within:scale-[1.03]
-      `}tabIndex={0}>
+        `}tabIndex={0}>
         <div className="mb-4">
-          <FaExchangeAlt className="text-red-400 text-3xl drop-shadow-lg" />
+        <FaExchangeAlt className="text-red-400 text-3xl drop-shadow-lg" />
         </div>
         <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
           Code Comparison
-        </h3>
-        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
+          </h3>
+          <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
           Compare different versions of your code to identify changes and improvements.
         </p>
         <a
@@ -387,35 +931,44 @@ function Home() {
               px-5 py-2 rounded-md font-semibold text-base
               transition-colors duration-200
               ${isDark
-                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+              ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+              : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
               }
               cursor-pointer select-none
             `}>
             Learn More <FaArrowRight size={16} />
           </span>
-        </a>
+        </a> 
+        </div> 
+        
+        </div>
+  </div> */}
+        {/* </section> */}
       </div>
 
-    </div>
-  </div>
-</section>
-
       {/* Code Tools Section */}
-      <section className={`py-16 px-4 ${isDark ? 'bg-gray-800 bg-opacity-50' : 'bg-gray-100'}`}>
+      <section
+        className={`py-16 px-4 ${
+          isDark ? "bg-gray-800 bg-opacity-50" : "bg-gray-100"
+        }`}
+      >
         <div className="container mx-auto">
           <div className="flex items-center justify-center mb-6">
-        <FaTools className="text-blue-400 text-3xl mr-3" />
-         <h2 className="text-3xl font-bold text-center">New Code Tools</h2>
-           </div>
-         <p className={`text-xl ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto text-center mb-12`}>
-                       Explore our latest AI-powered tools to enhance your coding experience
-           </p>
+            <FaTools className="text-blue-400 text-3xl mr-3" />
+            <h2 className="text-3xl font-bold text-center">New Code Tools</h2>
+          </div>
+          <p
+            className={`text-xl ${
+              isDark ? "text-gray-300" : "text-gray-600"
+            } max-w-3xl mx-auto text-center mb-12`}
+          >
+            Explore our latest AI-powered tools to enhance your coding
+            experience
+          </p>
 
-       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      
-      <div
-        className={`
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div
+              className={`
           flex flex-col items-center p-8
           rounded-2xl
           ${isDark ? "bg-gray-900" : "bg-white"}
@@ -425,38 +978,50 @@ function Home() {
           hover:shadow-2xl hover:shadow-black/30
           hover:scale-[1.03] hover:border-blue-500
           focus-within:shadow-2xl focus-within:scale-[1.03]`}
-        tabIndex={0}>
-        <div className="mb-4">
-          <FaVial className="text-blue-400 text-3xl drop-shadow-lg" />
-        </div>
-        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
-          Test Case Generator
-        </h3>
-        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
-          Automatically generate comprehensive test cases for your code.
-        </p>
-        <a
-          href="/test-case-generator"
-          tabIndex={0}
-          role="button"
-          aria-label="Learn more about Test Case Generator">
-          <span className={`
+              tabIndex={0}
+            >
+              <div className="mb-4">
+                <FaVial className="text-blue-400 text-3xl drop-shadow-lg" />
+              </div>
+              <h3
+                className={`text-xl font-bold text-center mb-2 ${
+                  isDark ? "text-blue-100" : "text-blue-900"
+                }`}
+              >
+                Test Case Generator
+              </h3>
+              <p
+                className={`text-center mb-6 px-2 ${
+                  isDark ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
+                Automatically generate comprehensive test cases for your code.
+              </p>
+              <a
+                href="/test-case-generator"
+                tabIndex={0}
+                role="button"
+                aria-label="Learn more about Test Case Generator"
+              >
+                <span
+                  className={`
               inline-flex items-center gap-2
               px-5 py-2 rounded-md font-semibold text-base
               transition-colors duration-200
-              ${isDark
-                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+              ${
+                isDark
+                  ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                  : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
               }
-              cursor-pointer select-none`}>
-            Learn More <FaArrowRight size={16} />
-          </span>
-        </a>
-      </div>
-      
-      
-      <div
-        className={`
+              cursor-pointer select-none`}
+                >
+                  Learn More <FaArrowRight size={16} />
+                </span>
+              </a>
+            </div>
+
+            <div
+              className={`
           flex flex-col items-center p-8
           rounded-2xl
           ${isDark ? "bg-gray-900" : "bg-white"}
@@ -467,41 +1032,52 @@ function Home() {
           hover:scale-[1.03] hover:border-blue-500
           focus-within:shadow-2xl focus-within:scale-[1.03]
         `}
-        tabIndex={0}>
-        <div className="mb-4">
-          <FaMagic className="text-purple-400 text-3xl drop-shadow-lg" />
-        </div>
-        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
-          Code Beautifier
-        </h3>
-        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
-          Transform messy code into clean, well-structured code that follows best practices.
-        </p>
-        <a
-          href="/code-beautifier"
-          tabIndex={0}
-          role="button"
-          aria-label="Learn more about Code Beautifier">
-          <span
-            className={`
+              tabIndex={0}
+            >
+              <div className="mb-4">
+                <FaMagic className="text-purple-400 text-3xl drop-shadow-lg" />
+              </div>
+              <h3
+                className={`text-xl font-bold text-center mb-2 ${
+                  isDark ? "text-blue-100" : "text-blue-900"
+                }`}
+              >
+                Code Beautifier
+              </h3>
+              <p
+                className={`text-center mb-6 px-2 ${
+                  isDark ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
+                Transform messy code into clean, well-structured code that
+                follows best practices.
+              </p>
+              <a
+                href="/code-beautifier"
+                tabIndex={0}
+                role="button"
+                aria-label="Learn more about Code Beautifier"
+              >
+                <span
+                  className={`
               inline-flex items-center gap-2
               px-5 py-2 rounded-md font-semibold text-base
               transition-colors duration-200
-              ${isDark
-                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+              ${
+                isDark
+                  ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                  : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
               }
               cursor-pointer select-none
             `}
-          >
-            Learn More <FaArrowRight size={16} />
-          </span>
-        </a>
-      </div>
+                >
+                  Learn More <FaArrowRight size={16} />
+                </span>
+              </a>
+            </div>
 
-      
-      <div
-        className={`
+            <div
+              className={`
           flex flex-col items-center p-8
           rounded-2xl
           ${isDark ? "bg-gray-900" : "bg-white"}
@@ -512,38 +1088,51 @@ function Home() {
           hover:scale-[1.03] hover:border-blue-500
           focus-within:shadow-2xl focus-within:scale-[1.03]
         `}
-        tabIndex={0}>
-        <div className="mb-4">
-          <FaBug className="text-red-400 text-3xl drop-shadow-lg" />
-        </div>
-        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
-          Error Debugger
-        </h3>
-        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
-          Identify and fix bugs, syntax errors, and logical issues in your code.
-        </p>
-        <a
-          href="/error-debugger"
-          tabIndex={0}
-          role="button"
-          aria-label="Learn more about Error Debugger">
-          <span
-            className={`
+              tabIndex={0}
+            >
+              <div className="mb-4">
+                <FaBug className="text-red-400 text-3xl drop-shadow-lg" />
+              </div>
+              <h3
+                className={`text-xl font-bold text-center mb-2 ${
+                  isDark ? "text-blue-100" : "text-blue-900"
+                }`}
+              >
+                Error Debugger
+              </h3>
+              <p
+                className={`text-center mb-6 px-2 ${
+                  isDark ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
+                Identify and fix bugs, syntax errors, and logical issues in your
+                code.
+              </p>
+              <a
+                href="/error-debugger"
+                tabIndex={0}
+                role="button"
+                aria-label="Learn more about Error Debugger"
+              >
+                <span
+                  className={`
               inline-flex items-center gap-2
               px-5 py-2 rounded-md font-semibold text-base
               transition-colors duration-200
-              ${isDark
-                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+              ${
+                isDark
+                  ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                  : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
               }
-              cursor-pointer select-none`}>
-            Learn More <FaArrowRight size={16} />
-          </span>
-        </a>
-      </div>
+              cursor-pointer select-none`}
+                >
+                  Learn More <FaArrowRight size={16} />
+                </span>
+              </a>
+            </div>
 
-      <div
-        className={`
+            <div
+              className={`
           flex flex-col items-center p-8
           rounded-2xl
           ${isDark ? "bg-gray-900" : "bg-white"}
@@ -554,45 +1143,54 @@ function Home() {
           hover:scale-[1.03] hover:border-blue-500
           focus-within:shadow-2xl focus-within:scale-[1.03]
         `}
-        tabIndex={0}
-      >
-        <div className="mb-4">
-          <FaTachometerAlt className="text-green-400 text-3xl drop-shadow-lg" />
-        </div>
-        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
-          Performance Analyzer
-        </h3>
-        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
-          Analyze execution time and memory usage of your code and get optimization recommendations.
-        </p>
-        <a
-          href="/performance-analyzer"
-          tabIndex={0}
-          role="button"
-          aria-label="Learn more about Performance Analyzer"
-        >
-          <span
-            className={`
+              tabIndex={0}
+            >
+              <div className="mb-4">
+                <FaTachometerAlt className="text-green-400 text-3xl drop-shadow-lg" />
+              </div>
+              <h3
+                className={`text-xl font-bold text-center mb-2 ${
+                  isDark ? "text-blue-100" : "text-blue-900"
+                }`}
+              >
+                Performance Analyzer
+              </h3>
+              <p
+                className={`text-center mb-6 px-2 ${
+                  isDark ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
+                Analyze execution time and memory usage of your code and get
+                optimization recommendations.
+              </p>
+              <a
+                href="/performance-analyzer"
+                tabIndex={0}
+                role="button"
+                aria-label="Learn more about Performance Analyzer"
+              >
+                <span
+                  className={`
               inline-flex items-center gap-2
               px-5 py-2 rounded-md font-semibold text-base
               transition-colors duration-200
-              ${isDark
-                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+              ${
+                isDark
+                  ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                  : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
               }
               cursor-pointer select-none
             `}
-          >
-            Learn More <FaArrowRight size={16} />
-          </span>
-        </a>
-      </div>
-
-    </div>
-    <div className="text-center mt-10">
-      <a
-        href="/code-tools"
-        className={`
+                >
+                  Learn More <FaArrowRight size={16} />
+                </span>
+              </a>
+            </div>
+          </div>
+          <div className="text-center mt-10">
+            <a
+              href="/code-tools"
+              className={`
           inline-flex items-center gap-2
           bg-blue-600 hover:bg-blue-700
           text-white px-6 py-3 rounded-lg font-semibold
@@ -600,18 +1198,21 @@ function Home() {
           transition-all duration-200
           focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2
         `}
-        tabIndex={0}
-        role="button">
-        View All Tools <FaArrowRight size={18} />
-        </a>
-        </div>
+              tabIndex={0}
+              role="button"
+            >
+              View All Tools <FaArrowRight size={18} />
+            </a>
+          </div>
         </div>
       </section>
 
-
       {/* How It Works Section */}
-      <section className={`py-16 px-4 ${isDark ? '' : 'bg-white'}`}>
-        <div className="container mx-auto">
+      <section
+        ref={howItWorksRef}
+        className={`py-16 px-4 ${isDark ? "" : "bg-white"}`}
+      >
+        <div className="how-step-card container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <StepCard
@@ -634,27 +1235,195 @@ function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className={`py-16 px-4 ${isDark ? 'bg-gray-900' : 'bg-gray-50'} relative overflow-hidden`}>
+      <section
+        ref={testimonialSectionRef}
+        className={`py-16 px-4 ${
+          isDark ? "bg-gray-900" : "bg-gray-50"
+        } relative overflow-hidden`}
+      >
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 opacity-5"></div>
-          <div className="absolute inset-0 bg-cover bg-center opacity-5"
-               style={{backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"}}></div>
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-5"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
+            }}
+          ></div>
         </div>
         <div className="container mx-auto relative z-10">
           <div className="text-center mb-12">
-            <div className="flex justify-center mb-4">
-              <div className={`p-4 rounded-full ${isDark ? 'glass-dark' : 'glass'}`}>
+            <div className="flex justify-center mb-4" ref={testimonialIconRef}>
+              <div
+                className={`p-4 rounded-full ${
+                  isDark ? "glass-dark" : "glass"
+                }`}
+              >
                 <FaStar className="text-yellow-400 text-3xl" />
               </div>
             </div>
-            <h2 className="text-3xl font-bold mb-4">What Developers Say</h2>
-            <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-3xl mx-auto`}>
-              Trusted by developers around the world to improve their coding workflow
+            <h2 ref={testimonialHeadingRef} className="text-3xl font-bold mb-4">
+              &nbsp;
+            </h2>
+            <p
+              ref={testimonialParagraphRef}
+              className={`text-lg ${
+                isDark ? "text-gray-300" : "text-gray-600"
+              } max-w-3xl mx-auto`}
+            >
+              Trusted by developers around the world to improve their coding
+              workflow
             </p>
+          </div>
+          <div>
+            {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+            className={`rounded-lg p-6 ${
+                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+                
+                }`}
+            >
+            <div className="flex text-yellow-400 mb-4">
+            <FaStar />
+            <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                </div>
+              <p
+              className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
+              >
+              "OMEX has completely transformed my coding workflow. The code
+              optimization tool helped me improve performance by 40% on a
+              critical project. Highly recommended!"
+              </p>
+              <div className="flex items-center">
+                <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
+                <img
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                alt="User"
+                className="w-full h-full object-cover"
+                />
+                <div
+                    className={`absolute inset-0 rounded-full border-2 ${
+                      isDark ? "border-blue-400" : "border-blue-500"
+                      }`}
+                  ></div>
+                  </div>
+                  <div>
+                  <h4 className="font-medium">Michael Chen</h4>
+                  <p
+                  className={`text-sm ${
+                    isDark ? "text-gray-400" : "text-gray-500"
+                    }`}
+                    >
+                    Senior Developer, TechCorp
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+            className={`rounded-lg p-6 ${
+                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+              }`}
+            >
+              <div className="flex text-yellow-400 mb-4">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                </div>
+                <p
+                className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
+                >
+                "The code generation feature is a game-changer. It saves me
+                hours of work by creating boilerplate code and helping with
+                complex algorithms. OMEX is now an essential part of my
+                toolkit."
+                </p>
+                <div className="flex items-center">
+                <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
+                  <img
+                  src="https://randomuser.me/api/portraits/women/44.jpg"
+                  alt="User"
+                  className="w-full h-full object-cover"
+                  />
+                  <div
+                  className={`absolute inset-0 rounded-full border-2 ${
+                    isDark ? "border-purple-400" : "border-purple-500"
+                    }`}
+                    ></div>
+                </div>
+                <div>
+                <h4 className="font-medium">Sarah Johnson</h4>
+                  <p
+                  className={`text-sm ${
+                    isDark ? "text-gray-400" : "text-gray-500"
+                    }`}
+                  >
+                    Freelance Developer
+                    </p>
+                    </div>
+                    </div>
+                    </div>
+                    
+                    <div
+              className={`rounded-lg p-6 ${
+                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+                }`}
+            >
+            <div className="flex text-yellow-400 mb-4">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+              <p
+                className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
+              >
+              "As a team lead, I've implemented OMEX across our development
+                department. The consistency in code quality and the time saved
+                on reviews has been invaluable. A must-have for any dev team."
+              </p>
+              <div className="flex items-center">
+              <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
+              <img
+              src="https://randomuser.me/api/portraits/men/22.jpg"
+                    alt="User"
+                    className="w-full h-full object-cover"
+                  />
+                  <div
+                  className={`absolute inset-0 rounded-full border-2 ${
+                      isDark ? "border-green-400" : "border-green-500"
+                    }`}
+                  ></div>
+                </div>
+                <div>
+                <h4 className="font-medium">David Rodriguez</h4>
+                <p
+                className={`text-sm ${
+                      isDark ? "text-gray-400" : "text-gray-500"
+                    }`}
+                  >
+                  Lead Developer, StartupX
+                  </p>
+                  </div>
+                  </div>
+                  </div>
+                  </div> */}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className={`rounded-lg p-6 ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}`}>
+            {/* Testimonial 1 */}
+            <div
+              ref={(el) => (testimonialCardsRef.current[0] = el)}
+              className={`testimonial-card rounded-lg p-6 ${
+                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+              }`}
+            >
               <div className="flex text-yellow-400 mb-4">
                 <FaStar />
                 <FaStar />
@@ -662,26 +1431,49 @@ function Home() {
                 <FaStar />
                 <FaStar />
               </div>
-              <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                "OMEX has completely transformed my coding workflow. The code optimization tool helped me improve performance by 40% on a critical project. Highly recommended!"
+              <p
+                className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
+              >
+                "OMEX has completely transformed my coding workflow. The code
+                optimization tool helped me improve performance by 40% on a
+                critical project. Highly recommended!"
               </p>
               <div className="flex items-center">
-                <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
+                <div
+                  ref={(el) => (testimonialAvatarsRef.current[0] = el)}
+                  className="relative w-12 h-12 rounded-full mr-4 overflow-hidden"
+                >
                   <img
                     src="https://randomuser.me/api/portraits/men/32.jpg"
                     alt="User"
                     className="w-full h-full object-cover"
                   />
-                  <div className={`absolute inset-0 rounded-full border-2 ${isDark ? 'border-blue-400' : 'border-blue-500'}`}></div>
+                  <div
+                    className={`absolute inset-0 rounded-full border-2 ${
+                      isDark ? "border-blue-400" : "border-blue-500"
+                    }`}
+                  ></div>
                 </div>
                 <div>
                   <h4 className="font-medium">Michael Chen</h4>
-                  <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Senior Developer, TechCorp</p>
+                  <p
+                    className={`text-sm ${
+                      isDark ? "text-gray-400" : "text-gray-500"
+                    }`}
+                  >
+                    Senior Developer, TechCorp
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className={`rounded-lg p-6 ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}`}>
+            {/* Testimonial 2 */}
+            <div
+              ref={(el) => (testimonialCardsRef.current[1] = el)}
+              className={`testimonial-card rounded-lg p-6 ${
+                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+              }`}
+            >
               <div className="flex text-yellow-400 mb-4">
                 <FaStar />
                 <FaStar />
@@ -689,26 +1481,50 @@ function Home() {
                 <FaStar />
                 <FaStar />
               </div>
-              <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                "The code generation feature is a game-changer. It saves me hours of work by creating boilerplate code and helping with complex algorithms. OMEX is now an essential part of my toolkit."
+              <p
+                className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
+              >
+                "The code generation feature is a game-changer. It saves me
+                hours of work by creating boilerplate code and helping with
+                complex algorithms. OMEX is now an essential part of my
+                toolkit."
               </p>
               <div className="flex items-center">
-                <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
+                <div
+                  ref={(el) => (testimonialAvatarsRef.current[1] = el)}
+                  className="relative w-12 h-12 rounded-full mr-4 overflow-hidden"
+                >
                   <img
                     src="https://randomuser.me/api/portraits/women/44.jpg"
                     alt="User"
                     className="w-full h-full object-cover"
                   />
-                  <div className={`absolute inset-0 rounded-full border-2 ${isDark ? 'border-purple-400' : 'border-purple-500'}`}></div>
+                  <div
+                    className={`absolute inset-0 rounded-full border-2 ${
+                      isDark ? "border-purple-400" : "border-purple-500"
+                    }`}
+                  ></div>
                 </div>
                 <div>
                   <h4 className="font-medium">Sarah Johnson</h4>
-                  <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Freelance Developer</p>
+                  <p
+                    className={`text-sm ${
+                      isDark ? "text-gray-400" : "text-gray-500"
+                    }`}
+                  >
+                    Freelance Developer
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className={`rounded-lg p-6 ${isDark ? 'glass-dark glass-dark-card' : 'glass glass-card'}`}>
+            {/* Testimonial 3 */}
+            <div
+              ref={(el) => (testimonialCardsRef.current[2] = el)}
+              className={`testimonial-card rounded-lg p-6 ${
+                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+              }`}
+            >
               <div className="flex text-yellow-400 mb-4">
                 <FaStar />
                 <FaStar />
@@ -716,21 +1532,38 @@ function Home() {
                 <FaStar />
                 <FaStar />
               </div>
-              <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                "As a team lead, I've implemented OMEX across our development department. The consistency in code quality and the time saved on reviews has been invaluable. A must-have for any dev team."
+              <p
+                className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
+              >
+                "As a team lead, I've implemented OMEX across our development
+                department. The consistency in code quality and the time saved
+                on reviews has been invaluable. A must-have for any dev team."
               </p>
               <div className="flex items-center">
-                <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
+                <div
+                  ref={(el) => (testimonialAvatarsRef.current[2] = el)}
+                  className="relative w-12 h-12 rounded-full mr-4 overflow-hidden"
+                >
                   <img
                     src="https://randomuser.me/api/portraits/men/22.jpg"
                     alt="User"
                     className="w-full h-full object-cover"
                   />
-                  <div className={`absolute inset-0 rounded-full border-2 ${isDark ? 'border-green-400' : 'border-green-500'}`}></div>
+                  <div
+                    className={`absolute inset-0 rounded-full border-2 ${
+                      isDark ? "border-green-400" : "border-green-500"
+                    }`}
+                  ></div>
                 </div>
                 <div>
                   <h4 className="font-medium">David Rodriguez</h4>
-                  <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Lead Developer, StartupX</p>
+                  <p
+                    className={`text-sm ${
+                      isDark ? "text-gray-400" : "text-gray-500"
+                    }`}
+                  >
+                    Lead Developer, StartupX
+                  </p>
                 </div>
               </div>
             </div>
@@ -739,37 +1572,66 @@ function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className={`py-16 px-4 ${isDark ? 'bg-slate-600 bg-opacity-10 ' : 'bg-blue-50'} relative overflow-hidden`}>
+      <section
+        ref={ctaSectionRef}
+        className={`py-16 px-4 ${
+          isDark ? "bg-slate-600 bg-opacity-10 " : "bg-blue-50"
+        } relative overflow-hidden`}
+      >
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-cover bg-center opacity-10"
-               style={{backgroundImage: "url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"}}></div>
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-10"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
+            }}
+          ></div>
         </div>
         <div className="container mx-auto text-center relative z-10">
-          <div className={`${isDark ? 'glass-dark' : 'glass'} rounded-2xl py-12 px-6 max-w-4xl mx-auto`}>
-            <h2 className="text-3xl font-bold mb-6">Ready to Elevate Your Code?</h2>
-            <p className={`text-xl ${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto mb-8`}>
-              Join thousands of developers who are writing better, cleaner, and more efficient code with OMEX.
+          <div
+            ref={ctaCardRef}
+            className={`${
+              isDark ? "glass-dark" : "glass"
+            } rounded-2xl py-12 px-6 max-w-4xl mx-auto`}
+          >
+            <h2 ref={ctaHeadingRef} className="text-3xl font-bold mb-6">
+              Ready to Elevate Your Code?
+            </h2>
+            <p
+              ref={ctaParagraphRef}
+              className={`text-xl ${
+                isDark ? "text-gray-300" : "text-gray-600"
+              } max-w-2xl mx-auto mb-8`}
+            >
+              Join thousands of developers who are writing better, cleaner, and
+              more efficient code with OMEX.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 to="/code-tools"
+                ref={(el) => (ctaButtonsRef.current[0] = el)}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 inline-flex items-center"
               >
                 Explore Our Tools <FaArrowRight className="ml-2" />
               </Link>
               <Link
                 to="/contact"
-                className={`${isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-white hover:bg-gray-100 border border-gray-200'} text-${isDark ? 'white' : 'gray-800'} px-8 py-3 rounded-lg font-medium transition-all duration-200`}
+                ref={(el) => (ctaButtonsRef.current[1] = el)}
+                className={`${
+                  isDark
+                    ? "bg-gray-700 hover:bg-gray-600"
+                    : "bg-white hover:bg-gray-100 border border-gray-200"
+                } text-${
+                  isDark ? "white" : "gray-800"
+                } px-8 py-3 rounded-lg font-medium transition-all duration-200`}
               >
                 Contact Us
               </Link>
             </div>
           </div>
         </div>
-
       </section>
-              <FAQSection/>
-
+      <FAQSection />
     </div>
   );
 }
@@ -778,10 +1640,17 @@ function Home() {
 const FeatureCard = ({ icon, title, description, link }) => {
   const { isDark } = useTheme();
   return (
-    <Link to={link} className={`${isDark ? 'bg-gray-700' : 'bg-white border border-gray-200'} rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:-translate-y-1`}>
+    <Link
+      to={link}
+      className={`${
+        isDark ? "bg-gray-700" : "bg-white border border-gray-200"
+      } rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:-translate-y-1`}
+    >
       <div className="text-3xl mb-4">{icon}</div>
       <h3 className="text-xl font-semibold mb-3">{title}</h3>
-      <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} mb-4`}>{description}</p>
+      <p className={`${isDark ? "text-gray-300" : "text-gray-600"} mb-4`}>
+        {description}
+      </p>
       <div className="flex items-center text-blue-400 font-medium">
         Learn more <FaArrowRight className="ml-2" size={14} />
       </div>
@@ -792,10 +1661,18 @@ const FeatureCard = ({ icon, title, description, link }) => {
 const StepCard = ({ number, title, description }) => {
   const { isDark } = useTheme();
   return (
-    <div className={`${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-lg p-6 shadow-lg border`}>
-      <div className="text-5xl font-bold text-blue-400 opacity-50 mb-4">{number}</div>
+    <div
+      className={`${
+        isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
+      } rounded-lg p-6 shadow-lg border`}
+    >
+      <div className="text-5xl font-bold text-blue-400 opacity-50 mb-4">
+        {number}
+      </div>
       <h3 className="text-xl font-semibold mb-3">{title}</h3>
-      <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{description}</p>
+      <p className={`${isDark ? "text-gray-300" : "text-gray-600"}`}>
+        {description}
+      </p>
     </div>
   );
 };
