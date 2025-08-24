@@ -68,7 +68,35 @@ const securityAnalyzer = genAI.getGenerativeModel({
  */
 async function generateCode(prompt, lang) {
     const result = await codeGenerator.generateContent(prompt, lang);
-    return result.response.text();
+    const rawResponse = result.response.text();
+    return cleanAIResponse(rawResponse);
+}
+
+/**
+ * Clean AI response by removing system instruction text
+ * @param {string} response - The raw AI response
+ * @returns {string} - The cleaned response
+ */
+function cleanAIResponse(response) {
+    // Remove common system instruction patterns that might appear in responses
+    const patternsToRemove = [
+        /AI System Instruction:.*?(?=\n|$)/gi,
+        /System Instruction:.*?(?=\n|$)/gi,
+        /Role & Responsibilities:.*?(?=\n|$)/gi,
+        /Here's a solid system instruction.*?(?=\n|$)/gi,
+        /Senior Code Reviewer.*?Experience.*?(?=\n|$)/gi,
+        /expert code reviewer.*?years.*?experience.*?(?=\n|$)/gi
+    ];
+    
+    let cleanedResponse = response;
+    patternsToRemove.forEach(pattern => {
+        cleanedResponse = cleanedResponse.replace(pattern, '');
+    });
+    
+    // Remove any leading/trailing whitespace and normalize line breaks
+    cleanedResponse = cleanedResponse.trim();
+    
+    return cleanedResponse;
 }
 
 /**
@@ -78,7 +106,8 @@ async function generateCode(prompt, lang) {
  */
 async function generateReview(prompt) {
     const result = await codeOptimiser.generateContent(prompt);
-    return result.response.text();
+    const rawResponse = result.response.text();
+    return cleanAIResponse(rawResponse);
 }
 
 /**
@@ -88,7 +117,8 @@ async function generateReview(prompt) {
  */
 async function generateComplexity(prompt) {
     const result = await codeComplexity.generateContent(prompt);
-    return result.response.text();
+    const rawResponse = result.response.text();
+    return cleanAIResponse(rawResponse);
 }
 
 /**
@@ -115,7 +145,8 @@ Focus only on identifying critical logical errors, syntax errors, or bugs that w
 Provide a line-by-line analysis of the errors with brief explanations.`;
 
     const result = await codeComparer.generateContent(prompt);
-    return result.response.text();
+    const rawResponse = result.response.text();
+    return cleanAIResponse(rawResponse);
 }
 
 /**
@@ -134,7 +165,8 @@ ${code}
 Please provide a variety of test cases including normal cases, edge cases, and error cases.`;
 
     const result = await testCaseGenerator.generateContent(prompt);
-    return result.response.text();
+    const rawResponse = result.response.text();
+    return cleanAIResponse(rawResponse);
 }
 
 /**
