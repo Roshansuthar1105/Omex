@@ -173,7 +173,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                 <FaCode className="text-blue-400 text-2xl group-hover:text-purple-400 transition-all duration-300 transform group-hover:scale-110" />
                 <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-              <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                 <Link
                   to="/"
                   className="hover:from-purple-400 hover:via-pink-400 hover:to-blue-400 transition-all duration-500"
@@ -439,7 +439,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
         }`}>
           <div className="flex items-center space-x-3">
             <FaCode className="text-blue-400 text-xl" />
-            <span className="font-bold text-xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="font-bold text-2xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               OMEX
             </span>
           </div>
