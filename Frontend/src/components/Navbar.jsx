@@ -473,7 +473,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
             { to: "/optimiser", icon: FaRocket, label: "Optimize", color: "yellow" },
             { to: "/codegenerator", icon: FaMagic, label: "Generate", color: "green" },
             { to: "/codecomplexity", icon: FaChartLine, label: "Complexity", color: "purple" },
-            { to: "/codecompare", icon: FaExchangeAlt, label: "Compare", color: "red" }
+            { to: "/codecompare", icon: FaExchangeAlt, label: "Compare", color: "red" },
+            { to: "/contributors", icon: FaUserFriends, label: "Contributors", color: "pink"}
           ].map((item) => (
             <Link
               key={item.to}

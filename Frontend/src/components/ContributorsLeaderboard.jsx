@@ -15,7 +15,7 @@ const ContributorsLeaderboard = () => {
   }, []);
 
   const stats = [
-    { label: "Contributors", value: "20+", icon: <FaUser /> },
+    { label: "Contributors", value: `${contributors.length}+`, icon: <FaUser /> },
     { label: "Pull Requests", value: "31+", icon: <FaCodeBranch /> },
     { label: "Contributions", value: "115+", icon: <FaPlus /> },
     { label: "Total Points", value: "500+", icon: <FaStar /> },
@@ -32,10 +32,10 @@ const ContributorsLeaderboard = () => {
     <div className="bg-black min-h-screen text-white p-6">
       {/* Title */}
       <h1 className="text-4xl font-extrabold text-center text-purple-400 mb-2">
-        GSsoc'25 Leaderboard
+        GSSoC'25 Leaderboard
       </h1>
       <p className="text-center text-gray-400 mb-8">
-        Celebrating the amazing contributions from GSSoc'25 participants.
+        Celebrating the amazing contributions from GSSoC'25 participants.
       </p>
 
       {/* Stats section */}
@@ -54,94 +54,175 @@ const ContributorsLeaderboard = () => {
         ))}
       </div>
 
-      {/* Leaderboard table */}
-      <div className="max-w-5xl mx-auto bg-[#1a1a1a] rounded-xl shadow-lg overflow-hidden">
-        <table className="w-full text-left border-collapse">
-          <thead className="bg-[#222] text-gray-300">
-            <tr>
-              <th className="p-4">#</th>
-              <th className="p-4">Contributor</th>
-              <th className="p-4">PRs</th>
-              <th className="p-4">Contributions</th>
-              <th className="p-4">Progress</th>
-            </tr>
-          </thead>
-          <tbody>
-            {contributors.map((contributor, index) => (
-              <tr
-                key={contributor.login}
-                className="border-t border-gray-700 hover:bg-[#2a2a2a] transition"
-              >
-                {/* Rank with medal */}
-                <td className="p-4">
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm font-bold ${getMedalBg(
-                      index
-                    )}`}
-                  >
-                    {index + 1}
-                  </span>
-                </td>
-
-                {/* Contributor avatar + name */}
-                <td className="p-4 flex items-center space-x-3">
-                  <img
-                    src={contributor.avatar_url}
-                    alt={contributor.login}
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <div>
-                    <p className="font-semibold">{contributor.login}</p>
-                    <a
-                      href={contributor.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-purple-400 hover:underline"
+      <div className="max-w-5xl mx-auto">
+        {/* Desktop Table */}
+        <div className="hidden lg:block bg-[#1a1a1a] rounded-xl shadow-lg overflow-hidden">
+          <table className="w-full text-left border-collapse">
+            <thead className="bg-[#222] text-gray-300">
+              <tr>
+                <th className="p-4">#</th>
+                <th className="p-4">Contributor</th>
+                <th className="p-4">PRs</th>
+                <th className="p-4">Contributions</th>
+                <th className="p-4">Progress</th>
+              </tr>
+            </thead>
+            <tbody>
+              {contributors.map((contributor, index) => (
+                <tr
+                  key={contributor.login}
+                  className="border-t border-gray-700 hover:bg-[#2a2a2a] transition"
+                >
+                  {/* Rank */}
+                  <td className="p-4">
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-bold ${getMedalBg(
+                        index
+                      )}`}
                     >
-                      View Contributions →
-                    </a>
-                  </div>
-                </td>
+                      {index + 1}
+                    </span>
+                  </td>
 
-                {/* Placeholder for PRs */}
-                <td className="p-4 text-purple-400 font-bold">4</td>
+                  {/* Contributor */}
+                  <td className="p-4 flex items-center space-x-3">
+                    <img
+                      src={contributor.avatar_url}
+                      alt={contributor.login}
+                      className="w-10 h-10 rounded-full"
+                    />
+                    <div>
+                      <p className="font-semibold">{contributor.login}</p>
+                      <a
+                        href={contributor.html_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-purple-400 hover:underline"
+                      >
+                        View Contributions →
+                      </a>
+                    </div>
+                  </td>
 
-                {/* Contributions */}
-                <td className="p-4 text-gray-300 font-bold">
-                  {contributor.contributions}
-                </td>
+                  {/* Placeholder PRs */}
+                  <td className="p-4 text-purple-400 font-bold">4</td>
 
-                {/* Progress bar */}
-                <td className="p-4">
-                  <div className="w-full bg-gray-700 rounded-full h-3">
-                    <div
-                      className="bg-purple-400 h-3 rounded-full"
-                      style={{
-                        width: `${Math.min(
+                  {/* Contributions */}
+                  <td className="p-4 text-gray-300 font-bold">
+                    {contributor.contributions}
+                  </td>
+
+                  {/* Progress bar */}
+                  <td className="p-4">
+                    <div className="w-full bg-gray-700 rounded-full h-3">
+                      <div
+                        className="bg-purple-400 h-3 rounded-full"
+                        style={{
+                          width: `${Math.min(
+                            (contributor.contributions /
+                              contributors[0].contributions) *
+                              100,
+                            100
+                          )}%`,
+                        }}
+                      ></div>
+                    </div>
+                    <p className="text-sm text-gray-400 mt-1">
+                      {Math.min(
+                        Math.round(
                           (contributor.contributions /
                             contributors[0].contributions) *
-                            100,
-                          100
-                        )}%`,
-                      }}
-                    ></div>
-                  </div>
-                  <p className="text-sm text-gray-400 mt-1">
-                    {Math.min(
-                      Math.round(
+                            100
+                        ),
+                        100
+                      )}
+                      %
+                    </p>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Mobile & Tablet Cards */}
+        <div className="lg:hidden space-y-4">
+          {contributors.map((contributor, index) => (
+            <div
+              key={contributor.login}
+              className="bg-[#1a1a1a] rounded-xl p-4 shadow-lg"
+            >
+              {/* Header */}
+              <div className="flex items-center space-x-3 mb-4">
+                <span
+                  className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold ${getMedalBg(
+                    index
+                  )}`}
+                >
+                  {index + 1}
+                </span>
+                <img
+                  src={contributor.avatar_url}
+                  alt={contributor.login}
+                  className="w-12 h-12 rounded-full"
+                />
+                <div>
+                  <p className="font-semibold">{contributor.login}</p>
+                  <a
+                    href={contributor.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-purple-400 hover:underline"
+                  >
+                    View Contributions →
+                  </a>
+                </div>
+              </div>
+
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2 gap-4 text-center mb-4">
+                <div>
+                  <p className="text-lg font-bold text-purple-400">4</p>
+                  <p className="text-gray-400 text-sm">PRs</p>
+                </div>
+                <div>
+                  <p className="text-lg font-bold text-gray-300">
+                    {contributor.contributions}
+                  </p>
+                  <p className="text-gray-400 text-sm">Contributions</p>
+                </div>
+              </div>
+
+              {/* Progress */}
+              <div>
+                <div className="w-full bg-gray-700 rounded-full h-3 mb-2">
+                  <div
+                    className="bg-purple-400 h-3 rounded-full"
+                    style={{
+                      width: `${Math.min(
                         (contributor.contributions /
                           contributors[0].contributions) *
-                          100
-                      ),
-                      100
-                    )}
-                    %
-                  </p>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                          100,
+                        100
+                      )}%`,
+                    }}
+                  ></div>
+                </div>
+                <p className="text-sm text-gray-400 text-right">
+                  {Math.min(
+                    Math.round(
+                      (contributor.contributions /
+                        contributors[0].contributions) *
+                        100
+                    ),
+                    100
+                  )}
+                  %
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
