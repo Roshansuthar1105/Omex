@@ -8,16 +8,14 @@ import {
   FaLightbulb,
   FaMagic,
   FaRobot,
-  FaStar,
   FaTools,
-  FaUsers,
-  FaComments,
   FaVial,
   FaTachometerAlt
 } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 import FAQSection from '../components/Faq';
 import { Link } from "react-router-dom";
+import Testimonials from '../components/Testimonials';
 
 function Home() {
   const { isDark } = useTheme();
@@ -334,182 +332,7 @@ function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section
-        className={`py-16 px-4 ${
-          isDark ? "bg-gray-900" : "bg-gray-50"
-        } relative overflow-hidden`}
-      >
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 opacity-5"></div>
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-5"
-            style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
-            }}
-          ></div>
-        </div>
-        <div className="container mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <div className="flex justify-center mb-4">
-              <div
-                className={`p-4 rounded-full ${
-                  isDark ? "glass-dark" : "glass"
-                }`}
-              >
-                <FaStar className="text-yellow-400 text-3xl" />
-              </div>
-            </div>
-            <h2 className="text-3xl font-bold mb-4">What Developers Say</h2>
-            <p
-              className={`text-lg ${
-                isDark ? "text-gray-300" : "text-gray-600"
-              } max-w-3xl mx-auto`}
-            >
-              Trusted by developers around the world to improve their coding
-              workflow
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div
-              className={`rounded-lg p-6 ${
-                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-              }`}
-            >
-              <div className="flex text-yellow-400 mb-4">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-              <p
-                className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
-              >
-                "OMEX has completely transformed my coding workflow. The code
-                optimization tool helped me improve performance by 40% on a
-                critical project. Highly recommended!"
-              </p>
-              <div className="flex items-center">
-                <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
-                  <img
-                    src="https://randomuser.me/api/portraits/men/32.jpg"
-                    alt="User"
-                    className="w-full h-full object-cover"
-                  />
-                  <div
-                    className={`absolute inset-0 rounded-full border-2 ${
-                      isDark ? "border-blue-400" : "border-blue-500"
-                    }`}
-                  ></div>
-                </div>
-                <div>
-                  <h4 className="font-medium">Michael Chen</h4>
-                  <p
-                    className={`text-sm ${
-                      isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
-                  >
-                    Senior Developer, TechCorp
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className={`rounded-lg p-6 ${
-                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-              }`}
-            >
-              <div className="flex text-yellow-400 mb-4">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-              <p
-                className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
-              >
-                "The code generation feature is a game-changer. It saves me
-                hours of work by creating boilerplate code and helping with
-                complex algorithms. OMEX is now an essential part of my
-                toolkit."
-              </p>
-              <div className="flex items-center">
-                <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
-                  <img
-                    src="https://randomuser.me/api/portraits/women/44.jpg"
-                    alt="User"
-                    className="w-full h-full object-cover"
-                  />
-                  <div
-                    className={`absolute inset-0 rounded-full border-2 ${
-                      isDark ? "border-purple-400" : "border-purple-500"
-                    }`}
-                  ></div>
-                </div>
-                <div>
-                  <h4 className="font-medium">Sarah Johnson</h4>
-                  <p
-                    className={`text-sm ${
-                      isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
-                  >
-                    Freelance Developer
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className={`rounded-lg p-6 ${
-                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-              }`}
-            >
-              <div className="flex text-yellow-400 mb-4">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-              <p
-                className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
-              >
-                "As a team lead, I've implemented OMEX across our development
-                department. The consistency in code quality and the time saved
-                on reviews has been invaluable. A must-have for any dev team."
-              </p>
-              <div className="flex items-center">
-                <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
-                  <img
-                    src="https://randomuser.me/api/portraits/men/22.jpg"
-                    alt="User"
-                    className="w-full h-full object-cover"
-                  />
-                  <div
-                    className={`absolute inset-0 rounded-full border-2 ${
-                      isDark ? "border-green-400" : "border-green-500"
-                    }`}
-                  ></div>
-                </div>
-                <div>
-                  <h4 className="font-medium">David Rodriguez</h4>
-                  <p
-                    className={`text-sm ${
-                      isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
-                  >
-                    Lead Developer, StartupX
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Testimonials />
 
       {/* CTA Section */}
       <section
