@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const faqs = [
   {
@@ -65,9 +65,9 @@ export default function FAQSection() {
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-semibold">{faq.question}</h3>
               {openIndex === index ? (
-                <ChevronUp className="w-5 h-5 text-blue-400" />
+                <FaChevronUp className="w-5 h-5 text-blue-400" />
               ) : (
-                <ChevronDown className="w-5 h-5 text-blue-400" />
+                <FaChevronDown className="w-5 h-5 text-blue-400" />
               )}
             </div>
             {openIndex === index && (

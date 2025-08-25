@@ -33,13 +33,13 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Team from "./pages/Team";
 import TermsOfService from "./pages/TermsOfService";
 import Contribute from "./pages/Contribute";
-import ContributorGuide from "./pages/ContributorGuide";
 
 // Theme context
 import { ThemeProvider } from './context/ThemeContext';
 
 // Extra components
 import BackToTopButton from "./components/BackToTopButton";
+import ContributorGuide from "./pages/ContributorGuide";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
