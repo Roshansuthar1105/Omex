@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '.env.local' });
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -8,7 +9,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONT_END_URL,
+  origin: 'http://localhost:5173',
   credentials: true
 }));
 

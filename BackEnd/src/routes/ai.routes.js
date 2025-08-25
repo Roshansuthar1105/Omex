@@ -1,5 +1,5 @@
 const express = require('express');
-const aiController = require("../controllers/ai.controller")
+const aiController = require("../controllers/ai.controller");
 
 const router = express.Router();
 
@@ -16,5 +16,6 @@ router.post("/analyze-performance", aiController.analyzePerformance)
 router.post("/analyze-security", aiController.analyzeSecurity);
 router.post("/intent-detect", aiController.intentDetect);
 router.post("/contact", aiController.contactHandler);
+router.post("/ai/contact", aiController.contactHandler);
 
 module.exports = router;

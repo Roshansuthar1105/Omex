@@ -25,12 +25,12 @@ export default function AIContact() {
 
     try {
       // Send request to backend
-      const res = await fetch("http://localhost:5000/ai/intent-detect", {
+      const res = await fetch(`http://localhost:5050/ai/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: formData.message }),
+        body: JSON.stringify({ name: formData.name, email: formData.email,message: formData.message }),
       });
 
       if (!res.ok) {

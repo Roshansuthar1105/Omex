@@ -1,4 +1,5 @@
 const aiService = require("../services/ai.service")
+const USE_GEMINI = process.env.USE_GEMINI === "true";
 
 const getReview = async (req, res) => {
     try {
@@ -139,6 +140,15 @@ const intentDetect = async (req, res) => {
     if (!message || !message.trim()) {
       return res.status(400).json({ error: "message is required" });
     }
+    // 🔧 Check if Gemini is disabled
+    if (process.env.USE_GEMINI !== "true") {
+      console.log("🔧 Gemini disabled — returning mock response");
+      return res.json({
+        intent: "General Inquiry",
+        reply: "Hi Zoya! Gemini is not active yet, but your request flow is working perfectly."
+      });
+    }
+
     const out = await aiService.detectIntent(message);
     // normalize shape
     return res.json({
@@ -160,13 +170,35 @@ const contactHandler = async (req, res) => {
     if (!message || !message.trim()) {
       return res.status(400).json({ reply: "Message is required." });
     }
+    const useMock = process.env.USE_MOCK === "true";
+    if (useMock) {
+  console.log("🧪 Mock mode active — returning simulated Gemini response");
+  return res.json({
+    intent: "General Inquiry",
+    reply: "Thanks for reaching out! We'll get back to you shortly.",
+    source: "mock",
+  });
+}
+     // 🔧 Add Gemini check like intentDetect
+    if (!USE_GEMINI) {
+      console.log("🔧 Gemini disabled — returning mock response");
+      return res.json({
+        intent: "General Inquiry",
+        reply: "Hi! Gemini is not active yet, but your request flow is working perfectly.",
+        source: "fallback",
+      });
+    }
     const response = await aiService.detectIntent(message);
     return res.json({
       intent: response?.intent || "General Inquiry",
       reply: response?.reply || "Thanks for reaching out! We'll get back to you soon.",
+      source: "gemini",
     });
   } catch (error) {
     console.error("Error in contactHandler:", error);
+    if (error.response?.data) {
+      console.log("🔍 Gemini error response:", error.response.data);
+    }
     return res.status(500).json({ reply: "Something went wrong while processing your request." });
   }
 };

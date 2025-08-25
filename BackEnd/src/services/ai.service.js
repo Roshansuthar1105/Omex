@@ -5,9 +5,12 @@
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const systemInstructions = require("../config/systemInstructions");
+const { generateContent } = require('../config/gemini');
 
 // Initialize Google Generative AI
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_KEY);
+
+console.log(genAI)
 
 // Create AI models with system instructions
 const codeOptimiser = genAI.getGenerativeModel({
@@ -265,8 +268,7 @@ async function detectIntent(message) {
   // Step 2: Try AI-based intent detection
   try {
     const prompt = `Classify intent and reply: ${message}`;
-    const result = await intentModel.generateContent(prompt);
-
+    const result = await generateContent(prompt);
     let text = "";
     if (result?.response?.text) {
         text = result.response.text().trim();
@@ -282,6 +284,7 @@ async function detectIntent(message) {
     console.log("🧠 AI response text:", text);
     console.log("AI raw response:", text);
     console.log("Full AI result:", result);
+    console.log("AI Service Output:", result);
 
     // Step 2a: Try parsing AI output as JSON
     try {
