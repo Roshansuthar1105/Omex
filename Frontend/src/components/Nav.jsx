@@ -114,17 +114,10 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
       <div className="container mx-auto" ref={navbarRef}>
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <FaCode className="text-blue-400 text-2xl" />
-            <h1 className="text-xl md:text-2xl font-bold">
-              <Link
-                to="/"
-                className="hover:text-blue-400 transition duration-200"
-              >
-                OMEX
-              </Link>
-            </h1>
-          </div>
+          <Link to="/" className="flex items-center space-x-2 group focus:outline-none">
+            <FaCode className="text-blue-400 text-2xl group-hover:text-blue-500 transition duration-200" />
+            <span className="text-xl md:text-2xl font-bold group-hover:text-blue-400 transition duration-200">OMEX</span>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-6">

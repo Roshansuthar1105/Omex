@@ -173,11 +173,13 @@ const Contact = () => {
                       </div>
                       <div>
                         <h3 className="font-medium mb-1">Office</h3>
+                        <a href="https://www.google.com/maps?q=123+Tech+Street,+San+Franciso,+CA+94015,+United+States" className="hover:underline">
                         <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
                           123 Tech Street<br />
                           San Francisco, CA 94105<br />
                           United States
                         </p>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -341,7 +343,7 @@ const Contact = () => {
                             </>
                           ) : (
                             <>
-                              <FaPaperPlane className="mr-2" />
+                              <FaPaperPlane className="mr-2 " />
                               Send Message
                             </>
                           )}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,63 +8,95 @@ import { useLocation } from "react-router-dom";
 import {
   FaLightbulb,
   FaRobot,
-  FaChartLine,
-  FaExchangeAlt,
   FaArrowRight,
-  FaCode,
-  FaTools,
-  FaVial,
-  FaMagic,
   FaBug,
-  FaTachometerAlt,
+  FaChartLine,
+  FaCode,
+  FaExchangeAlt,
   FaFileAlt,
+  FaMagic,
   FaStar,
+  FaTools,
   FaUsers,
   FaComments,
+  FaVial,
+  FaTachometerAlt,
 } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 import FAQSection from "../components/Faq";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(TextPlugin);
 
-const features = [
-  {
-    title: "Code Optimization",
-    description:
-      "Get AI-powered suggestions to improve your code's performance, readability, and maintainability.",
-    icon: <FaLightbulb className="text-yellow-400 text-3xl drop-shadow-lg" />,
-    link: "/optimiser",
-  },
-  {
-    title: "Code Generation",
-    description:
-      "Generate code snippets and solutions based on your requirements and specifications.",
-    icon: <FaRobot className="text-green-400 text-3xl drop-shadow-lg" />,
-    link: "/codegenerator",
-  },
-  {
-    title: "Complexity Analysis",
-    description:
-      "Understand the time and space complexity of your algorithms and identify bottlenecks.",
-    icon: <FaChartLine className="text-purple-400 text-3xl drop-shadow-lg" />,
-    link: "/codecomplexity",
-  },
-  {
-    title: "Code Comparison",
-    description:
-      "Compare different versions of your code to identify changes and improvements.",
-    icon: <FaExchangeAlt className="text-red-400 text-3xl drop-shadow-lg" />,
-    link: "/codecompare",
-  },
-];
-
 function Home() {
   const { isDark } = useTheme();
+
+  const features = [
+    {
+      icon: FaLightbulb,
+      title: "AI-Powered Insights",
+      description: "Get smart recommendations and insights from AI.",
+      link: "/insights",
+    },
+    {
+      icon: FaRobot,
+      title: "Automation Tools",
+      description: "Automate repetitive tasks and save time.",
+      link: "/automation",
+    },
+    {
+      icon: FaChartLine,
+      title: "Analytics Dashboard",
+      description: "Track progress with powerful analytics.",
+      link: "/analytics",
+    },
+    {
+      icon: FaExchangeAlt,
+      title: "Seamless Integration",
+      description: "Easily connect with your favorite tools.",
+      link: "/integration",
+    },
+  ];
+
+  const toolsData = [
+    {
+      id: 1,
+      icon: FaVial,
+      title: "Test Case Generator",
+      description:
+        "Automatically generate comprehensive test cases for your code.",
+      href: "/test-case-generator",
+      iconColor: "text-blue-400",
+    },
+    {
+      id: 2,
+      icon: FaMagic,
+      title: "Code Beautifier",
+      description:
+        "Transform messy code into clean, well-structured code that follows best practices.",
+      href: "/code-beautifier",
+      iconColor: "text-purple-400",
+    },
+    {
+      id: 3,
+      icon: FaBug,
+      title: "Error Debugger",
+      description:
+        "Identify and fix bugs, syntax errors, and logical issues in your code.",
+      href: "/error-debugger",
+      iconColor: "text-red-400",
+    },
+    {
+      id: 4,
+      icon: FaTachometerAlt,
+      title: "Performance Analyzer",
+      description:
+        "Analyze execution time and memory usage of your code and get optimization recommendations.",
+      href: "/performance-analyzer",
+      iconColor: "text-green-400",
+    },
+  ];
+
   // Refs
-  const cardRefs = useRef([]);
-  const iconRefs = useRef([]);
-  const titleRefs = useRef([]);
-  const descRefs = useRef([]);
   const containerRef = useRef();
   const howItWorksRef = useRef(null);
   const ctaSectionRef = useRef(null);
@@ -78,9 +110,16 @@ function Home() {
   const testimonialIconRef = useRef(null);
   const testimonialCardsRef = useRef([]);
   const testimonialAvatarsRef = useRef([]);
-  const location = useLocation();
   const pageRef = useRef(null);
   const navRef = useRef(null);
+  const featureCardRefs = useRef([]);
+  const featureIconRefs = useRef([]);
+  const featureTitleRefs = useRef([]);
+  const featureDescRefs = useRef([]);
+  const toolCardRefs = useRef([]);
+  const toolsHeadingRef = useRef(null);
+  const toolsParagraphRef = useRef(null);
+  const toolsIconRef = useRef(null);
 
   useGSAP(
     () => {
@@ -153,51 +192,14 @@ function Home() {
         },
       });
 
-      //Featured Services Cards
-      gsap.from(".card-left", {
-        opacity: 0,
-        x: -100,
-        duration: 1,
-        ease: "circ.out",
-        scrollTrigger: {
-          trigger: ".card-left",
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      gsap.from(".card-bottom", {
-        opacity: 0,
-        y: 100,
-        duration: 1,
-        ease: "circ.out",
-        scrollTrigger: {
-          trigger: ".card-bottom",
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      gsap.from(".card-right", {
-        opacity: 0,
-        x: 100,
-        duration: 1,
-        ease: "circ.out",
-        scrollTrigger: {
-          trigger: ".card-right",
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
       // Feature animations
       features.forEach((feature, index) => {
-        const card = cardRefs.current[index];
-        const icon = iconRefs.current[index];
-        const title = titleRefs.current[index];
-        const desc = descRefs.current[index];
+        const card = featureCardRefs.current[index];
+        const icon = featureIconRefs.current[index];
+        const title = featureTitleRefs.current[index];
+        const desc = featureDescRefs.current[index];
 
-        // Fade-in card
+        // Card fade-in
         gsap.from(card, {
           opacity: 0,
           y: 50,
@@ -241,6 +243,40 @@ function Home() {
             });
           },
         });
+      });
+
+      //
+      gsap.from(toolsParagraphRef.current, {
+        opacity: 0,
+        y: 30,
+        duration: 1.2,
+        ease: "circ.out",
+        scrollTrigger: {
+          trigger: toolsParagraphRef.current,
+          start: "top 85%",
+        },
+      });
+
+      gsap.from(toolsHeadingRef.current, {
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: toolsHeadingRef.current,
+          start: "top 85%",
+        },
+      });
+
+      gsap.from(toolsIconRef.current, {
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: toolsIconRef.current,
+          start: "top 85%",
+        },
       });
 
       // How It Works Section
@@ -390,6 +426,25 @@ function Home() {
         });
       });
 
+      toolCardRefs.current.forEach((card, index) => {
+        gsap.from(card, {
+          opacity: 0,
+          x: -50,
+          duration: 0.8,
+          ease: "power3.out",
+          delay: index * 0.16,
+          scale: 0.98,
+          filter: "blur(4px)",
+          onUpdate: () => {
+            card.style.filter = "blur(0px)";
+          },
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+          },
+        });
+      });
+
       // Refresh ScrollTrigger on window resize to ensure correct positions
       ScrollTrigger.refresh();
     },
@@ -477,10 +532,11 @@ function Home() {
             className="absolute top-0 right-0 w-full h-full bg-cover bg-center"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
+                "url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=2070&q=80')",
             }}
           ></div>
         </div>
+
         <div className="container mx-auto relative z-10">
           <div className="text-center mb-12 featured-heading">
             <h2 className="text-3xl font-bold mb-4">Featured Services</h2>
@@ -494,457 +550,71 @@ function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div
-              className={`card-left rounded-lg overflow-hidden ${
-                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-              }
-                  transition duration-300
-                  hover:shadow-lg
-                  hover:shadow-gray-900
-                  hover:scale-102
-                  hover:border-2
-                  hover:border-blue-500
-                  focus-within:shadow-lg
-                  focus-within:scale-102
-                  `}
-              tabIndex={0}
-            >
-              <div
-                className={`h-3 ${isDark ? "bg-blue-500" : "bg-blue-600"}`}
-              ></div>
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <div
-                    className={`p-3 rounded-full ${
-                      isDark ? "bg-blue-500 bg-opacity-20" : "bg-blue-100"
-                    }`}
-                  >
-                    <FaRobot className="text-blue-500 text-xl" />
-                  </div>
-                  <h3 className="ml-4 text-xl font-bold">Code Generator</h3>
-                </div>
-                <div className="relative h-40 mb-6 rounded-lg overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                    alt="Code Generator"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
-                </div>
-                <p
-                  className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}
-                `}
-                >
-                  Generate clean, efficient code in multiple languages based on
-                  your requirements. Perfect for boilerplate code, algorithms,
-                  and common patterns.
-                </p>
-                <Link
-                  to="/codegenerator"
-                  className={`inline-block px-6 py-2 rounded-md font-semibold text-base transition duration-200
-                  ${
-                    isDark
-                      ? "bg-gray-900 text-blue-300 border border-blue-600 hover:bg-blue-800"
-                      : "bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100"
-                  } cursor-pointer select-none `}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <div
+                  key={index}
+                  ref={(el) => (featureCardRefs.current[index] = el)}
+                  className={`flex flex-col items-center p-8 rounded-2xl ${
+                    isDark ? "bg-gray-900" : "bg-white"
+                  } shadow-md border border-transparent transition-all duration-300 hover:shadow-2xl hover:shadow-black/30 hover:scale-[1.03] hover:border-blue-500 focus-within:shadow-2xl focus-within:scale-[1.03]`}
                   tabIndex={0}
-                  role="button"
-                  aria-label="Try Content Summarizer"
                 >
-                  <span className="flex items-center gap-2">
-                    Try Code Generator <FaArrowRight size={14} />
-                  </span>
-                </Link>
-              </div>
-            </div>
-
-            <div
-              className={`card-bottom rounded-lg overflow-hidden ${
-                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-              }
-                  transition duration-300
-                  hover:shadow-lg
-                  hover:shadow-gray-900
-                  hover:scale-102
-                  hover:border-2
-                  hover:border-blue-500
-                  focus-within:shadow-lg
-                  focus-within:scale-102`}
-              tabIndex={0}
-            >
-              <div
-                className={`h-3 ${isDark ? "bg-purple-500" : "bg-purple-600"}`}
-              ></div>
-              <div className="p-6">
-                <div className="flex items-center mb-4">
                   <div
-                    className={`p-3 rounded-full ${
-                      isDark ? "bg-purple-500 bg-opacity-20" : "bg-purple-100"
-                    }`}
+                    className="mb-4"
+                    ref={(el) => (featureIconRefs.current[index] = el)}
                   >
-                    <FaLightbulb className="text-purple-500 text-xl" />
+                    <Icon className="text-3xl text-blue-400 drop-shadow-lg" />
                   </div>
-                  <h3 className="ml-4 text-xl font-bold">Code Optimizer</h3>
-                </div>
-                <div className="relative h-40 mb-6 rounded-lg overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                    alt="Code Optimizer"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
-                </div>
-                <p
-                  className={`mb-6 ${
-                    isDark ? "text-gray-300" : "text-gray-600"
-                  }`}
-                >
-                  Improve your code's performance, readability, and
-                  maintainability with AI-powered suggestions and best
-                  practices.
-                </p>
-                <Link
-                  to="/optimiser"
-                  className={`inline-block px-6 py-2 rounded-md font-semibold text-base transition duration-200
-                  ${
-                    isDark
-                      ? "bg-gray-900 text-blue-300 border border-blue-600 hover:bg-blue-800"
-                      : "bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100"
-                  } cursor-pointer select-none `}
-                  tabIndex={0}
-                  role="button"
-                  aria-label="Try Content Summarizer"
-                >
-                  <span className="flex items-center gap-2">
-                    Try Code Optimizer <FaArrowRight size={14} />
-                  </span>
-                </Link>
-              </div>
-            </div>
-
-            <div
-              className={`card-right rounded-lg overflow-hidden ${
-                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-              }
-                  transition duration-300
-                  hover:shadow-lg
-                  hover:shadow-gray-900
-                  hover:scale-102
-                  hover:border-2
-                  hover:border-blue-500
-                  focus-within:shadow-lg
-                  focus-within:scale-102`}
-              tabIndex={0}
-            >
-              <div
-                className={`h-3 ${isDark ? "bg-green-500" : "bg-green-600"}`}
-              ></div>
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <div
-                    className={`p-3 rounded-full ${
-                      isDark ? "bg-green-500 bg-opacity-20" : "bg-green-100"
+                  <h3
+                    ref={(el) => (featureTitleRefs.current[index] = el)}
+                    className={`text-xl font-bold text-center mb-2 ${
+                      isDark ? "text-blue-100" : "text-blue-900"
                     }`}
+                  ></h3>
+                  <p
+                    ref={(el) => (featureDescRefs.current[index] = el)}
+                    className={`text-center mb-6 px-2 ${
+                      isDark ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  ></p>
+                  <Link
+                    to={feature.link}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`Learn more about ${feature.title}`}
                   >
-                    <FaFileAlt className="text-green-500 text-xl" />
-                  </div>
-                  <h3 className="ml-4 text-xl font-bold">Content Summarizer</h3>
+                    <span
+                      className={`inline-flex items-center gap-2 px-5 py-2 rounded-md font-semibold text-base transition-colors duration-200 ${
+                        isDark
+                          ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                          : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+                      } cursor-pointer select-none`}
+                    >
+                      Learn More <FaArrowRight size={16} />
+                    </span>
+                  </Link>
                 </div>
-                <div className="relative h-40 mb-6 rounded-lg overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                    alt="Content Summarizer"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
-                </div>
-                <p
-                  className={`mb-6 ${
-                    isDark ? "text-gray-300" : "text-gray-600"
-                  }`}
-                >
-                  Extract key information from various sources including text,
-                  images, PDFs, and YouTube videos with our AI summarization
-                  tool.
-                </p>
-
-                <Link
-                  to="/content-summarizer"
-                  className={`inline-block px-6 py-2 rounded-md font-semibold text-base transition duration-200
-                  ${
-                    isDark
-                      ? "bg-gray-900 text-blue-300 border border-blue-600 hover:bg-blue-800"
-                      : "bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100"
-                  } cursor-pointer select-none `}
-                  tabIndex={0}
-                  role="button"
-                  aria-label="Try Content Summarizer"
-                >
-                  <span className="flex items-center gap-2">
-                    Try Content Summarizer <FaArrowRight size={14} />
-                  </span>
-                </Link>
-              </div>
-            </div>
+              );
+            })}
           </div>
 
-          <div className=" text-center mt-10 featured-cta">
+          <div className="text-center mt-10 featured-cta">
             <Link
               to="/code-tools"
-              className={`inline-flex items-center gap-2 px-6 py-2 rounded-full font-semibold  transition-all duration-200 border-2
-            ${
-              isDark
-                ? "border-gray-700 text-blue-200 bg-black/30 hover:bg-blue-900 hover:border-blue-700"
-                : "border-blue-300 text-blue-700 bg-blue-50/60 hover:bg-blue-100 hover:border-blue-600"
-            }
-            hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 `}
+              className={`inline-flex items-center gap-2 px-6 py-2 rounded-full font-semibold transition-all duration-200 border-2 ${
+                isDark
+                  ? "border-gray-700 text-blue-200 bg-black/30 hover:bg-blue-900 hover:border-blue-700"
+                  : "border-blue-300 text-blue-700 bg-blue-50/60 hover:bg-blue-100 hover:border-blue-600"
+              } hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2`}
             >
               View All Tools <FaArrowRight size={16} />
             </Link>
           </div>
         </div>
       </section>
-
-      {/* Features Section */}
-      <section
-        className={`py-16 px-4 ${isDark ? "bg-gray-900/95" : "bg-gray-200"}`}
-      >
-        <div className="container mx-auto">
-          <h2
-            className={`text-4xl font-extrabold text-center mb-10 ${
-              isDark ? "text-blue-200" : "text-blue-800"
-            }`}
-          >
-            Our Features
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                ref={(el) => (cardRefs.current[index] = el)}
-                className={`flex flex-col items-center p-8 rounded-2xl ${
-                  isDark ? "bg-gray-900" : "bg-white"
-                } shadow-md border border-transparent transition-all duration-300 hover:shadow-2xl hover:shadow-black/30 hover:scale-[1.03] hover:border-blue-500 focus-within:shadow-2xl focus-within:scale-[1.03]`}
-                tabIndex={0}
-              >
-                <div
-                  className="mb-4"
-                  ref={(el) => (iconRefs.current[index] = el)}
-                >
-                  {feature.icon}
-                </div>
-                <h3
-                  ref={(el) => (titleRefs.current[index] = el)}
-                  className={`text-xl font-bold text-center mb-2 ${
-                    isDark ? "text-blue-100" : "text-blue-900"
-                  }`}
-                ></h3>
-                <p
-                  ref={(el) => (descRefs.current[index] = el)}
-                  className={`text-center mb-6 px-2 ${
-                    isDark ? "text-gray-300" : "text-gray-700"
-                  }`}
-                ></p>
-                <a
-                  href={feature.link}
-                  tabIndex={0}
-                  role="button"
-                  aria-label={`Learn more about ${feature.title}`}
-                >
-                  <span
-                    className={`inline-flex items-center gap-2 px-5 py-2 rounded-md font-semibold text-base transition-colors duration-200 ${
-                      isDark
-                        ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                        : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
-                    } cursor-pointer select-none`}
-                  >
-                    Learn More <FaArrowRight size={16} />
-                  </span>
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div>
-        {/* <section className={`py-16 px-4 ${isDark ? 'bg-gray-900/95' : 'bg-gray-200'}`}>
-          <div className="container mx-auto">
-          <h2 className={`text-4xl font-extrabold text-center mb-10 ${isDark ? "text-blue-200" : "text-blue-800"}`}>
-                    Our Features
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-          <div
-        className={`
-        flex flex-col items-center p-8
-          rounded-2xl
-          ${isDark ? "bg-gray-900" : "bg-white"}
-          shadow-md
-          border border-transparent
-          transition-all duration-300
-          hover:shadow-2xl hover:shadow-black/30
-          hover:scale-[1.03] hover:border-blue-500
-          focus-within:shadow-2xl focus-within:scale-[1.03]
-        `} tabIndex={0}>
-        <div className="mb-4">
-        <FaLightbulb className="text-yellow-400 text-3xl drop-shadow-lg" />
-        </div>
-        <h3 ref={featureTitleRef} className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
-          {/* Code Optimization */}
-        {/* </h3>
-        <p ref={featureDescRef} className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
-          {/* Get AI-powered suggestions to improve your code's performance, readability, and maintainability. */}
-        {/* </p>
-        <a
-          href="/optimiser"
-          tabIndex={0}
-          role="button"
-          aria-label="Learn more about Code Optimization">
-          <span
-            className={`
-            inline-flex items-center gap-2
-              px-5 py-2 rounded-md font-semibold text-base
-              transition-colors duration-200
-              ${isDark
-                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
-                }
-              cursor-pointer select-none `}>
-            Learn More <FaArrowRight size={16} />
-          </span>
-        </a> */}
-
-        {/* Card 2 */}
-        {/* <div className={`
-        flex flex-col items-center p-8
-        rounded-2xl
-        ${isDark ? "bg-gray-900" : "bg-white"}
-        shadow-md
-        border border-transparent
-        transition-all duration-300
-        hover:shadow-2xl hover:shadow-black/30
-        hover:scale-[1.03] hover:border-blue-500
-        focus-within:shadow-2xl focus-within:scale-[1.03] `}
-      tabIndex={0}>
-        <div className="mb-4">
-          <FaRobot className="text-green-400 text-3xl drop-shadow-lg" />
-        </div>
-        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
-          Code Generation
-        </h3>
-        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
-        Generate code snippets and solutions based on your requirements and specifications.
-        </p>
-        <a
-          href="/codegenerator"
-          tabIndex={0}
-          role="button"
-          aria-label="Learn more about Code Generation" >
-          <span
-            className={`
-              inline-flex items-center gap-2
-              px-5 py-2 rounded-md font-semibold text-base
-              transition-colors duration-200
-              ${isDark
-              ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
-                }
-                cursor-pointer select-none
-            `} >
-            Learn More <FaArrowRight size={16} />
-            </span>
-            </a>
-      </div>  */}
-
-        {/*      
-      <div className={`
-        flex flex-col items-center p-8
-        rounded-2xl
-        ${isDark ? "bg-gray-900" : "bg-white"}
-        shadow-md
-        border border-transparent
-        transition-all duration-300
-        hover:shadow-2xl hover:shadow-black/30
-        hover:scale-[1.03] hover:border-blue-500
-        focus-within:shadow-2xl focus-within:scale-[1.03]
-        `} tabIndex={0}>
-        <div className="mb-4">
-        <FaChartLine className="text-purple-400 text-3xl drop-shadow-lg" />
-        </div>
-        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
-          Complexity Analysis
-        </h3>
-        <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
-          Understand the time and space complexity of your algorithms and identify bottlenecks.
-          </p>
-        <a
-          href="/codecomplexity"
-          tabIndex={0}
-          role="button"
-          aria-label="Learn more about Complexity Analysis">
-          <span
-            className={`
-              inline-flex items-center gap-2
-              px-5 py-2 rounded-md font-semibold text-base
-              transition-colors duration-200
-              ${isDark
-              ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
-                }
-              cursor-pointer select-none`}>
-              Learn More <FaArrowRight size={16} />
-          </span>
-        </a>
-      </div> */}
-
-        {/*       
-      <div className={`
-        flex flex-col items-center p-8
-        rounded-2xl
-        ${isDark ? "bg-gray-900" : "bg-white"}
-        shadow-md
-        border border-transparent
-        transition-all duration-300
-        hover:shadow-2xl hover:shadow-black/30
-        hover:scale-[1.03] hover:border-blue-500
-        focus-within:shadow-2xl focus-within:scale-[1.03]
-        `}tabIndex={0}>
-        <div className="mb-4">
-        <FaExchangeAlt className="text-red-400 text-3xl drop-shadow-lg" />
-        </div>
-        <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
-          Code Comparison
-          </h3>
-          <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
-          Compare different versions of your code to identify changes and improvements.
-        </p>
-        <a
-          href="/codecompare"
-          tabIndex={0}
-          role="button"
-          aria-label="Learn more about Code Comparison">
-          <span className={`
-              inline-flex items-center gap-2
-              px-5 py-2 rounded-md font-semibold text-base
-              transition-colors duration-200
-              ${isDark
-              ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-              : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
-              }
-              cursor-pointer select-none
-            `}>
-            Learn More <FaArrowRight size={16} />
-          </span>
-        </a> 
-        </div> 
-        
-        </div>
-  </div> */}
-        {/* </section> */}
-      </div>
 
       {/* Code Tools Section */}
       <section
@@ -954,10 +624,19 @@ function Home() {
       >
         <div className="container mx-auto">
           <div className="flex items-center justify-center mb-6">
-            <FaTools className="text-blue-400 text-3xl mr-3" />
-            <h2 className="text-3xl font-bold text-center">New Code Tools</h2>
+            <FaTools
+              ref={toolsIconRef}
+              className="text-blue-400 text-3xl mr-3"
+            />
+            <h2
+              ref={toolsHeadingRef}
+              className="text-3xl font-bold text-center"
+            >
+              New Code Tools
+            </h2>
           </div>
           <p
+            ref={toolsParagraphRef}
             className={`text-xl ${
               isDark ? "text-gray-300" : "text-gray-600"
             } max-w-3xl mx-auto text-center mb-12`}
@@ -966,231 +645,25 @@ function Home() {
             experience
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div
-              className={`
-          flex flex-col items-center p-8
-          rounded-2xl
-          ${isDark ? "bg-gray-900" : "bg-white"}
-          shadow-md
-          border border-transparent
-          transition-all duration-300
-          hover:shadow-2xl hover:shadow-black/30
-          hover:scale-[1.03] hover:border-blue-500
-          focus-within:shadow-2xl focus-within:scale-[1.03]`}
-              tabIndex={0}
-            >
-              <div className="mb-4">
-                <FaVial className="text-blue-400 text-3xl drop-shadow-lg" />
-              </div>
-              <h3
-                className={`text-xl font-bold text-center mb-2 ${
-                  isDark ? "text-blue-100" : "text-blue-900"
-                }`}
-              >
-                Test Case Generator
-              </h3>
-              <p
-                className={`text-center mb-6 px-2 ${
-                  isDark ? "text-gray-300" : "text-gray-700"
-                }`}
-              >
-                Automatically generate comprehensive test cases for your code.
-              </p>
-              <a
-                href="/test-case-generator"
-                tabIndex={0}
-                role="button"
-                aria-label="Learn more about Test Case Generator"
-              >
-                <span
-                  className={`
-              inline-flex items-center gap-2
-              px-5 py-2 rounded-md font-semibold text-base
-              transition-colors duration-200
-              ${
-                isDark
-                  ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                  : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
-              }
-              cursor-pointer select-none`}
-                >
-                  Learn More <FaArrowRight size={16} />
-                </span>
-              </a>
+          <div className="">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {toolsData.map((tool, index) => (
+                <FeatureCard
+                  key={tool.id}
+                  icon={tool.icon}
+                  title={tool.title}
+                  description={tool.description}
+                  href={tool.href}
+                  iconColor={tool.iconColor}
+                  isDark={isDark}
+                  ref={(el) => (toolCardRefs.current[index] = el)}
+                />
+              ))}
             </div>
-
-            <div
-              className={`
-          flex flex-col items-center p-8
-          rounded-2xl
-          ${isDark ? "bg-gray-900" : "bg-white"}
-          shadow-md
-          border border-transparent
-          transition-all duration-300
-          hover:shadow-2xl hover:shadow-black/30
-          hover:scale-[1.03] hover:border-blue-500
-          focus-within:shadow-2xl focus-within:scale-[1.03]
-        `}
-              tabIndex={0}
-            >
-              <div className="mb-4">
-                <FaMagic className="text-purple-400 text-3xl drop-shadow-lg" />
-              </div>
-              <h3
-                className={`text-xl font-bold text-center mb-2 ${
-                  isDark ? "text-blue-100" : "text-blue-900"
-                }`}
-              >
-                Code Beautifier
-              </h3>
-              <p
-                className={`text-center mb-6 px-2 ${
-                  isDark ? "text-gray-300" : "text-gray-700"
-                }`}
-              >
-                Transform messy code into clean, well-structured code that
-                follows best practices.
-              </p>
-              <a
-                href="/code-beautifier"
-                tabIndex={0}
-                role="button"
-                aria-label="Learn more about Code Beautifier"
-              >
-                <span
-                  className={`
-              inline-flex items-center gap-2
-              px-5 py-2 rounded-md font-semibold text-base
-              transition-colors duration-200
-              ${
-                isDark
-                  ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                  : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
-              }
-              cursor-pointer select-none
-            `}
-                >
-                  Learn More <FaArrowRight size={16} />
-                </span>
-              </a>
-            </div>
-
-            <div
-              className={`
-          flex flex-col items-center p-8
-          rounded-2xl
-          ${isDark ? "bg-gray-900" : "bg-white"}
-          shadow-md
-          border border-transparent
-          transition-all duration-300
-          hover:shadow-2xl hover:shadow-black/30
-          hover:scale-[1.03] hover:border-blue-500
-          focus-within:shadow-2xl focus-within:scale-[1.03]
-        `}
-              tabIndex={0}
-            >
-              <div className="mb-4">
-                <FaBug className="text-red-400 text-3xl drop-shadow-lg" />
-              </div>
-              <h3
-                className={`text-xl font-bold text-center mb-2 ${
-                  isDark ? "text-blue-100" : "text-blue-900"
-                }`}
-              >
-                Error Debugger
-              </h3>
-              <p
-                className={`text-center mb-6 px-2 ${
-                  isDark ? "text-gray-300" : "text-gray-700"
-                }`}
-              >
-                Identify and fix bugs, syntax errors, and logical issues in your
-                code.
-              </p>
-              <a
-                href="/error-debugger"
-                tabIndex={0}
-                role="button"
-                aria-label="Learn more about Error Debugger"
-              >
-                <span
-                  className={`
-              inline-flex items-center gap-2
-              px-5 py-2 rounded-md font-semibold text-base
-              transition-colors duration-200
-              ${
-                isDark
-                  ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                  : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
-              }
-              cursor-pointer select-none`}
-                >
-                  Learn More <FaArrowRight size={16} />
-                </span>
-              </a>
-            </div>
-
-            <div
-              className={`
-          flex flex-col items-center p-8
-          rounded-2xl
-          ${isDark ? "bg-gray-900" : "bg-white"}
-          shadow-md
-          border border-transparent
-          transition-all duration-300
-          hover:shadow-2xl hover:shadow-black/30
-          hover:scale-[1.03] hover:border-blue-500
-          focus-within:shadow-2xl focus-within:scale-[1.03]
-        `}
-              tabIndex={0}
-            >
-              <div className="mb-4">
-                <FaTachometerAlt className="text-green-400 text-3xl drop-shadow-lg" />
-              </div>
-              <h3
-                className={`text-xl font-bold text-center mb-2 ${
-                  isDark ? "text-blue-100" : "text-blue-900"
-                }`}
-              >
-                Performance Analyzer
-              </h3>
-              <p
-                className={`text-center mb-6 px-2 ${
-                  isDark ? "text-gray-300" : "text-gray-700"
-                }`}
-              >
-                Analyze execution time and memory usage of your code and get
-                optimization recommendations.
-              </p>
-              <a
-                href="/performance-analyzer"
-                tabIndex={0}
-                role="button"
-                aria-label="Learn more about Performance Analyzer"
-              >
-                <span
-                  className={`
-              inline-flex items-center gap-2
-              px-5 py-2 rounded-md font-semibold text-base
-              transition-colors duration-200
-              ${
-                isDark
-                  ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                  : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
-              }
-              cursor-pointer select-none
-            `}
-                >
-                  Learn More <FaArrowRight size={16} />
-                </span>
-              </a>
-            </div>
-          </div>
-          <div className="text-center mt-10">
-            <a
-              href="/code-tools"
-              className={`
+            <div className="flex justify-center mt-10">
+              <Link
+                to="/code-tools"
+                className={`
           inline-flex items-center gap-2
           bg-blue-600 hover:bg-blue-700
           text-white px-6 py-3 rounded-lg font-semibold
@@ -1198,11 +671,12 @@ function Home() {
           transition-all duration-200
           focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2
         `}
-              tabIndex={0}
-              role="button"
-            >
-              View All Tools <FaArrowRight size={18} />
-            </a>
+                tabIndex={0}
+                role="button"
+              >
+                View All Tools <FaArrowRight size={18} />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -1243,6 +717,13 @@ function Home() {
       >
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 opacity-5"></div>
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-5"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
+            }}
+          ></div>
           <div
             className="absolute inset-0 bg-cover bg-center opacity-5"
             style={{
@@ -1586,6 +1067,13 @@ function Home() {
                 "url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
             }}
           ></div>
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-10"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
+            }}
+          ></div>
         </div>
         <div className="container mx-auto text-center relative z-10">
           <div
@@ -1637,24 +1125,186 @@ function Home() {
 }
 
 // Helper Components
-const FeatureCard = ({ icon, title, description, link }) => {
-  const { isDark } = useTheme();
+const ServiceCard = ({
+  isDark,
+  title,
+  description,
+  img,
+  link,
+  icon: Icon,
+  color,
+}) => {
   return (
-    <Link
-      to={link}
-      className={`${
-        isDark ? "bg-gray-700" : "bg-white border border-gray-200"
-      } rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:-translate-y-1`}
+    <div
+      className={`rounded-lg overflow-hidden ${
+        isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+      }
+        transition duration-300
+        hover:shadow-lg hover:shadow-gray-900
+        hover:scale-102 hover:border-2 hover:border-${color}-500
+        focus-within:shadow-lg focus-within:scale-102`}
+      tabIndex={0}
     >
-      <div className="text-3xl mb-4">{icon}</div>
-      <h3 className="text-xl font-semibold mb-3">{title}</h3>
-      <p className={`${isDark ? "text-gray-300" : "text-gray-600"} mb-4`}>
+      <div
+        className={`h-3 ${isDark ? `bg-${color}-500` : `bg-${color}-600`}`}
+      ></div>
+
+      <div className="p-6">
+        <div className="flex items-center mb-4">
+          <div
+            className={`p-3 rounded-full ${
+              isDark ? `bg-${color}-500 bg-opacity-20` : `bg-${color}-100`
+            }`}
+          >
+            <Icon className={`text-${color}-500 text-xl`} />
+          </div>
+          <h3 className="ml-4 text-xl font-bold">{title}</h3>
+        </div>
+
+        <div className="relative h-40 mb-6 rounded-lg overflow-hidden">
+          <img src={img} alt={title} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+        </div>
+
+        <p className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}>
+          {description}
+        </p>
+
+        <Link
+          to={link}
+          className={`inline-block px-6 py-2 rounded-md font-semibold text-base transition duration-200
+            ${
+              isDark
+                ? "bg-gray-900 text-blue-300 border border-blue-600 hover:bg-blue-800"
+                : "bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100"
+            }
+            cursor-pointer select-none`}
+          tabIndex={0}
+          role="button"
+          aria-label={`Try ${title}`}
+        >
+          <span className="flex items-center gap-2">
+            Try {title} <FaArrowRight size={14} />
+          </span>
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+const FeatureCard = forwardRef(
+  ({ icon: Icon, title, description, href, iconColor, isDark }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={`flex flex-col items-center p-8 rounded-2xl justify-between ${
+          isDark ? "bg-gray-900" : "bg-white"
+        } shadow-md border border-transparent transition-all duration-300 hover:shadow-2xl hover:shadow-black/30 hover:scale-[1.03] hover:border-blue-500 focus-within:shadow-2xl focus-within:scale-[1.03]`}
+        tabIndex={0}
+      >
+        <div className="mb-4">
+          <Icon className={`text-3xl drop-shadow-lg ${iconColor}`} />
+        </div>
+        <h3
+          className={`text-xl font-bold text-center mb-2 ${
+            isDark ? "text-blue-100" : "text-blue-900"
+          }`}
+        >
+          {title}
+        </h3>
+        <p
+          className={`text-center mb-6 px-2 ${
+            isDark ? "text-gray-300" : "text-gray-700"
+          }`}
+        >
+          {description}
+        </p>
+        <a
+          href={href}
+          tabIndex={0}
+          role="button"
+          aria-label={`Learn more about ${title}`}
+        >
+          <span
+            className={`inline-flex items-center gap-2 px-5 py-2 rounded-md font-semibold text-base transition-colors duration-200 ${
+              isDark
+                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+            } cursor-pointer select-none`}
+          >
+            Learn More <FaArrowRight size={16} />
+          </span>
+        </a>
+      </div>
+    );
+  }
+);
+
+FeatureCard.displayName = "FeatureCard";
+
+const FeatureCard2 = ({
+  icon: Icon,
+  title,
+  description,
+  href,
+  iconColor,
+  isDark,
+}) => {
+  return (
+    <div
+      className={`
+        flex flex-col items-center p-8
+        rounded-2xl justify-between
+        ${isDark ? "bg-gray-800" : "bg-white"}
+        shadow-md
+        border border-transparent
+        transition-all duration-300
+        hover:shadow-2xl hover:shadow-black/30
+        hover:scale-[1.03] hover:border-blue-500
+        focus-within:shadow-2xl focus-within:scale-[1.03]
+      `}
+      tabIndex={0}
+    >
+      <div className="mb-4">
+        <Icon className={`text-3xl drop-shadow-lg ${iconColor}`} />
+      </div>
+      <h3
+        className={`text-xl font-bold text-center mb-2 ${
+          isDark ? "text-blue-100" : "text-blue-900"
+        }`}
+      >
+        {title}
+      </h3>
+      <p
+        className={`text-center mb-6 px-2 ${
+          isDark ? "text-gray-300" : "text-gray-700"
+        }`}
+      >
         {description}
       </p>
-      <div className="flex items-center text-blue-400 font-medium">
-        Learn more <FaArrowRight className="ml-2" size={14} />
-      </div>
-    </Link>
+      <a
+        href={href}
+        tabIndex={0}
+        role="button"
+        aria-label={`Learn more about ${title}`}
+      >
+        <span
+          className={`
+            inline-flex items-center gap-2
+            px-5 py-2 rounded-md font-semibold text-base
+            transition-colors duration-200
+            ${
+              isDark
+                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+            }
+            cursor-pointer select-none
+          `}
+        >
+          Learn More <FaArrowRight size={16} />
+        </span>
+      </a>
+    </div>
   );
 };
 
