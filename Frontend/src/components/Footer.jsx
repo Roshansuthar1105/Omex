@@ -21,7 +21,8 @@ import {
   FaTwitter,
   FaUserFriends,
   FaUsers,
-  FaVial
+  FaVial,
+  FaLightbulb
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
@@ -167,6 +168,15 @@ const Footer = () => {
                   className={`flex items-center ${linkBase}`}
                 >
                   <FaAlignLeft className={iconClass} /> Content Summarizer
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/code-explanation"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className={`flex items-center ${linkBase}`}
+                >
+                  <FaLightbulb className={iconClass} /> Code Explanation
                 </Link>
               </li>
             </ul>
