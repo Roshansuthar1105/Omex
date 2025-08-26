@@ -20,6 +20,7 @@ import ErrorDebugger from "./pages/ErrorDebugger";
 import PerformanceAnalyzer from "./pages/PerformanceAnalyzer";
 import SecurityScanner from "./pages/SecurityScanner";
 import TestCaseGenerator from "./pages/TestCaseGenerator";
+import CodeExplanation from "./pages/CodeExplanation";
 
 // Other pages
 import About from "./pages/About";
@@ -71,6 +72,7 @@ function App() {
               <Route path="/performance-analyzer" element={<PerformanceAnalyzer />} />
               <Route path="/content-summarizer" element={<ContentSummarizer />} />
               <Route path="/security-scanner" element={<SecurityScanner />} />
+              <Route path="/code-explanation" element={<CodeExplanation />} />
 
               {/* Company pages */}
               <Route path="/team" element={<Team />} />

@@ -60,6 +60,11 @@ const securityAnalyzer = genAI.getGenerativeModel({
     systemInstruction: systemInstructions.securityAnalyzer
 });
 
+const codeExplainer = genAI.getGenerativeModel({
+    model: "gemini-2.0-flash",
+    systemInstruction: systemInstructions.codeExplainer
+});
+
 /**
  * Generate code based on a prompt
  * @param {string} prompt - The prompt to generate code from
@@ -265,6 +270,25 @@ Please provide a detailed security analysis including vulnerability types, sever
     return result.response.text();
 }
 
+/**
+ * Explain code in detail
+ * @param {string} code - The code to explain
+ * @param {string} language - The programming language
+ * @returns {Promise<string>} - The code explanation
+ */
+async function explainCode(code, language) {
+    const prompt = `Please explain the following ${language || 'code'} in detail:
+
+\`\`\`
+${code}
+\`\`\`
+
+Please provide a comprehensive explanation including what the code does, how it works, key concepts used, and any important considerations.`;
+
+    const result = await codeExplainer.generateContent(prompt);
+    return result.response.text();
+}
+
 module.exports = {
     generateReview,
     generateCode,
@@ -276,4 +300,5 @@ module.exports = {
     analyzePerformance,
     summarizeContent,
     analyzeSecurity,
+    explainCode,
 };
