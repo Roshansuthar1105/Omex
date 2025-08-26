@@ -93,15 +93,15 @@ function CodeEditor(props) {
   }
 
   return (
-    <div className={`w-full p-4 md:p-6 ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
+    <div className={`w-full p-4 md:p-6 $${isDark ? 'bg-[#161b22]' : 'bg-[#f6f8fa]'}`}>
       {/* Settings Panel */}
       {showSettings && (
-        <div className={`mb-4 p-4 rounded-lg shadow-md ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
+        <div className={`mb-4 p-4 rounded-lg shadow-md $${isDark ? 'bg-[#0d1117] text-white' : 'bg-white text-[#24292f]'}`}>
           <div className="flex justify-between items-center mb-3">
             <h3 className="text-lg font-semibold">Editor Settings</h3>
             <button
               onClick={() => setShowSettings(false)}
-              className="text-gray-400 hover:text-gray-200"
+              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
             >
               ✕
             </button>
@@ -112,7 +112,7 @@ function CodeEditor(props) {
               <select
                 value={codelang}
                 onChange={(e) => changeLanguage(e.target.value)}
-                className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600"
+                className="w-full p-2 rounded bg-[#161b22] text-white border border-[#30363d]"
               >
                 {languages.map((item) => (
                   <option key={item} value={item}>{item}</option>
@@ -140,12 +140,8 @@ function CodeEditor(props) {
       <div className="flex flex-col md:flex-row gap-4 md:gap-6 h-[80vh]">
         {/* Editor Panel */}
         <div className="relative h-1/2 md:h-full md:w-1/2">
-          <div className={`h-full overflow-hidden rounded-lg shadow-lg border ${
-            isDark ? 'border-gray-600' : 'border-gray-300'
-          }`}>
-            <div className={`flex items-center justify-between px-4 py-2 ${
-              isDark ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'
-            }`}>
+          <div className={`h-full overflow-hidden rounded-lg shadow-lg border $${isDark ? 'border-[#30363d]' : 'border-[#d1d5da]'}`}>
+            <div className={`flex items-center justify-between px-4 py-2 $${isDark ? 'bg-[#161b22] text-white' : 'bg-[#f6f8fa] text-[#24292f]'}`}>
               <div className="flex items-center">
                 <FaCode className="mr-2" />
                 <span className="font-medium">{codelang} Editor</span>
@@ -153,33 +149,27 @@ function CodeEditor(props) {
               <div className="flex space-x-2">
                 <button
                   onClick={() => setShowSettings(!showSettings)}
-                  className={`p-2 rounded-md ${
-                    isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-300'
-                  } transition-colors`}
+                  className={`p-2 rounded-md $${isDark ? 'hover:bg-[#161b22]' : 'hover:bg-[#eaecef]'} transition-colors`}
                   title="Settings"
                 >
                   <MdSettings />
                 </button>
                 <button
                   onClick={handleClearEditor}
-                  className={`p-2 rounded-md ${
-                    isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-300'
-                  } transition-colors`}
+                  className={`p-2 rounded-md $${isDark ? 'hover:bg-[#161b22]' : 'hover:bg-[#eaecef]'} transition-colors`}
                   title="Clear Editor"
                 >
                   <FaTrash />
                 </button>
               </div>
             </div>
-            <div className={`h-[calc(100%-40px)] overflow-y-auto ${
-              isDark ? 'bg-gray-900' : 'bg-white'
-            }`}>
+            <div className={`h-[calc(100%-40px)] overflow-y-auto $${isDark ? 'bg-[#0d1117]' : 'bg-white'}`}>
               <Editor
                 value={prompt}
                 onValueChange={prompt => setPrompt(prompt)}
                 highlight={prompt => prism.highlight(prompt, prism.languages.javascript, codelang)}
                 padding={20}
-                className={`h-full w-full ${isDark ? 'text-white' : 'text-gray-800'}`}
+                className={`h-full w-full $${isDark ? 'text-white' : 'text-[#24292f]'}`}
                 style={{
                   fontFamily: '"Fira code", "Fira Mono", monospace',
                   fontSize: `${fontSize}px`,
@@ -192,22 +182,9 @@ function CodeEditor(props) {
           <button
             onClick={reviewCode}
             disabled={loading}
-            className={`absolute bottom-4 right-4 px-6 py-2 rounded-lg font-medium transition-all duration-200 flex items-center ${
-              loading
-                ? 'bg-gray-500 cursor-not-allowed'
-                : 'bg-blue-500 hover:bg-blue-600 hover:shadow-lg'
-            } text-white`}
+            className={`absolute bottom-4 right-4 px-6 py-2 rounded-lg font-medium transition-all duration-200 flex items-center $${loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-[#24292f] hover:bg-[#161b22]'} text-white`}
           >
-            {loading ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                Processing...
-              </>
-            ) : (
-              <>
-                <FaCheck className="mr-2" /> Review
-              </>
-            )}
+            {loading ? <Loader size="sm" color={isDark ? "white" : "black"} /> : <FaCheck className="mr-2" />} Review
           </button>
         </div>
 

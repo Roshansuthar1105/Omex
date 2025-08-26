@@ -155,25 +155,17 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
   return (
     <>
       <nav
-        className={`${
-          isDark 
-            ? "bg-gray-900 text-white border-gray-800"
-            : "bg-white text-gray-800 border-gray-200"
-        } ${
-          scrolled 
-            ? "backdrop-blur-xl shadow-2xl border-b" 
-            : "backdrop-blur-md shadow-lg"
-        } py-4 px-4 md:px-8 w-full transition-all duration-500 sticky top-0 z-50`}
+        className={`glass bg-gradient-blue/80 shadow-2xl border-b border-blue-200/30 py-4 px-4 md:px-8 w-full transition-all duration-500 sticky top-0 z-50`}
       >
         <div className="container mx-auto">
           <div className="flex justify-between items-center">
             {/* Logo */}
             <div className="flex items-center space-x-3 group">
               <div className="relative">
-                <img src="/vite.svg" alt="Omex AI Logo" className="w-8 h-8" />
+                <img src="/vite.svg" alt="Omex AI Logo" className="w-10 h-10 drop-shadow-lg rounded-full border-2 border-blue-300 bg-white/80" />
                 <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-              <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <h1 className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent tracking-tight drop-shadow-lg">
                 <Link
                   to="/"
                   className="hover:from-purple-400 hover:via-pink-400 hover:to-blue-400 transition-all duration-500"
@@ -182,26 +174,22 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                   OMEX
                 </Link>
               </h1>
-              <FaStar className="text-yellow-400 text-sm animate-pulse opacity-70" />
+              <FaStar className="text-yellow-400 text-lg animate-pulse opacity-80" />
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-10">
               <Link
                 to="/"
-                className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 ${isActive("/")}`}
+                className={`flex items-center space-x-2 py-2 px-4 rounded-xl transition-all duration-300 font-semibold text-lg hover:bg-gradient-to-r hover:from-blue-100/60 hover:to-purple-100/60 ${isActive("/")}`}
               >
                 <span className="relative z-10">Home</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
-
               <Link
                 to="/optimiser"
-                className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${isActive("/optimiser")}`}
+                className={`flex items-center space-x-2 py-2 px-4 rounded-xl transition-all duration-300 font-semibold text-lg hover:bg-gradient-to-r hover:from-blue-100/60 hover:to-purple-100/60 ${isActive("/optimiser")}`}
               >
-                <FaRocket className="text-lg group-hover:text-yellow-400 transition-colors duration-300 transform group-hover:scale-110" />
-                <span className="relative z-10">Optimize</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-orange-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                <span className="relative z-10">Optimiser</span>
               </Link>
 
               <Link
@@ -231,14 +219,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                 <span className="absolute inset-0 bg-gradient-to-r from-red-400/10 to-pink-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
 
-              <Link
-                to="/contributors"
-                className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${isActive("/contributors")}`}
-              >
-                <FaUserFriends className="text-lg group-hover:text-red-400 transition-colors duration-300 transform group-hover:scale-110" />
-                <span className="relative z-10">Contributors</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-red-400/10 to-pink-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              </Link>
+              {/* Contributors Link Removed */}
+              
 
               {/* Enhanced Tools Dropdown */}
               <div className="relative">
@@ -295,61 +277,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                 )}
               </div>
 
-              {/* Enhanced Company Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={toggleCompanyDropdown}
-                  className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${
-                    isCompanyActive()
-                      ? "text-purple-400 bg-purple-400/10"
-                      : "hover:text-purple-400 hover:bg-purple-400/10"
-                  }`}
-                >
-                  <FaRegBuilding className="text-lg group-hover:text-indigo-400 transition-colors duration-300 transform group-hover:scale-110" />
-                  <span className="relative z-10">Company</span>
-                  <div className={`transform transition-all duration-300 ${isCompanyDropdownOpen ? "rotate-180" : ""}`}>
-                    <FaChevronDown className="text-xs" />
-                  </div>
-                  <span className="absolute inset-0 bg-gradient-to-r from-indigo-400/10 to-purple-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                </button>
-
-                {isCompanyDropdownOpen && (
-                  <div
-                    className={`absolute left-0 mt-3 w-56 rounded-xl shadow-2xl backdrop-blur-xl border ${
-                      isDark 
-                        ? "bg-gray-800/95 border-gray-700/50" 
-                        : "bg-white/95 border-gray-200/50"
-                    } ring-1 ring-black/5 z-50 animate-in slide-in-from-top-2 duration-200`}
-                  >
-                    <div className="py-2" role="menu">
-                      {[
-                        { to: "/about", icon: FaUsers, label: "About Us", color: "blue" },
-                        { to: "/team", icon: FaUserFriends, label: "Our Team", color: "green" },
-                        { to: "/contribute", icon: FaHandsHelping, label: "Contribute", color: "yellow" },
-                        { to: "/contributor-guide", icon: FaBookOpen, label: "Contributor Guide", color: "indigo" },
-                        { to: "/contact", icon: FaEnvelope, label: "Contact Us", color: "purple" },
-                        { to: "/faq", icon: FaQuestionCircle, label: "FAQ", color: "pink" },
-                        { to: "/privacy-policy", icon: FaShieldAlt, label: "Privacy Policy", color: "red" },
-                        { to: "/terms-of-service", icon: FaFileContract, label: "Terms of Service", color: "gray" }
-                      ].map((item) => (
-                        <Link
-                          key={item.to}
-                          to={item.to}
-                          className={`flex items-center space-x-3 px-4 py-3 text-sm transition-all duration-200 group ${
-                            isDark
-                              ? "text-gray-300 hover:bg-gray-700/50 hover:text-white"
-                              : "text-gray-700 hover:bg-gray-50/50 hover:text-gray-900"
-                          }`}
-                          onClick={() => setIsCompanyDropdownOpen(false)}
-                        >
-                          <item.icon className={`text-${item.color}-400 group-hover:scale-110 transition-transform duration-200`} />
-                          <span className="relative z-10">{item.label}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
+              
 
               {/* Theme Toggle Button */}
               <button

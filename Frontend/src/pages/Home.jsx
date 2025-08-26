@@ -118,60 +118,34 @@ function Home() {
 
   return (
     <div
-      className={`${
-        isDark ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"
-      } min-h-screen`}
+      className={`$${isDark ? "bg-[#0d1117] text-white" : "bg-white text-[#24292f]"} min-h-screen`}
     >
       {/* Hero Section */}
       <section className="py-20 px-4 relative overflow-hidden animated-bg">
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 opacity-10"></div>
-          <div className="absolute top-20 left-10 w-40 h-40 bg-yellow-400 rounded-full filter blur-3xl opacity-10"></div>
-          <div className="absolute bottom-20 right-10 w-60 h-60 bg-blue-600 rounded-full filter blur-3xl opacity-10"></div>
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-5"
-            style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
-            }}
-          ></div>
+          <div className={`absolute top-0 left-0 w-full h-full $${isDark ? "bg-[#161b22]" : "bg-[#f6f8fa]"} opacity-100`}></div>
         </div>
         <div className="container mx-auto text-center relative z-10">
-          <div
-            className={`${
-              isDark ? "glass-dark" : "glass"
-            } rounded-3xl py-12 px-6 max-w-4xl mx-auto`}
-          >
-            <div className="mb-8 inline-block p-3 bg-blue-600 bg-opacity-20 rounded-full">
-              <FaCode className="text-blue-400 text-3xl" />
+          <div className={`$${isDark ? "glass-dark" : "glass"} rounded-3xl py-12 px-6 max-w-4xl mx-auto`}> 
+            <div className="mb-8 inline-block p-3 bg-[#161b22] bg-opacity-40 rounded-full">
+              <FaCode className="text-3xl text-[#24292f] dark:text-white" />
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Elevate Your Code with <span className="text-blue-400">OMEX</span>
+              Elevate Your Code with <span className="font-bold">OMEX</span>
             </h1>
-            <p
-              className={`text-xl md:text-2xl ${
-                isDark ? "text-gray-300" : "text-gray-600"
-              } max-w-3xl mx-auto mb-10`}
-            >
-              The AI-powered platform for developers to optimize, generate, and
-              analyze code with confidence.
+            <p className={`text-xl md:text-2xl $${isDark ? "text-gray-300" : "text-gray-600"} max-w-3xl mx-auto mb-10`}>
+              The AI-powered platform for developers to optimize, generate, and analyze code with confidence.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 to="/code-tools"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 flex items-center"
+                className="bg-[#24292f] hover:bg-[#161b22] text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 flex items-center"
               >
                 Explore Tools <FaArrowRight className="ml-2" />
               </Link>
               <Link
                 to="/about"
-                className={`${
-                  isDark
-                    ? "bg-gray-700 hover:bg-gray-600"
-                    : "bg-white hover:bg-gray-100 border border-gray-200"
-                } text-${
-                  isDark ? "white" : "gray-800"
-                } px-8 py-3 rounded-lg font-medium transition-all duration-200`}
+                className={`$${isDark ? "bg-[#161b22] hover:bg-[#24292f]" : "bg-white hover:bg-[#f6f8fa] border border-gray-200"} text-$${isDark ? "white" : "#24292f"} px-8 py-3 rounded-lg font-medium transition-all duration-200`}
               >
                 Learn More
               </Link>

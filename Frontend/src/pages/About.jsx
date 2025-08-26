@@ -37,46 +37,23 @@ const About = () => {
   }
   return (
     <div
-      className={`min-h-screen ${
-        isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
-      }`}
+      className={`min-h-screen $${isDark ? "bg-[#0d1117] text-white" : "bg-white text-[#24292f]"}`}
     >
       {/* Hero Section */}
       <div
-        className={`py-20 px-4 ${
-          isDark ? "bg-gray-900" : "bg-blue-50"
-        } relative overflow-hidden animated-bg`}
+        className={`py-20 px-4 $${isDark ? "bg-[#161b22]" : "bg-[#f6f8fa]"} relative overflow-hidden animated-bg`}
       >
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-40 h-40 bg-blue-400 rounded-full filter blur-3xl opacity-10"></div>
-          <div className="absolute bottom-20 right-10 w-60 h-60 bg-purple-600 rounded-full filter blur-3xl opacity-10"></div>
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-5"
-            style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
-            }}
-          ></div>
-        </div>
+        <div className="absolute inset-0"></div>
         <div className="container mx-auto text-center relative z-10">
-          <div
-            className={`${
-              isDark ? "glass-dark" : "glass"
-            } rounded-3xl py-12 px-6 max-w-4xl mx-auto`}
-          >
-            <div className="mb-8 inline-block p-3 bg-blue-600 bg-opacity-20 rounded-full">
-              <FaCode className="text-blue-400 text-3xl" />
+          <div className={`$${isDark ? "glass-dark" : "glass"} rounded-3xl py-12 px-6 max-w-4xl mx-auto`}>
+            <div className="mb-8 inline-block p-3 bg-[#161b22] bg-opacity-40 rounded-full">
+              <FaCode className="text-3xl text-[#24292f] dark:text-white" />
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              About <span className="text-blue-400">OMEX</span>
+              About <span className="font-bold">OMEX</span>
             </h1>
-            <p
-              className={`text-xl ${
-                isDark ? "text-gray-300" : "text-gray-600"
-              } max-w-3xl mx-auto mb-6`}
-            >
-              An AI-powered platform revolutionizing how developers write,
-              optimize, and understand code.
+            <p className={`text-xl $${isDark ? "text-gray-300" : "text-gray-600"} max-w-3xl mx-auto mb-6`}>
+              An AI-powered platform revolutionizing how developers write, optimize, and understand code.
             </p>
           </div>
         </div>
