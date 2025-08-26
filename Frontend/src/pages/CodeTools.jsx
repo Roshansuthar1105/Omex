@@ -8,7 +8,9 @@ import {
   FaBug,
   FaTachometerAlt,
   FaArrowRight,
-  FaFileAlt,FaShieldAlt
+  FaFileAlt,
+  FaShieldAlt,
+  FaLightbulb
 } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 
@@ -115,14 +117,19 @@ function CodeTools() {
           />
 
           <ToolCard
-  icon={<FaShieldAlt
- className="text-red-500 text-2xl" />}  // use FaShieldAlt for security
-  title="Security Vulnerability Scanner"
-  description="Scan your code for security flaws like SQL injection, XSS, and hardcoded secrets with remediation suggestions."
-  link="/security-scanner"
-  isDark={isDark}
-/>
-
+            icon={<FaShieldAlt className="text-red-500 text-2xl" />}
+            title="Security Vulnerability Scanner"
+            description="Scan your code for security flaws like SQL injection, XSS, and hardcoded secrets with remediation suggestions."
+            link="/security-scanner"
+            isDark={isDark}
+          />
+          <ToolCard
+            icon={<FaLightbulb className="text-yellow-400 text-2xl" />}
+            title="Code Explanation"
+            description="Get detailed explanations of your code with step-by-step breakdowns, complexity analysis, and best practices."
+            link="/code-explanation"
+            isDark={isDark}
+          />
         </div>
 
         {/* Coming Soon Section */}
@@ -152,9 +159,7 @@ function CodeTools() {
             <li className="flex items-center">
               <span className="mr-2 text-green-400">•</span> API Documentation Generator
             </li>
-            <li className="flex items-center">
-              <span className="mr-2 text-green-400">•</span> Code Explanation Tool
-            </li>
+
             <li className="flex items-center">
               <span className="mr-2 text-green-400">•</span> Algorithm Visualizer
             </li>
