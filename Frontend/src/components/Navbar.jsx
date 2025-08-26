@@ -25,7 +25,9 @@ import {
   FaAlignLeft,
   FaRegBuilding,
   FaBookOpen,
-  FaLightbulb
+  FaLightbulb,
+  FaStar,
+  FaTimes
 } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 
