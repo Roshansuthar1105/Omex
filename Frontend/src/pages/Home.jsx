@@ -5,30 +5,60 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextPlugin } from "gsap/TextPlugin";
 import { useGSAP } from "@gsap/react";
 import { useLocation } from "react-router-dom";
+
+// Register GSAP plugins (this is a key fix for your GSAP errors)
+gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
 import {
-  FaLightbulb,
-  FaRobot,
   FaArrowRight,
   FaBug,
   FaChartLine,
   FaCode,
   FaExchangeAlt,
   FaFileAlt,
+  FaLightbulb,
   FaMagic,
-  FaStar,
+  FaRobot,
   FaTools,
-  FaUsers,
-  FaComments,
   FaVial,
   FaTachometerAlt,
 } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 import FAQSection from "../components/Faq";
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(TextPlugin);
+import Testimonials from "../components/Testimonials";
 
 function Home() {
   const { isDark } = useTheme();
+
+  const services = [
+    {
+      title: "Code Generator",
+      description:
+        "Generate clean, efficient code in multiple languages based on your requirements. Perfect for boilerplate code, algorithms, and common patterns.",
+      img: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=2070&q=80",
+      link: "/codegenerator",
+      icon: FaRobot,
+      color: "blue",
+    },
+    {
+      title: "Code Optimizer",
+      description:
+        "Improve your code's performance, readability, and maintainability with AI-powered suggestions and best practices.",
+      img: "https://images.unsplash.com/photo-1550439062-609e1531270e?auto=format&fit=crop&w=2070&q=80",
+      link: "/optimiser",
+      icon: FaLightbulb,
+      color: "purple",
+    },
+    {
+      title: "Content Summarizer",
+      description:
+        "Extract key information from various sources including text, images, PDFs, and YouTube videos with our AI summarization tool.",
+      img: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=2070&q=80",
+      link: "/content-summarizer",
+      icon: FaFileAlt,
+      color: "green",
+    },
+  ];
 
   const features = [
     {
@@ -245,7 +275,7 @@ function Home() {
         });
       });
 
-      //
+      // Tools Section Animations
       gsap.from(toolsParagraphRef.current, {
         opacity: 0,
         y: 30,
@@ -346,7 +376,7 @@ function Home() {
         });
       });
 
-      //Testimonial Section Animations
+      // Testimonial Section Animations
       // Fade in background
       gsap.from(testimonialSectionRef.current, {
         opacity: 0,
@@ -487,7 +517,8 @@ function Home() {
               <FaCode className="text-blue-400 text-3xl" />
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight hero-animate">
-              Elevate Your Code with <span className="text-blue-400">OMEX</span>
+              Elevate Your Code with{" "}
+              <span className="text-blue-400">OMEX</span>
             </h1>
             <p
               className={`text-xl md:text-2xl ${
@@ -502,7 +533,7 @@ function Home() {
                 to="/code-tools"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 flex items-center"
               >
-                Explore Tools <FaArrowRight className="ml-2" />
+                Explore Tools <FaArrowRight size={16} className="ml-2" />
               </Link>
               <Link
                 to="/about"
@@ -709,352 +740,10 @@ function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section
-        ref={testimonialSectionRef}
-        className={`py-16 px-4 ${
-          isDark ? "bg-gray-900" : "bg-gray-50"
-        } relative overflow-hidden`}
-      >
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 opacity-5"></div>
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-5"
-            style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
-            }}
-          ></div>
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-5"
-            style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
-            }}
-          ></div>
-        </div>
-        <div className="container mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <div className="flex justify-center mb-4" ref={testimonialIconRef}>
-              <div
-                className={`p-4 rounded-full ${
-                  isDark ? "glass-dark" : "glass"
-                }`}
-              >
-                <FaStar className="text-yellow-400 text-3xl" />
-              </div>
-            </div>
-            <h2 ref={testimonialHeadingRef} className="text-3xl font-bold mb-4">
-              &nbsp;
-            </h2>
-            <p
-              ref={testimonialParagraphRef}
-              className={`text-lg ${
-                isDark ? "text-gray-300" : "text-gray-600"
-              } max-w-3xl mx-auto`}
-            >
-              Trusted by developers around the world to improve their coding
-              workflow
-            </p>
-          </div>
-          <div>
-            {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div
-            className={`rounded-lg p-6 ${
-                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-                
-                }`}
-            >
-            <div className="flex text-yellow-400 mb-4">
-            <FaStar />
-            <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                </div>
-              <p
-              className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
-              >
-              "OMEX has completely transformed my coding workflow. The code
-              optimization tool helped me improve performance by 40% on a
-              critical project. Highly recommended!"
-              </p>
-              <div className="flex items-center">
-                <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
-                <img
-                src="https://randomuser.me/api/portraits/men/32.jpg"
-                alt="User"
-                className="w-full h-full object-cover"
-                />
-                <div
-                    className={`absolute inset-0 rounded-full border-2 ${
-                      isDark ? "border-blue-400" : "border-blue-500"
-                      }`}
-                  ></div>
-                  </div>
-                  <div>
-                  <h4 className="font-medium">Michael Chen</h4>
-                  <p
-                  className={`text-sm ${
-                    isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
-                    >
-                    Senior Developer, TechCorp
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div
-            className={`rounded-lg p-6 ${
-                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-              }`}
-            >
-              <div className="flex text-yellow-400 mb-4">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                </div>
-                <p
-                className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
-                >
-                "The code generation feature is a game-changer. It saves me
-                hours of work by creating boilerplate code and helping with
-                complex algorithms. OMEX is now an essential part of my
-                toolkit."
-                </p>
-                <div className="flex items-center">
-                <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
-                  <img
-                  src="https://randomuser.me/api/portraits/women/44.jpg"
-                  alt="User"
-                  className="w-full h-full object-cover"
-                  />
-                  <div
-                  className={`absolute inset-0 rounded-full border-2 ${
-                    isDark ? "border-purple-400" : "border-purple-500"
-                    }`}
-                    ></div>
-                </div>
-                <div>
-                <h4 className="font-medium">Sarah Johnson</h4>
-                  <p
-                  className={`text-sm ${
-                    isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
-                  >
-                    Freelance Developer
-                    </p>
-                    </div>
-                    </div>
-                    </div>
-                    
-                    <div
-              className={`rounded-lg p-6 ${
-                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-                }`}
-            >
-            <div className="flex text-yellow-400 mb-4">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-              <p
-                className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
-              >
-              "As a team lead, I've implemented OMEX across our development
-                department. The consistency in code quality and the time saved
-                on reviews has been invaluable. A must-have for any dev team."
-              </p>
-              <div className="flex items-center">
-              <div className="relative w-12 h-12 rounded-full mr-4 overflow-hidden">
-              <img
-              src="https://randomuser.me/api/portraits/men/22.jpg"
-                    alt="User"
-                    className="w-full h-full object-cover"
-                  />
-                  <div
-                  className={`absolute inset-0 rounded-full border-2 ${
-                      isDark ? "border-green-400" : "border-green-500"
-                    }`}
-                  ></div>
-                </div>
-                <div>
-                <h4 className="font-medium">David Rodriguez</h4>
-                <p
-                className={`text-sm ${
-                      isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
-                  >
-                  Lead Developer, StartupX
-                  </p>
-                  </div>
-                  </div>
-                  </div>
-                  </div> */}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Testimonial 1 */}
-            <div
-              ref={(el) => (testimonialCardsRef.current[0] = el)}
-              className={`testimonial-card rounded-lg p-6 ${
-                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-              }`}
-            >
-              <div className="flex text-yellow-400 mb-4">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-              <p
-                className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
-              >
-                "OMEX has completely transformed my coding workflow. The code
-                optimization tool helped me improve performance by 40% on a
-                critical project. Highly recommended!"
-              </p>
-              <div className="flex items-center">
-                <div
-                  ref={(el) => (testimonialAvatarsRef.current[0] = el)}
-                  className="relative w-12 h-12 rounded-full mr-4 overflow-hidden"
-                >
-                  <img
-                    src="https://randomuser.me/api/portraits/men/32.jpg"
-                    alt="User"
-                    className="w-full h-full object-cover"
-                  />
-                  <div
-                    className={`absolute inset-0 rounded-full border-2 ${
-                      isDark ? "border-blue-400" : "border-blue-500"
-                    }`}
-                  ></div>
-                </div>
-                <div>
-                  <h4 className="font-medium">Michael Chen</h4>
-                  <p
-                    className={`text-sm ${
-                      isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
-                  >
-                    Senior Developer, TechCorp
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial 2 */}
-            <div
-              ref={(el) => (testimonialCardsRef.current[1] = el)}
-              className={`testimonial-card rounded-lg p-6 ${
-                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-              }`}
-            >
-              <div className="flex text-yellow-400 mb-4">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-              <p
-                className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
-              >
-                "The code generation feature is a game-changer. It saves me
-                hours of work by creating boilerplate code and helping with
-                complex algorithms. OMEX is now an essential part of my
-                toolkit."
-              </p>
-              <div className="flex items-center">
-                <div
-                  ref={(el) => (testimonialAvatarsRef.current[1] = el)}
-                  className="relative w-12 h-12 rounded-full mr-4 overflow-hidden"
-                >
-                  <img
-                    src="https://randomuser.me/api/portraits/women/44.jpg"
-                    alt="User"
-                    className="w-full h-full object-cover"
-                  />
-                  <div
-                    className={`absolute inset-0 rounded-full border-2 ${
-                      isDark ? "border-purple-400" : "border-purple-500"
-                    }`}
-                  ></div>
-                </div>
-                <div>
-                  <h4 className="font-medium">Sarah Johnson</h4>
-                  <p
-                    className={`text-sm ${
-                      isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
-                  >
-                    Freelance Developer
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial 3 */}
-            <div
-              ref={(el) => (testimonialCardsRef.current[2] = el)}
-              className={`testimonial-card rounded-lg p-6 ${
-                isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-              }`}
-            >
-              <div className="flex text-yellow-400 mb-4">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-              <p
-                className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}
-              >
-                "As a team lead, I've implemented OMEX across our development
-                department. The consistency in code quality and the time saved
-                on reviews has been invaluable. A must-have for any dev team."
-              </p>
-              <div className="flex items-center">
-                <div
-                  ref={(el) => (testimonialAvatarsRef.current[2] = el)}
-                  className="relative w-12 h-12 rounded-full mr-4 overflow-hidden"
-                >
-                  <img
-                    src="https://randomuser.me/api/portraits/men/22.jpg"
-                    alt="User"
-                    className="w-full h-full object-cover"
-                  />
-                  <div
-                    className={`absolute inset-0 rounded-full border-2 ${
-                      isDark ? "border-green-400" : "border-green-500"
-                    }`}
-                  ></div>
-                </div>
-                <div>
-                  <h4 className="font-medium">David Rodriguez</h4>
-                  <p
-                    className={`text-sm ${
-                      isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
-                  >
-                    Lead Developer, StartupX
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Testimonials />
 
       {/* CTA Section */}
       <section
-        ref={ctaSectionRef}
         className={`py-16 px-4 ${
           isDark ? "bg-slate-600 bg-opacity-10 " : "bg-blue-50"
         } relative overflow-hidden`}
@@ -1125,81 +814,22 @@ function Home() {
 }
 
 // Helper Components
-const ServiceCard = ({
-  isDark,
-  title,
-  description,
-  img,
-  link,
-  icon: Icon,
-  color,
-}) => {
-  return (
-    <div
-      className={`rounded-lg overflow-hidden ${
-        isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-      }
-        transition duration-300
-        hover:shadow-lg hover:shadow-gray-900
-        hover:scale-102 hover:border-2 hover:border-${color}-500
-        focus-within:shadow-lg focus-within:scale-102`}
-      tabIndex={0}
-    >
-      <div
-        className={`h-3 ${isDark ? `bg-${color}-500` : `bg-${color}-600`}`}
-      ></div>
-
-      <div className="p-6">
-        <div className="flex items-center mb-4">
-          <div
-            className={`p-3 rounded-full ${
-              isDark ? `bg-${color}-500 bg-opacity-20` : `bg-${color}-100`
-            }`}
-          >
-            <Icon className={`text-${color}-500 text-xl`} />
-          </div>
-          <h3 className="ml-4 text-xl font-bold">{title}</h3>
-        </div>
-
-        <div className="relative h-40 mb-6 rounded-lg overflow-hidden">
-          <img src={img} alt={title} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
-        </div>
-
-        <p className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}>
-          {description}
-        </p>
-
-        <Link
-          to={link}
-          className={`inline-block px-6 py-2 rounded-md font-semibold text-base transition duration-200
-            ${
-              isDark
-                ? "bg-gray-900 text-blue-300 border border-blue-600 hover:bg-blue-800"
-                : "bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100"
-            }
-            cursor-pointer select-none`}
-          tabIndex={0}
-          role="button"
-          aria-label={`Try ${title}`}
-        >
-          <span className="flex items-center gap-2">
-            Try {title} <FaArrowRight size={14} />
-          </span>
-        </Link>
-      </div>
-    </div>
-  );
-};
-
 const FeatureCard = forwardRef(
   ({ icon: Icon, title, description, href, iconColor, isDark }, ref) => {
     return (
       <div
-        ref={ref}
-        className={`flex flex-col items-center p-8 rounded-2xl justify-between ${
-          isDark ? "bg-gray-900" : "bg-white"
-        } shadow-md border border-transparent transition-all duration-300 hover:shadow-2xl hover:shadow-black/30 hover:scale-[1.03] hover:border-blue-500 focus-within:shadow-2xl focus-within:scale-[1.03]`}
+        ref={ref} // Added ref to the div
+        className={`
+        flex flex-col items-center p-8
+        rounded-2xl justify-between
+        ${isDark ? "bg-gray-800" : "bg-white"}
+        shadow-md
+        border border-transparent
+        transition-all duration-300
+        hover:shadow-2xl hover:shadow-black/30
+        hover:scale-[1.03] hover:border-blue-500
+        focus-within:shadow-2xl focus-within:scale-[1.03]
+      `}
         tabIndex={0}
       >
         <div className="mb-4">
@@ -1226,70 +856,7 @@ const FeatureCard = forwardRef(
           aria-label={`Learn more about ${title}`}
         >
           <span
-            className={`inline-flex items-center gap-2 px-5 py-2 rounded-md font-semibold text-base transition-colors duration-200 ${
-              isDark
-                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
-            } cursor-pointer select-none`}
-          >
-            Learn More <FaArrowRight size={16} />
-          </span>
-        </a>
-      </div>
-    );
-  }
-);
-
-FeatureCard.displayName = "FeatureCard";
-
-const FeatureCard2 = ({
-  icon: Icon,
-  title,
-  description,
-  href,
-  iconColor,
-  isDark,
-}) => {
-  return (
-    <div
-      className={`
-        flex flex-col items-center p-8
-        rounded-2xl justify-between
-        ${isDark ? "bg-gray-800" : "bg-white"}
-        shadow-md
-        border border-transparent
-        transition-all duration-300
-        hover:shadow-2xl hover:shadow-black/30
-        hover:scale-[1.03] hover:border-blue-500
-        focus-within:shadow-2xl focus-within:scale-[1.03]
-      `}
-      tabIndex={0}
-    >
-      <div className="mb-4">
-        <Icon className={`text-3xl drop-shadow-lg ${iconColor}`} />
-      </div>
-      <h3
-        className={`text-xl font-bold text-center mb-2 ${
-          isDark ? "text-blue-100" : "text-blue-900"
-        }`}
-      >
-        {title}
-      </h3>
-      <p
-        className={`text-center mb-6 px-2 ${
-          isDark ? "text-gray-300" : "text-gray-700"
-        }`}
-      >
-        {description}
-      </p>
-      <a
-        href={href}
-        tabIndex={0}
-        role="button"
-        aria-label={`Learn more about ${title}`}
-      >
-        <span
-          className={`
+            className={`
             inline-flex items-center gap-2
             px-5 py-2 rounded-md font-semibold text-base
             transition-colors duration-200
@@ -1300,13 +867,14 @@ const FeatureCard2 = ({
             }
             cursor-pointer select-none
           `}
-        >
-          Learn More <FaArrowRight size={16} />
-        </span>
-      </a>
-    </div>
-  );
-};
+          >
+            Learn More <FaArrowRight size={16} />
+          </span>
+        </a>
+      </div>
+    );
+  }
+);
 
 const StepCard = ({ number, title, description }) => {
   const { isDark } = useTheme();
@@ -1326,5 +894,4 @@ const StepCard = ({ number, title, description }) => {
     </div>
   );
 };
-
 export default Home;

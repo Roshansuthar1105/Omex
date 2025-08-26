@@ -38,14 +38,14 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Team from "./pages/Team";
 import TermsOfService from "./pages/TermsOfService";
 import Contribute from "./pages/Contribute";
-import ContributorGuide from "./pages/ContributorGuide";
-
+import ContributorsLeaderboard from "./components/ContributorsLeaderboard";
 
 // Theme context
 import { ThemeProvider } from './context/ThemeContext';
 
 // Extra components
 import BackToTopButton from "./components/BackToTopButton";
+import ContributorGuide from "./pages/ContributorGuide";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -68,6 +68,8 @@ function App() {
               <Route path="/codecomplexity" element={<CodeComplexity />} />
               <Route path="/codecompare" element={<CodeCompare />} />
               <Route path="/about" element={<About />} />
+              <Route path="/contributors" element={<ContributorsLeaderboard />} />
+
 
               {/* Code tools */}
               <Route path="/code-tools" element={<CodeTools />} />

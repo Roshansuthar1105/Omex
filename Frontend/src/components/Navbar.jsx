@@ -173,7 +173,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                 <FaCode className="text-blue-400 text-2xl group-hover:text-purple-400 transition-all duration-300 transform group-hover:scale-110" />
                 <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-              <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                 <Link
                   to="/"
                   className="hover:from-purple-400 hover:via-pink-400 hover:to-blue-400 transition-all duration-500"
@@ -228,6 +228,15 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
               >
                 <FaExchangeAlt className="text-lg group-hover:text-red-400 transition-colors duration-300 transform group-hover:scale-110" />
                 <span className="relative z-10">Compare</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-red-400/10 to-pink-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              </Link>
+
+              <Link
+                to="/contributors"
+                className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${isActive("/contributors")}`}
+              >
+                <FaUserFriends className="text-lg group-hover:text-red-400 transition-colors duration-300 transform group-hover:scale-110" />
+                <span className="relative z-10">Contributors</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-red-400/10 to-pink-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
 
@@ -439,7 +448,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
         }`}>
           <div className="flex items-center space-x-3">
             <FaCode className="text-blue-400 text-xl" />
-            <span className="font-bold text-xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="font-bold text-2xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               OMEX
             </span>
           </div>
@@ -464,7 +473,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
             { to: "/optimiser", icon: FaRocket, label: "Optimize", color: "yellow" },
             { to: "/codegenerator", icon: FaMagic, label: "Generate", color: "green" },
             { to: "/codecomplexity", icon: FaChartLine, label: "Complexity", color: "purple" },
-            { to: "/codecompare", icon: FaExchangeAlt, label: "Compare", color: "red" }
+            { to: "/codecompare", icon: FaExchangeAlt, label: "Compare", color: "red" },
+            { to: "/contributors", icon: FaUserFriends, label: "Contributors", color: "pink"}
           ].map((item) => (
             <Link
               key={item.to}

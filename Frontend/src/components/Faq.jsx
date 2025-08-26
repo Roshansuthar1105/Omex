@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { useTheme } from '../context/ThemeContext';
 import { gsap } from "gsap";
-import { ChevronDown, ChevronUp } from "lucide-react";
 
 
 
@@ -45,6 +46,7 @@ const faqs = [
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(null);
   const answerRefs = useRef([]);
+  const { isDark } = useTheme();
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -69,7 +71,7 @@ export default function FAQSection() {
 }, [openIndex]);
 
   return (
-    <section className="bg-[#0B1120] text-white py-16 px-6 md:px-20" id="faq">
+    <section id="faq" className={`${isDark ? 'bg-[#0B1120] text-white' : 'bg-gray-100 text-black'} py-16 px-6 md:px-20`}>
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">
           Frequently Asked Questions
@@ -84,15 +86,15 @@ export default function FAQSection() {
         {faqs.map((faq, index) => (
           <div
             key={index}
-            className="bg-[#111827] rounded-2xl shadow-md p-5 cursor-pointer transition-all duration-300 hover:bg-[#1F2937] hover:shadow-[#374151]"
+            className={`p-4 rounded-lg border ${isDark ? 'border-gray-700 bg-[#1A202E]' : 'border-gray-300 bg-white'} cursor-pointer`}
             onClick={() => toggleFAQ(index)}
           >
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-semibold">{faq.question}</h3>
               {openIndex === index ? (
-                <ChevronUp className="w-5 h-5 text-blue-400" />
+                <FaChevronUp className="w-5 h-5 text-blue-400" />
               ) : (
-                <ChevronDown className="w-5 h-5 text-blue-400" />
+                <FaChevronDown className="w-5 h-5 text-blue-400" />
               )}
             </div>
             {openIndex === index && (
