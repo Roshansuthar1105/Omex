@@ -325,6 +325,7 @@ const Contact = () => {
                           )}
                         </div>
                         {/* Submit Button */}
+                        <div className="flex justify-center">
                         <button
                           type="submit"
                           disabled={isSubmitting}
@@ -348,6 +349,7 @@ const Contact = () => {
                             </>
                           )}
                         </button>
+                        </div>
                       </form>
                     </>
                   )}
