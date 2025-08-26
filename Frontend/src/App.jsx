@@ -33,6 +33,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Team from "./pages/Team";
 import TermsOfService from "./pages/TermsOfService";
 import Contribute from "./pages/Contribute";
+import ContributorsLeaderboard from "./components/ContributorsLeaderboard";
 
 // Theme context
 import { ThemeProvider } from './context/ThemeContext';
@@ -62,6 +63,8 @@ function App() {
               <Route path="/codecomplexity" element={<CodeComplexity />} />
               <Route path="/codecompare" element={<CodeCompare />} />
               <Route path="/about" element={<About />} />
+              <Route path="/contributors" element={<ContributorsLeaderboard />} />
+
 
               {/* Code tools */}
               <Route path="/code-tools" element={<CodeTools />} />
