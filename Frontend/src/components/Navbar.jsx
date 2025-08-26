@@ -170,7 +170,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
             {/* Logo */}
             <div className="flex items-center space-x-3 group">
               <div className="relative">
-                <FaCode className="text-blue-400 text-2xl group-hover:text-purple-400 transition-all duration-300 transform group-hover:scale-110" />
+                <img src="/vite.svg" alt="Omex AI Logo" className="w-8 h-8" />
                 <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">

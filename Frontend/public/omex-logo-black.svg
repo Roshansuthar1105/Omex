@@ -1,0 +1,7 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="128" fill="#000"/>
+  <g>
+    <text x="50%" y="55%" text-anchor="middle" font-family="Fira Code, monospace" font-size="120" fill="#fff" font-weight="bold">&lt;/&gt;</text>
+    <text x="50%" y="80%" text-anchor="middle" font-family="Fira Code, monospace" font-size="72" fill="#fff" font-weight="bold">Omex</text>
+  </g>
+</svg>
