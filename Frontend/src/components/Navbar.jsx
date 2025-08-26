@@ -896,3 +896,4 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
 }
 
 export default NavBar;
+// Updated import statement with all required icons
