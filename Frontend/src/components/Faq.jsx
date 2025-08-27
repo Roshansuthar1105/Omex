@@ -1,13 +1,8 @@
 import { useTheme } from '../context/ThemeContext';
-import { useState } from "react";
 import { ChevronDown, HelpCircle, Sparkles } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { useTheme } from '../context/ThemeContext';
 import { gsap } from "gsap";
-
-
 
 const faqs = [
   {
@@ -92,15 +87,6 @@ export default function FAQSection() {
         <div className={`absolute bottom-20 right-10 w-40 h-40 rounded-full ${
           isDark ? 'bg-purple-500/5' : 'bg-purple-500/10'
         } blur-3xl`}></div>
-    <section id="faq" className={`${isDark ? 'bg-[#0B1120] text-white' : 'bg-gray-100 text-black'} py-16 px-6 md:px-20`}>
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6">
-          Frequently Asked Questions
-        </h2>
-        <p className="text-gray-400 mb-12">
-          Everything you need to know about Omex and how it can improve your
-          coding workflow.
-        </p>
       </div>
 
       <div className="max-w-5xl mx-auto relative z-10">
@@ -200,14 +186,6 @@ export default function FAQSection() {
             <button onClick={()=>{navigate('/contact')}} className="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors duration-300">
               Contact Support
             </button>
-            {openIndex === index && (
-              <p
-                ref={(el) => (answerRefs.current[index] = el)}
-                className="mt-3 text-gray-400"
-              >
-                {faq.answer}
-              </p>
-            )}
           </div>
         </div>
       </div>

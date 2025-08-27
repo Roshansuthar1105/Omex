@@ -17,6 +17,7 @@
     "dotenv": "^16.6.1",
     "gsap": "^3.13.0",
     "highlight.js": "^11.11.1",
+    "lucide-react": "^0.542.0",
     "marked": "^15.0.6",
     "prismjs": "^1.29.0",
     "react": "^19.0.0",
