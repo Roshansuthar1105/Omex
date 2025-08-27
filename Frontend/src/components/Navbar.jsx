@@ -26,6 +26,8 @@ import {
   FaRegBuilding,
   FaBookOpen,
   FaLightbulb,
+  FaStar,
+  FaTimes
 } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 
