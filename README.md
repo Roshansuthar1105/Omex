@@ -11,6 +11,19 @@
 
 [![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/roshansuthar1105/omex)
 
+# 🌐 Connect with Me on Discord  
+  
+<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" width="100px" height="100px">  
+
+👤 **Username:** `sroshan1105_99788`  
+or search for `Roshan Suthar | PA`   
+🆔 **Discord ID:** `1317732270047498343`  
+
+[![Join My Server](https://img.shields.io/badge/Join%20Discord-5865F2?logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/ybwDbRHY)  
+
+📌 **My Profile:** [![Profile](https://img.shields.io/badge/View%20Profile-Click%20Here-blue?style=for-the-badge)](https://discord.com/users/1317732270047498343)  
+
+
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
 **✨ Overview**
@@ -288,4 +301,5 @@ This project is licensed under the MIT License - see the [`License`](https://git
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=65&section=footer"/>
 
 **Ready to show off your coding achievements? Get started with Omex today! 🚀**
+
 
