@@ -25,7 +25,6 @@ import {
   FaAlignLeft,
   FaRegBuilding,
   FaBookOpen,
-  FaLightbulb,
   FaStar,
   FaTimes
 } from "react-icons/fa";
@@ -69,8 +68,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
       "/error-debugger",
       "/performance-analyzer",
       "/content-summarizer",
-      "/security-scanner",
-      "/code-explanation"
+      "/security-scanner"
     ];
     return toolsPaths.some((path) => location.pathname === path);
   };
@@ -280,17 +278,6 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                     >
                       <FaShieldAlt className="inline mr-2" />
                       Security Vulnerability Scanner
-                    </Link>
-                    <Link
-                      to="/code-explanation"
-                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${isDark
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                      onClick={() => setIsToolsDropdownOpen(false)}
-                    >
-                      <FaLightbulb className="inline mr-2" />
-                      Code Explanation
                     </Link>
                   </div>
                 </div>
