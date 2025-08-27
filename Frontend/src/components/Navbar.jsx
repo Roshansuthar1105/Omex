@@ -24,7 +24,8 @@ import {
   FaTachometerAlt,
   FaAlignLeft,
   FaRegBuilding,
-  FaBookOpen 
+  FaBookOpen,
+  FaLightbulb,
 } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 
