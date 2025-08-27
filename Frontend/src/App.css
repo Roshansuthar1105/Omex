@@ -1,4 +1,19 @@
 @import "tailwindcss";
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  0%, 100% { border-color: transparent }
+  50% { border-color: currentColor }
+}
+
+@keyframes hideCursor {
+  to { border-color: transparent }
+}
+
+
 /* * {
   margin: 0%;
   padding: 0%;

@@ -9,6 +9,11 @@ import NavBar from './components/Navbar';
 import Footer from './components/Footer';
 import { Toaster } from 'react-hot-toast';
 
+// //GSAP Animations
+// import { useRef } from "react";
+// import gsap from "gsap";
+// import { useGSAP } from "@gsap/react"; 
+
 // New utility
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -44,7 +49,7 @@ import ContributorGuide from "./pages/ContributorGuide";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  
   return (
     <ThemeProvider>
       <Router>
