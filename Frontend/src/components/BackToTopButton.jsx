@@ -26,7 +26,7 @@ const BackToTopButton = () => {
       aria-label="Scroll to top"
       tabIndex={0}
       onClick={scrollToTop}
-      className={`fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-lg transition-colors duration-200
+      className={`fixed bottom-6 right-9 z-40 p-3 rounded-full shadow-lg transition-colors duration-200
         bg-gradient-to-br from-indigo-500 to-purple-500
         hover:from-indigo-600 hover:to-purple-600
         focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2

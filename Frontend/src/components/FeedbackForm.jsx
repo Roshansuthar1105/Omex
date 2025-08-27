@@ -21,7 +21,7 @@ const FeedbackForm = ({ isDark = true }) => {
   };
   
   return (
-    <div className={`fixed bottom-4 right-4 z-10 ${isDark ? 'text-white' : 'text-gray-800'}`}>
+    <div className={`fixed bottom-6 right-30 z-11 ${isDark ? 'text-white' : 'text-gray-800'}`}>
       {!showForm ? (
         <button
           onClick={() => setShowForm(true)}
