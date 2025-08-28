@@ -186,7 +186,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-4">
               <Link
                 to="/"
                 className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 ${isActive("/")}`}
