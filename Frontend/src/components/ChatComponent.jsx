@@ -70,7 +70,7 @@ function ChatComponent() {
           <h2 className="text-lg font-bold text-gray-300">Response:</h2>
           <Markdown className="text-gray-400">{response}</Markdown>
         </div>
-        {savedResponses.length && <div className="mt-4 overflow-y-scroll h-3/5" style={{ overflowY: 'scroll', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
+        {Object.keys(savedResponses).length > 0 && (<div className="mt-4 overflow-y-scroll h-3/5" style={{ overflowY: 'scroll', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
           <h2 className="text-lg font-bold text-gray-300">Saved Responses:</h2>
           <ul className="list-none p-0 m-0">
             {Object.keys(savedResponses).map((key) => (
@@ -99,7 +99,7 @@ function ChatComponent() {
             ))}
           </ul>
         </div>
-        }
+        )}
       </div>
       <form onSubmit={handleSubmit} className="fixed bottom-0 left-0 right-0 p-4 bg-gray-900 rounded-lg shadow-md flex flex-row gap-4">
         <input type="text" value={input} onChange={handleInputChange} placeholder="Command line" className="p-2 pl-10 text-sm text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 w-7/8" />
