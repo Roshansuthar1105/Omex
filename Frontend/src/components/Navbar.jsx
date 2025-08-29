@@ -11,7 +11,6 @@ import {
   FaHandsHelping,
   FaRocket,
   FaMoon,
-  FaQuestionCircle,
   FaMagic,
   FaShieldAlt,
   FaSun,
@@ -114,7 +113,6 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
       "/team",
       "/contribute",
       "/contact",
-      "/faq",
       "/privacy-policy",
       "/terms-of-service",
     ];
@@ -328,7 +326,6 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                         { to: "/contribute", icon: FaHandsHelping, label: "Contribute", color: "yellow" },
                         { to: "/contributor-guide", icon: FaBookOpen, label: "Contributor Guide", color: "indigo" },
                         { to: "/contact", icon: FaEnvelope, label: "Contact Us", color: "purple" },
-                        { to: "/faq", icon: FaQuestionCircle, label: "FAQ", color: "pink" },
                         { to: "/privacy-policy", icon: FaShieldAlt, label: "Privacy Policy", color: "red" },
                         { to: "/terms-of-service", icon: FaFileContract, label: "Terms of Service", color: "gray" }
                       ].map((item) => (
@@ -584,7 +581,6 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                   { to: "/contribute", icon: FaHandsHelping, label: "Contribute", color: "yellow" },
                   { to: "/contributor-guide", icon: FaBookOpen, label: "Contributor Guide", color: "indigo" },
                   { to: "/contact", icon: FaEnvelope, label: "Contact Us", color: "purple" },
-                  { to: "/faq", icon: FaQuestionCircle, label: "FAQ", color: "pink" },
                   { to: "/privacy-policy", icon: FaShieldAlt, label: "Privacy Policy", color: "red" },
                   { to: "/terms-of-service", icon: FaFileContract, label: "Terms of Service", color: "gray" }
                 ].map((item) => (
