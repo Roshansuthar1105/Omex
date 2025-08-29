@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FaTrophy, FaStar, FaCode, FaUsers, FaGithub } from "react-icons/fa";
+import { FaTrophy, FaStar, FaCode, FaUsers, FaGithub, FaSearch } from "react-icons/fa";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { useTheme } from "../context/ThemeContext"; // Add theme context
 
@@ -90,6 +90,7 @@ export default function LeaderBoard() {
     totalContributors: 0,
     totalPoints: 0,
   });
+  const [searchTerm, setSearchTerm] = useState(""); // Add search state
   const { isDark } = useTheme(); // Theme context
 
   useEffect(() => {
@@ -189,18 +190,21 @@ export default function LeaderBoard() {
     }
   }, [contributors]);
 
+  // Filter contributors by search term (username)
+  const filteredContributors = contributors.filter((c) =>
+    c.username.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   // Pagination variables and states
-
-  const PAGE_SIZE = 10; // how many contributors per page
-
+  const PAGE_SIZE = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
   // Calculate which contributors to show on current page
   const indexOfLast = currentPage * PAGE_SIZE;
   const indexOfFirst = indexOfLast - PAGE_SIZE;
-  const currentContributors = contributors.slice(indexOfFirst, indexOfLast);
+  const currentContributors = filteredContributors.slice(indexOfFirst, indexOfLast);
 
-  const totalPages = Math.ceil(contributors.length / PAGE_SIZE);
+  const totalPages = Math.ceil(filteredContributors.length / PAGE_SIZE);
 
   return (
     <div className={`${isDark ? "bg-[#0B1120]" : "bg-gray-50"} min-h-screen py-6 sm:py-12 px-2 sm:px-4`}>
@@ -220,6 +224,31 @@ export default function LeaderBoard() {
             Join us in building something incredible together!
           </p>
         </motion.div>
+
+        {/* Search Bar */}
+        <div className="flex justify-center mb-6 px-2">
+          <div className={`relative w-full max-w-xs`}>
+            <input
+              type="text"
+              placeholder="Search contributor..."
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1); // Reset to first page on search
+              }}
+              className={`w-full pl-10 pr-4 py-2 rounded-lg border focus:outline-none transition-colors ${
+                isDark
+                  ? "bg-[#232a3a] border-gray-700 text-white placeholder:text-gray-400"
+                  : "bg-white border-gray-300 text-gray-800 placeholder:text-gray-500"
+              }`}
+            />
+            <FaSearch
+              className={`absolute left-3 top-1/2 transform -translate-y-1/2 ${
+                isDark ? "text-gray-400" : "text-gray-500"
+              }`}
+            />
+          </div>
+        </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 mb-8 sm:mb-12 px-2">
@@ -291,72 +320,152 @@ export default function LeaderBoard() {
 
             {/* Contributors List */}
             <div className="divide-y divide-gray-100 dark:divide-gray-700">
-              {currentContributors.map((contributor, index) => (
-                <motion.div
-                  key={contributor.username}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.03 }}
-                  className={`group ${isDark ? "hover:bg-[#232a3a]" : "hover:bg-gray-50"} transition-colors`}
-                >
-                  {/* Mobile Layout */}
-                  <div className="sm:hidden p-4">
-                    <div className="flex items-center space-x-3">
-                      {/* Rank Badge */}
-                      <div
-                        className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0 ${
-                          index === 0
-                            ? isDark
-                              ? "bg-yellow-900/30 text-yellow-400"
-                              : "bg-yellow-100 text-yellow-600"
-                            : index === 1
-                            ? isDark
-                              ? "bg-gray-800 text-gray-300"
-                              : "bg-gray-100 text-gray-600"
-                            : index === 2
-                            ? isDark
-                              ? "bg-amber-900/30 text-amber-400"
-                              : "bg-amber-100 text-amber-600"
-                            : isDark
-                              ? "bg-gray-800/50 text-gray-400"
-                              : "bg-gray-100 text-gray-500"
-                        }`}
-                      >
-                        {indexOfFirst + index + 1}
+              {currentContributors.length === 0 ? (
+                <div className="text-center py-8 text-gray-400">
+                  No contributors found.
+                </div>
+              ) : (
+                currentContributors.map((contributor, index) => (
+                  <motion.div
+                    key={contributor.username}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.03 }}
+                    className={`group ${isDark ? "hover:bg-[#232a3a]" : "hover:bg-gray-50"} transition-colors`}
+                  >
+                    {/* Mobile Layout */}
+                    <div className="sm:hidden p-4">
+                      <div className="flex items-center space-x-3">
+                        {/* Rank Badge */}
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0 ${
+                            index === 0
+                              ? isDark
+                                ? "bg-yellow-900/30 text-yellow-400"
+                                : "bg-yellow-100 text-yellow-600"
+                              : index === 1
+                              ? isDark
+                                ? "bg-gray-800 text-gray-300"
+                                : "bg-gray-100 text-gray-600"
+                              : index === 2
+                              ? isDark
+                                ? "bg-amber-900/30 text-amber-400"
+                                : "bg-amber-100 text-amber-600"
+                              : isDark
+                                ? "bg-gray-800/50 text-gray-400"
+                                : "bg-gray-100 text-gray-500"
+                          }`}
+                        >
+                          {indexOfFirst + index + 1}
+                        </div>
+
+                        {/* Avatar */}
+                        <img
+                          src={contributor.avatar}
+                          alt={contributor.username}
+                          className={`w-10 h-10 rounded-full border-2 ${isDark ? "border-gray-700" : "border-white"} shadow-sm flex-shrink-0`}
+                        />
+
+                        {/* User Info */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                            <div className="min-w-0">
+                              <a
+                                href={contributor.profile}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`font-medium ${isDark ? "text-white hover:text-blue-400" : "text-gray-900 hover:text-primary-600"} transition-colors text-sm truncate block`}
+                              >
+                                {contributor.username}
+                              </a>
+                              <a
+                                href={`https://github.com/${GITHUB_REPO}/pulls?q=is:pr+author:${contributor.username}+is:merged`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`text-xs ${isDark ? "text-gray-400 hover:text-blue-400" : "text-gray-500 hover:text-primary-600"} transition-colors block`}
+                              >
+                                View Contributions →
+                              </a>
+                            </div>
+                          </div>
+
+                          {/* Badges */}
+                          <div className="flex items-center space-x-2 mt-2">
+                            <Badge
+                              count={contributor.prs}
+                              label={`PR${contributor.prs !== 1 ? "s" : ""}`}
+                              color={isDark ? "bg-blue-900/30 text-blue-400" : "bg-blue-100 text-blue-700"}
+                            />
+                            <Badge
+                              count={contributor.points}
+                              label="Points"
+                              color={isDark ? "bg-purple-900/30 text-purple-400" : "bg-purple-100 text-purple-700"}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Desktop Layout - Hidden on mobile */}
+                    <div className="hidden sm:grid grid-cols-12 gap-4 items-center px-6 py-4">
+                      <div className="col-span-1">
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                            index === 0
+                              ? isDark
+                                ? "bg-yellow-900/30 text-yellow-400"
+                                : "bg-yellow-100 text-yellow-600"
+                              : index === 1
+                              ? isDark
+                                ? "bg-gray-800 text-gray-300"
+                                : "bg-gray-100 text-gray-600"
+                              : index === 2
+                              ? isDark
+                                ? "bg-amber-900/30 text-amber-400"
+                                : "bg-amber-100 text-amber-600"
+                              : isDark
+                                ? "bg-gray-800/50 text-gray-400"
+                                : "bg-gray-100 text-gray-500"
+                          }`}
+                        >
+                          <span className="font-medium">
+                            {indexOfFirst + index + 1}
+                          </span>
+                        </div>
                       </div>
 
-                      {/* Avatar */}
-                      <img
-                        src={contributor.avatar}
-                        alt={contributor.username}
-                        className={`w-10 h-10 rounded-full border-2 ${isDark ? "border-gray-700" : "border-white"} shadow-sm flex-shrink-0`}
-                      />
-
-                      {/* User Info */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                          <div className="min-w-0">
+                      <div className="col-span-6 md:col-span-7">
+                        <div className="flex items-center space-x-4">
+                          <img
+                            src={contributor.avatar}
+                            alt={contributor.username}
+                            className={`w-10 h-10 rounded-full border-2 ${isDark ? "border-gray-700" : "border-white"} shadow-sm`}
+                          />
+                          <div>
                             <a
                               href={contributor.profile}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className={`font-medium ${isDark ? "text-white hover:text-blue-400" : "text-gray-900 hover:text-primary-600"} transition-colors text-sm truncate block`}
+                              className={`font-medium ${isDark ? "text-white hover:text-blue-400" : "text-gray-900 hover:text-primary-600"} transition-colors`}
                             >
                               {contributor.username}
                             </a>
-                            <a
-                              href={`https://github.com/${GITHUB_REPO}/pulls?q=is:pr+author:${contributor.username}+is:merged`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={`text-xs ${isDark ? "text-gray-400 hover:text-blue-400" : "text-gray-500 hover:text-primary-600"} transition-colors block`}
-                            >
-                              View Contributions →
-                            </a>
+                            <div className="flex items-center mt-1 space-x-2">
+                              <a
+                                href={`https://github.com/${GITHUB_REPO}/pulls?q=is:pr+author:${contributor.username}+is:merged`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`text-xs ${isDark ? "text-gray-400 hover:text-blue-400" : "text-gray-500 hover:text-primary-600"} transition-colors`}
+                              >
+                                View Contributions →
+                              </a>
+                            </div>
                           </div>
                         </div>
+                      </div>
 
-                        {/* Badges */}
-                        <div className="flex items-center space-x-2 mt-2">
+                      <div className="col-span-5 md:col-span-4">
+                        <div className="flex items-center justify-end space-x-3">
                           <Badge
                             count={contributor.prs}
                             label={`PR${contributor.prs !== 1 ? "s" : ""}`}
@@ -370,83 +479,9 @@ export default function LeaderBoard() {
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                  {/* Desktop Layout - Hidden on mobile */}
-                  <div className="hidden sm:grid grid-cols-12 gap-4 items-center px-6 py-4">
-                    <div className="col-span-1">
-                      <div
-                        className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                          index === 0
-                            ? isDark
-                              ? "bg-yellow-900/30 text-yellow-400"
-                              : "bg-yellow-100 text-yellow-600"
-                            : index === 1
-                            ? isDark
-                              ? "bg-gray-800 text-gray-300"
-                              : "bg-gray-100 text-gray-600"
-                            : index === 2
-                            ? isDark
-                              ? "bg-amber-900/30 text-amber-400"
-                              : "bg-amber-100 text-amber-600"
-                            : isDark
-                              ? "bg-gray-800/50 text-gray-400"
-                              : "bg-gray-100 text-gray-500"
-                        }`}
-                      >
-                        <span className="font-medium">
-                          {indexOfFirst + index + 1}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="col-span-6 md:col-span-7">
-                      <div className="flex items-center space-x-4">
-                        <img
-                          src={contributor.avatar}
-                          alt={contributor.username}
-                          className={`w-10 h-10 rounded-full border-2 ${isDark ? "border-gray-700" : "border-white"} shadow-sm`}
-                        />
-                        <div>
-                          <a
-                            href={contributor.profile}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`font-medium ${isDark ? "text-white hover:text-blue-400" : "text-gray-900 hover:text-primary-600"} transition-colors`}
-                          >
-                            {contributor.username}
-                          </a>
-                          <div className="flex items-center mt-1 space-x-2">
-                            <a
-                              href={`https://github.com/${GITHUB_REPO}/pulls?q=is:pr+author:${contributor.username}+is:merged`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={`text-xs ${isDark ? "text-gray-400 hover:text-blue-400" : "text-gray-500 hover:text-primary-600"} transition-colors`}
-                            >
-                              View Contributions →
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-span-5 md:col-span-4">
-                      <div className="flex items-center justify-end space-x-3">
-                        <Badge
-                          count={contributor.prs}
-                          label={`PR${contributor.prs !== 1 ? "s" : ""}`}
-                          color={isDark ? "bg-blue-900/30 text-blue-400" : "bg-blue-100 text-blue-700"}
-                        />
-                        <Badge
-                          count={contributor.points}
-                          label="Points"
-                          color={isDark ? "bg-purple-900/30 text-purple-400" : "bg-purple-100 text-purple-700"}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))
+              )}
             </div>
             
 
@@ -468,7 +503,7 @@ export default function LeaderBoard() {
               {/* Page Numbers Section */}
               <div className="flex justify-center gap-2 mt-4">
                 {Array.from(
-                  { length: Math.ceil(contributors.length / PAGE_SIZE) }, // Create an array with total number of pages
+                  { length: Math.ceil(filteredContributors.length / PAGE_SIZE) }, // Create an array with total number of pages
                   (_, i) => (
                     <button
                       key={i + 1} // Unique key for each page button
