@@ -9,9 +9,9 @@ const TOKEN = import.meta.env.VITE_GITHUB_TOKEN || "YOUR_GITHUB_TOKEN";
 
 // Points configuration for different PR levels
 const POINTS = {
-  level1: 3, // Easy
-  level2: 7, // Medium
-  level3: 10, // Hard/Feature
+  "level 1": 3, // Easy
+  "level 2": 7, // Medium
+  "level 3": 10, // Hard/Feature
 };
 
 // Badge component for PR counts
