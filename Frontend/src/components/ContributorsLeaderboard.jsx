@@ -5,7 +5,6 @@ import { ChevronRight, ChevronLeft } from "lucide-react";
 import { useTheme } from "../context/ThemeContext"; // Add theme context
 
 const GITHUB_REPO = "Roshansuthar1105/Omex";
-const TOKEN = import.meta.env.VITE_GITHUB_TOKEN || "YOUR_GITHUB_TOKEN";
 
 // Points configuration for different PR levels
 const POINTS = {
@@ -109,23 +108,10 @@ export default function LeaderBoard() {
         // See below for a correct fetch example.
 
         while (keepFetching && page <= MAX_PAGES) {
-          // --- This endpoint does NOT return PRs with labels ---
-          // const batch = await Promise.all(
-          //   Array.from({ length: 5 }, (_, i) =>
-          //     fetch(
-          //       `https://api.github.com/repos/Roshansuthar1105/Omex/contributors`
-          //     ).then((res) => res.json())
-          //   )
-          // );
-
-          // --- Correct way: fetch PRs with labels ---
-          // You need a GitHub token for this, otherwise you'll hit rate limits quickly.
-          // Uncomment TOKEN above and use it here.
           const res = await fetch(
             `https://api.github.com/repos/${GITHUB_REPO}/pulls?state=closed&per_page=100&page=${page}`,
             {
               headers: {
-                // Authorization: `token ${TOKEN}`, // Uncomment if you have a token
                 Accept: "application/vnd.github.v3+json",
               },
             }
@@ -207,17 +193,12 @@ export default function LeaderBoard() {
 
   const PAGE_SIZE = 10; // how many contributors per page
 
-
-
   const [currentPage, setCurrentPage] = useState(1);
-
 
   // Calculate which contributors to show on current page
   const indexOfLast = currentPage * PAGE_SIZE;
   const indexOfFirst = indexOfLast - PAGE_SIZE;
   const currentContributors = contributors.slice(indexOfFirst, indexOfLast);
-
-
 
   const totalPages = Math.ceil(contributors.length / PAGE_SIZE);
 
