@@ -181,7 +181,7 @@ const Testimonials = forwardRef((props, ref) => {
                 <FaStar className="text-yellow-400 text-3xl" />
               </div>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 sm:mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 dark:bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 py-2 sm:mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 dark:bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
               What Developers Say
             </h2>
             <p className={`text-sm sm:text-base md:text-lg ${
