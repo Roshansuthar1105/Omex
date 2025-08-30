@@ -565,49 +565,6 @@ export default function LeaderBoard() {
             </div>
           </div>
         )}
-
-        {/* About GSSoC Section */}
-        <div className={`mt-8 sm:mt-12 ${isDark ? "bg-[#1a202e] border-gray-700" : "bg-white border-gray-100"} rounded-xl shadow-sm border p-4 sm:p-6 mx-2 sm:mx-0`}>
-          <h2 className={`text-xl sm:text-2xl font-bold mb-4 ${isDark ? "text-white" : "text-gray-800"}`}>
-            About GSSoC'25
-          </h2>
-          <div className="prose dark:prose-invert max-w-none">
-            <p className={`text-sm sm:text-base mb-4 ${isDark ? "text-gray-300" : "text-gray-600"}`}>
-              <strong>GirlScript Summer of Code</strong> is a 3-month long open
-              source program organized by GirlScript Foundation to help
-              beginners get started with Open Source Development.
-            </p>
-            <p className={`text-sm sm:text-base mb-4 ${isDark ? "text-gray-300" : "text-gray-600"}`}>
-              Participants contribute to various projects under the guidance of
-              experienced mentors. This leaderboard tracks the contributions
-              made by GSSoC'25 participants to the AnimateHub project.
-            </p>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-6">
-              <div className={`${isDark ? "bg-blue-900/20" : "bg-blue-50"} p-3 sm:p-4 rounded-lg`}>
-                <h3 className={`font-semibold mb-2 text-sm sm:text-base ${isDark ? "text-blue-400" : "text-blue-700"}`}>
-                  How to Participate
-                </h3>
-                <ul className={`text-xs sm:text-sm ${isDark ? "text-gray-300" : "text-gray-600"} space-y-1 sm:space-y-2`}>
-                  <li>• Register on the GSSoC'25 platform</li>
-                  <li>• Join the AnimateHub project</li>
-                  <li>• Start working on beginner-friendly issues</li>
-                  <li>• Submit your pull requests</li>
-                </ul>
-              </div>
-              <div className={`${isDark ? "bg-purple-900/20" : "bg-purple-50"} p-3 sm:p-4 rounded-lg`}>
-                <h3 className={`font-semibold mb-2 text-sm sm:text-base ${isDark ? "text-purple-400" : "text-purple-700"}`}>
-                  Contribution Guidelines
-                </h3>
-                <ul className={`text-xs sm:text-sm ${isDark ? "text-gray-300" : "text-gray-600"} space-y-1 sm:space-y-2`}>
-                  <li>• Read our contribution guidelines</li>
-                  <li>• Follow the code of conduct</li>
-                  <li>• Start with good first issues</li>
-                  <li>• Ask for help in the community</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
