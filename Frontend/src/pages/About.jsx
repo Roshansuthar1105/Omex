@@ -31,21 +31,19 @@ const About = () => {
   if (loading) {
     return (
       <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
-        <Loader fullscreen size="xl" color="purple" text="Loading About..."/>
+        <Loader fullscreen size="xl" color="purple" text="Loading About..." />
       </div>
     );
   }
   return (
     <div
-      className={`min-h-screen ${
-        isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
-      }`}
+      className={`min-h-screen ${isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
+        }`}
     >
       {/* Hero Section */}
       <div
-        className={`py-20 px-4 ${
-          isDark ? "bg-gray-900" : "bg-blue-50"
-        } relative overflow-hidden animated-bg`}
+        className={`py-20 px-4 ${isDark ? "bg-gray-900" : "bg-blue-50"
+          } relative overflow-hidden animated-bg`}
       >
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-40 h-40 bg-blue-400 rounded-full filter blur-3xl opacity-10"></div>
@@ -60,9 +58,8 @@ const About = () => {
         </div>
         <div className="container mx-auto text-center relative z-10">
           <div
-            className={`${
-              isDark ? "glass-dark" : "glass"
-            } rounded-3xl py-12 px-6 max-w-4xl mx-auto`}
+            className={`${isDark ? "glass-dark" : "glass"
+              } rounded-3xl py-12 px-6 max-w-4xl mx-auto`}
           >
             <div className="mb-8 inline-block p-3 bg-blue-600 bg-opacity-20 rounded-full">
               <FaCode className="text-blue-400 text-3xl" />
@@ -71,9 +68,8 @@ const About = () => {
               About <span className="text-blue-400">OMEX</span>
             </h1>
             <p
-              className={`text-xl ${
-                isDark ? "text-gray-300" : "text-gray-600"
-              } max-w-3xl mx-auto mb-6`}
+              className={`text-xl ${isDark ? "text-gray-300" : "text-gray-600"
+                } max-w-3xl mx-auto mb-6`}
             >
               An AI-powered platform revolutionizing how developers write,
               optimize, and understand code.
@@ -87,9 +83,8 @@ const About = () => {
         <div className="max-w-4xl mx-auto mb-20">
           <div className="flex items-center justify-center mb-8">
             <div
-              className={`p-3 rounded-full ${
-                isDark ? "bg-blue-500 bg-opacity-20" : "bg-blue-100"
-              } mr-4`}
+              className={`p-3 rounded-full ${isDark ? "bg-blue-500 bg-opacity-20" : "bg-blue-100"
+                } mr-4`}
             >
               <FaRocket className="text-blue-500 text-xl" />
             </div>
@@ -97,9 +92,8 @@ const About = () => {
           </div>
 
           <div
-            className={`${
-              isDark ? "glass-dark" : "glass"
-            } rounded-xl p-8 mb-8 relative overflow-hidden`}
+            className={`${isDark ? "glass-dark" : "glass"
+              } rounded-xl p-8 mb-8 relative overflow-hidden`}
           >
             <div className="absolute top-0 right-0 w-32 h-32 -mr-10 -mt-10 opacity-10">
               <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -122,9 +116,8 @@ const About = () => {
                 </div>
                 <div className="w-full md:w-2/3">
                   <p
-                    className={`text-lg ${
-                      isDark ? "text-gray-300" : "text-gray-600"
-                    } leading-relaxed mb-6`}
+                    className={`text-lg ${isDark ? "text-gray-300" : "text-gray-600"
+                      } leading-relaxed mb-6`}
                   >
                     At OMEX, we believe that every developer deserves access to
                     tools that can help them improve their coding skills and
@@ -134,9 +127,8 @@ const About = () => {
                     their code more efficient, readable, and maintainable.
                   </p>
                   <p
-                    className={`text-lg ${
-                      isDark ? "text-gray-300" : "text-gray-600"
-                    } leading-relaxed`}
+                    className={`text-lg ${isDark ? "text-gray-300" : "text-gray-600"
+                      } leading-relaxed`}
                   >
                     We're committed to democratizing access to advanced code
                     analysis and optimization techniques, making them available
@@ -165,33 +157,29 @@ const About = () => {
           <div className="relative z-10">
             <div className="flex items-center justify-center mb-8">
               <div
-                className={`p-3 rounded-full ${
-                  isDark ? "glass-dark" : "glass"
-                } mr-4`}
+                className={`p-3 rounded-full ${isDark ? "glass-dark" : "glass"
+                  } mr-4`}
               >
                 <FaTools className="text-purple-500 text-xl" />
               </div>
               <h2 className="text-3xl font-bold">Our Core Features</h2>
             </div>
             <p
-              className={`text-lg ${
-                isDark ? "text-gray-300" : "text-gray-600"
-              } max-w-3xl mx-auto text-center mb-10`}
+              className={`text-lg ${isDark ? "text-gray-300" : "text-gray-600"
+                } max-w-3xl mx-auto text-center mb-10`}
             >
               Comprehensive tools designed to enhance every aspect of your
               development workflow
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div
-                className={`${
-                  isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-                } rounded-xl p-6`}
+                className={`${isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+                  } rounded-xl p-6`}
               >
                 <div className="flex items-center mb-4">
                   <div
-                    className={`p-3 rounded-full ${
-                      isDark ? "bg-yellow-500 bg-opacity-20" : "bg-yellow-100"
-                    }`}
+                    className={`p-3 rounded-full ${isDark ? "bg-yellow-500 bg-opacity-20" : "bg-yellow-100"
+                      }`}
                   >
                     <FaLightbulb className="text-yellow-400 text-xl" />
                   </div>
@@ -204,15 +192,13 @@ const About = () => {
               </div>
 
               <div
-                className={`${
-                  isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-                } rounded-xl p-6`}
+                className={`${isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+                  } rounded-xl p-6`}
               >
                 <div className="flex items-center mb-4">
                   <div
-                    className={`p-3 rounded-full ${
-                      isDark ? "bg-green-500 bg-opacity-20" : "bg-green-100"
-                    }`}
+                    className={`p-3 rounded-full ${isDark ? "bg-green-500 bg-opacity-20" : "bg-green-100"
+                      }`}
                   >
                     <FaRobot className="text-green-400 text-xl" />
                   </div>
@@ -225,15 +211,13 @@ const About = () => {
               </div>
 
               <div
-                className={`${
-                  isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-                } rounded-xl p-6`}
+                className={`${isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+                  } rounded-xl p-6`}
               >
                 <div className="flex items-center mb-4">
                   <div
-                    className={`p-3 rounded-full ${
-                      isDark ? "bg-purple-500 bg-opacity-20" : "bg-purple-100"
-                    }`}
+                    className={`p-3 rounded-full ${isDark ? "bg-purple-500 bg-opacity-20" : "bg-purple-100"
+                      }`}
                   >
                     <FaChartLine className="text-purple-400 text-xl" />
                   </div>
@@ -248,15 +232,13 @@ const About = () => {
               </div>
 
               <div
-                className={`${
-                  isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-                } rounded-xl p-6`}
+                className={`${isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+                  } rounded-xl p-6`}
               >
                 <div className="flex items-center mb-4">
                   <div
-                    className={`p-3 rounded-full ${
-                      isDark ? "bg-red-500 bg-opacity-20" : "bg-red-100"
-                    }`}
+                    className={`p-3 rounded-full ${isDark ? "bg-red-500 bg-opacity-20" : "bg-red-100"
+                      }`}
                   >
                     <FaExchangeAlt className="text-red-400 text-xl" />
                   </div>
@@ -271,9 +253,8 @@ const About = () => {
             <div className="text-center mt-10">
               <Link
                 to="/code-tools"
-                className={`inline-flex items-center ${
-                  isDark ? "glass-dark" : "glass"
-                } px-6 py-3 rounded-lg font-medium transition-all duration-200`}
+                className={`inline-flex items-center ${isDark ? "glass-dark" : "glass"
+                  } px-6 py-3 rounded-lg font-medium transition-all duration-200`}
               >
                 Explore All Tools <FaArrowRight className="ml-2" />
               </Link>
@@ -295,26 +276,23 @@ const About = () => {
           <div className="relative z-10">
             <div className="flex items-center justify-center mb-8">
               <div
-                className={`p-3 rounded-full ${
-                  isDark ? "glass-dark" : "glass"
-                } mr-4`}
+                className={`p-3 rounded-full ${isDark ? "glass-dark" : "glass"
+                  } mr-4`}
               >
                 <FaUsers className="text-green-500 text-xl" />
               </div>
               <h2 className="text-3xl font-bold">Why Choose OMEX?</h2>
             </div>
             <p
-              className={`text-lg ${
-                isDark ? "text-gray-300" : "text-gray-600"
-              } max-w-3xl mx-auto text-center mb-10`}
+              className={`text-lg ${isDark ? "text-gray-300" : "text-gray-600"
+                } max-w-3xl mx-auto text-center mb-10`}
             >
               What sets us apart from other development tools
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div
-                className={`${
-                  isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-                } rounded-xl p-6 relative overflow-hidden`}
+                className={`${isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+                  } rounded-xl p-6 relative overflow-hidden`}
               >
                 <div className="absolute top-0 right-0 w-24 h-24 -mr-8 -mt-8 opacity-10">
                   <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -327,9 +305,8 @@ const About = () => {
                 </div>
                 <div className="relative z-10">
                   <div
-                    className={`p-3 rounded-full ${
-                      isDark ? "bg-blue-500 bg-opacity-20" : "bg-blue-100"
-                    } mb-4 inline-block`}
+                    className={`p-3 rounded-full ${isDark ? "bg-blue-500 bg-opacity-20" : "bg-blue-100"
+                      } mb-4 inline-block`}
                   >
                     <FaCode className="text-blue-400 text-xl" />
                   </div>
@@ -344,9 +321,8 @@ const About = () => {
               </div>
 
               <div
-                className={`${
-                  isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-                } rounded-xl p-6 relative overflow-hidden`}
+                className={`${isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+                  } rounded-xl p-6 relative overflow-hidden`}
               >
                 <div className="absolute top-0 right-0 w-24 h-24 -mr-8 -mt-8 opacity-10">
                   <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -359,9 +335,8 @@ const About = () => {
                 </div>
                 <div className="relative z-10">
                   <div
-                    className={`p-3 rounded-full ${
-                      isDark ? "bg-purple-500 bg-opacity-20" : "bg-purple-100"
-                    } mb-4 inline-block`}
+                    className={`p-3 rounded-full ${isDark ? "bg-purple-500 bg-opacity-20" : "bg-purple-100"
+                      } mb-4 inline-block`}
                   >
                     <FaUsers className="text-purple-400 text-xl" />
                   </div>
@@ -376,9 +351,8 @@ const About = () => {
               </div>
 
               <div
-                className={`${
-                  isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-                } rounded-xl p-6 relative overflow-hidden`}
+                className={`${isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+                  } rounded-xl p-6 relative overflow-hidden`}
               >
                 <div className="absolute top-0 right-0 w-24 h-24 -mr-8 -mt-8 opacity-10">
                   <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -391,9 +365,8 @@ const About = () => {
                 </div>
                 <div className="relative z-10">
                   <div
-                    className={`p-3 rounded-full ${
-                      isDark ? "bg-green-500 bg-opacity-20" : "bg-green-100"
-                    } mb-4 inline-block`}
+                    className={`p-3 rounded-full ${isDark ? "bg-green-500 bg-opacity-20" : "bg-green-100"
+                      } mb-4 inline-block`}
                   >
                     <FaTools className="text-green-400 text-xl" />
                   </div>
@@ -426,23 +399,20 @@ const About = () => {
           <div className="relative z-10">
             <div className="flex items-center justify-center mb-8">
               <div
-                className={`p-3 rounded-full ${
-                  isDark ? "glass-dark" : "glass"
-                } mr-4`}
+                className={`p-3 rounded-full ${isDark ? "glass-dark" : "glass"
+                  } mr-4`}
               >
                 <FaShieldAlt className="text-red-500 text-xl" />
               </div>
               <h2 className="text-3xl font-bold">Our Values</h2>
             </div>
             <div
-              className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${
-                isDark ? "text-gray-300" : "text-gray-600"
-              }`}
+              className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${isDark ? "text-gray-300" : "text-gray-600"
+                }`}
             >
               <div
-                className={`p-6 rounded-lg ${
-                  isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-                } relative overflow-hidden`}
+                className={`p-6 rounded-lg ${isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+                  } relative overflow-hidden`}
               >
                 <div className="absolute top-0 right-0 w-24 h-24 -mr-8 -mt-8 opacity-10">
                   <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -456,9 +426,8 @@ const About = () => {
                 <div className="relative z-10">
                   <h3 className="text-xl font-bold mb-4 flex items-center">
                     <span
-                      className={`inline-block p-2 rounded-full ${
-                        isDark ? "bg-red-500 bg-opacity-20" : "bg-red-100"
-                      } mr-3`}
+                      className={`inline-block p-2 rounded-full ${isDark ? "bg-red-500 bg-opacity-20" : "bg-red-100"
+                        } mr-3`}
                     >
                       <svg
                         className="w-5 h-5 text-red-500"
@@ -486,9 +455,8 @@ const About = () => {
               </div>
 
               <div
-                className={`p-6 rounded-lg ${
-                  isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-                } relative overflow-hidden`}
+                className={`p-6 rounded-lg ${isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+                  } relative overflow-hidden`}
               >
                 <div className="absolute top-0 right-0 w-24 h-24 -mr-8 -mt-8 opacity-10">
                   <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -502,9 +470,8 @@ const About = () => {
                 <div className="relative z-10">
                   <h3 className="text-xl font-bold mb-4 flex items-center">
                     <span
-                      className={`inline-block p-2 rounded-full ${
-                        isDark ? "bg-blue-500 bg-opacity-20" : "bg-blue-100"
-                      } mr-3`}
+                      className={`inline-block p-2 rounded-full ${isDark ? "bg-blue-500 bg-opacity-20" : "bg-blue-100"
+                        } mr-3`}
                     >
                       <svg
                         className="w-5 h-5 text-blue-500"
@@ -528,9 +495,8 @@ const About = () => {
               </div>
 
               <div
-                className={`p-6 rounded-lg ${
-                  isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-                } relative overflow-hidden`}
+                className={`p-6 rounded-lg ${isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+                  } relative overflow-hidden`}
               >
                 <div className="absolute top-0 right-0 w-24 h-24 -mr-8 -mt-8 opacity-10">
                   <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -544,9 +510,8 @@ const About = () => {
                 <div className="relative z-10">
                   <h3 className="text-xl font-bold mb-4 flex items-center">
                     <span
-                      className={`inline-block p-2 rounded-full ${
-                        isDark ? "bg-purple-500 bg-opacity-20" : "bg-purple-100"
-                      } mr-3`}
+                      className={`inline-block p-2 rounded-full ${isDark ? "bg-purple-500 bg-opacity-20" : "bg-purple-100"
+                        } mr-3`}
                     >
                       <svg
                         className="w-5 h-5 text-purple-500"
@@ -569,9 +534,8 @@ const About = () => {
               </div>
 
               <div
-                className={`p-6 rounded-lg ${
-                  isDark ? "glass-dark glass-dark-card" : "glass glass-card"
-                } relative overflow-hidden`}
+                className={`p-6 rounded-lg ${isDark ? "glass-dark glass-dark-card" : "glass glass-card"
+                  } relative overflow-hidden`}
               >
                 <div className="absolute top-0 right-0 w-24 h-24 -mr-8 -mt-8 opacity-10">
                   <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -585,9 +549,8 @@ const About = () => {
                 <div className="relative z-10">
                   <h3 className="text-xl font-bold mb-4 flex items-center">
                     <span
-                      className={`inline-block p-2 rounded-full ${
-                        isDark ? "bg-green-500 bg-opacity-20" : "bg-green-100"
-                      } mr-3`}
+                      className={`inline-block p-2 rounded-full ${isDark ? "bg-green-500 bg-opacity-20" : "bg-green-100"
+                        } mr-3`}
                     >
                       <svg
                         className="w-5 h-5 text-green-500"
@@ -620,42 +583,39 @@ const About = () => {
         <div className="mb-20">
           <div className="flex items-center justify-center mb-8">
             <div
-              className={`p-3 rounded-full ${
-                isDark ? "bg-blue-500 bg-opacity-20" : "bg-blue-100"
-              } mr-4`}
+              className={`p-3 rounded-full ${isDark ? "bg-blue-500 bg-opacity-20" : "bg-blue-100"
+                } mr-4`}
             >
               <FaCode className="text-blue-500 text-xl" />
             </div>
             <h2 className="text-3xl font-bold">Our Technology Stack</h2>
           </div>
           <p
-            className={`text-lg ${
-              isDark ? "text-gray-300" : "text-gray-600"
-            } max-w-3xl mx-auto text-center mb-10`}
+            className={`text-lg ${isDark ? "text-gray-300" : "text-gray-600"
+              } max-w-3xl mx-auto text-center mb-10`}
           >
             Built with modern technologies for performance, scalability, and
             developer experience
           </p>
 
           <div
-            className={`rounded-lg p-8 ${
-              isDark ? "bg-gray-700" : "bg-white"
-            } shadow-lg`}
+            className={`rounded-lg p-8 ${isDark ? "bg-gray-700" : "bg-white"
+              } shadow-lg`}
           >
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              <TechItem name="React" />
-              <TechItem name="Node.js" />
-              <TechItem name="Express" />
-              <TechItem name="Tailwind CSS" />
-              <TechItem name="Google Gemini AI" />
-              <TechItem name="Prism.js" />
-              <TechItem name="React Router" />
-              <TechItem name="Axios" />
-              <TechItem name="MongoDB" />
-              <TechItem name="Jest" />
-              <TechItem name="Webpack" />
-              <TechItem name="GitHub Actions" />
-            </div>
+  <TechItem name="React" icon="⚛" />
+  <TechItem name="Node.js" icon="🟢" />
+  <TechItem name="Express" icon="🚀" />
+  <TechItem name="Tailwind CSS" icon="🎨" />
+  <TechItem name="Google Gemini AI" icon="🤖" />
+  <TechItem name="Prism.js" icon="🌈" />
+  <TechItem name="React Router" icon="🛣" />
+  <TechItem name="Axios" icon="📡" />
+  <TechItem name="MongoDB" icon="🍃" />
+  <TechItem name="Jest" icon="🃏" />
+  <TechItem name="Webpack" icon="📦" />
+  <TechItem name="GitHub Actions" icon="⚙" />
+</div>
           </div>
         </div>
 
@@ -663,9 +623,8 @@ const About = () => {
         <div className="mb-20">
           <div className="flex items-center justify-center mb-8">
             <div
-              className={`p-3 rounded-full ${
-                isDark ? "bg-yellow-500 bg-opacity-20" : "bg-yellow-100"
-              } mr-4`}
+              className={`p-3 rounded-full ${isDark ? "bg-yellow-500 bg-opacity-20" : "bg-yellow-100"
+                } mr-4`}
             >
               <FaHistory className="text-yellow-500 text-xl" />
             </div>
@@ -673,22 +632,18 @@ const About = () => {
           </div>
 
           <div
-            className={`relative border-l-4 ${
-              isDark ? "border-gray-700" : "border-gray-200"
-            } ml-6 pl-8 pb-8`}
+            className={`relative border-l-4 ${isDark ? "border-gray-700" : "border-gray-200"
+              } ml-6 pl-8 pb-8`}
           >
             <div className="mb-12">
               <div
-                className={`absolute -left-6 ${
-                  isDark ? "bg-gray-700" : "bg-white"
-                } p-2 rounded-full border-4 ${
-                  isDark ? "border-gray-600" : "border-gray-200"
-                }`}
+                className={`absolute -left-6 ${isDark ? "bg-gray-700" : "bg-white"
+                  } p-2 rounded-full border-4 ${isDark ? "border-gray-600" : "border-gray-200"
+                  }`}
               >
                 <div
-                  className={`w-6 h-6 rounded-full ${
-                    isDark ? "bg-blue-400" : "bg-blue-500"
-                  }`}
+                  className={`w-6 h-6 rounded-full ${isDark ? "bg-blue-400" : "bg-blue-500"
+                    }`}
                 ></div>
               </div>
               <div className={`${isDark ? "text-gray-300" : "text-gray-600"}`}>
@@ -704,16 +659,13 @@ const About = () => {
 
             <div className="mb-12">
               <div
-                className={`absolute -left-6 ${
-                  isDark ? "bg-gray-700" : "bg-white"
-                } p-2 rounded-full border-4 ${
-                  isDark ? "border-gray-600" : "border-gray-200"
-                }`}
+                className={`absolute -left-6 ${isDark ? "bg-gray-700" : "bg-white"
+                  } p-2 rounded-full border-4 ${isDark ? "border-gray-600" : "border-gray-200"
+                  }`}
               >
                 <div
-                  className={`w-6 h-6 rounded-full ${
-                    isDark ? "bg-green-400" : "bg-green-500"
-                  }`}
+                  className={`w-6 h-6 rounded-full ${isDark ? "bg-green-400" : "bg-green-500"
+                    }`}
                 ></div>
               </div>
               <div className={`${isDark ? "text-gray-300" : "text-gray-600"}`}>
@@ -729,16 +681,13 @@ const About = () => {
 
             <div>
               <div
-                className={`absolute -left-6 ${
-                  isDark ? "bg-gray-700" : "bg-white"
-                } p-2 rounded-full border-4 ${
-                  isDark ? "border-gray-600" : "border-gray-200"
-                }`}
+                className={`absolute -left-6 ${isDark ? "bg-gray-700" : "bg-white"
+                  } p-2 rounded-full border-4 ${isDark ? "border-gray-600" : "border-gray-200"
+                  }`}
               >
                 <div
-                  className={`w-6 h-6 rounded-full ${
-                    isDark ? "bg-purple-400" : "bg-purple-500"
-                  }`}
+                  className={`w-6 h-6 rounded-full ${isDark ? "bg-purple-400" : "bg-purple-500"
+                    }`}
                 ></div>
               </div>
               <div className={`${isDark ? "text-gray-300" : "text-gray-600"}`}>
@@ -759,18 +708,16 @@ const About = () => {
         <div className="text-center mb-16">
           <div className="flex items-center justify-center mb-8">
             <div
-              className={`p-3 rounded-full ${
-                isDark ? "bg-green-500 bg-opacity-20" : "bg-green-100"
-              } mr-4`}
+              className={`p-3 rounded-full ${isDark ? "bg-green-500 bg-opacity-20" : "bg-green-100"
+                } mr-4`}
             >
               <FaUsers className="text-green-500 text-xl" />
             </div>
             <h2 className="text-3xl font-bold">Meet Our Team</h2>
           </div>
           <p
-            className={`text-lg ${
-              isDark ? "text-gray-300" : "text-gray-600"
-            } max-w-3xl mx-auto mb-8`}
+            className={`text-lg ${isDark ? "text-gray-300" : "text-gray-600"
+              } max-w-3xl mx-auto mb-8`}
           >
             We're a passionate team of developers, designers, and AI enthusiasts
             dedicated to creating tools that make coding better for everyone.
@@ -778,11 +725,10 @@ const About = () => {
           <Link
             to="/team"
             onClick={() => window.scrollTo(0, 0)}
-            className={`inline-flex items-center ${
-              isDark
+            className={`inline-flex items-center ${isDark
                 ? "bg-gray-700 hover:bg-gray-600"
                 : "bg-blue-100 hover:bg-blue-200"
-            } px-6 py-3 rounded-lg font-medium transition-all duration-200`}
+              } px-6 py-3 rounded-lg font-medium transition-all duration-200`}
           >
             View Team Page <FaArrowRight className="ml-2" />
           </Link>
@@ -797,9 +743,8 @@ const FeatureCard = ({ icon, title, description }) => {
   const { isDark } = useTheme();
   return (
     <div
-      className={`${
-        isDark ? "bg-gray-700" : "bg-white"
-      } rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:-translate-y-1`}
+      className={`${isDark ? "bg-gray-700" : "bg-white"
+        } rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:-translate-y-1`}
     >
       <div className="text-3xl mb-4">{icon}</div>
       <h3 className="text-xl font-semibold mb-3">{title}</h3>
@@ -814,9 +759,8 @@ const ReasonCard = ({ icon, title, description }) => {
   const { isDark } = useTheme();
   return (
     <div
-      className={`${
-        isDark ? "bg-gray-700" : "bg-white"
-      } rounded-lg p-6 shadow-lg text-center`}
+      className={`${isDark ? "bg-gray-700" : "bg-white"
+        } rounded-lg p-6 shadow-lg text-center`}
     >
       <div className="text-3xl mb-4 flex justify-center">{icon}</div>
       <h3 className="text-xl font-semibold mb-3">{title}</h3>
@@ -827,7 +771,7 @@ const ReasonCard = ({ icon, title, description }) => {
   );
 };
 
-const TechItem = ({ name }) => {
+const TechItem = ({ name, icon }) => {
   const { isDark } = useTheme();
   return (
     <div
@@ -837,6 +781,7 @@ const TechItem = ({ name }) => {
           : "bg-gray-100 hover:bg-gray-200"
       } rounded-lg p-4 shadow-md transition-colors duration-200`}
     >
+      {icon && <div className="mb-2 text-2xl">{icon}</div>}
       <p className="font-medium">{name}</p>
     </div>
   );
