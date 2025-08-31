@@ -712,32 +712,46 @@ function Home() {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section
-        ref={howItWorksRef}
-        className={`py-16 px-4 ${isDark ? "" : "bg-white"}`}
-      >
-        <div className="how-step-card container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <StepCard
-              number="01"
-              title="Input Your Code"
-              description="Paste your code or write it directly in our editor."
-            />
-            <StepCard
-              number="02"
-              title="AI Analysis"
-              description="Our AI analyzes your code for optimization opportunities."
-            />
-            <StepCard
-              number="03"
-              title="Get Results"
-              description="Receive detailed feedback and suggestions for improvement."
-            />
-          </div>
-        </div>
-      </section>
+{/* How It Works Section */}
+<section
+  ref={howItWorksRef}
+  className={`py-16 px-4 ${isDark ? "" : "bg-white"}`}
+>
+  <div className="container mx-auto">
+    <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      {/* Step 1 */}
+      <div className="rounded-2xl p-6 transform transition-transform duration-300 ease-in-out hover:-translate-y-3 hover:shadow-2xl">
+        <StepCard
+          number="01"
+          title="Input Your Code"
+          description="Paste your code or write it directly in our editor."
+        />
+      </div>
+
+      {/* Step 2 */}
+      <div className="rounded-2xl p-6 transform transition-transform duration-300 ease-in-out hover:-translate-y-3 hover:shadow-2xl">
+        <StepCard
+          number="02"
+          title="AI Analysis"
+          description="Our AI analyzes your code for optimization opportunities."
+        />
+      </div>
+
+      {/* Step 3 */}
+      <div className="rounded-2xl p-6 transform transition-transform duration-300 ease-in-out hover:-translate-y-3 hover:shadow-2xl">
+        <StepCard
+          number="03"
+          title="Get Results"
+          description="Receive detailed feedback and suggestions for improvement."
+        />
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
       {/* Testimonials Section */}
       <Testimonials />
