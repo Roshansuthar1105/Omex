@@ -25,63 +25,6 @@ const Badge = ({ count, label, color }) => (
   </div>
 );
 
-// Skeleton Loader Component
-const SkeletonLoader = () => (
-  <div className="bg-white dark:bg-[#1a202e] rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
-    <div className="hidden sm:grid grid-cols-12 gap-4 px-6 py-4 bg-gray-50 dark:bg-[#232a3a] border-b border-gray-100 dark:border-gray-700">
-      <div className="col-span-1 text-sm font-medium text-gray-500 dark:text-gray-400">
-        #
-      </div>
-      <div className="col-span-6 md:col-span-7 text-sm font-medium text-gray-500 dark:text-gray-400">
-        Contributor
-      </div>
-      <div className="col-span-5 md:col-span-4 text-sm font-medium text-gray-500 dark:text-gray-400 text-right">
-        Contributions
-      </div>
-    </div>
-    <div className="divide-y divide-gray-100 dark:divide-gray-700">
-      {[...Array(10)].map((_, i) => (
-        <div
-          key={i}
-          className="p-4 sm:grid sm:grid-cols-12 sm:gap-4 sm:items-center sm:px-6 sm:py-4"
-        >
-          <div className="flex items-center space-x-3 sm:hidden">
-            <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse flex-shrink-0"></div>
-            <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse flex-shrink-0"></div>
-            <div className="flex-1 space-y-2">
-              <div className="w-24 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
-              <div className="flex space-x-2">
-                <div className="w-12 h-6 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
-                <div className="w-12 h-6 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
-              </div>
-            </div>
-          </div>
-          <div className="hidden sm:contents">
-            <div className="col-span-1">
-              <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-            </div>
-            <div className="col-span-6 md:col-span-7">
-              <div className="flex items-center space-x-4">
-                <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-                <div className="space-y-2">
-                  <div className="w-32 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
-                  <div className="w-24 h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
-                </div>
-              </div>
-            </div>
-            <div className="col-span-5 md:col-span-4">
-              <div className="flex items-center justify-end space-x-3">
-                <div className="w-16 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
-                <div className="w-16 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
 export default function LeaderBoard() {
   const [contributors, setContributors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -205,6 +148,115 @@ export default function LeaderBoard() {
   const currentContributors = filteredContributors.slice(indexOfFirst, indexOfLast);
 
   const totalPages = Math.ceil(filteredContributors.length / PAGE_SIZE);
+
+  // Skeleton Loader Component
+  const SkeletonLoader = () => (
+    <div
+      className={`${
+        isDark ? "bg-[#1a202e]" : "bg-white"
+      } rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden`}
+    >
+      <div
+        className={`hidden sm:grid grid-cols-12 gap-4 px-6 py-4 ${
+          isDark ? "bg-[#232a3a]" : "bg-gray-50"
+        } border-b border-gray-100 dark:border-gray-700`}
+      >
+        <div className="col-span-1 text-sm font-medium text-gray-500 dark:text-gray-400">
+          #
+        </div>
+        <div className="col-span-6 md:col-span-7 text-sm font-medium text-gray-500 dark:text-gray-400">
+          Contributor
+        </div>
+        <div className="col-span-5 md:col-span-4 text-sm font-medium text-gray-500 dark:text-gray-400 text-right">
+          Contributions
+        </div>
+      </div>
+      <div className="divide-y divide-gray-100 dark:divide-gray-700">
+        {[...Array(10)].map((_, i) => (
+          <div
+            key={i}
+            className="p-4 sm:grid sm:grid-cols-12 sm:gap-4 sm:items-center sm:px-6 sm:py-4"
+          >
+            <div className="flex items-center space-x-3 sm:hidden">
+              <div
+                className={`w-8 h-8 rounded-full animate-pulse flex-shrink-0 ${
+                  isDark ? "bg-gray-700" : "bg-gray-200"
+                }`}
+              ></div>
+              <div
+                className={`w-10 h-10 rounded-full animate-pulse flex-shrink-0 ${
+                  isDark ? "bg-gray-700" : "bg-gray-200"
+                }`}
+              ></div>
+              <div className="flex-1 space-y-2">
+                <div
+                  className={`w-24 h-4 rounded animate-pulse ${
+                    isDark ? "bg-gray-700" : "bg-gray-200"
+                  }`}
+                ></div>
+                <div className="flex space-x-2">
+                  <div
+                    className={`w-12 h-6 rounded-full animate-pulse ${
+                      isDark ? "bg-gray-700" : "bg-gray-200"
+                    }`}
+                  ></div>
+                  <div
+                    className={`w-12 h-6 rounded-full animate-pulse ${
+                      isDark ? "bg-gray-700" : "bg-gray-200"
+                    }`}
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div className="hidden sm:contents">
+              <div className="col-span-1">
+                <div
+                  className={`w-8 h-8 rounded-full animate-pulse ${
+                    isDark ? "bg-gray-700" : "bg-gray-200"
+                  }`}
+                ></div>
+              </div>
+              <div className="col-span-6 md:col-span-7">
+                <div className="flex items-center space-x-4">
+                  <div
+                    className={`w-10 h-10 rounded-full animate-pulse ${
+                      isDark ? "bg-gray-700" : "bg-gray-200"
+                    }`}
+                  ></div>
+                  <div className="space-y-2">
+                    <div
+                      className={`w-32 h-4 rounded animate-pulse ${
+                        isDark ? "bg-gray-700" : "bg-gray-200"
+                      }`}
+                    ></div>
+                    <div
+                      className={`w-24 h-3 rounded animate-pulse ${
+                        isDark ? "bg-gray-700" : "bg-gray-200"
+                      }`}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-span-5 md:col-span-4">
+                <div className="flex items-center justify-end space-x-3">
+                  <div
+                    className={`w-16 h-8 rounded-full animate-pulse ${
+                      isDark ? "bg-gray-700" : "bg-gray-200"
+                    }`}
+                  ></div>
+                  <div
+                    className={`w-16 h-8 rounded-full animate-pulse ${
+                      isDark ? "bg-gray-700" : "bg-gray-200"
+                    }`}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <div className={`${isDark ? "bg-[#0B1120]" : "bg-gray-50"} min-h-screen py-6 sm:py-12 px-2 sm:px-4`}>
