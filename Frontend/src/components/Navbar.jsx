@@ -38,6 +38,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
   const location = useLocation();
   const { isDark, toggleTheme } = useTheme();
   const menuRef = useRef(null);
+  const toolsDropdownRef = useRef(null);
+  const companyDropdownRef = useRef(null);
 
   // Handle scroll effect
   useEffect(() => {
@@ -136,6 +138,20 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isMenuOpen]);
+
+  // Handle click outside for desktop dropdowns
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (toolsDropdownRef.current && !toolsDropdownRef.current.contains(event.target)) {
+        setIsToolsDropdownOpen(false);
+      }
+      if (companyDropdownRef.current && !companyDropdownRef.current.contains(event.target)) {
+        setIsCompanyDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Prevent background scroll when mobile menu is open
   useEffect(() => {
@@ -239,7 +255,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
               </Link>
 
               {/* Enhanced Tools Dropdown */}
-              <div className="relative">
+              <div className="relative" ref={toolsDropdownRef}>
                 <button
                   onClick={toggleToolsDropdown}
                   className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${
@@ -294,7 +310,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
               </div>
 
               {/* Enhanced Company Dropdown */}
-              <div className="relative">
+              <div className="relative" ref={companyDropdownRef}>
                 <button
                   onClick={toggleCompanyDropdown}
                   className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${
