@@ -484,19 +484,13 @@ function Home() {
 
   return (
     <div
-<<<<<<< HEAD
       ref={(el) => {
         containerRef.current = el;
         pageRef.current = el;
       }}
-      className={`${
+      className={`$ {
         isDark ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"
-      } min-h-screen `}
-=======
-      className={`$
-        {isDark ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"}
-      min-h-screen`}
->>>>>>> d9f861c (chore: commit all changes)
+      } min-h-screen`}
     >
       <div className="flex justify-center mb-8 mt-8">
         <img
