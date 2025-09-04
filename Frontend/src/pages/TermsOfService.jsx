@@ -29,7 +29,11 @@ const TermsOfService = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
-            <FaFileContract className="text-blue-400 text-4xl" />
+            <img
+              src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
+              alt="Omex AI Logo"
+              className="h-12 w-auto"
+            />
           </div>
           <h1 className="text-4xl font-bold mb-4">Terms of Service</h1>
           <p className={`max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>

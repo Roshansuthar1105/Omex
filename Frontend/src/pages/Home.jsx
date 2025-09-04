@@ -484,6 +484,7 @@ function Home() {
 
   return (
     <div
+<<<<<<< HEAD
       ref={(el) => {
         containerRef.current = el;
         pageRef.current = el;
@@ -491,7 +492,19 @@ function Home() {
       className={`${
         isDark ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"
       } min-h-screen `}
+=======
+      className={`$
+        {isDark ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"}
+      min-h-screen`}
+>>>>>>> d9f861c (chore: commit all changes)
     >
+      <div className="flex justify-center mb-8 mt-8">
+        <img
+          src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
+          alt="Omex AI Logo"
+          className="h-16 w-auto"
+        />
+      </div>
       {/* Hero Section */}
       <section className="hero-section py-20 px-4 relative overflow-hidden animated-bg">
         <div className="absolute inset-0 featured-bg">

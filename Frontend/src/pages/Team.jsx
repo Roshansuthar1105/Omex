@@ -185,7 +185,11 @@ const Team = () => {
                 ? 'bg-gray-800/70 border border-gray-700/50'
                 : 'bg-white/70 border border-white/50'
             } shadow-lg backdrop-blur-sm`}>
-              <FaCode className="text-blue-500 text-4xl" />
+              <img
+                src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
+                alt="Omex AI Logo"
+                className="h-12 w-auto"
+              />
             </div>
           </div>
           <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">About the Developer</h1>

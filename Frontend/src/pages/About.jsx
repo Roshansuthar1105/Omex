@@ -40,6 +40,13 @@ const About = () => {
       className={`min-h-screen ${isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
         }`}
     >
+      <div className="flex justify-center mb-8 mt-8">
+        <img
+          src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
+          alt="Omex AI Logo"
+          className="h-16 w-auto"
+        />
+      </div>
       {/* Hero Section */}
       <div
         className={`py-20 px-4 ${isDark ? "bg-gray-900" : "bg-blue-50"

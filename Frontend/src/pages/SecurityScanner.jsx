@@ -83,13 +83,17 @@ app.get('/user/:id', (req, res) => {
         <div className="mb-6">
           <div className="flex flex-col md:flex-row justify-between items-center mb-4">
             <div className="flex items-center mb-4 md:mb-0">
-              <FaShieldAlt className="text-red-500 text-2xl mr-2" />
+              <img
+                src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
+                alt="Omex AI Logo"
+                className="h-10 w-auto mr-3"
+              />
               <h1
                 className={`text-2xl md:text-3xl font-bold ${
                   isDark ? "text-white" : "text-gray-800"
                 }`}
               >
-                Security Vulnerability Scanner
+                Security Scanner
               </h1>
             </div>
           </div>
