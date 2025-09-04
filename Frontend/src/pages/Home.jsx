@@ -490,7 +490,7 @@ function Home() {
       }}
       className={`${
         isDark ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"
-      } min-h-screen `}
+      } min-h-screen`}
     >
       {/* Hero Section */}
       <section className="hero-section py-20 px-4 relative overflow-hidden animated-bg">
