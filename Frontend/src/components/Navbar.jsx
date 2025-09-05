@@ -183,20 +183,14 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
           <div className="flex justify-between items-center">
             {/* Logo */}
             <div className="flex items-center space-x-3 group">
-              <div className="relative">
-                <FaCode className="text-blue-400 text-2xl group-hover:text-purple-400 transition-all duration-300 transform group-hover:scale-110" />
-                <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-              <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                <Link
-                  to="/"
-                  className="hover:from-purple-400 hover:via-pink-400 hover:to-blue-400 transition-all duration-500"
-                  onClick={closeMenu}
-                >
-                  OMEX
-                </Link>
-              </h1>
-              <FaStar className="text-yellow-400 text-sm animate-pulse opacity-70" />
+              <Link to="/" className="flex items-center" onClick={closeMenu}>
+                <img 
+                  src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
+                  alt="Omex AI" 
+                  className="h-16 w-auto transition-transform duration-300 transform group-hover:scale-110" 
+                />
+                <FaStar className="text-yellow-400 text-sm animate-pulse opacity-70 ml-2" />
+              </Link>
             </div>
 
             {/* Desktop Navigation */}
@@ -459,11 +453,15 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
         <div className={`flex justify-between items-center p-6 border-b ${
           isDark ? "border-gray-800/50" : "border-gray-200/50"
         }`}>
-          <div className="flex items-center space-x-3">
-            <FaCode className="text-blue-400 text-xl" />
-            <span className="font-bold text-2xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              OMEX
-            </span>
+          <div className="flex items-center justify-center space-x-3">
+            <Link to="/" className="flex items-center" onClick={closeMenu}>
+              <img 
+                src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
+                alt="Omex AI" 
+                className="h-10 w-auto transition-transform duration-300 transform group-hover:scale-110" 
+              />
+              <FaStar className="text-yellow-400 text-sm animate-pulse opacity-70 ml-2" />
+            </Link>
           </div>
           <button
             onClick={closeMenu}

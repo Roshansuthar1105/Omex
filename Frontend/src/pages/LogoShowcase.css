@@ -8,7 +8,7 @@
 }
 
 .logo-animated {
-  height: 120px;
+  height: 200px;
   width: auto;
   margin-bottom: 24px;
   animation: logo-bounce 2s infinite alternate cubic-bezier(0.68, -0.55, 0.27, 1.55);
