@@ -15,6 +15,7 @@ function CodeEditor(props) {
   const URL = props.URL;
   const [prompt, setPrompt] = useState(props.prompt || '');
   const [copyText, setCopyButtonText] = useState(true);
+  const [copyAllText, setCopyAllButtonText] = useState(true);
   const [review, setReview] = useState('');
   const [optimisedCode, setOptimisedCode] = useState('');
   const [lang, setLang] = useState('');
@@ -37,8 +38,15 @@ function CodeEditor(props) {
   const handleCopyClick = () => {
     navigator.clipboard.writeText(optimisedCode);
     setCopyButtonText(false);
-    toast.success("Code copied to clipboard!");
+    toast.success("Optimized code copied to clipboard!");
     setTimeout(() => setCopyButtonText(true), 2000);
+  };
+
+  const handleCopyAllClick = () => {
+    navigator.clipboard.writeText(review);
+    setCopyAllButtonText(false);
+    toast.success("Full review copied to clipboard!");
+    setTimeout(() => setCopyAllButtonText(true), 2000);
   };
 
   const handleClearEditor = () => {
@@ -219,25 +227,46 @@ function CodeEditor(props) {
             isDark ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-800'
           } flex justify-between items-center`}>
             <span className="font-medium">Review Results</span>
-            {lang && (
-              <button
-                onClick={handleCopyClick}
-                className={`p-2 rounded-md ${
-                  isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-300'
-                } transition-colors flex items-center`}
-                title="Copy optimized code"
-              >
-                {copyText ? (
-                  <>
-                    <FaCopy className="mr-1" /> Copy Code
-                  </>
-                ) : (
-                  <>
-                    <MdDone className="mr-1" /> Copied!
-                  </>
-                )}
-              </button>
-            )}
+            <div className="flex space-x-2">
+              {review && (
+                <button
+                  onClick={handleCopyAllClick}
+                  className={`px-3 py-1 rounded-md text-sm ${
+                    isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-300'
+                  } transition-colors flex items-center`}
+                  title="Copy full review"
+                >
+                  {copyAllText ? (
+                    <>
+                      <FaCopy className="mr-1" /> Copy All
+                    </>
+                  ) : (
+                    <>
+                      <MdDone className="mr-1" /> Copied!
+                    </>
+                  )}
+                </button>
+              )}
+              {lang && (
+                <button
+                  onClick={handleCopyClick}
+                  className={`px-3 py-1 rounded-md text-sm ${
+                    isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-300'
+                  } transition-colors flex items-center`}
+                  title="Copy optimized code"
+                >
+                  {copyText ? (
+                    <>
+                      <FaCopy className="mr-1" /> Copy Code
+                    </>
+                  ) : (
+                    <>
+                      <MdDone className="mr-1" /> Copied!
+                    </>
+                  )}
+                </button>
+              )}
+            </div>
           </div>
 
           <div className={`h-[calc(100%-40px)] overflow-y-auto p-4 ${
