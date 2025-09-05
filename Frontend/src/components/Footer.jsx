@@ -42,11 +42,21 @@ const Footer = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email) {
-      setShowToast(true);
-      setEmail("");
-      setTimeout(() => setShowToast(false), 3000);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email) {
+      alert("Email is required");
+      return;
     }
+
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
+    setShowToast(true);
+    setEmail("");
+    setTimeout(() => setShowToast(false), 3000);
   };
 
   return (
