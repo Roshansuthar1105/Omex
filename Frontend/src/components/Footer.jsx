@@ -18,11 +18,11 @@ import {
   FaShieldAlt,
   FaTachometerAlt,
   FaTools,
-  FaTwitter,
   FaUserFriends,
   FaUsers,
   FaVial,
 } from "react-icons/fa";
+import { BsTwitterX } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { useState } from "react";
@@ -101,7 +101,7 @@ const Footer = () => {
                       : "text-gray-600 hover:text-gray-900"
                   } transition duration-200`}
                 >
-                  <FaTwitter size={20} />
+                  <BsTwitterX size={20} />
                 </a>
                 <a
                   href="https://linkedin.com/in/roshansuthar"
