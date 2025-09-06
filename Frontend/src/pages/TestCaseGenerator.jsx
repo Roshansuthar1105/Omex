@@ -10,10 +10,40 @@ import Loader from '../components/Loader';
 import { useTheme } from '../context/ThemeContext';
 
 function TestCaseGenerator() {
-  const [code, setCode] = useState(`function factorial(n) {
+  const exampleCodes = {
+    "JavaScript": `function factorial(n) {
   if (n <= 1) return 1;
   return n * factorial(n - 1);
-}`);
+}`,
+    "Python": `def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)`,
+    "Java": `public int factorial(int n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}`,
+    "C++": `int factorial(int n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}`,
+    "C#": `public int Factorial(int n) {
+    if (n <= 1) return 1;
+    return n * Factorial(n - 1);
+}`,
+    "PHP": '<?php\nfunction factorial($n) {\n    if ($n <= 1) return 1;\n    return $n * factorial($n - 1);\n}\n?>',
+    "Go": `func factorial(n int) int {
+    if n <= 1 {
+        return 1
+    }
+    return n * factorial(n-1)
+}`,
+    "Ruby": `def factorial(n)
+  return 1 if n <= 1
+  n * factorial(n - 1)
+end`,
+  };
+  const [code, setCode] = useState(exampleCodes["JavaScript"]);
   const [language, setLanguage] = useState('JavaScript');
   const [testCases, setTestCases] = useState('');
   const [loading, setLoading] = useState(true);
@@ -98,7 +128,10 @@ function TestCaseGenerator() {
               <div className="flex space-x-2">
                 <select
                   value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
+                  onChange={(e) => {
+                    setLanguage(e.target.value);
+                    setCode(exampleCodes[e.target.value] || "");
+                  }}
                   className={`px-3 py-1 rounded ${
                     isDark
                       ? 'bg-gray-800 text-white border-gray-600'
