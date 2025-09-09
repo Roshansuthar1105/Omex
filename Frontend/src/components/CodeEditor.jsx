@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import prism from "prismjs"
+import React, { useEffect, useState, useRef } from 'react'
 import Markdown from "react-markdown"
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
@@ -7,7 +6,7 @@ import axios from 'axios'
 import { FaCopy, FaTrash, FaCode, FaCheck } from "react-icons/fa";
 import { MdDone, MdSettings } from "react-icons/md";
 import Loader from "../components/Loader.jsx"
-import Editor from 'react-simple-code-editor';
+import Editor from '@monaco-editor/react';
 import toast from 'react-hot-toast';
 import { useTheme } from '../context/ThemeContext';
 
@@ -23,6 +22,7 @@ function CodeEditor(props) {
   const [codelang, setCodeLang] = useState("JavaScript");
   const [showSettings, setShowSettings] = useState(false);
   const [fontSize, setFontSize] = useState(16);
+  const editorRef = useRef(null);
 
   // Update prompt when props.prompt changes
   useEffect(() => {
@@ -34,6 +34,56 @@ function CodeEditor(props) {
   const { isDark } = useTheme();
 
   const languages = ["Java", "JavaScript", "C", "C++", "Python", "Go"];
+
+  // Language mapping for Monaco Editor
+  const getMonacoLanguage = (lang) => {
+    const langMap = {
+      'JavaScript': 'javascript',
+      'Java': 'java',
+      'C': 'c',
+      'C++': 'cpp',
+      'Python': 'python',
+      'Go': 'go'
+    };
+    return langMap[lang] || 'javascript';
+  };
+
+  // Register additional language features for enhanced IntelliSense
+  const registerLanguageFeatures = (monaco) => {
+    // For C, C++, Java, Python, Go, enable basic IntelliSense using Monaco's built-in support
+    // For more advanced features, external language servers would be needed (out of scope here)
+    // Here we enable word-based suggestions and parameter hints for these languages
+
+    ['c', 'cpp', 'java', 'python', 'go', 'javascript'].forEach(language => {
+      monaco.languages.registerCompletionItemProvider(language, {
+        triggerCharacters: ['.', '>', ':', '#', '<', '"', "'"],
+        provideCompletionItems: (model, position) => {
+          const word = model.getWordUntilPosition(position);
+          const range = {
+            startLineNumber: position.lineNumber,
+            endLineNumber: position.lineNumber,
+            startColumn: word.startColumn,
+            endColumn: word.endColumn
+          };
+          // Provide simple word-based suggestions from the document
+          const textUntilPosition = model.getValueInRange({
+            startLineNumber: 1,
+            startColumn: 1,
+            endLineNumber: position.lineNumber,
+            endColumn: position.column
+          });
+          const words = Array.from(new Set(textUntilPosition.match(/\b\w+\b/g) || []));
+          const suggestions = words.map(w => ({
+            label: w,
+            kind: monaco.languages.CompletionItemKind.Text,
+            insertText: w,
+            range: range
+          }));
+          return { suggestions: suggestions };
+        }
+      });
+    });
+  };
 
   const handleCopyClick = () => {
     navigator.clipboard.writeText(optimisedCode);
@@ -76,10 +126,6 @@ function CodeEditor(props) {
     }
   }
 
-  useEffect(() => {
-    prism.highlightAll();
-  }, []);
-
   async function reviewCode() {
     setLoading(true);
     try {
@@ -99,6 +145,88 @@ function CodeEditor(props) {
       setLoading(false);
     }
   }
+
+  // Monaco Editor configuration
+  const editorOptions = {
+    selectOnLineNumbers: true,
+    roundedSelection: false,
+    readOnly: false,
+    cursorStyle: 'line',
+    automaticLayout: true,
+    scrollBeyondLastLine: false,
+    minimap: { enabled: false },
+    fontSize: fontSize,
+    fontFamily: '"Fira Code", "Fira Mono", monospace',
+    lineNumbers: 'on',
+    folding: true,
+    foldingStrategy: 'indentation',
+    showFoldingControls: 'mouseover',
+    unfoldOnClickAfterEndOfLine: true,
+    autoClosingBrackets: 'always',
+    autoClosingQuotes: 'always',
+    autoSurround: 'brackets',
+    suggestOnTriggerCharacters: true,
+    acceptSuggestionOnEnter: 'on',
+    tabCompletion: 'on',
+    wordBasedSuggestions: 'currentDocument',
+    parameterHints: {
+      enabled: true
+    },
+    hover: {
+      enabled: true
+    },
+    contextmenu: true,
+    mouseWheelZoom: true,
+    multiCursorModifier: 'ctrlCmd',
+    renderWhitespace: 'selection',
+    renderControlCharacters: false,
+    renderLineHighlight: 'line',
+    scrollbar: {
+      vertical: 'visible',
+      horizontal: 'visible',
+      useShadows: false,
+      verticalHasArrows: false,
+      horizontalHasArrows: false,
+      verticalScrollbarSize: 14,
+      horizontalScrollbarSize: 14
+    }
+  };
+
+  const handleEditorDidMount = (editor, monaco) => {
+    editorRef.current = editor;
+
+    // Register language features for enhanced IntelliSense
+    registerLanguageFeatures(monaco);
+
+    // Configure theme based on app theme
+    monaco.editor.defineTheme('custom-dark', {
+      base: 'vs-dark',
+      inherit: true,
+      rules: [],
+      colors: {
+        'editor.background': '#1f2937',
+        'editor.foreground': '#f9fafb',
+        'editor.lineHighlightBackground': '#374151',
+        'editor.selectionBackground': '#3b82f6',
+        'editor.inactiveSelectionBackground': '#1e40af'
+      }
+    });
+
+    monaco.editor.defineTheme('custom-light', {
+      base: 'vs',
+      inherit: true,
+      rules: [],
+      colors: {
+        'editor.background': '#ffffff',
+        'editor.foreground': '#111827',
+        'editor.lineHighlightBackground': '#f3f4f6',
+        'editor.selectionBackground': '#dbeafe',
+        'editor.inactiveSelectionBackground': '#bfdbfe'
+      }
+    });
+
+    monaco.editor.setTheme(isDark ? 'custom-dark' : 'custom-light');
+  };
 
   return (
     <div className={`w-full p-4 md:p-6 ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
@@ -179,20 +307,15 @@ function CodeEditor(props) {
                 </button>
               </div>
             </div>
-            <div className={`h-[calc(100%-40px)] overflow-y-auto ${
-              isDark ? 'bg-gray-900' : 'bg-white'
-            }`}>
+            <div className={`h-[calc(100%-40px)]`}>
               <Editor
+                height="100%"
+                language={getMonacoLanguage(codelang)}
                 value={prompt}
-                onValueChange={prompt => setPrompt(prompt)}
-                highlight={prompt => prism.highlight(prompt, prism.languages.javascript, codelang)}
-                padding={20}
-                className={`h-full w-full ${isDark ? 'text-white' : 'text-gray-800'}`}
-                style={{
-                  fontFamily: '"Fira code", "Fira Mono", monospace',
-                  fontSize: `${fontSize}px`,
-                  minHeight: '100%'
-                }}
+                onChange={(value) => setPrompt(value || '')}
+                onMount={handleEditorDidMount}
+                options={editorOptions}
+                theme={isDark ? 'custom-dark' : 'custom-light'}
               />
             </div>
           </div>

@@ -12,6 +12,7 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@gsap/react": "^2.1.2",
+    "@monaco-editor/react": "^4.7.0",
     "@tailwindcss/vite": "^4.0.6",
     "axios": "^1.7.9",
     "dotenv": "^16.6.1",
