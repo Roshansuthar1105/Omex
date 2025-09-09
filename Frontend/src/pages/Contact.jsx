@@ -17,6 +17,7 @@ const Contact = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isBusinessOpen, setIsBusinessOpen] = useState(false);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -64,6 +65,25 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Check if business is currently open
+  const checkBusinessHours = () => {
+    const now = new Date();
+    const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const currentTime = currentHour * 60 + currentMinute; // Convert to minutes for easier comparison
+    
+    // Business hours: Monday-Friday (1-5), 9:00 AM - 6:00 PM
+    const openTime = 9 * 60; // 9:00 AM in minutes
+    const closeTime = 18 * 60; // 6:00 PM in minutes
+    
+    // Check if it's a weekday (Monday-Friday) and within business hours
+    const isWeekday = currentDay >= 1 && currentDay <= 5;
+    const isWithinHours = currentTime >= openTime && currentTime < closeTime;
+    
+    return isWeekday && isWithinHours;
+  };
+
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -96,6 +116,19 @@ const Contact = () => {
       window.scrollTo(0, 0);
     }, 1500);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Check business hours on component mount and update every minute
+  useEffect(() => {
+    // Initial check
+    setIsBusinessOpen(checkBusinessHours());
+    
+    // Set up interval to check every minute
+    const interval = setInterval(() => {
+      setIsBusinessOpen(checkBusinessHours());
+    }, 60000); // Check every minute
+    
+    return () => clearInterval(interval);
   }, []);
 
   if (loading) {
@@ -540,7 +573,7 @@ const Contact = () => {
                           isDark ? "border-gray-600" : "border-gray-200"
                         }`}
                       >
-                        <span className="text-green-500">●</span> Currently Open
+                        <span className={isBusinessOpen ? "text-green-500" : "text-red-500"}>●</span> {isBusinessOpen ? "Currently Open" : "Currently Closed"}
                       </div>
                     </div>
                   </motion.div>
