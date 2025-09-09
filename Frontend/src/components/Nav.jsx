@@ -22,6 +22,7 @@ import {
   FaUserFriends,
   FaUsers,
 } from "react-icons/fa";
+import { GoPackageDependencies } from "react-icons/go";
 import { useTheme } from "../context/ThemeContext";
 
 function Nav({ isMenuOpen, setIsMenuOpen }) {
@@ -75,6 +76,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
       "/performance-analyzer",
       "/content-summarizer",
       "/security-scanner",
+      "/dependency-scanner"
     ];
     return toolsPaths.some((path) => location.pathname === path);
   };
@@ -267,6 +269,18 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
                       Security Vulnerability Scanner
+                    </Link>
+
+                    <Link
+                      to="/dependency-scanner"
+                      className={`hover:text-white hover:bg-gray-500 block px-4 py-2 text-sm ${
+                        isDark
+                          ? "text-gray-300 hover:bg-gray-700"
+                          : "text-gray-700 hover:bg-gray-100"
+                      }`}
+                      onClick={() => setIsToolsDropdownOpen(false)}
+                    >
+                      Dependancy Scanner
                     </Link>
                   </div>
                 </div>
@@ -729,6 +743,23 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                 >
                   <FaShieldAlt className="text-red-400" />
                   <span>Security Scanner</span>
+                </Link>
+
+                <Link
+                  to="/dependency-scanner"
+                  className={`flex items-center space-x-3 p-3 rounded-lg ${
+                    isActive("/security-scanner")
+                      ? isDark
+                        ? "bg-blue-900/30 text-blue-400"
+                        : "bg-blue-50 text-blue-600"
+                      : isDark
+                      ? "hover:bg-gray-800/70"
+                      : "hover:bg-gray-100/70"
+                  }`}
+                  onClick={toggleMenu}
+                >
+                  <GoPackageDependencies className="text-red-400" />
+                  <span>Dependancy Scanner</span>
                 </Link>
               </div>
             </div>

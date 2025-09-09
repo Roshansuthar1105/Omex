@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
+import "../components/css/NavBar.css"
 import {
   FaChartLine,
   FaChevronDown,
@@ -27,6 +28,7 @@ import {
   FaStar,
   FaTimes
 } from "react-icons/fa";
+import { GoPackageDependencies } from "react-icons/go";
 import { useTheme } from "../context/ThemeContext";
 
 function NavBar({ isMenuOpen, setIsMenuOpen }) {
@@ -282,7 +284,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                         { to: "/error-debugger", icon: FaBug, label: "Error Debugger", color: "red" },
                         { to: "/performance-analyzer", icon: FaTachometerAlt, label: "Performance Analyzer", color: "yellow" },
                         { to: "/content-summarizer", icon: FaAlignLeft, label: "Content Summarizer", color: "purple" },
-                        { to: "/security-scanner", icon: FaShieldAlt, label: "Security Scanner", color: "red" }
+                        { to: "/security-scanner", icon: FaShieldAlt, label: "Security Scanner", color: "red" },
+                        { to: "/dependency-scanner", icon: GoPackageDependencies, label: "Dependency Scanner", color: "orange" }
                       ].map((item) => (
                         <Link
                           key={item.to}
@@ -542,7 +545,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                   { to: "/error-debugger", icon: FaBug, label: "Error Debugger", color: "red" },
                   { to: "/performance-analyzer", icon: FaTachometerAlt, label: "Performance Analyzer", color: "yellow" },
                   { to: "/content-summarizer", icon: FaAlignLeft, label: "Content Summarizer", color: "purple" },
-                  { to: "/security-scanner", icon: FaShieldAlt, label: "Security Scanner", color: "red" }
+                  { to: "/security-scanner", icon: FaShieldAlt, label: "Security Scanner", color: "red" },
+                  { to: "/dependency-scanner", icon: GoPackageDependencies, label: "Dependancy Scanner", color: "orange" }
                 ].map((item) => (
                   <Link
                     key={item.to}
@@ -646,87 +650,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
       </div>
       {/* End Mobile Navigation Sidebar */}
       {/* Custom Styles */}
-      <style jsx>{`
-        @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
 
-        @keyframes glow {
-          0%, 100% { 
-            box-shadow: 0 0 15px rgba(147,51,234,0.5),
-                       0 0 30px rgba(147,51,234,0.3); 
-          }
-          50% { 
-            box-shadow: 0 0 25px rgba(147,51,234,0.8),
-                       0 0 40px rgba(147,51,234,0.5); 
-          }
-        }
-
-        .animate-in {
-          animation: slideInRight 0.3s ease-out forwards;
-        }
-
-        .slide-in-from-top-2 {
-          animation: slideInFromTop 0.2s ease-out forwards;
-        }
-
-        @keyframes slideInFromTop {
-          from {
-            opacity: 0;
-            transform: translateY(-8px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        /* Ensure backdrop blur works properly */
-        .backdrop-blur-xl {
-          backdrop-filter: blur(24px);
-          -webkit-backdrop-filter: blur(24px);
-        }
-
-        .backdrop-blur-md {
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-        }
-
-        .backdrop-blur-2xl {
-          backdrop-filter: blur(40px);
-          -webkit-backdrop-filter: blur(40px);
-        }
-
-        .backdrop-blur-sm {
-          backdrop-filter: blur(4px);
-          -webkit-backdrop-filter: blur(4px);
-        }
-
-        /* Custom scrollbar for mobile menu */
-        .overflow-y-auto::-webkit-scrollbar {
-          width: 4px;
-        }
-
-        .overflow-y-auto::-webkit-scrollbar-track {
-          background: transparent;
-        }
-
-        .overflow-y-auto::-webkit-scrollbar-thumb {
-          background: rgba(156, 163, 175, 0.3);
-          border-radius: 2px;
-        }
-
-        .overflow-y-auto::-webkit-scrollbar-thumb:hover {
-          background: rgba(156, 163, 175, 0.5);
-        }
-      `}</style>
     </>
   );
 }
