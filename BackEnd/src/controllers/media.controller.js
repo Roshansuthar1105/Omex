@@ -1,19 +1,31 @@
 /**
  * Media Controller
- * This file contains the controller functions for handling media files and content
+ * Handles text extraction and summarization from files, text, and YouTube URLs.
  */
 
-const fs = require('fs');
-const path = require('path');
-const pdfParse = require('pdf-parse');
-const Tesseract = require('tesseract.js');
-const axios = require('axios');
-const aiService = require('../services/ai.service');
+const fs = require("fs");
+const pdfParse = require("pdf-parse");
+const Tesseract = require("tesseract.js");
+const aiService = require("../services/ai.service");
+
+// ---------- Utility Functions ----------
+
+const MAX_TEXT_LENGTH = 15000;
+
+/**
+ * Ensure extracted/received text is within token limits.
+ * @param {string} text
+ * @returns {string}
+ */
+const limitTextLength = (text) => {
+  if (!text) return "";
+  return text.length > MAX_TEXT_LENGTH
+    ? text.substring(0, MAX_TEXT_LENGTH) + "..."
+    : text;
+};
 
 /**
  * Extract text from a PDF file
- * @param {string} filePath - Path to the PDF file
- * @returns {Promise<string>} - Extracted text
  */
 const extractTextFromPDF = async (filePath) => {
   try {
@@ -21,231 +33,186 @@ const extractTextFromPDF = async (filePath) => {
     const data = await pdfParse(dataBuffer);
     return data.text;
   } catch (error) {
-    console.error('Error extracting text from PDF:', error);
-    throw new Error('Failed to extract text from PDF');
+    console.error("Error extracting text from PDF:", error);
+    throw new Error("Failed to extract text from PDF");
   }
 };
 
 /**
  * Extract text from an image using OCR
- * @param {string} filePath - Path to the image file
- * @returns {Promise<string>} - Extracted text
  */
 const extractTextFromImage = async (filePath) => {
   try {
-    const { data } = await Tesseract.recognize(filePath, 'eng');
+    const { data } = await Tesseract.recognize(filePath, "eng");
     return data.text;
   } catch (error) {
-    console.error('Error extracting text from image:', error);
-    throw new Error('Failed to extract text from image');
+    console.error("Error extracting text from image:", error);
+    throw new Error("Failed to extract text from image");
   }
 };
 
 /**
- * Read text from a text file
- * @param {string} filePath - Path to the text file
- * @returns {Promise<string>} - File content
+ * Read text from a plain text/markdown file
  */
-const readTextFile = async (filePath) => {
+const readTextFile = (filePath) => {
   try {
-    return fs.readFileSync(filePath, 'utf8');
+    return fs.readFileSync(filePath, "utf8");
   } catch (error) {
-    console.error('Error reading text file:', error);
-    throw new Error('Failed to read text file');
-  }
-};
-
-/**
- * Extract information from a YouTube URL
- * @param {string} youtubeUrl - YouTube video URL
- * @returns {Promise<string>} - Video information
- */
-const extractYouTubeInfo = async (youtubeUrl) => {
-  try {
-    // For now, we'll use a simple approach to get video ID
-    const videoId = extractYouTubeVideoId(youtubeUrl);
-    if (!videoId) {
-      throw new Error('Invalid YouTube URL');
-    }
-
-    // Use YouTube API to get video details (in a real app, you'd use the YouTube Data API)
-    // For this demo, we'll simulate getting video information
-    return `YouTube Video ID: ${videoId}
-Title: Sample YouTube Video
-Description: This is a placeholder for the actual YouTube video transcript and information.
-Since we don't have direct access to YouTube transcripts in this demo, we're providing this placeholder text.
-In a production environment, you would integrate with the YouTube Data API and a transcription service to get the actual video content.
-The video appears to be discussing technology, programming, and AI-related topics based on the URL.
-`;
-  } catch (error) {
-    console.error('Error extracting YouTube info:', error);
-    throw new Error('Failed to extract information from YouTube URL');
+    console.error("Error reading text file:", error);
+    throw new Error("Failed to read text file");
   }
 };
 
 /**
  * Extract YouTube video ID from URL
- * @param {string} url - YouTube URL
- * @returns {string|null} - Video ID or null if invalid
  */
 const extractYouTubeVideoId = (url) => {
-  const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+  const regExp =
+    /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
   const match = url.match(regExp);
-  return (match && match[7].length === 11) ? match[7] : null;
+  return match && match[7].length === 11 ? match[7] : null;
 };
 
 /**
- * Summarize content from text input
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
+ * Extract placeholder information from YouTube URL
+ * (In production, replace with YouTube Data API + transcription service)
+ */
+const extractYouTubeInfo = async (youtubeUrl) => {
+  try {
+    const videoId = extractYouTubeVideoId(youtubeUrl);
+    if (!videoId) throw new Error("Invalid YouTube URL");
+
+    return `YouTube Video ID: ${videoId}
+Title: Sample YouTube Video
+Description: Placeholder transcript and information.
+In production, integrate YouTube Data API + transcription.
+Likely discussing technology, programming, and AI-related topics.`;
+  } catch (error) {
+    console.error("Error extracting YouTube info:", error);
+    throw new Error("Failed to extract information from YouTube URL");
+  }
+};
+
+// ---------- Controller Functions ----------
+
+/**
+ * Summarize plain text input
  */
 const summarizeTextInput = async (req, res) => {
   try {
-    const { text, summaryLength, summaryType } = req.body;
+    const {
+      text,
+      summaryLength = "medium",
+      summaryType = "general",
+    } = req.body;
+    if (!text || text.trim() === "")
+      return res.status(400).send("No text provided");
 
-    if (!text || text.trim() === '') {
-      return res.status(400).send('No text provided');
-    }
-
-    // Limit text length to avoid token limits
-    const maxLength = 15000;
-    const processedText = text.length > maxLength
-      ? text.substring(0, maxLength) + '...'
-      : text;
-
-    // Generate summary
+    const processedText = limitTextLength(text);
     const summary = await aiService.summarizeContent(
       processedText,
-      summaryLength || 'medium',
-      summaryType || 'general'
+      summaryLength,
+      summaryType
     );
 
     res.send(summary);
   } catch (error) {
-    console.error('Error in summarizeTextInput:', error);
+    console.error("Error in summarizeTextInput:", error);
     res.status(500).send(`An error occurred: ${error.message}`);
   }
 };
 
 /**
- * Summarize content from YouTube URL
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
+ * Summarize content from a YouTube URL
  */
 const summarizeYouTubeUrl = async (req, res) => {
   try {
-    const { youtubeUrl, summaryLength, summaryType } = req.body;
+    const {
+      youtubeUrl,
+      summaryLength = "medium",
+      summaryType = "general",
+    } = req.body;
+    if (!youtubeUrl || youtubeUrl.trim() === "")
+      return res.status(400).send("No YouTube URL provided");
 
-    if (!youtubeUrl || youtubeUrl.trim() === '') {
-      return res.status(400).send('No YouTube URL provided');
-    }
-
-    // Extract information from YouTube URL
     const videoInfo = await extractYouTubeInfo(youtubeUrl);
-
-    // Generate summary
     const summary = await aiService.summarizeContent(
       videoInfo,
-      summaryLength || 'medium',
-      summaryType || 'general'
+      summaryLength,
+      summaryType
     );
 
     res.send(summary);
   } catch (error) {
-    console.error('Error in summarizeYouTubeUrl:', error);
+    console.error("Error in summarizeYouTubeUrl:", error);
     res.status(500).send(`An error occurred: ${error.message}`);
   }
 };
 
 /**
- * Summarize content from a file
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
+ * Summarize content from an uploaded file
  */
 const summarizeFile = async (req, res) => {
   try {
-    // Check if file exists
-    if (!req.file) {
-      return res.status(400).send('No file uploaded');
-    }
+    if (!req.file) return res.status(400).send("No file uploaded");
 
-    const filePath = req.file.path;
-    const fileType = req.file.mimetype;
-    const summaryLength = req.body.summaryLength || 'medium';
-    const summaryType = req.body.summaryType || 'general';
+    const { path: filePath, mimetype: fileType, originalname } = req.file;
+    const summaryLength = req.body.summaryLength || "medium";
+    const summaryType = req.body.summaryType || "general";
 
-    let extractedText = '';
-
-    // Extract text based on file type
-    if (fileType === 'application/pdf') {
+    let extractedText = "";
+    if (fileType === "application/pdf") {
       extractedText = await extractTextFromPDF(filePath);
-    } else if (fileType.startsWith('image/')) {
+    } else if (fileType.startsWith("image/")) {
       extractedText = await extractTextFromImage(filePath);
-    } else if (fileType === 'text/plain' ||
-               req.file.originalname.endsWith('.txt') ||
-               req.file.originalname.endsWith('.md')) {
-      extractedText = await readTextFile(filePath);
-    } else if (fileType.startsWith('video/')) {
-      // For video files, we would need a more complex solution with ffmpeg
-      // For now, we'll return an error
-      return res.status(400).send('Video transcription is not yet supported');
+    } else if (
+      fileType === "text/plain" ||
+      originalname.endsWith(".txt") ||
+      originalname.endsWith(".md")
+    ) {
+      extractedText = readTextFile(filePath);
+    } else if (fileType.startsWith("video/")) {
+      return res.status(400).send("Video transcription is not yet supported");
     } else {
-      return res.status(400).send('Unsupported file type');
+      return res.status(400).send("Unsupported file type");
     }
 
-    // Check if text was extracted
-    if (!extractedText || extractedText.trim() === '') {
-      return res.status(400).send('No text could be extracted from the file');
-    }
+    if (!extractedText || extractedText.trim() === "")
+      return res.status(400).send("No text could be extracted from the file");
 
-    // Limit text length to avoid token limits (Gemini has a context window)
-    const maxLength = 15000; // Adjust based on model's token limit
-    if (extractedText.length > maxLength) {
-      extractedText = extractedText.substring(0, maxLength) + '...';
-    }
-
-    // Generate summary
+    extractedText = limitTextLength(extractedText);
     const summary = await aiService.summarizeContent(
       extractedText,
       summaryLength,
       summaryType
     );
 
-    // Clean up the temporary file
-    fs.unlinkSync(filePath);
-
+    fs.unlinkSync(filePath); // cleanup temp file
     res.send(summary);
   } catch (error) {
-    console.error('Error in summarizeFile:', error);
+    console.error("Error in summarizeFile:", error);
     res.status(500).send(`An error occurred: ${error.message}`);
   }
 };
 
 /**
- * Summarize content from various sources (file, text, or YouTube URL)
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
+ * Route summarization requests to appropriate handler
  */
 const summarizeContent = async (req, res) => {
   try {
     const { inputType } = req.body;
 
-    // Route to the appropriate handler based on input type
-    if (req.file) {
-      // If a file was uploaded, use the file handler
-      return await summarizeFile(req, res);
-    } else if (inputType === 'text') {
-      // If text input was provided
-      return await summarizeTextInput(req, res);
-    } else if (inputType === 'youtube') {
-      // If YouTube URL was provided
-      return await summarizeYouTubeUrl(req, res);
-    } else {
-      // If no valid input was provided
-      return res.status(400).send('No valid input provided. Please upload a file, enter text, or provide a YouTube URL.');
-    }
+    if (req.file) return await summarizeFile(req, res);
+    if (inputType === "text") return await summarizeTextInput(req, res);
+    if (inputType === "youtube") return await summarizeYouTubeUrl(req, res);
+
+    return res
+      .status(400)
+      .send(
+        "No valid input provided. Upload a file, enter text, or provide a YouTube URL."
+      );
   } catch (error) {
-    console.error('Error in summarizeContent:', error);
+    console.error("Error in summarizeContent:", error);
     res.status(500).send(`An error occurred: ${error.message}`);
   }
 };
@@ -253,5 +220,5 @@ const summarizeContent = async (req, res) => {
 module.exports = {
   summarizeContent,
   summarizeTextInput,
-  summarizeYouTubeUrl
+  summarizeYouTubeUrl,
 };
