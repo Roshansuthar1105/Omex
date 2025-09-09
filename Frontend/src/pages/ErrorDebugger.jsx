@@ -9,13 +9,57 @@ import Loader from '../components/Loader';
 import { useTheme } from '../context/ThemeContext';
 
 function ErrorDebugger() {
-  const [code, setCode] = useState(`function calculateAverage(numbers) {
+  const exampleCodes = {
+    "JavaScript": `function calculateAverage(numbers) {
   let sum = 0;
   for (let i = 0; i <= numbers.length; i++) {
     sum += numbers[i];
   }
   return sum / numbers.length;
-}`);
+}`,
+    "Python": `def calculate_average(numbers):
+    sum = 0
+    for i in range(len(numbers)+1):
+        sum += numbers[i]
+    return sum / len(numbers)`,
+    "Java": `public double calculateAverage(int[] numbers) {
+    int sum = 0;
+    for (int i = 0; i <= numbers.length; i++) {
+        sum += numbers[i];
+    }
+    return sum / numbers.length;
+}`,
+    "C++": `double calculateAverage(const std::vector<int>& numbers) {
+    int sum = 0;
+    for (size_t i = 0; i <= numbers.size(); ++i) {
+        sum += numbers[i];
+    }
+    return sum / numbers.size();
+}`,
+    "C#": `public double CalculateAverage(int[] numbers) {
+    int sum = 0;
+    for (int i = 0; i <= numbers.Length; i++) {
+        sum += numbers[i];
+    }
+    return sum / numbers.Length;
+}`,
+    "PHP": '<?php\nfunction calculateAverage($numbers) {\n    $sum = 0;\n    for ($i = 0; $i <= count($numbers); $i++) {\n        $sum += $numbers[$i];\n    }\n    return $sum / count($numbers);\n}\n?>',
+    "Go": `func calculateAverage(numbers []int) float64 {
+    sum := 0
+    for i := 0; i <= len(numbers); i++ {
+        sum += numbers[i]
+    }
+    return float64(sum) / float64(len(numbers))
+}`,
+    "Ruby": `def calculate_average(numbers)
+  sum = 0
+  (0..numbers.length).each do |i|
+    sum += numbers[i]
+  end
+  sum / numbers.length
+end`,
+  };
+  const [code, setCode] = useState(exampleCodes["JavaScript"]);
   const [language, setLanguage] = useState('JavaScript');
   const [debugResult, setDebugResult] = useState('');
   const [loading, setLoading] = useState(true);
@@ -101,7 +145,10 @@ function ErrorDebugger() {
               <div className="flex space-x-2">
                 <select
                   value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
+                  onChange={(e) => {
+                    setLanguage(e.target.value);
+                    setCode(exampleCodes[e.target.value] || "");
+                  }}
                   className={`px-3 py-1 rounded ${
                     isDark
                       ? 'bg-gray-800 text-white border-gray-600'

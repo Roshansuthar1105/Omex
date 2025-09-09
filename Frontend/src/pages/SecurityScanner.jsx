@@ -10,13 +10,73 @@ import Loader from "../components/Loader";
 import { useTheme } from "../context/ThemeContext";
 
 function SecurityScanner() {
-  const [code, setCode] = useState(`// Example vulnerable code
+
+  const exampleCodes = {
+    "JavaScript": `// Example vulnerable code
 app.get('/user/:id', (req, res) => {
   db.query("SELECT * FROM users WHERE id = " + req.params.id, (err, result) => {
     if (err) throw err;
     res.send(result);
   });
-});`);
+});`,
+
+    "Python": `# Example vulnerable code
+def get_user(id):
+    db.query("SELECT * FROM users WHERE id = " + id, (err, result) => {
+        if err: raise err
+        return result
+    })`,
+
+    "Java": `// Example vulnerable code
+public void get_user(String id) {
+    db.query("SELECT * FROM users WHERE id = " + id, (err, result) => {
+        if (err) throw err;
+        return result;
+    });
+}`,
+    "C++": `// Example vulnerable code
+void get_user(int id) {
+    db.query("SELECT * FROM users WHERE id = " + id, (err, result) => {
+        if (err) throw err;
+        return result;
+    });
+}`,
+
+    "C#": `// Example vulnerable code
+void get_user(int id) {
+    db.query("SELECT * FROM users WHERE id = " + id, (err, result) => {
+        if (err) throw err;
+        return result;
+    });
+}`,
+
+    "PHP": `// Example vulnerable code
+function get_user($id) {
+    db.query("SELECT * FROM users WHERE id = " + $id, (err, result) => {
+        if (err) throw err;
+        return result;
+    });
+}`,
+
+    "Go": `// Example vulnerable code
+func get_user(id int) {
+    db.query("SELECT * FROM users WHERE id = " + id, (err, result) => {
+        if (err) throw err;
+        return result;
+    });
+}`,
+
+    "Ruby": `// Example vulnerable code
+def get_user(id)
+  db.query("SELECT * FROM users WHERE id = " + id, (err, result) => {
+    if err then raise err end
+    return result
+  })
+end`,
+
+  };
+
+  const [code, setCode] = useState(exampleCodes["JavaScript"]);
   const [language, setLanguage] = useState("JavaScript");
   const [report, setReport] = useState("");
   const [loading, setLoading] = useState(true);
@@ -116,7 +176,9 @@ app.get('/user/:id', (req, res) => {
               </h2>
               <select
                 value={language}
-                onChange={(e) => setLanguage(e.target.value)}
+                onChange={(e) => {
+                  setLanguage(e.target.value); 
+                  setCode(exampleCodes[e.target.value] || "")}}
                 className={`px-3 py-1 rounded border ${
                   isDark
                     ? "bg-gray-800 text-white border-gray-600"
