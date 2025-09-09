@@ -1,0 +1,14 @@
+<!-- Omex AI Logo: White version for dark backgrounds -->
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Code Symbol and O Lettermark Combined -->
+  <g>
+    <!-- Left Bracket -->
+    <path d="M176 176L128 256L176 336" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Right Bracket -->
+    <path d="M336 176L384 256L336 336" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Letter O Styled as a Circle -->
+    <circle cx="256" cy="256" r="64" stroke="#FFFFFF" stroke-width="20" fill="none"/>
+  </g>
+</svg>

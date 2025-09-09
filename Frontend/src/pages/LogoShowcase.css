@@ -1,0 +1,49 @@
+.logo-showcase-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  background: transparent;
+}
+
+.logo-animated {
+  height: 200px;
+  width: auto;
+  margin-bottom: 24px;
+  animation: logo-bounce 2s infinite alternate cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.12));
+  transition: filter 0.3s;
+}
+
+.logo-animated:hover {
+  filter: drop-shadow(0 8px 32px rgba(0,0,0,0.18));
+  animation-play-state: paused;
+}
+
+@keyframes logo-bounce {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  60% {
+    transform: translateY(-18px) scale(1.08);
+  }
+  100% {
+    transform: translateY(-8px) scale(1.04);
+  }
+}
+
+.logo-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: var(--logo-title-color, #2563eb);
+  text-align: center;
+}
+
+.logo-desc {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 420px;
+  text-align: center;
+}

@@ -67,9 +67,12 @@ const Footer = () => {
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Left side - Logo, description and social links */}
             <div className="lg:w-1/4">
-              <div className="flex items-center mb-4">
-                <FaCode className="text-blue-400 text-2xl mr-2" />
-                <h2 className="text-2xl font-bold">OMEX</h2>
+              <div className="flex justify-center lg:justify-start items-center mb-6">
+                <img 
+                  src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
+                  alt="Omex AI Logo" 
+                  className="h-12 w-auto" 
+                />
               </div>
               <p
                 className={`${isDark ? "text-gray-400" : "text-gray-600"} mb-6`}

@@ -1,3 +1,4 @@
+import LogoShowcase from "./pages/LogoShowcase";
 import "prismjs/themes/prism-tomorrow.css";
 import "./styles/glassmorphism.css";
 
@@ -86,6 +87,7 @@ function App() {
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
               <Route path="/contributor-guide" element={<ContributorGuide />} />
+              <Route path="/logo-showcase" element={<LogoShowcase />} />
             </Routes>
           </main>
 
