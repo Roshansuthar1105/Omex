@@ -280,7 +280,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                       }`}
                       onClick={() => setIsToolsDropdownOpen(false)}
                     >
-                      Dependancy Scanner
+                      Dependency Scanner
                     </Link>
                   </div>
                 </div>
@@ -759,7 +759,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
                   onClick={toggleMenu}
                 >
                   <GoPackageDependencies className="text-red-400" />
-                  <span>Dependancy Scanner</span>
+                  <span>Dependency Scanner</span>
                 </Link>
               </div>
             </div>

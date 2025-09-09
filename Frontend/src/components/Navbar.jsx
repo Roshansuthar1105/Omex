@@ -546,7 +546,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                   { to: "/performance-analyzer", icon: FaTachometerAlt, label: "Performance Analyzer", color: "yellow" },
                   { to: "/content-summarizer", icon: FaAlignLeft, label: "Content Summarizer", color: "purple" },
                   { to: "/security-scanner", icon: FaShieldAlt, label: "Security Scanner", color: "red" },
-                  { to: "/dependency-scanner", icon: GoPackageDependencies, label: "Dependancy Scanner", color: "orange" }
+                  { to: "/dependency-scanner", icon: GoPackageDependencies, label: "Dependency Scanner", color: "orange" }
                 ].map((item) => (
                   <Link
                     key={item.to}

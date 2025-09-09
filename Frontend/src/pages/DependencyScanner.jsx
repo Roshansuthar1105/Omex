@@ -81,7 +81,7 @@ function DependencyScanner() {
           fullscreen
           size="xl"
           color="purple"
-          text="Loading Dependancy Scanner..."
+          text="Loading Dependency Scanner..."
         />
       </div>
     );
