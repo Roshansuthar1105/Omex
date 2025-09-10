@@ -1,7 +1,7 @@
 import emailjs from "@emailjs/browser";
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaCheck, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaPhone, FaClock, FaArrowUp, FaStar } from 'react-icons/fa';
+import { FaCheck, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaPhone, FaClock, FaStar } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 import Loader from "../components/Loader";
 
@@ -1026,41 +1026,6 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Enhanced Floating Action Button */}
-        <motion.div
-          className="fixed bottom-8 right-8 z-30"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 2, duration: 0.5 }}
-        >
-          <motion.button
-            className={`group p-4 rounded-2xl backdrop-blur-xl cursor-pointer ${
-              isDark
-                ? "bg-gray-900/60 hover:bg-gray-800/80 border border-gray-600/30 shadow-2xl shadow-blue-500/20"
-                : "bg-white/60 hover:bg-white/80 border border-white/40 shadow-2xl shadow-blue-500/30"
-            } transition-all duration-300`}
-            whileHover={{ scale: 1.1, y: -8, rotate: 5 }}
-            whileTap={{ scale: 0.9 }}
-            animate={{
-              y: [0, -8, 0],
-              boxShadow: [
-                "0 10px 25px rgba(59, 130, 246, 0.2)",
-                "0 20px 40px rgba(139, 92, 246, 0.3)",
-                "0 10px 25px rgba(59, 130, 246, 0.2)",
-              ],
-            }}
-            transition={{
-              y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-              boxShadow: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-              scale: { duration: 0.2 },
-              rotate: { duration: 0.2 },
-            }}
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          >
-            <motion.div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <FaArrowUp className="w-6 h-6 text-blue-500 relative z-10 group-hover:text-purple-500 transition-colors duration-300" />
-          </motion.button>
-        </motion.div>
 
         {/* Floating decorative elements */}
         <motion.div
