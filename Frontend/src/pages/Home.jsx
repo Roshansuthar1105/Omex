@@ -5,10 +5,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextPlugin } from "gsap/TextPlugin";
 import { useGSAP } from "@gsap/react";
 import { useLocation } from "react-router-dom";
-
-// Register GSAP plugins (this is a key fix for your GSAP errors)
+// Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
-
 import {
   FaArrowRight,
   FaBug,
@@ -29,7 +27,6 @@ import Testimonials from "../components/Testimonials";
 
 function Home() {
   const { isDark } = useTheme();
-
   const services = [
     {
       title: "Code Generator",
@@ -160,7 +157,6 @@ function Home() {
         duration: 1,
         ease: "power3.out",
       });
-
       // Stagger hero content
       gsap.from(".hero-animate", {
         opacity: 0,
@@ -170,7 +166,6 @@ function Home() {
         delay: 0.3,
         ease: "power3.out",
       });
-
       // Scroll-trigger fade-ups
       gsap.utils.toArray(".fade-up").forEach((el) => {
         gsap.from(el, {
@@ -185,7 +180,6 @@ function Home() {
           ease: "power3.out",
         });
       });
-
       // Fade in section heading
       gsap.from(".featured-heading", {
         opacity: 0,
@@ -197,7 +191,6 @@ function Home() {
           start: "top 85%",
         },
       });
-
       // CTA button subtle pop
       gsap.from(".featured-cta", {
         opacity: 0,
@@ -209,7 +202,6 @@ function Home() {
           start: "top 95%",
         },
       });
-
       // Parallax background effect
       gsap.to(".featured-bg > div", {
         backgroundPositionY: "40%",
@@ -221,14 +213,12 @@ function Home() {
           scrub: true,
         },
       });
-
       // Feature animations
       features.forEach((feature, index) => {
         const card = featureCardRefs.current[index];
         const icon = featureIconRefs.current[index];
         const title = featureTitleRefs.current[index];
         const desc = featureDescRefs.current[index];
-
         // Card fade-in
         gsap.from(card, {
           opacity: 0,
@@ -240,7 +230,6 @@ function Home() {
             start: "top 85%",
           },
         });
-
         // Icon pop
         gsap.from(icon, {
           scale: 0.5,
@@ -252,7 +241,6 @@ function Home() {
             start: "top 85%",
           },
         });
-
         // Typewriter text
         ScrollTrigger.create({
           trigger: card,
@@ -264,7 +252,6 @@ function Home() {
               text: feature.title,
               ease: "none",
             });
-
             gsap.to(desc, {
               duration: 3,
               text: feature.description,
@@ -274,7 +261,6 @@ function Home() {
           },
         });
       });
-
       // Tools Section Animations
       gsap.from(toolsParagraphRef.current, {
         opacity: 0,
@@ -286,7 +272,6 @@ function Home() {
           start: "top 85%",
         },
       });
-
       gsap.from(toolsHeadingRef.current, {
         y: 100,
         opacity: 0,
@@ -297,7 +282,6 @@ function Home() {
           start: "top 85%",
         },
       });
-
       gsap.from(toolsIconRef.current, {
         y: 100,
         opacity: 0,
@@ -308,7 +292,6 @@ function Home() {
           start: "top 85%",
         },
       });
-
       // How It Works Section
       gsap.utils.toArray(".how-step-card").forEach((card, index) => {
         gsap.from(card, {
@@ -324,7 +307,6 @@ function Home() {
           },
         });
       });
-
       // CTA Section Animations
       gsap.from(ctaSectionRef.current, {
         opacity: 0,
@@ -335,7 +317,6 @@ function Home() {
           start: "top 85%",
         },
       });
-
       // Slide up glass card
       gsap.from(ctaCardRef.current, {
         opacity: 0,
@@ -347,7 +328,6 @@ function Home() {
           start: "top 85%",
         },
       });
-
       // Stagger heading and paragraph
       gsap.from([ctaHeadingRef.current, ctaParagraphRef.current], {
         opacity: 0,
@@ -360,7 +340,6 @@ function Home() {
           start: "top 85%",
         },
       });
-
       // Buttons ripple in
       ctaButtonsRef.current.forEach((btn, index) => {
         gsap.from(btn, {
@@ -375,7 +354,6 @@ function Home() {
           },
         });
       });
-
       // Testimonial Section Animations
       // Fade in background
       gsap.from(testimonialSectionRef.current, {
@@ -387,7 +365,6 @@ function Home() {
           start: "top 85%",
         },
       });
-
       // Icon pop
       gsap.from(testimonialIconRef.current, {
         scale: 0.5,
@@ -399,7 +376,6 @@ function Home() {
           start: "top 85%",
         },
       });
-
       // Text-Typing Heading
       ScrollTrigger.create({
         trigger: testimonialSectionRef.current,
@@ -413,7 +389,6 @@ function Home() {
           });
         },
       });
-
       // Paragraph fade-up
       gsap.from(testimonialParagraphRef.current, {
         opacity: 0,
@@ -425,7 +400,6 @@ function Home() {
           start: "top 85%",
         },
       });
-
       // Cards staggered slide-in
       testimonialCardsRef.current.forEach((card, index) => {
         gsap.from(card, {
@@ -440,7 +414,6 @@ function Home() {
           },
         });
       });
-
       // Avatars ripple in
       testimonialAvatarsRef.current.forEach((avatar, index) => {
         gsap.from(avatar, {
@@ -455,31 +428,24 @@ function Home() {
           },
         });
       });
-
+      // New Code Tools Card Animations
       toolCardRefs.current.forEach((card, index) => {
         gsap.from(card, {
           opacity: 0,
-          x: -50,
-          duration: 0.8,
-          ease: "power3.out",
+          y: 50,
+          duration: 1,
+          ease: "power2.out",
           delay: index * 0.16,
-          scale: 0.98,
-          filter: "blur(4px)",
-          onUpdate: () => {
-            card.style.filter = "blur(0px)";
-          },
           scrollTrigger: {
             trigger: card,
             start: "top 85%",
           },
         });
       });
-
       // Refresh ScrollTrigger on window resize to ensure correct positions
       ScrollTrigger.refresh();
     },
-
-    { scope: containerRef } // <-- only scope to the container
+    { scope: containerRef }
   );
 
   return (
@@ -488,9 +454,7 @@ function Home() {
         containerRef.current = el;
         pageRef.current = el;
       }}
-      className={`${
-        isDark ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"
-      } min-h-screen`}
+      className={`${isDark ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"} min-h-screen`}
     >
       {/* Hero Section */}
       <section className="hero-section py-20 px-4 relative overflow-hidden animated-bg">
@@ -508,40 +472,23 @@ function Home() {
           ></div>
         </div>
         <div className="container mx-auto text-center relative z-10">
-          <div
-            className={`${
-              isDark ? "glass-dark" : "glass"
-            } rounded-3xl py-12 px-6 max-w-4xl mx-auto hero-animate`}
-          >
+          <div className={`${isDark ? "glass-dark" : "glass"} rounded-3xl py-12 px-6 max-w-4xl mx-auto hero-animate`}>
             <div className="mb-8 inline-block p-3 bg-blue-600 bg-opacity-20 rounded-full hero-animate">
               <FaCode className="text-blue-400 text-3xl" />
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight hero-animate">
-              Elevate Your Code with{" "}
-              <span className="text-blue-400">OMEX</span>
+              Elevate Your Code with <span className="text-blue-400">OMEX</span>
             </h1>
-            <p
-              className={`text-xl md:text-2xl ${
-                isDark ? "text-gray-300" : "text-gray-600"
-              } max-w-3xl mx-auto mb-10 hero-animate`}
-            >
-              The AI-powered platform for developers to optimize, generate, and
-              analyze code with confidence.
+            <p className={`text-xl md:text-2xl ${isDark ? "text-gray-300" : "text-gray-600"} max-w-3xl mx-auto mb-10 hero-animate`}>
+              The AI-powered platform for developers to optimize, generate, and analyze code with confidence.
             </p>
             <div className="flex flex-wrap justify-center gap-4 hero-animate">
-              <Link
-                to="/code-tools"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 flex items-center"
-              >
+              <Link to="/code-tools" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 flex items-center">
                 Explore Tools <FaArrowRight size={16} className="ml-2" />
               </Link>
               <Link
                 to="/about"
-                className={`${
-                  isDark
-                    ? "bg-gray-700 hover:bg-gray-600"
-                    : "bg-white hover:bg-gray-100 border border-gray-200"
-                } text-${
+                className={`${isDark ? "bg-gray-700 hover:bg-gray-600" : "bg-white hover:bg-gray-100 border border-gray-200"} text-${
                   isDark ? "white" : "gray-800"
                 } px-8 py-3 rounded-lg font-medium transition-all duration-200`}
               >
@@ -553,11 +500,7 @@ function Home() {
       </section>
 
       {/* Featured Services Section */}
-      <section
-        className={`py-16 px-4 ${
-          isDark ? "bg-gray-800" : "bg-white"
-        } relative overflow-hidden`}
-      >
+      <section className={`py-16 px-4 ${isDark ? "bg-gray-800" : "bg-white"} relative overflow-hidden`}>
         <div className="absolute inset-0 opacity-5">
           <div
             className="absolute top-0 right-0 w-full h-full bg-cover bg-center"
@@ -567,20 +510,13 @@ function Home() {
             }}
           ></div>
         </div>
-
         <div className="container mx-auto relative z-10">
           <div className="text-center mb-12 featured-heading">
             <h2 className="text-3xl font-bold mb-4">Featured Services</h2>
-            <p
-              className={`text-lg ${
-                isDark ? "text-gray-300" : "text-gray-600"
-              } max-w-3xl mx-auto`}
-            >
-              Discover our most popular tools that help developers write better
-              code
+            <p className={`text-lg ${isDark ? "text-gray-300" : "text-gray-600"} max-w-3xl mx-auto`}>
+              Discover our most popular tools that help developers write better code
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => {
               const Icon = feature.icon;
@@ -593,10 +529,7 @@ function Home() {
                   } shadow-md border border-transparent transition-all duration-300 hover:shadow-2xl hover:shadow-black/30 hover:scale-[1.03] hover:border-blue-500 focus-within:shadow-2xl focus-within:scale-[1.03]`}
                   tabIndex={0}
                 >
-                  <div
-                    className="mb-4"
-                    ref={(el) => (featureIconRefs.current[index] = el)}
-                  >
+                  <div className="mb-4" ref={(el) => (featureIconRefs.current[index] = el)}>
                     <Icon className="text-3xl text-blue-400 drop-shadow-lg" />
                   </div>
                   <h3
@@ -631,7 +564,6 @@ function Home() {
               );
             })}
           </div>
-
           <div className="text-center mt-10 featured-cta">
             <Link
               to="/code-tools"
@@ -648,60 +580,70 @@ function Home() {
       </section>
 
       {/* Code Tools Section */}
-      <section
-        className={`py-16 px-4 ${
-          isDark ? "bg-gray-800 bg-opacity-50" : "bg-gray-100"
-        }`}
-      >
+      <section className={`py-16 px-4 ${isDark ? "bg-gray-800 bg-opacity-50" : "bg-gray-100"}`}>
         <div className="container mx-auto">
           <div className="flex items-center justify-center mb-6">
-            <FaTools
-              ref={toolsIconRef}
-              className="text-blue-400 text-3xl mr-3"
-            />
-            <h2
-              ref={toolsHeadingRef}
-              className="text-3xl font-bold text-center"
-            >
+            <FaTools ref={toolsIconRef} className="text-blue-400 text-3xl mr-3" />
+            <h2 ref={toolsHeadingRef} className="text-3xl font-bold text-center">
               New Code Tools
             </h2>
           </div>
           <p
             ref={toolsParagraphRef}
-            className={`text-xl ${
-              isDark ? "text-gray-300" : "text-gray-600"
-            } max-w-3xl mx-auto text-center mb-12`}
+            className={`text-xl ${isDark ? "text-gray-300" : "text-gray-600"} max-w-3xl mx-auto text-center mb-12`}
           >
-            Explore our latest AI-powered tools to enhance your coding
-            experience
+            Explore our latest AI-powered tools to enhance your coding experience
           </p>
-
           <div className="">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {toolsData.map((tool, index) => (
-                <FeatureCard
+                <div
                   key={tool.id}
-                  icon={tool.icon}
-                  title={tool.title}
-                  description={tool.description}
-                  href={tool.href}
-                  iconColor={tool.iconColor}
-                  isDark={isDark}
                   ref={(el) => (toolCardRefs.current[index] = el)}
-                />
+                  className={`flex flex-col items-center p-8 rounded-2xl ${
+                    isDark ? "bg-gray-900" : "bg-white"
+                  } shadow-md border border-transparent transition-all duration-300 hover:shadow-2xl hover:shadow-black/30 hover:scale-[1.03] hover:border-blue-500 focus-within:shadow-2xl focus-within:scale-[1.03]`}
+                  tabIndex={0}
+                >
+                  <div className="mb-4">
+                    <tool.icon className={`text-3xl drop-shadow-lg ${tool.iconColor}`} />
+                  </div>
+                  <h3 className={`text-xl font-bold text-center mb-2 ${isDark ? "text-blue-100" : "text-blue-900"}`}>
+                    {tool.title}
+                  </h3>
+                  <p className={`text-center mb-6 px-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
+                    {tool.description}
+                  </p>
+                  <Link
+                    to={tool.href}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`Learn more about ${tool.title}`}
+                  >
+                    <span
+                      className={`inline-flex items-center gap-2 px-5 py-2 rounded-md font-semibold text-base transition-colors duration-200 ${
+                        isDark
+                          ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
+                          : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
+                      } cursor-pointer select-none`}
+                    >
+                      Learn More <FaArrowRight size={16} />
+                    </span>
+                  </Link>
+                </div>
               ))}
             </div>
             <div className="flex justify-center mt-10">
               <Link
                 to="/code-tools"
                 className={`
-          inline-flex items-center gap-2
-          bg-blue-600 hover:bg-blue-700
-          text-white px-6 py-3 rounded-lg font-semibold
-          shadow-md hover:shadow-xl
-          transition-all duration-200
-          focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2
-        `}
+                  inline-flex items-center gap-2
+                  bg-blue-600 hover:bg-blue-700
+                  text-white px-6 py-3 rounded-lg font-semibold
+                  shadow-md hover:shadow-xl
+                  transition-all duration-200
+                  focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2
+                `}
                 tabIndex={0}
                 role="button"
               >
@@ -712,56 +654,29 @@ function Home() {
         </div>
       </section>
 
-{/* How It Works Section */}
-<section
-  ref={howItWorksRef}
-  className={`py-16 px-4 ${isDark ? "" : "bg-white"}`}
->
-  <div className="container mx-auto">
-    <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      
-      {/* Step 1 */}
-      <div className="rounded-2xl p-6 transform transition-transform duration-300 ease-in-out hover:-translate-y-3 hover:shadow-2xl">
-        <StepCard
-          number="01"
-          title="Input Your Code"
-          description="Paste your code or write it directly in our editor."
-        />
-      </div>
-
-      {/* Step 2 */}
-      <div className="rounded-2xl p-6 transform transition-transform duration-300 ease-in-out hover:-translate-y-3 hover:shadow-2xl">
-        <StepCard
-          number="02"
-          title="AI Analysis"
-          description="Our AI analyzes your code for optimization opportunities."
-        />
-      </div>
-
-      {/* Step 3 */}
-      <div className="rounded-2xl p-6 transform transition-transform duration-300 ease-in-out hover:-translate-y-3 hover:shadow-2xl">
-        <StepCard
-          number="03"
-          title="Get Results"
-          description="Receive detailed feedback and suggestions for improvement."
-        />
-      </div>
-
-    </div>
-  </div>
-</section>
-
+      {/* How It Works Section */}
+      <section ref={howItWorksRef} className={`py-16 px-4 ${isDark ? "" : "bg-white"}`}>
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="rounded-2xl p-6 transform transition-transform duration-300 ease-in-out hover:-translate-y-3 hover:shadow-2xl">
+              <StepCard number="01" title="Input Your Code" description="Paste your code or write it directly in our editor." />
+            </div>
+            <div className="rounded-2xl p-6 transform transition-transform duration-300 ease-in-out hover:-translate-y-3 hover:shadow-2xl">
+              <StepCard number="02" title="AI Analysis" description="Our AI analyzes your code for optimization opportunities." />
+            </div>
+            <div className="rounded-2xl p-6 transform transition-transform duration-300 ease-in-out hover:-translate-y-3 hover:shadow-2xl">
+              <StepCard number="03" title="Get Results" description="Receive detailed feedback and suggestions for improvement." />
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Testimonials Section */}
       <Testimonials />
 
       {/* CTA Section */}
-      <section
-        className={`py-16 px-4 ${
-          isDark ? "bg-slate-600 bg-opacity-10 " : "bg-blue-50"
-        } relative overflow-hidden`}
-      >
+      <section className={`py-16 px-4 ${isDark ? "bg-slate-600 bg-opacity-10 " : "bg-blue-50"} relative overflow-hidden`}>
         <div className="absolute inset-0">
           <div
             className="absolute inset-0 bg-cover bg-center opacity-10"
@@ -779,23 +694,15 @@ function Home() {
           ></div>
         </div>
         <div className="container mx-auto text-center relative z-10">
-          <div
-            ref={ctaCardRef}
-            className={`${
-              isDark ? "glass-dark" : "glass"
-            } rounded-2xl py-12 px-6 max-w-4xl mx-auto`}
-          >
+          <div ref={ctaCardRef} className={`${isDark ? "glass-dark" : "glass"} rounded-2xl py-12 px-6 max-w-4xl mx-auto`}>
             <h2 ref={ctaHeadingRef} className="text-3xl font-bold mb-6">
               Ready to Elevate Your Code?
             </h2>
             <p
               ref={ctaParagraphRef}
-              className={`text-xl ${
-                isDark ? "text-gray-300" : "text-gray-600"
-              } max-w-2xl mx-auto mb-8`}
+              className={`text-xl ${isDark ? "text-gray-300" : "text-gray-600"} max-w-2xl mx-auto mb-8`}
             >
-              Join thousands of developers who are writing better, cleaner, and
-              more efficient code with OMEX.
+              Join thousands of developers who are writing better, cleaner, and more efficient code with OMEX.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
@@ -808,11 +715,7 @@ function Home() {
               <Link
                 to="/contact"
                 ref={(el) => (ctaButtonsRef.current[1] = el)}
-                className={`${
-                  isDark
-                    ? "bg-gray-700 hover:bg-gray-600"
-                    : "bg-white hover:bg-gray-100 border border-gray-200"
-                } text-${
+                className={`${isDark ? "bg-gray-700 hover:bg-gray-600" : "bg-white hover:bg-gray-100 border border-gray-200"} text-${
                   isDark ? "white" : "gray-800"
                 } px-8 py-3 rounded-lg font-medium transition-all duration-200`}
               >
@@ -822,82 +725,17 @@ function Home() {
           </div>
         </div>
       </section>
+
       <FAQSection />
     </div>
   );
 }
 
 // Helper Components
-const FeatureCard = forwardRef(
-  ({ icon: Icon, title, description, href, iconColor, isDark }, ref) => {
-    return (
-      <div
-        ref={ref} // Added ref to the div
-        className={`
-        flex flex-col items-center p-8
-        rounded-2xl justify-between
-        ${isDark ? "bg-gray-800" : "bg-white"}
-        shadow-md
-        border border-transparent
-        transition-all duration-300
-        hover:shadow-2xl hover:shadow-black/30
-        hover:scale-[1.03] hover:border-blue-500
-        focus-within:shadow-2xl focus-within:scale-[1.03]
-      `}
-        tabIndex={0}
-      >
-        <div className="mb-4">
-          <Icon className={`text-3xl drop-shadow-lg ${iconColor}`} />
-        </div>
-        <h3
-          className={`text-xl font-bold text-center mb-2 ${
-            isDark ? "text-blue-100" : "text-blue-900"
-          }`}
-        >
-          {title}
-        </h3>
-        <p
-          className={`text-center mb-6 px-2 ${
-            isDark ? "text-gray-300" : "text-gray-700"
-          }`}
-        >
-          {description}
-        </p>
-        <a
-          href={href}
-          tabIndex={0}
-          role="button"
-          aria-label={`Learn more about ${title}`}
-        >
-          <span
-            className={`
-            inline-flex items-center gap-2
-            px-5 py-2 rounded-md font-semibold text-base
-            transition-colors duration-200
-            ${
-              isDark
-                ? "bg-blue-900 text-blue-200 border border-blue-600 hover:bg-blue-700"
-                : "bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-200"
-            }
-            cursor-pointer select-none
-          `}
-          >
-            Learn More <FaArrowRight size={16} />
-          </span>
-        </a>
-      </div>
-    );
-  }
-);
-
 const StepCard = ({ number, title, description }) => {
   const { isDark } = useTheme();
   return (
-    <div
-      className={`${
-        isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
-      } rounded-lg p-6 shadow-lg border`}
-    >
+    <div className={`${isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"} rounded-lg p-6 shadow-lg border`}>
       <div className="text-5xl font-bold text-blue-400 opacity-50 mb-4">
         {number}
       </div>
@@ -908,4 +746,5 @@ const StepCard = ({ number, title, description }) => {
     </div>
   );
 };
+
 export default Home;
