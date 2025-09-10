@@ -3,6 +3,7 @@ import "./styles/glassmorphism.css";
 
 import { useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import NotFound from "./pages/notFound";
 
 import Home from './pages/Home';
 import NavBar from './components/Navbar';
@@ -83,8 +84,10 @@ function App() {
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
               <Route path="/contributor-guide" element={<ContributorGuide />} />
-            </Routes>
-          </main>
+           {/* 👇 Catch-all 404 route goes here */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </main>
 
           <Footer />
           {!isMenuOpen && <BackToTopButton />}
@@ -92,6 +95,7 @@ function App() {
         </div>
       </Router>
     </ThemeProvider>
+    
   );
 }
 
