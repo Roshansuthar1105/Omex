@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { FaCode, FaLinkedin, FaGithub, Instagram } from "react-icons/fa";
+import { FaCode, FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 import Loader from "../components/Loader";
 
@@ -117,7 +117,7 @@ const Team = () => {
                       : "bg-white/70 hover:bg-blue-100/70"
                   } backdrop-blur-sm transition duration-200 hover:scale-110 shadow-md`}
                 >
-                  <FaLinkedin size="{20}" className="text-blue-500" />
+                  <FaLinkedin size={20} className="text-blue-500" />
                 </a>
               )}
               {member.social.github && (
