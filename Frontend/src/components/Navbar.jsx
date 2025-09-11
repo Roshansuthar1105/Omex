@@ -43,6 +43,72 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
   const toolsDropdownRef = useRef(null);
   const companyDropdownRef = useRef(null);
 
+  const colorMap = {
+    blue: {
+      bg: "bg-blue-50",
+      text: "text-blue-600",
+      darkBg: "bg-blue-900/30",
+      darkText: "text-blue-400",
+      icon: "text-blue-400",
+    },
+    yellow: {
+      bg: "bg-yellow-50",
+      text: "text-yellow-600",
+      darkBg: "bg-yellow-900/30",
+      darkText: "text-yellow-400",
+      icon: "text-yellow-400",
+    },
+    green: {
+      bg: "bg-green-50",
+      text: "text-green-600",
+      darkBg: "bg-green-900/30",
+      darkText: "text-green-400",
+      icon: "text-green-400",
+    },
+    purple: {
+      bg: "bg-purple-50",
+      text: "text-purple-600",
+      darkBg: "bg-purple-900/30",
+      darkText: "text-purple-400",
+      icon: "text-purple-400",
+    },
+    red: {
+      bg: "bg-red-50",
+      text: "text-red-600",
+      darkBg: "bg-red-900/30",
+      darkText: "text-red-400",
+      icon: "text-red-400",
+    },
+    pink: {
+      bg: "bg-pink-50",
+      text: "text-pink-600",
+      darkBg: "bg-pink-900/30",
+      darkText: "text-pink-400",
+      icon: "text-pink-400",
+    },
+    indigo: {
+      bg: "bg-indigo-50",
+      text: "text-indigo-600",
+      darkBg: "bg-indigo-900/30",
+      darkText: "text-indigo-400",
+      icon: "text-indigo-400",
+    },
+    gray: {
+      bg: "bg-gray-50",
+      text: "text-gray-600",
+      darkBg: "bg-gray-900/30",
+      darkText: "text-gray-400",
+      icon: "text-gray-400",
+    },
+    orange: {
+        bg: "bg-orange-50",
+        text: "text-orange-600",
+        darkBg: "bg-orange-900/30",
+        darkText: "text-orange-400",
+        icon: "text-orange-400",
+      },
+  };
+
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
@@ -286,21 +352,26 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                         { to: "/content-summarizer", icon: FaAlignLeft, label: "Content Summarizer", color: "purple" },
                         { to: "/security-scanner", icon: FaShieldAlt, label: "Security Scanner", color: "red" },
                         { to: "/dependency-scanner", icon: GoPackageDependencies, label: "Dependency Scanner", color: "orange" }
-                      ].map((item) => (
-                        <Link
-                          key={item.to}
-                          to={item.to}
-                          className={`flex items-center space-x-3 px-4 py-3 text-sm transition-all duration-200 group ${
-                            isDark
-                              ? "text-gray-300 hover:bg-gray-700/50 hover:text-white"
-                              : "text-gray-700 hover:bg-gray-50/50 hover:text-gray-900"
-                          }`}
-                          onClick={() => setIsToolsDropdownOpen(false)}
-                        >
-                          <item.icon className={`text-${item.color}-400 text-sm group-hover:scale-110 transition-transform duration-200`} />
-                          <span className="text-sm font-medium">{item.label}</span>
-                        </Link>
-                      ))}
+                      ].map((item) => {
+                        const colors = colorMap[item.color] || colorMap.blue;
+                        return (
+                          <Link
+                            key={item.to}
+                            to={item.to}
+                            className={`flex items-center space-x-3 px-4 py-3 text-sm transition-all duration-200 group ${
+                              isDark
+                                ? "text-gray-300 hover:bg-gray-700/50 hover:text-white"
+                                : "text-gray-700 hover:bg-gray-50/50 hover:text-gray-900"
+                            }`}
+                            onClick={() => setIsToolsDropdownOpen(false)}
+                          >
+                            <item.icon
+                              className={`${colors.icon} text-sm group-hover:scale-110 transition-transform duration-200`}
+                            />
+                            <span className="text-sm font-medium">{item.label}</span>
+                          </Link>
+                        );
+                      })}}
                     </div>
                   </div>
                 )}
@@ -341,21 +412,26 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                         { to: "/contact", icon: FaEnvelope, label: "Contact Us", color: "purple" },
                         { to: "/privacy-policy", icon: FaShieldAlt, label: "Privacy Policy", color: "red" },
                         { to: "/terms-of-service", icon: FaFileContract, label: "Terms of Service", color: "gray" }
-                      ].map((item) => (
-                        <Link
-                          key={item.to}
-                          to={item.to}
-                          className={`flex items-center space-x-3 px-4 py-3 text-sm transition-all duration-200 group ${
-                            isDark
-                              ? "text-gray-300 hover:bg-gray-700/50 hover:text-white"
-                              : "text-gray-700 hover:bg-gray-50/50 hover:text-gray-900"
-                          }`}
-                          onClick={() => setIsCompanyDropdownOpen(false)}
-                        >
-                          <item.icon className={`text-${item.color}-400 group-hover:scale-110 transition-transform duration-200`} />
-                          <span className="relative z-10">{item.label}</span>
-                        </Link>
-                      ))}
+                      ].map((item) => {
+                        const colors = colorMap[item.color] || colorMap.blue;
+                        return (
+                          <Link
+                            key={item.to}
+                            to={item.to}
+                            className={`flex items-center space-x-3 px-4 py-3 text-sm transition-all duration-200 group ${
+                              isDark
+                                ? "text-gray-300 hover:bg-gray-700/50 hover:text-white"
+                                : "text-gray-700 hover:bg-gray-50/50 hover:text-gray-900"
+                            }`}
+                            onClick={() => setIsCompanyDropdownOpen(false)}
+                          >
+                            <item.icon
+                              className={`${colors.icon} group-hover:scale-110 transition-transform duration-200`}
+                            />
+                            <span className="relative z-10">{item.label}</span>
+                          </Link>
+                        );
+                      })}}
                     </div>
                   </div>
                 )}
@@ -489,27 +565,34 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
             { to: "/codecomplexity", icon: FaChartLine, label: "Complexity", color: "purple" },
             { to: "/codecompare", icon: FaExchangeAlt, label: "Compare", color: "red" },
             { to: "/contributors", icon: FaUserFriends, label: "Contributors", color: "pink"}
-          ].map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className={`flex items-center space-x-3 p-4 rounded-xl transition-all duration-300 group ${
-                location.pathname === item.to
-                  ? isDark
-                    ? `bg-${item.color}-900/30 text-${item.color}-400`
-                    : `bg-${item.color}-50 text-${item.color}-600`
-                  : isDark
+          ].map((item) => {
+            const colors = colorMap[item.color] || colorMap.blue;
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`flex items-center space-x-3 p-4 rounded-xl transition-all duration-300 group ${
+                  location.pathname === item.to
+                    ? isDark
+                      ? `${colors.darkBg} ${colors.darkText}`
+                      : `${colors.bg} ${colors.text}`
+                    : isDark
                     ? "hover:bg-gray-800/70"
                     : "hover:bg-gray-100/70"
-              } border ${
-                isDark ? "border-transparent hover:border-gray-700/50" : "border-transparent hover:border-gray-200/50"
-              }`}
-              onClick={closeMenu}
-            >
-              <item.icon className={`text-${item.color}-400 group-hover:scale-110 transition-transform duration-200`} />
-              <span className="font-medium">{item.label}</span>
-            </Link>
-          ))}
+                } border ${
+                  isDark
+                    ? "border-transparent hover:border-gray-700/50"
+                    : "border-transparent hover:border-gray-200/50"
+                }`}
+                onClick={closeMenu}
+              >
+                <item.icon
+                  className={`${colors.icon} group-hover:scale-110 transition-transform duration-200`}
+                />
+                <span className="font-medium">{item.label}</span>
+              </Link>
+            );
+          })}}
 
           {/* Mobile Tools Dropdown */}
           <div className="space-y-2">
@@ -547,21 +630,26 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                   { to: "/content-summarizer", icon: FaAlignLeft, label: "Content Summarizer", color: "purple" },
                   { to: "/security-scanner", icon: FaShieldAlt, label: "Security Scanner", color: "red" },
                   { to: "/dependency-scanner", icon: GoPackageDependencies, label: "Dependency Scanner", color: "orange" }
-                ].map((item) => (
-                  <Link
-                    key={item.to}
-                    to={item.to}
-                    className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 group ${
-                      isDark
-                        ? "hover:bg-gray-800/50 text-gray-300"
-                        : "hover:bg-gray-100/50 text-gray-700"
-                    }`}
-                    onClick={closeMenu}
-                  >
-                    <item.icon className={`text-${item.color}-400 text-sm group-hover:scale-110 transition-transform duration-200`} />
-                    <span className="text-sm font-medium">{item.label}</span>
-                  </Link>
-                ))}
+                ].map((item) => {
+                  const colors = colorMap[item.color] || colorMap.blue;
+                  return (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 group ${
+                        isDark
+                          ? "hover:bg-gray-800/50 text-gray-300"
+                          : "hover:bg-gray-100/50 text-gray-700"
+                      }`}
+                      onClick={closeMenu}
+                    >
+                      <item.icon
+                        className={`${colors.icon} text-sm group-hover:scale-110 transition-transform duration-200`}
+                      />
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </Link>
+                  );
+                })}}
               </div>
             )}
           </div>
@@ -601,21 +689,26 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                   { to: "/contact", icon: FaEnvelope, label: "Contact Us", color: "purple" },
                   { to: "/privacy-policy", icon: FaShieldAlt, label: "Privacy Policy", color: "red" },
                   { to: "/terms-of-service", icon: FaFileContract, label: "Terms of Service", color: "gray" }
-                ].map((item) => (
-                  <Link
-                    key={item.to}
-                    to={item.to}
-                    className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 group ${
-                      isDark
-                        ? "hover:bg-gray-800/50 text-gray-300"
-                        : "hover:bg-gray-100/50 text-gray-700"
-                    }`}
-                    onClick={closeMenu}
-                  >
-                    <item.icon className={`text-${item.color}-400 text-sm group-hover:scale-110 transition-transform duration-200`} />
-                    <span className="text-sm font-medium">{item.label}</span>
-                  </Link>
-                ))}
+                ].map((item) => {
+                  const colors = colorMap[item.color] || colorMap.blue;
+                  return (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 group ${
+                        isDark
+                          ? "hover:bg-gray-800/50 text-gray-300"
+                          : "hover:bg-gray-100/50 text-gray-700"
+                      }`}
+                      onClick={closeMenu}
+                    >
+                      <item.icon
+                        className={`${colors.icon} text-sm group-hover:scale-110 transition-transform duration-200`}
+                      />
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </Link>
+                  );
+                })}}
               </div>
             )}
           </div>
