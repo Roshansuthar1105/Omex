@@ -130,6 +130,7 @@ export default function CodeTools() {
 
   useEffect(() => {
     if (!loading) {
+      console.log('headerRef.current in CodeTools.jsx:', headerRef.current);
       gsap.from(headerRef.current, {
         opacity: 0,
         y: 30,
@@ -137,6 +138,7 @@ export default function CodeTools() {
         ease: "power3.out",
       });
 
+      console.log('paragraphRef.current in CodeTools.jsx:', paragraphRef.current);
       gsap.from(paragraphRef.current, {
         opacity: 0,
         y: 20,
@@ -146,6 +148,7 @@ export default function CodeTools() {
       });
 
       cardRefs.current.forEach((card, index) => {
+        console.log(`cardRefs.current[${index}] in CodeTools.jsx:`, card);
         if (card) {
           gsap.from(card, {
             opacity: 0,
