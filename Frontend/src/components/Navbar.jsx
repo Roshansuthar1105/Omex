@@ -453,15 +453,15 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
         }`}
       >
         {/* Mobile header */}
-        <div className={`flex justify-between items-center p-6 border-b ${
+        <div className={`flex justify-between items-center p-6 border-b  ${
           isDark ? "border-gray-800/50" : "border-gray-200/50"
         }`}>
           <div className="flex items-center justify-center space-x-3">
-            <Link to="/" className="flex items-center" onClick={closeMenu}>
+            <Link to="/" className="flex items-center  " onClick={closeMenu}>
               <img 
                 src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
                 alt="Omex AI" 
-                className="h-10 w-auto transition-transform duration-300 transform group-hover:scale-110" 
+                className="h-10 w-auto transition-transform duration-300 transform group-hover:scale-110 " 
               />
               <FaStar className="text-yellow-400 text-sm animate-pulse opacity-70 ml-2" />
             </Link>
