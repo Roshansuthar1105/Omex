@@ -1,7 +1,7 @@
 import emailjs from "@emailjs/browser";
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaCheck, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaPhone, FaClock, FaStar } from 'react-icons/fa';
+import { FaCheck, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaPhone, FaClock, FaStar, FaCode, FaRobot, FaChartLine, FaTasks } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 import Loader from "../components/Loader";
 
@@ -13,11 +13,33 @@ const Contact = () => {
     email: "",
     subject: "",
     message: "",
+    projectType: "",
+    codeLanguage: "",
+    urgency: "medium",
+    company: ""
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isBusinessOpen, setIsBusinessOpen] = useState(false);
+
+  // Programming languages supported by OMEX
+  const programmingLanguages = [
+    "JavaScript", "Python", "Java", "C++", "C", "Go", "Ruby", 
+    "PHP", "TypeScript", "Swift", "Kotlin", "Rust", "Other"
+  ];
+
+  // Project types relevant to OMEX
+  const projectTypes = [
+    "Code Optimization",
+    "Code Generation",
+    "Complexity Analysis",
+    "Code Comparison",
+    "General Inquiry",
+    "Enterprise Solution",
+    "Technical Support",
+    "Partnership"
+  ];
 
   // Handle input changes
   const handleChange = (e) => {
@@ -68,16 +90,14 @@ const Contact = () => {
   // Check if business is currently open
   const checkBusinessHours = () => {
     const now = new Date();
-    const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    const currentDay = now.getDay();
     const currentHour = now.getHours();
     const currentMinute = now.getMinutes();
-    const currentTime = currentHour * 60 + currentMinute; // Convert to minutes for easier comparison
+    const currentTime = currentHour * 60 + currentMinute;
     
-    // Business hours: Monday-Friday (1-5), 9:00 AM - 6:00 PM
-    const openTime = 9 * 60; // 9:00 AM in minutes
-    const closeTime = 18 * 60; // 6:00 PM in minutes
+    const openTime = 9 * 60;
+    const closeTime = 18 * 60;
     
-    // Check if it's a weekday (Monday-Friday) and within business hours
     const isWeekday = currentDay >= 1 && currentDay <= 5;
     const isWithinHours = currentTime >= openTime && currentTime < closeTime;
     
@@ -95,7 +115,7 @@ const Contact = () => {
       setTimeout(() => {
         setIsSubmitting(false);
         setIsSubmitted(true);
-        toast.success("Message sent successfully!");
+        // toast.success("Message sent successfully!");
 
         // Reset form
         setFormData({
@@ -103,10 +123,14 @@ const Contact = () => {
           email: "",
           subject: "",
           message: "",
+          projectType: "",
+          codeLanguage: "",
+          urgency: "medium",
+          company: ""
         });
       }, 2000);
     } else {
-      toast.error("Please fix the errors in the form.");
+      // toast.error("Please fix the errors in the form.");
     }
   };
 
@@ -120,13 +144,11 @@ const Contact = () => {
 
   // Check business hours on component mount and update every minute
   useEffect(() => {
-    // Initial check
     setIsBusinessOpen(checkBusinessHours());
     
-    // Set up interval to check every minute
     const interval = setInterval(() => {
       setIsBusinessOpen(checkBusinessHours());
-    }, 60000); // Check every minute
+    }, 60000);
     
     return () => clearInterval(interval);
   }, []);
@@ -231,7 +253,7 @@ const Contact = () => {
           }}
         />
 
-        {/* Geometric patterns */}
+        {/* Geometric patterns with code symbols */}
         <div className="absolute inset-0 opacity-5">
           <motion.div
             className="absolute top-20 left-20 w-32 h-32 border border-blue-500 rounded-full"
@@ -248,6 +270,14 @@ const Contact = () => {
             animate={{ rotate: 360 }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
           />
+          {/* Code brackets */}
+          <motion.div
+            className="absolute top-1/4 right-1/4 text-6xl opacity-10"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 8, repeat: Infinity }}
+          >
+            {"</>"}
+          </motion.div>
         </div>
 
         {/* Modern floating particles */}
@@ -315,7 +345,7 @@ const Contact = () => {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <motion.div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20" />
-              <FaEnvelope className="text-5xl text-blue-500 relative z-10" />
+              <FaCode className="text-5xl text-blue-500 relative z-10" />
               <motion.div
                 className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center"
                 animate={{ scale: [1, 1.2, 1] }}
@@ -336,7 +366,7 @@ const Contact = () => {
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
               transition={{ duration: 5, repeat: Infinity }}
             >
-              Let's Connect
+              Let's Optimize Together
             </motion.h1>
             <motion.div
               className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6 rounded-full"
@@ -354,9 +384,9 @@ const Contact = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Ready to start your next project or have questions about our
-            services? We're here to help bring your ideas to life. Reach out and
-            let's create something amazing together.
+            Ready to optimize your code with AI-powered tools? Whether you need code optimization, 
+            generation, complexity analysis, or comparison, our team is here to help you write better, 
+            cleaner, and more efficient code.
           </motion.p>
         </motion.div>
 
@@ -577,6 +607,46 @@ const Contact = () => {
                       </div>
                     </div>
                   </motion.div>
+
+                  {/* OMEX Services Overview */}
+                  <motion.div
+                    className={`mt-10 p-6 rounded-2xl backdrop-blur-sm ${
+                      isDark
+                        ? "bg-gray-800/30 border border-gray-600/30"
+                        : "bg-white/50 border border-white/60"
+                    }`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.8 }}
+                  >
+                    <h3 className="font-semibold text-xl mb-4">Our Services</h3>
+                    <div className="space-y-4">
+                      <div className="flex items-center">
+                        <div className={`p-2 rounded-lg mr-3 ${isDark ? 'bg-blue-500/20' : 'bg-blue-100'}`}>
+                          <FaRobot className="text-blue-500" />
+                        </div>
+                        <span>AI-Powered Code Optimization</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className={`p-2 rounded-lg mr-3 ${isDark ? 'bg-purple-500/20' : 'bg-purple-100'}`}>
+                          <FaCode className="text-purple-500" />
+                        </div>
+                        <span>Multi-language Code Generation</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className={`p-2 rounded-lg mr-3 ${isDark ? 'bg-green-500/20' : 'bg-green-100'}`}>
+                          <FaChartLine className="text-green-500" />
+                        </div>
+                        <span>Complexity Analysis</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className={`p-2 rounded-lg mr-3 ${isDark ? 'bg-pink-500/20' : 'bg-pink-100'}`}>
+                          <FaTasks className="text-pink-500" />
+                        </div>
+                        <span>Code Comparison</span>
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
               </motion.div>
             </motion.div>
@@ -671,9 +741,8 @@ const Contact = () => {
                           animate={{ y: 0, opacity: 1 }}
                           transition={{ delay: 0.4, duration: 0.5 }}
                         >
-                          Thank you for reaching out! We've received your
-                          message and our team will get back to you within 24
-                          hours.
+                          Thank you for reaching out! Our AI experts will review your inquiry 
+                          and get back to you within 24 hours with optimization suggestions.
                         </motion.p>
                         <motion.button
                           onClick={() => setIsSubmitted(false)}
@@ -724,15 +793,14 @@ const Contact = () => {
                           </motion.div>
                           <div>
                             <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                              Send Us a Message
+                              Tell Us About Your Project
                             </h2>
                             <p
                               className={`mt-2 ${
                                 isDark ? "text-gray-400" : "text-gray-500"
                               }`}
                             >
-                              We'd love to hear from you. Fill out the form
-                              below.
+                              Help us understand your coding needs for better assistance.
                             </p>
                           </div>
                         </motion.div>
@@ -837,12 +905,147 @@ const Contact = () => {
                             </motion.div>
                           </motion.div>
 
+                          <motion.div
+                            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                          >
+                            {/* Company */}
+                            <motion.div
+                              className="group"
+                              whileHover={{ scale: 1.02 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <label
+                                htmlFor="company"
+                                className="block mb-3 font-semibold text-lg"
+                              >
+                                Company
+                              </label>
+                              <motion.input
+                                type="text"
+                                id="company"
+                                name="company"
+                                value={formData.company}
+                                onChange={handleChange}
+                                className={`w-full px-6 py-4 rounded-2xl backdrop-blur-sm transition-all duration-300 ${
+                                  isDark
+                                    ? "bg-gray-800/30 border-gray-600/50 text-white placeholder-gray-400 focus:bg-gray-800/50 focus:border-blue-400/70"
+                                    : "bg-white/50 border-gray-300/50 text-gray-900 placeholder-gray-500 focus:bg-white/70 focus:border-blue-500/70"
+                                } border-2 focus:outline-none focus:ring-4 focus:ring-blue-500/20 text-lg group-hover:border-blue-400/50`}
+                                placeholder="Your company name"
+                                whileFocus={{ scale: 1.02 }}
+                              />
+                            </motion.div>
+
+                            {/* Project Type */}
+                            <motion.div
+                              className="group"
+                              whileHover={{ scale: 1.02 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <label
+                                htmlFor="projectType"
+                                className="block mb-3 font-semibold text-lg"
+                              >
+                                Project Type
+                              </label>
+                              <motion.select
+                                id="projectType"
+                                name="projectType"
+                                value={formData.projectType}
+                                onChange={handleChange}
+                                className={`w-full px-6 py-4 rounded-2xl backdrop-blur-sm transition-all duration-300 ${
+                                  isDark
+                                    ? "bg-gray-800/30 border-gray-600/50 text-white focus:bg-gray-800/50 focus:border-blue-400/70"
+                                    : "bg-white/50 border-gray-300/50 text-gray-900 focus:bg-white/70 focus:border-blue-500/70"
+                                } border-2 focus:outline-none focus:ring-4 focus:ring-blue-500/20 text-lg group-hover:border-blue-400/50`}
+                                whileFocus={{ scale: 1.02 }}
+                              >
+                                <option value="">Select project type</option>
+                                {projectTypes.map((type) => (
+                                  <option key={type} value={type}>{type}</option>
+                                ))}
+                              </motion.select>
+                            </motion.div>
+                          </motion.div>
+
+                          <motion.div
+                            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.5 }}
+                          >
+                            {/* Programming Language */}
+                            <motion.div
+                              className="group"
+                              whileHover={{ scale: 1.02 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <label
+                                htmlFor="codeLanguage"
+                                className="block mb-3 font-semibold text-lg"
+                              >
+                                Primary Language
+                              </label>
+                              <motion.select
+                                id="codeLanguage"
+                                name="codeLanguage"
+                                value={formData.codeLanguage}
+                                onChange={handleChange}
+                                className={`w-full px-6 py-4 rounded-2xl backdrop-blur-sm transition-all duration-300 ${
+                                  isDark
+                                    ? "bg-gray-800/30 border-gray-600/50 text-white focus:bg-gray-800/50 focus:border-blue-400/70"
+                                    : "bg-white/50 border-gray-300/50 text-gray-900 focus:bg-white/70 focus:border-blue-500/70"
+                                } border-2 focus:outline-none focus:ring-4 focus:ring-blue-500/20 text-lg group-hover:border-blue-400/50`}
+                                whileFocus={{ scale: 1.02 }}
+                              >
+                                <option value="">Select language</option>
+                                {programmingLanguages.map((lang) => (
+                                  <option key={lang} value={lang}>{lang}</option>
+                                ))}
+                              </motion.select>
+                            </motion.div>
+
+                            {/* Urgency */}
+                            <motion.div
+                              className="group"
+                              whileHover={{ scale: 1.02 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <label
+                                htmlFor="urgency"
+                                className="block mb-3 font-semibold text-lg"
+                              >
+                                Project Urgency
+                              </label>
+                              <motion.select
+                                id="urgency"
+                                name="urgency"
+                                value={formData.urgency}
+                                onChange={handleChange}
+                                className={`w-full px-6 py-4 rounded-2xl backdrop-blur-sm transition-all duration-300 ${
+                                  isDark
+                                    ? "bg-gray-800/30 border-gray-600/50 text-white focus:bg-gray-800/50 focus:border-blue-400/70"
+                                    : "bg-white/50 border-gray-300/50 text-gray-900 focus:bg-white/70 focus:border-blue-500/70"
+                                } border-2 focus:outline-none focus:ring-4 focus:ring-blue-500/20 text-lg group-hover:border-blue-400/50`}
+                                whileFocus={{ scale: 1.02 }}
+                              >
+                                <option value="low">Low (General Inquiry)</option>
+                                <option value="medium">Medium (Planning Phase)</option>
+                                <option value="high">High (Active Development)</option>
+                                <option value="critical">Critical (Production Issue)</option>
+                              </motion.select>
+                            </motion.div>
+                          </motion.div>
+
                           {/* Subject */}
                           <motion.div
                             className="group"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.4 }}
+                            transition={{ duration: 0.6, delay: 0.6 }}
                           >
                             <label
                               htmlFor="subject"
@@ -886,15 +1089,20 @@ const Contact = () => {
                             className="group"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.5 }}
+                            transition={{ duration: 0.6, delay: 0.7 }}
                           >
-                            <label
-                              htmlFor="message"
-                              className="block mb-3 font-semibold text-lg"
-                            >
-                              Message
-                              <span className="text-red-500 ml-1">*</span>
-                            </label>
+                            <div className="flex justify-between items-center mb-2">
+                              <label
+                                htmlFor="message"
+                                className="block font-semibold text-lg"
+                              >
+                                Message
+                                <span className="text-red-500 ml-1">*</span>
+                              </label>
+                              <span className={`text-sm ${formData.message.length > 490 ? 'text-red-500' : isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                                {formData.message.length}/500
+                              </span>
+                            </div>
                             <motion.textarea
                               id="message"
                               name="message"
@@ -906,9 +1114,10 @@ const Contact = () => {
                                   ? "bg-gray-800/30 border-gray-600/50 text-white placeholder-gray-400 focus:bg-gray-800/50 focus:border-blue-400/70"
                                   : "bg-white/50 border-gray-300/50 text-gray-900 placeholder-gray-500 focus:bg-white/70 focus:border-blue-500/70"
                               } border-2 focus:outline-none focus:ring-4 focus:ring-blue-500/20 text-lg resize-none group-hover:border-blue-400/50`}
-                              placeholder="Tell us more about your project or inquiry..."
+                              placeholder="Tell us about your project, code challenges, or specific requirements..."
                               whileHover={{ scale: 1.01 }}
                               whileFocus={{ scale: 1.01 }}
+                              maxLength="500"
                             ></motion.textarea>
                             <AnimatePresence>
                               {errors.message && (
@@ -929,7 +1138,7 @@ const Contact = () => {
                           <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.6 }}
+                            transition={{ duration: 0.6, delay: 0.8 }}
                             className="flex justify-center"
                           >
                             <motion.button
@@ -991,7 +1200,7 @@ const Contact = () => {
                                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                                       ></path>
                                     </motion.svg>
-                                    <span>Sending Message...</span>
+                                    <span>Analyzing Request...</span>
                                   </motion.div>
                                 ) : (
                                   <motion.div
@@ -1010,7 +1219,7 @@ const Contact = () => {
                                     >
                                       <FaPaperPlane className="mr-3 text-xl" />
                                     </motion.div>
-                                    <span>Send Message</span>
+                                    <span>Send for Analysis</span>
                                   </motion.div>
                                 )}
                               </AnimatePresence>
