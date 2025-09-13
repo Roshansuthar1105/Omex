@@ -23,6 +23,7 @@ import {
   FaUsers,
   FaVial
 } from 'react-icons/fa';
+import { FaSquareXTwitter } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 
@@ -47,18 +48,51 @@ const Footer = () => {
               Elevate your code with AI-powered optimization, analysis, and generation tools. OMEX helps developers write better, cleaner, and more efficient code.
             </p>
             <div className="flex space-x-4 mb-6">
-              <a href="https://github.com/Roshansuthar1105/Omex" target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition duration-200`}>
+              {/* GitHub */}
+              <a
+                href="https://github.com/Roshansuthar1105/Omex"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${isDark ? "text-gray-400" : "text-gray-600"
+                  } hover:text-black dark:hover:text-white transition duration-200`}
+              >
                 <FaGithub size={20} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition duration-200`}>
-                <FaTwitter size={20} />
-              </a>
-              <a href="https://linkedin.com/in/roshansuthar" target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition duration-200`}>
+
+              {/* Twitter (X) */}
+              <a
+    href="https://twitter.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`${
+      isDark ? "text-gray-400" : "text-gray-600"
+    } hover:text-black transition duration-200`}
+  >
+    <FaSquareXTwitter size={20} />
+  </a>
+
+              {/* LinkedIn */}
+              <a
+                href="https://linkedin.com/in/roshansuthar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${isDark ? "text-gray-400" : "text-gray-600"
+                  } hover:text-[#0077B5] transition duration-200`}
+              >
                 <FaLinkedin size={20} />
               </a>
-              <a href="https://discord.com/users/1317732270047498343" target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} transition duration-200`}>
-                <FaDiscord size={20} />
-              </a>
+
+              {/* Discord */}
+               <a
+    href="https://discord.com/users/1317732270047498343"
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`${
+      isDark ? "text-gray-400" : "text-gray-600"
+    } hover:text-[#5865F2] transition duration-200`}
+  >
+    <FaDiscord size={20} />
+  </a>
             </div>
             <div className={`flex items-center ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               <FaEnvelope className="mr-2" />
@@ -227,8 +261,8 @@ const Footer = () => {
                 type="email"
                 placeholder="Your email address"
                 className={`px-4 py-2 rounded-md ${isDark
-                    ? 'bg-gray-800 border-gray-700 text-white'
-                    : 'bg-white border-gray-300 text-gray-800'
+                  ? 'bg-gray-800 border-gray-700 text-white'
+                  : 'bg-white border-gray-300 text-gray-800'
                   } border focus:outline-none focus:ring-2 focus:ring-blue-500 max-w-xs w-full mx-auto sm:mx-0`}
               />
               <button
