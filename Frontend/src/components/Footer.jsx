@@ -1,26 +1,9 @@
 import {
-  FaAlignLeft,
-  FaBug,
-  FaChartLine,
-  FaCode,
   FaEnvelope,
-  FaExchangeAlt,
-  FaFileContract,
   FaGithub,
-  FaHandsHelping,
   FaHeart,
   FaLinkedin,
   FaDiscord,
-  FaMagic,
-  FaPaintBrush,
-  FaQuestionCircle,
-  FaRocket,
-  FaShieldAlt,
-  FaTachometerAlt,
-  FaTools,
-  FaUserFriends,
-  FaUsers,
-  FaVial,
 } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -32,13 +15,6 @@ const Footer = () => {
   const { isDark } = useTheme();
   const [email, setEmail] = useState("");
   const [showToast, setShowToast] = useState(false);
-
-  const linkBase = `${
-    isDark
-      ? "text-gray-400 hover:text-blue-400"
-      : "text-gray-600 hover:text-blue-600"
-  } transition duration-200`;
-  const iconClass = "mr-2 text-sm";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,379 +39,163 @@ const Footer = () => {
     <>
       {/* Toast Notification */}
       {showToast && (
-        <div className="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg z-50 transition-opacity duration-300">
-          Thank you for subscribing to our newsletter!
+        <div 
+          className="fixed bottom-4 right-4 text-white px-4 py-2 rounded-lg shadow-xl z-50 transition-all duration-300"
+          style={{
+            background: 'rgba(34, 197, 94, 0.9)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)'
+          }}
+        >
+          <div className="flex items-center text-sm">
+            <div className="w-2 h-2 bg-green-300 rounded-full mr-2 animate-pulse"></div>
+            Subscribed successfully!
+          </div>
         </div>
       )}
 
-      <footer
-        className={`${
-          isDark ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"
-        } py-12 mt-auto transition-colors duration-300`}
+      {/* Footer - Clean Design with Purple Backdrop Shadow */}
+      <footer 
+        className={`relative border-t ${
+          isDark 
+            ? 'bg-gray-900 border-gray-800' 
+            : 'bg-gray-50 border-gray-200'
+        }`}
+        style={{
+          boxShadow: isDark 
+            ? '0 -12px 40px rgba(99, 102, 241, 0.3), 0 -8px 24px rgba(139, 92, 246, 0.2), 0 -4px 16px rgba(0, 0, 0, 0.3)'
+            : '0 -12px 40px rgba(99, 102, 241, 0.2), 0 -8px 24px rgba(139, 92, 246, 0.15), 0 -4px 16px rgba(0, 0, 0, 0.06)'
+        }}
       >
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Left side - Logo, description and social links */}
-            <div className="lg:w-1/4">
-              <div className="flex justify-center lg:justify-start items-center mb-6">
-                <img 
-                  src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
-                  alt="Omex AI Logo" 
-                  className="h-12 w-auto" 
-                />
-              </div>
-              <p
-                className={`${isDark ? "text-gray-400" : "text-gray-600"} mb-6`}
-              >
-                Elevate your code with AI-powered optimization, analysis, and
-                generation tools. OMEX helps developers write better, cleaner,
-                and more efficient code.
-              </p>
-              <div className="flex space-x-4 mb-6">
-                <a
-                  href="https://github.com/Roshansuthar1105/Omex"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${
-                    isDark
-                      ? "text-gray-400 hover:text-white"
-                      : "text-gray-600 hover:text-gray-900"
-                  } transition duration-200`}
-                >
-                  <FaGithub size={20} />
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${
-                    isDark
-                      ? "text-gray-400 hover:text-white"
-                      : "text-gray-600 hover:text-gray-900"
-                  } transition duration-200`}
-                >
-                  <BsTwitterX size={20} />
-                </a>
-                <a
-                  href="https://linkedin.com/in/roshansuthar"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${
-                    isDark
-                      ? "text-gray-400 hover:text-white"
-                      : "text-gray-600 hover:text-gray-900"
-                  } transition duration-200`}
-                >
-                  <FaLinkedin size={20} />
-                </a>
-                <a
-                  href="https://discord.com/users/1317732270047498343"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${
-                    isDark
-                      ? "text-gray-400 hover:text-white"
-                      : "text-gray-600 hover:text-gray-900"
-                  } transition duration-200`}
-                >
-                  <FaDiscord size={20} />
-                </a>
-              </div>
-              <div
-                className={`flex items-center ${
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Main Footer Content */}
+          <div className="py-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              
+              {/* Left Half - Brand Section */}
+              <div className="space-y-6">
+                <div className="flex items-center space-x-3">
+                  <img 
+                    src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
+                    alt="Omex AI Logo" 
+                    className="h-12 w-auto" 
+                  />
+                </div>
+                <p className={`text-base leading-relaxed max-w-lg ${
                   isDark ? "text-gray-400" : "text-gray-600"
-                }`}
-              >
-                <FaEnvelope className="mr-2" />
-                <a
-                  href="mailto:contact@omex.com"
-                  className="text-blue-400 hover:text-blue-300 transition duration-200"
-                >
-                  contact@omex.com
-                </a>
-              </div>
-            </div>
-
-            {/* Middle sections - Features, Tools, Company */}
-            <div className="flex flex-col md:flex-row lg:flex-row flex-1 gap-8">
-              {/* Main Features */}
-              <div className="flex-1">
-                <h3
-                  className={`text-lg font-semibold mb-4 border-b ${
-                    isDark ? "border-gray-700" : "border-gray-300"
-                  } pb-2`}
-                >
-                  Main Features
-                </h3>
-                <ul className="space-y-2">
-                  <li>
-                    <Link
-                      to="/optimiser"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
+                }`}>
+                  Elevate your code with AI-powered optimization, analysis, and generation tools. OMEX helps developers write better, cleaner, and more efficient code with intelligent automation and advanced debugging capabilities.
+                </p>
+                
+                {/* Social Links */}
+                <div className="flex space-x-3">
+                  {[
+                    { href: "https://github.com/Roshansuthar1105/Omex", icon: FaGithub },
+                    { href: "https://twitter.com", icon: BsTwitterX },
+                    { href: "https://linkedin.com/in/roshansuthar", icon: FaLinkedin },
+                    { href: "https://discord.com/users/1317732270047498343", icon: FaDiscord }
+                  ].map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`p-2 rounded-md transition-all duration-200 ${
+                        isDark 
+                          ? "text-gray-400 hover:text-white hover:bg-gray-800" 
+                          : "text-gray-600 hover:text-gray-900 hover:bg-gray-200"
+                      }`}
                     >
-                      <FaRocket className={iconClass} /> Code Optimizer
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/codegenerator"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaMagic className={iconClass} /> Code Generator
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/codecomplexity"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaChartLine className={iconClass} /> Code Complexity
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/codecompare"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaExchangeAlt className={iconClass} /> Code Compare
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/code-tools"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaTools className={iconClass} /> All Tools
-                    </Link>
-                  </li>
-                </ul>
+                      <social.icon size={16} />
+                    </a>
+                  ))}
+                </div>
               </div>
 
-              {/* Tools */}
-              <div className="flex-1">
-                <h3
-                  className={`text-lg font-semibold mb-4 border-b ${
-                    isDark ? "border-gray-700" : "border-gray-300"
-                  } pb-2`}
-                >
-                  Code Tools
-                </h3>
-                <ul className="space-y-2">
-                  <li>
-                    <Link
-                      to="/test-case-generator"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
+              {/* Right Half - Newsletter Section */}
+              <div className="flex justify-end">
+                <div className="w-full max-w-sm">
+                  <h3 className={`text-sm font-medium mb-4 ${
+                    isDark ? "text-gray-200" : "text-gray-900"
+                  }`}>
+                    Stay Updated
+                  </h3>
+                  <p className={`text-sm mb-6 ${
+                    isDark ? "text-gray-400" : "text-gray-600"
+                  }`}>
+                    Get the latest updates and features.
+                  </p>
+                  <form onSubmit={handleSubmit} className="space-y-3">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter email"
+                      className={`w-full px-3 py-2 text-sm rounded-md border transition-all duration-200 focus:outline-none focus:ring-2 ${
+                        isDark
+                          ? "bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+                          : "bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500"
+                      }`}
+                      required
+                    />
+                    <button
+                      type="submit"
+                      className="w-full px-3 py-2 text-sm font-medium text-white rounded-md transition-all duration-200 transform hover:scale-105 active:scale-95"
+                      style={{
+                        background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
+                      }}
                     >
-                      <FaVial className={iconClass} /> Test Case Generator
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/code-beautifier"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaPaintBrush className={iconClass} /> Code Beautifier
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/error-debugger"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaBug className={iconClass} /> Error Debugger
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/performance-analyzer"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaTachometerAlt className={iconClass} /> Performance
-                      Analyzer
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/content-summarizer"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaAlignLeft className={iconClass} /> Content Summarizer
-                    </Link>
-                  </li>
-                </ul>
+                      Subscribe
+                    </button>
+                  </form>
+                </div>
               </div>
-
-              {/* Company & Legal */}
-              <div className="flex-1">
-                <h3
-                  className={`text-lg font-semibold mb-4 border-b ${
-                    isDark ? "border-gray-700" : "border-gray-300"
-                  } pb-2`}
-                >
-                  Company & Legal
-                </h3>
-                <ul className="space-y-2">
-                  <li>
-                    <Link
-                      to="/about"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaUsers className={iconClass} /> About Us
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/team"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaUserFriends className={iconClass} /> Our Team
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/contribute"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaHandsHelping className={iconClass} /> Contribute
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/contact"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaEnvelope className={iconClass} /> Contact Us
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/faq"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaQuestionCircle className={iconClass} /> FAQ
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/privacy-policy"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaShieldAlt className={iconClass} /> Privacy Policy
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/terms-of-service"
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                      }
-                      className={`flex items-center ${linkBase}`}
-                    >
-                      <FaFileContract className={iconClass} /> Terms of Service
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Right side - Newsletter */}
-            <div className="lg:w-1/4">
-              <h3
-                className={`text-lg font-semibold mb-4 border-b ${
-                  isDark ? "border-gray-700" : "border-gray-300"
-                } pb-2`}
-              >
-                Stay Updated
-              </h3>
-              <p
-                className={`${isDark ? "text-gray-400" : "text-gray-600"} mb-4`}
-              >
-                Subscribe to our newsletter for the latest updates, features,
-                and tips.
-              </p>
-              <form onSubmit={handleSubmit} className="space-y-3">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email address"
-                  className={`px-4 py-2 rounded-md w-full ${
-                    isDark
-                      ? "bg-gray-800 border-gray-700 text-white"
-                      : "bg-white border-gray-300 text-gray-800"
-                  } border focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                  required
-                />
-                <button
-                  type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-200 font-medium w-full"
-                >
-                  Subscribe
-                </button>
-              </form>
             </div>
           </div>
 
-          {/* Copyright */}
-          <div
-            className={`border-t ${
-              isDark ? "border-gray-800" : "border-gray-300"
-            } mt-8 pt-8 text-center ${
-              isDark ? "text-gray-500" : "text-gray-600"
+          {/* Bottom Bar */}
+          <div 
+            className={`py-6 flex flex-col md:flex-row justify-between items-center border-t ${
+              isDark ? "border-gray-800" : "border-gray-200"
             }`}
           >
-            <p className="flex items-center justify-center">
-              &copy; {currentYear} OMEX. All rights reserved. Made with{" "}
-              <FaHeart className="text-red-500 mx-1" /> by OMEX Team
-            </p>
+            <div className="flex items-center space-x-4 mb-4 md:mb-0">
+              <p className={`text-sm ${
+                isDark ? "text-gray-400" : "text-gray-600"
+              }`}>
+                © {currentYear} OMEX. All rights reserved.
+              </p>
+              <div className="flex items-center space-x-1">
+                <span className={`text-xs ${
+                  isDark ? "text-gray-500" : "text-gray-500"
+                }`}>
+                  Made with
+                </span>
+                <FaHeart className="text-red-500 text-xs animate-pulse" />
+                <span className={`text-xs ${
+                  isDark ? "text-gray-400" : "text-gray-600"
+                }`}>
+                  by OMEX Team
+                </span>
+              </div>
+            </div>
+
+            {/* Contact */}
+            <div className="flex items-center space-x-4">
+              <a
+                href="mailto:contact@omex.com"
+                className={`flex items-center space-x-2 text-sm transition-colors duration-200 ${
+                  isDark 
+                    ? "text-gray-400 hover:text-gray-200" 
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <FaEnvelope size={14} />
+                <span>contact@omex.com</span>
+              </a>
+            </div>
           </div>
         </div>
       </footer>

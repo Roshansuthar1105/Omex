@@ -25,11 +25,12 @@ import {
   FaAlignLeft,
   FaRegBuilding,
   FaBookOpen,
-  FaStar,
   FaTimes
 } from "react-icons/fa";
 import { GoPackageDependencies } from "react-icons/go";
 import { useTheme } from "../context/ThemeContext";
+
+
 
 function NavBar({ isMenuOpen, setIsMenuOpen }) {
   const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
@@ -43,6 +44,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
   const toolsDropdownRef = useRef(null);
   const companyDropdownRef = useRef(null);
 
+
+
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
@@ -50,19 +53,27 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
       setScrolled(isScrolled);
     };
 
+
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+
+
   const toggleMenu = () => {
     setIsMenuOpen(prev => !prev);
   };
+
+
 
   const closeMenu = () => {
     setIsMenuOpen(false);
     setIsMobileToolsOpen(false);
     setIsMobileCompanyOpen(false);
   };
+
+
 
   const toggleToolsDropdown = () => {
     setIsToolsDropdownOpen(!isToolsDropdownOpen);
@@ -71,12 +82,16 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
     }
   };
 
+
+
   const toggleCompanyDropdown = () => {
     setIsCompanyDropdownOpen(!isCompanyDropdownOpen);
     if (!isCompanyDropdownOpen) {
       setIsToolsDropdownOpen(false);
     }
   };
+
+
 
   const toggleMobileTools = () => {
     setIsMobileToolsOpen(!isMobileToolsOpen);
@@ -85,6 +100,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
     }
   };
 
+
+
   const toggleMobileCompany = () => {
     setIsMobileCompanyOpen(!isMobileCompanyOpen);
     if (!isMobileCompanyOpen) {
@@ -92,11 +109,15 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
     }
   };
 
+
+
   const isActive = (path) => {
     return location.pathname === path
       ? "text-blue-400 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-blue-400 after:to-purple-400 after:rounded-full"
       : "hover:text-blue-400 relative overflow-hidden group";
   };
+
+
 
   const isToolsActive = () => {
     const toolsPaths = [
@@ -111,6 +132,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
     return toolsPaths.some((path) => location.pathname === path);
   };
 
+
+
   const isCompanyActive = () => {
     const companyPaths = [
       "/about",
@@ -122,6 +145,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
     ];
     return companyPaths.some((path) => location.pathname === path);
   };
+
+
 
   // Handle click outside to close dropdowns
   useEffect(() => {
@@ -137,9 +162,13 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
       }
     };
 
+
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isMenuOpen]);
+
+
 
   // Handle click outside for desktop dropdowns
   useEffect(() => {
@@ -155,6 +184,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+
+
   // Prevent background scroll when mobile menu is open
   useEffect(() => {
     if (isMenuOpen) {
@@ -168,22 +199,27 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
     };
   }, [isMenuOpen]);
 
+
+
   return (
     <>
       <nav
         className={`${
           isDark 
-            ? "bg-gray-900 text-white border-gray-800"
-            : "bg-white text-gray-800 border-gray-200"
+            ? "bg-gray-900/70 text-white border-gray-700/30"
+            : "bg-white/70 text-gray-800 border-gray-200/30"
         } ${
           scrolled 
             ? "backdrop-blur-xl shadow-2xl border-b" 
-            : "backdrop-blur-md shadow-lg"
-        } py-4 px-4 md:px-8 w-full transition-all duration-500 sticky top-0 z-50`}
+            : "backdrop-blur-lg shadow-xl"
+        } py-2.5 px-3 md:px-4 w-full transition-all duration-500 sticky top-0 z-50 border-b`}
+        style={{
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.08)'
+        }}
       >
-        <div className="container mx-auto">
+        <div className="container mx-auto max-w-6xl">
           <div className="flex justify-between items-center">
-            {/* Logo */}
+            {/* Logo - star removed */}
             <div className="flex items-center space-x-3 group">
               <Link to="/" className="flex items-center" onClick={closeMenu}>
                 <img 
@@ -191,64 +227,77 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                   alt="Omex AI" 
                   className="h-16 w-auto transition-transform duration-300 transform group-hover:scale-110" 
                 />
-                <FaStar className="text-yellow-400 text-sm animate-pulse opacity-70 ml-2" />
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-4">
+
+
+            {/* Desktop Navigation - Made more compact */}
+            <div className="hidden lg:flex items-center space-x-2">
               <Link
                 to="/"
                 className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 ${isActive("/")}`}
               >
-                <span className="relative z-10">Home</span>
+                <span className="relative z-10 text-sm font-medium">Home</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
+
+
 
               <Link
                 to="/optimiser"
                 className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${isActive("/optimiser")}`}
               >
-                <FaRocket className="text-lg group-hover:text-yellow-400 transition-colors duration-300 transform group-hover:scale-110" />
-                <span className="relative z-10">Optimize</span>
+                <FaRocket className="text-sm group-hover:text-yellow-400 transition-colors duration-300 transform group-hover:scale-110" />
+                <span className="relative z-10 text-sm font-medium">Optimize</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-orange-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
+
+
 
               <Link
                 to="/codegenerator"
                 className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${isActive("/codegenerator")}`}
               >
-                <FaMagic className="text-lg group-hover:text-green-400 transition-colors duration-300 transform group-hover:scale-110" />
-                <span className="relative z-10">Generate</span>
+                <FaMagic className="text-sm group-hover:text-green-400 transition-colors duration-300 transform group-hover:scale-110" />
+                <span className="relative z-10 text-sm font-medium">Generate</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-green-400/10 to-emerald-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
+
+
 
               <Link
                 to="/codecomplexity"
                 className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${isActive("/codecomplexity")}`}
               >
-                <FaChartLine className="text-lg group-hover:text-purple-400 transition-colors duration-300 transform group-hover:scale-110" />
-                <span className="relative z-10">Complexity</span>
+                <FaChartLine className="text-sm group-hover:text-purple-400 transition-colors duration-300 transform group-hover:scale-110" />
+                <span className="relative z-10 text-sm font-medium">Complexity</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
+
+
 
               <Link
                 to="/codecompare"
                 className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${isActive("/codecompare")}`}
               >
-                <FaExchangeAlt className="text-lg group-hover:text-red-400 transition-colors duration-300 transform group-hover:scale-110" />
-                <span className="relative z-10">Compare</span>
+                <FaExchangeAlt className="text-sm group-hover:text-red-400 transition-colors duration-300 transform group-hover:scale-110" />
+                <span className="relative z-10 text-sm font-medium">Compare</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-red-400/10 to-pink-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
+
+
 
               <Link
                 to="/contributors"
                 className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${isActive("/contributors")}`}
               >
-                <FaUserFriends className="text-lg group-hover:text-red-400 transition-colors duration-300 transform group-hover:scale-110" />
-                <span className="relative z-10">Contributors</span>
+                <FaUserFriends className="text-sm group-hover:text-red-400 transition-colors duration-300 transform group-hover:scale-110" />
+                <span className="relative z-10 text-sm font-medium">Contributors</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-red-400/10 to-pink-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
+
+
 
               {/* Enhanced Tools Dropdown */}
               <div className="relative" ref={toolsDropdownRef}>
@@ -260,13 +309,15 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                       : "hover:text-blue-400 hover:bg-blue-400/10"
                   }`}
                 >
-                  <FaTools className="text-lg group-hover:text-cyan-400 transition-colors duration-300 transform group-hover:scale-110" />
-                  <span className="relative z-10">Tools</span>
+                  <FaTools className="text-sm group-hover:text-cyan-400 transition-colors duration-300 transform group-hover:scale-110" />
+                  <span className="relative z-10 text-sm font-medium">Tools</span>
                   <div className={`transform transition-all duration-300 ${isToolsDropdownOpen ? "rotate-180" : ""}`}>
                     <FaChevronDown className="text-xs" />
                   </div>
                   <span className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 </button>
+
+
 
                 {isToolsDropdownOpen && (
                   <div
@@ -306,6 +357,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                 )}
               </div>
 
+
+
               {/* Enhanced Company Dropdown */}
               <div className="relative" ref={companyDropdownRef}>
                 <button
@@ -316,13 +369,15 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                       : "hover:text-purple-400 hover:bg-purple-400/10"
                   }`}
                 >
-                  <FaRegBuilding className="text-lg group-hover:text-indigo-400 transition-colors duration-300 transform group-hover:scale-110" />
-                  <span className="relative z-10">Company</span>
+                  <FaRegBuilding className="text-sm group-hover:text-indigo-400 transition-colors duration-300 transform group-hover:scale-110" />
+                  <span className="relative z-10 text-sm font-medium">Company</span>
                   <div className={`transform transition-all duration-300 ${isCompanyDropdownOpen ? "rotate-180" : ""}`}>
                     <FaChevronDown className="text-xs" />
                   </div>
                   <span className="absolute inset-0 bg-gradient-to-r from-indigo-400/10 to-purple-400/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 </button>
+
+
 
                 {isCompanyDropdownOpen && (
                   <div
@@ -361,25 +416,29 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                 )}
               </div>
 
-              {/* Theme Toggle Button */}
+
+
+              {/* Theme Toggle Button - Made more compact */}
               <button
                 onClick={toggleTheme}
-                className={`relative overflow-hidden p-3 rounded-xl transition-all duration-500 group ${
+                className={`relative overflow-hidden p-2.5 rounded-xl transition-all duration-500 group ${
                   isDark
                     ? "bg-gray-800 hover:bg-gray-700"
                     : "bg-gray-100 hover:bg-gray-200"
-                } shadow-lg hover:shadow-xl transform hover:scale-105`}
+                } shadow-md hover:shadow-lg transform hover:scale-105`}
                 aria-label="Toggle theme"
               >
                 <div className="relative z-10 flex items-center">
                   {isDark ? (
-                    <FaSun className="text-yellow-400 text-lg animate-pulse" />
+                    <FaSun className="text-yellow-400 text-base animate-pulse" />
                   ) : (
-                    <FaMoon className="text-indigo-600 text-lg" />
+                    <FaMoon className="text-indigo-600 text-base" />
                   )}
                 </div>
               </button>
             </div>
+
+
 
             {/* Mobile menu button and theme toggle */}
             <div className="lg:hidden flex items-center space-x-3">
@@ -398,6 +457,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                   <FaMoon className="text-lg text-indigo-600" />
                 )}
               </button>
+
+
 
               <button
                 onClick={toggleMenu}
@@ -433,6 +494,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
         </div>
       </nav>
 
+
+
       {/* Mobile Navigation Backdrop */}
       <div
         className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden transition-all duration-300 ${
@@ -440,6 +503,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
         }`}
         onClick={closeMenu}
       ></div>
+
+
 
       {/* Mobile Navigation Sidebar */}
       <div
@@ -463,7 +528,6 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                 alt="Omex AI" 
                 className="h-10 w-auto transition-transform duration-300 transform group-hover:scale-110" 
               />
-              <FaStar className="text-yellow-400 text-sm animate-pulse opacity-70 ml-2" />
             </Link>
           </div>
           <button
@@ -479,7 +543,9 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
           </button>
         </div>
 
-        {/* Mobile menu items */}
+
+
+        {/* Mobile menu items - Made more compact */}
         <div className="py-6 px-4 space-y-2">
           {/* Main Navigation Items */}
           {[
@@ -493,7 +559,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
             <Link
               key={item.to}
               to={item.to}
-              className={`flex items-center space-x-3 p-4 rounded-xl transition-all duration-300 group ${
+              className={`flex items-center space-x-3 p-3 rounded-xl transition-all duration-300 group ${
                 location.pathname === item.to
                   ? isDark
                     ? `bg-${item.color}-900/30 text-${item.color}-400`
@@ -511,11 +577,13 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
             </Link>
           ))}
 
+
+
           {/* Mobile Tools Dropdown */}
           <div className="space-y-2">
             <button
               onClick={toggleMobileTools}
-              className={`flex items-center justify-between w-full p-4 rounded-xl transition-all duration-300 group ${
+              className={`flex items-center justify-between w-full p-3 rounded-xl transition-all duration-300 group ${
                 isToolsActive()
                   ? isDark
                     ? "bg-blue-900/30 text-blue-400"
@@ -536,6 +604,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
               }`} />
             </button>
 
+
+
             {isMobileToolsOpen && (
               <div className="ml-4 space-y-1">
                 {[
@@ -551,7 +621,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                   <Link
                     key={item.to}
                     to={item.to}
-                    className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 group ${
+                    className={`flex items-center space-x-3 p-2.5 rounded-lg transition-all duration-300 group ${
                       isDark
                         ? "hover:bg-gray-800/50 text-gray-300"
                         : "hover:bg-gray-100/50 text-gray-700"
@@ -566,11 +636,13 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
             )}
           </div>
 
+
+
           {/* Mobile Company Dropdown */}
           <div className="space-y-2">
             <button
               onClick={toggleMobileCompany}
-              className={`flex items-center justify-between w-full p-4 rounded-xl transition-all duration-300 group ${
+              className={`flex items-center justify-between w-full p-3 rounded-xl transition-all duration-300 group ${
                 isCompanyActive()
                   ? isDark
                     ? "bg-purple-900/30 text-purple-400"
@@ -591,6 +663,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
               }`} />
             </button>
 
+
+
             {isMobileCompanyOpen && (
               <div className="ml-4 space-y-1">
                 {[
@@ -605,7 +679,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                   <Link
                     key={item.to}
                     to={item.to}
-                    className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 group ${
+                    className={`flex items-center space-x-3 p-2.5 rounded-lg transition-all duration-300 group ${
                       isDark
                         ? "hover:bg-gray-800/50 text-gray-300"
                         : "hover:bg-gray-100/50 text-gray-700"
@@ -649,10 +723,11 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
         </div>
       </div>
       {/* End Mobile Navigation Sidebar */}
-      {/* Custom Styles */}
 
     </>
   );
 }
+
+
 
 export default NavBar;
