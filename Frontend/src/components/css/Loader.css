@@ -1,0 +1,193 @@
+.loader-container {
+          animation: float 3s ease-in-out infinite;
+        }
+        
+        .loader-ring-outer {
+          animation: spin-slow 4s linear infinite;
+        }
+        
+        .loader-ring-middle {
+          animation: spin-fast 2s linear infinite reverse;
+        }
+        
+        .loader-particle-orbit {
+          animation: orbit 3s linear infinite;
+        }
+        
+        .loader-particle {
+          position: absolute;
+          top: -2px;
+          right: -2px;
+          animation: pulse-particle 1.5s ease-in-out infinite;
+        }
+        
+        .loader-morph {
+          animation: morph-scale 2s ease-in-out infinite;
+        }
+        
+        .loader-glow {
+          animation: glow-pulse 2s ease-in-out infinite;
+        }
+        
+        .loader-spin-main {
+          animation: spin-wobble 3s ease-in-out infinite;
+        }
+        
+        .loader-morph-path {
+          animation: morph-shape 4s ease-in-out infinite;
+        }
+        
+        .loader-inner-circle {
+          animation: spin-fast 1.5s linear infinite;
+          transform-origin: center;
+        }
+        
+        .loader-center-dot {
+          animation: pulse-center 1s ease-in-out infinite;
+        }
+        
+        .loader-wave-1, .loader-wave-2, .loader-wave-3 {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          opacity: 0;
+        }
+        
+        .loader-wave-1 {
+          animation: wave-expand 3s ease-out infinite;
+        }
+        
+        .loader-wave-2 {
+          animation: wave-expand 3s ease-out infinite 1s;
+        }
+        
+        .loader-wave-3 {
+          animation: wave-expand 3s ease-out infinite 2s;
+        }
+        
+        .loader-dna {
+          pointer-events: none;
+        }
+        
+        .dna-strand-1, .dna-strand-2 {
+          position: absolute;
+          width: 2px;
+          height: 100%;
+          left: 50%;
+          transform-origin: center;
+          opacity: 0.6;
+        }
+        
+        .dna-strand-1 {
+          animation: dna-rotate 2s linear infinite;
+        }
+        
+        .dna-strand-2 {
+          animation: dna-rotate 2s linear infinite reverse;
+        }
+        
+        .loader-text-main {
+          animation: text-glow 2s ease-in-out infinite;
+        }
+        
+        .loader-text-glitch {
+          animation: glitch 0.3s ease-in-out infinite;
+        }
+        
+        .loader-progress-bar {
+          width: 4px;
+          height: 20px;
+          border-radius: 2px;
+          animation: progress-bounce 1.5s ease-in-out infinite;
+        }
+        
+        .loader-bg {
+          animation: bg-shift 10s ease-in-out infinite;
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        
+        @keyframes spin-fast {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(-360deg); }
+        }
+        
+        @keyframes orbit {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse-particle {
+          0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+          50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
+        }
+        
+        @keyframes morph-scale {
+          0%, 100% { transform: scale(1) rotate(0deg); }
+          25% { transform: scale(1.1) rotate(90deg); }
+          50% { transform: scale(0.9) rotate(180deg); }
+          75% { transform: scale(1.05) rotate(270deg); }
+        }
+        
+        @keyframes glow-pulse {
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.2); }
+        }
+        
+        @keyframes spin-wobble {
+          0% { transform: rotate(0deg) scale(1); }
+          25% { transform: rotate(90deg) scale(1.1); }
+          50% { transform: rotate(180deg) scale(0.9); }
+          75% { transform: rotate(270deg) scale(1.05); }
+          100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        @keyframes morph-shape {
+          0%, 100% { d: path("M50,10 L80,40 L80,60 L50,90 L20,60 L20,40 Z"); }
+          25% { d: path("M50,5 L85,35 L85,65 L50,95 L15,65 L15,35 Z"); }
+          50% { d: path("M50,15 L75,45 L75,55 L50,85 L25,55 L25,45 Z"); }
+          75% { d: path("M50,8 L82,38 L82,62 L50,92 L18,62 L18,38 Z"); }
+        }
+        
+        @keyframes pulse-center {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.5); opacity: 0.7; }
+        }
+        
+        @keyframes wave-expand {
+          0% { transform: scale(0); opacity: 1; }
+          100% { transform: scale(3); opacity: 0; }
+        }
+        
+        @keyframes dna-rotate {
+          0% { transform: translateX(-50%) rotateY(0deg); }
+          100% { transform: translateX(-50%) rotateY(360deg); }
+        }
+        
+        @keyframes text-glow {
+          0%, 100% { filter: brightness(1) saturate(1); }
+          50% { filter: brightness(1.3) saturate(1.5); }
+        }
+        
+        @keyframes glitch {
+          0%, 100% { transform: translate(0); opacity: 0.1; }
+          50% { transform: translate(-1px, 1px); opacity: 0.3; }
+        }
+        
+        @keyframes progress-bounce {
+          0%, 100% { transform: scaleY(0.3); opacity: 0.5; }
+          50% { transform: scaleY(1); opacity: 1; }
+        }
+        
+        @keyframes bg-shift {
+          0%, 100% { filter: hue-rotate(0deg); }
+          50% { filter: hue-rotate(30deg); }
+        }

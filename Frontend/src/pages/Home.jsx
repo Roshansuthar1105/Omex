@@ -124,6 +124,15 @@ function Home() {
       href: "/performance-analyzer",
       iconColor: "text-green-400",
     },
+    {
+      id: 5,
+      icon: FaTachometerAlt,
+      title: "Dependency Checker",
+      description:
+        "Analyze execution time and memory usage of your code and get optimization recommendations.",
+      href: "/dependency-scanner",
+      iconColor: "text-green-400",
+    },
   ];
 
   // Refs

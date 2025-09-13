@@ -50,7 +50,22 @@ const analyzePerformance = (req, res) =>
   handleRequest(req, res, aiService.analyzePerformance, ["code", "language"]);
 const analyzeSecurity = (req, res) =>
   handleRequest(req, res, aiService.analyzeSecurity, ["code", "language"]);
+// Dependency Scanner
+const scanDependencies = async (req, res) => {
+  try {
+    const { fileContent } = req.body;
 
+    if (!fileContent) {
+      return res.status(400).send("Dependencies file is required");
+    }
+
+    const response = await aiService.scanDependencies(fileContent);
+    res.send(response);
+  } catch (error) {
+    console.error("Error in scanDependencies:", error);
+    res.status(500).send("An error occurred while scanning dependencies");
+  }
+};
 module.exports = {
   getReview,
   getCode,
@@ -61,4 +76,5 @@ module.exports = {
   debugCode,
   analyzePerformance,
   analyzeSecurity,
+  scanDependencies,
 };

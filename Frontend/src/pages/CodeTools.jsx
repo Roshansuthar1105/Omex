@@ -13,6 +13,7 @@ import {
   FaFileAlt,
   FaShieldAlt,
 } from "react-icons/fa";
+import { GoPackageDependencies } from "react-icons/go";
 import { useTheme } from "../context/ThemeContext";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -108,6 +109,13 @@ export default function CodeTools() {
       description:
         "Scan your code for security flaws like SQL injection, XSS, and hardcoded secrets with remediation suggestions.",
       link: "/security-scanner",
+    },
+    {
+      icon: <GoPackageDependencies className="text-orange-500 text-2xl" />,
+      title: "Dependency Scanner",
+      description:
+        "Scan your dependencies for vulnerabilities and deprecation.",
+      link: "/dependency-scanner",
     },
   ];
 
