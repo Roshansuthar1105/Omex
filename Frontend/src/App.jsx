@@ -3,7 +3,8 @@ import "prismjs/themes/prism-tomorrow.css";
 import "./styles/glassmorphism.css";
 
 import { useState } from "react";
-import { Route, BrowserRouter as Router, Routes, Outlet } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import NotFound from "./pages/notFound";
 
 import Home from './pages/Home';
 import NavBar from './components/Navbar';
@@ -60,6 +61,7 @@ function App() {
         <ScrollToTop /> {/* 👈 ensures every route loads from the top */}
             <Routes>
 
+
               {/* Routes with layout */}
               
               <Route
@@ -106,14 +108,13 @@ function App() {
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/contributor-guide" element={<ContributorGuide />} />
                 <Route path="/logo-showcase" element={<LogoShowcase />} />
-
+                {/* 👇 Catch-all 404 route goes here */}
+                <Route path="*" element={<NotFound />} />
               </Route>
-
-              {/* Fallback route without layout*/}
-              <Route path="*" element={<NotFound />} />
             </Routes>
       </Router>
     </ThemeProvider>
+    
   );
 }
 
