@@ -90,6 +90,12 @@ or search for `Roshan Suthar | PA`
 - **Critical Error Detection**: Focuses on important issues that would cause code to fail
 - **Concise Explanations**: Provides brief, actionable insights about each error
 
+***💻 Advanced Code Editor***
+- **Monaco Editor Integration**: Professional code editing experience with VS Code-like features
+- **Multi-language Support**: Syntax highlighting and auto-completion for JavaScript, Python, Java, C++, C, and Go
+- **Enhanced Features**: Line numbers, code folding, bracket matching, and intelligent auto-completion
+- **Theme Integration**: Custom dark/light themes that sync with the app's theme context
+
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="150%">
 
 🌟 **Exciting News...**
@@ -111,7 +117,7 @@ or search for `Roshan Suthar | PA`
 
  **🖥️ Tech Stack**
 
-- **Frontend**: React, Tailwind CSS, Prism.js
+- **Frontend**: React, Tailwind CSS, Monaco Editor, Prism.js
 - **Backend**: Node.js, Express
 - **AI**: Google Gemini AI
 - **Other Tools**: React Router, Axios, React Markdown

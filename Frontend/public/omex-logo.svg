@@ -1,0 +1,25 @@
+<!-- Omex AI Logo: Clean, professional, developer-focused design -->
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Shape -->
+  <rect width="512" height="512" rx="80" fill="#2563EB"/>
+  
+  <!-- Code Symbol and O Lettermark Combined -->
+  <g>
+    <!-- Left Bracket -->
+    <path d="M176 176L128 256L176 336" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Right Bracket -->
+    <path d="M336 176L384 256L336 336" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Letter O Styled as a Circle with Gradient -->
+    <circle cx="256" cy="256" r="64" stroke="url(#letterGradient)" stroke-width="20" fill="none"/>
+  </g>
+  
+  <!-- Definitions -->
+  <defs>
+    <linearGradient id="letterGradient" x1="192" y1="256" x2="320" y2="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+</svg>

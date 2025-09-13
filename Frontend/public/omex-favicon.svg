@@ -1,0 +1,25 @@
+<!-- Omex AI Favicon: Clean professional design -->
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Shape -->
+  <rect width="64" height="64" rx="16" fill="#2563EB"/>
+  
+  <!-- Code Symbol and O Lettermark -->
+  <g>
+    <!-- Left Bracket -->
+    <path d="M22 22L16 32L22 42" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Right Bracket -->
+    <path d="M42 22L48 32L42 42" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Letter O as Circle with Gradient -->
+    <circle cx="32" cy="32" r="10" stroke="url(#faviconGradient)" stroke-width="3" fill="none"/>
+  </g>
+  
+  <!-- Definitions -->
+  <defs>
+    <linearGradient id="faviconGradient" x1="22" y1="32" x2="42" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+</svg>

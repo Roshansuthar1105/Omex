@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Markdown from 'react-markdown';
+import { useTheme } from '../context/ThemeContext';
 
 function ChatComponent() {
+  const { isDark } = useTheme();
   const [input, setInput] = useState('');
   const [response, setResponse] = useState('');
   const [savedResponses, setSavedResponses] = useState({});
@@ -65,12 +67,19 @@ function ChatComponent() {
 
   return (
     <div className="flex flex-col items-center justify-center p-4 bg-gray-900 rounded-lg shadow-md h-screen">
+      <div className="flex items-center justify-center mb-4">
+        <img
+          src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
+          alt="Omex AI Logo"
+          className="h-12 w-auto"
+        />
+      </div>
       <div className="flex flex-col items-center justify-center gap-4 overflow-y-scroll h-4/5">
         <div className="mt-4">
           <h2 className="text-lg font-bold text-gray-300">Response:</h2>
           <Markdown className="text-gray-400">{response}</Markdown>
         </div>
-        {savedResponses.length && <div className="mt-4 overflow-y-scroll h-3/5" style={{ overflowY: 'scroll', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
+        {Object.keys(savedResponses).length > 0 && (<div className="mt-4 overflow-y-scroll h-3/5" style={{ overflowY: 'scroll', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
           <h2 className="text-lg font-bold text-gray-300">Saved Responses:</h2>
           <ul className="list-none p-0 m-0">
             {Object.keys(savedResponses).map((key) => (
@@ -99,7 +108,7 @@ function ChatComponent() {
             ))}
           </ul>
         </div>
-        }
+        )}
       </div>
       <form onSubmit={handleSubmit} className="fixed bottom-0 left-0 right-0 p-4 bg-gray-900 rounded-lg shadow-md flex flex-row gap-4">
         <input type="text" value={input} onChange={handleInputChange} placeholder="Command line" className="p-2 pl-10 text-sm text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 w-7/8" />

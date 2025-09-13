@@ -9,10 +9,56 @@ import Loader from '../components/Loader';
 import { useTheme } from '../context/ThemeContext';
 
 function CodeBeautifier() {
-  const [code, setCode] = useState(`function calculateTotal(items,tax){
+  const exampleCodes = {
+  "JavaScript": `function calculateTotal(items,tax){
 let total=0;for(let i=0;i<items.length;i++){
 total+=items[i].price;}
-return total+(total*tax);}`);
+return total+(total*tax);}`,
+  "Python": `def calculate_total(items, tax):
+total = 0
+for item in items:
+total += item['price']
+return total + (total * tax)`,
+  "Java": `public double calculateTotal(List<Item> items, double tax) {
+double total = 0;
+for (Item item : items) {
+total += item.getPrice();
+}
+return total + (total * tax);
+}`,
+  "C++": `double calculateTotal(const std::vector<Item>& items, double tax) {
+double total = 0;
+for (const auto& item : items) {
+total += item.price;
+}
+return total + (total * tax);
+}`,
+  "C#": `public double CalculateTotal(List<Item> items, double tax) {
+double total = 0;
+foreach (var item in items) {
+total += item.Price;
+}
+return total + (total * tax);
+}`,
+  "PHP": '<?php\nfunction calculateTotal($items, $tax) {\n$total = 0;\nforeach ($items as $item) {\n$total += $item["price"];\n}\nreturn $total + ($total * $tax);\n}\n?>',
+  "Go": `func calculateTotal(items []Item, tax float64) float64 {
+  total := 0.0
+  for _, item := range items {
+    total += item.Price
+  }
+  return total + (total * tax)
+}`,
+  "Ruby": `def calculate_total(items, tax)
+total = 0
+items.each { |item| total += item[:price] }
+total + (total * tax)
+end`,
+  "HTML": `<!-- Example messy HTML code -->
+<div><span>Item</span><span>Price</span></div><div><span>Apple</span><span>1.00</span></div>`,
+  "CSS": `/* Example messy CSS code */
+.item{color:red;font-size:14px;}.price{color:blue;font-weight:bold;}`,
+  };
+  const [code, setCode] = useState(exampleCodes["JavaScript"]);
   const [language, setLanguage] = useState('JavaScript');
   const [beautifiedCode, setBeautifiedCode] = useState('');
   const [loading, setLoading] = useState(true);
@@ -98,7 +144,10 @@ return total+(total*tax);}`);
               <div className="flex space-x-2">
                 <select
                   value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
+                  onChange={(e) => {
+                    setLanguage(e.target.value);
+                    setCode(exampleCodes[e.target.value] || "");
+                  }}
                   className={`px-3 py-1 rounded ${
                     isDark
                       ? 'bg-gray-800 text-white border-gray-600'
