@@ -3,6 +3,7 @@ import { FaShieldAlt, FaFileAlt, FaExclamationTriangle } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Loader from "../components/Loader";
+import FeedbackButton from "../components/FeedbackButton";
 import { useTheme } from "../context/ThemeContext";
 import Markdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
@@ -240,6 +241,9 @@ function DependencyScanner() {
           </div>
         </div>
       </div>
+      
+      {/* Feedback Button */}
+      <FeedbackButton toolName="Dependency Scanner" />
     </div>
   );
 }

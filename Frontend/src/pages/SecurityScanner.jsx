@@ -7,6 +7,7 @@ import Markdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
 import Loader from "../components/Loader";
+import FeedbackButton from "../components/FeedbackButton";
 import { useTheme } from "../context/ThemeContext";
 
 function SecurityScanner() {
@@ -287,6 +288,9 @@ end`,
           </div>
         </div>
       </div>
+      
+      {/* Feedback Button */}
+      <FeedbackButton toolName="Security Scanner" />
     </div>
   );
 }

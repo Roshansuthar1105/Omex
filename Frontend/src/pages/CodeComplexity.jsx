@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import CodeEditor from '../components/CodeEditor'
 import {useTheme} from '../context/ThemeContext';
 import Loader from '../components/Loader';
+import FeedbackButton from '../components/FeedbackButton';
 
 function CodeComplexity() {
     const {isDark} = useTheme();
@@ -34,6 +35,9 @@ if (loading) {
     return (
         <div className='' >
             <CodeEditor URL={URL} prompt={prompt} />
+            
+            {/* Feedback Button */}
+            <FeedbackButton toolName="Code Complexity Analyzer" />
         </div>
     )
 }

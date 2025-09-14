@@ -3,6 +3,7 @@ import {
   FaBug,
   FaChartLine,
   FaCode,
+  FaComment,
   FaEnvelope,
   FaExchangeAlt,
   FaFileContract,
@@ -347,6 +348,17 @@ const Footer = () => {
                       className={`flex items-center ${linkBase}`}
                     >
                       <FaEnvelope className={iconClass} /> Contact Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/feedback"
+                      onClick={() =>
+                        window.scrollTo({ top: 0, behavior: "smooth" })
+                      }
+                      className={`flex items-center ${linkBase}`}
+                    >
+                      <FaComment className={iconClass} /> Feedback
                     </Link>
                   </li>
                   <li>

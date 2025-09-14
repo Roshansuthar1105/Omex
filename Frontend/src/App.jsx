@@ -3,8 +3,7 @@ import "prismjs/themes/prism-tomorrow.css";
 import "./styles/glassmorphism.css";
 
 import { useState } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import NotFound from "./pages/notFound";
+import { Route, BrowserRouter as Router, Routes, Outlet } from "react-router-dom";
 
 import Home from './pages/Home';
 import NavBar from './components/Navbar';
@@ -36,6 +35,7 @@ import CodeComplexity from "./pages/CodeComplexity";
 import CodeGenerator from "./pages/CodeGenerator";
 import CodeOptimizer from "./pages/CodeOptimizer";
 import Contact from "./pages/Contact";
+import Feedback from "./pages/Feedback";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Team from "./pages/Team";
 import TermsOfService from "./pages/TermsOfService";
@@ -48,9 +48,7 @@ import { ThemeProvider } from './context/ThemeContext';
 // Extra components
 import BackToTopButton from "./components/BackToTopButton";
 import ContributorGuide from "./pages/ContributorGuide";
-
-// Not found page
-import NotFound from "./pages/NotFound";
+import NotFound from "./pages/notFound";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -104,6 +102,7 @@ function App() {
                 <Route path="/team" element={<Team />} />
                 <Route path="/contribute" element={<Contribute />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/feedback" element={<Feedback />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/contributor-guide" element={<ContributorGuide />} />
