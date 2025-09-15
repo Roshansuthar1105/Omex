@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
+import "../components/css/NavBar.css"
 import {
   FaChartLine,
   FaChevronDown,
@@ -11,7 +12,6 @@ import {
   FaHandsHelping,
   FaRocket,
   FaMoon,
-  FaQuestionCircle,
   FaMagic,
   FaShieldAlt,
   FaSun,
@@ -28,6 +28,7 @@ import {
   FaStar,
   FaTimes
 } from "react-icons/fa";
+import { GoPackageDependencies } from "react-icons/go";
 import { useTheme } from "../context/ThemeContext";
 
 function NavBar({ isMenuOpen, setIsMenuOpen }) {
@@ -39,6 +40,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
   const location = useLocation();
   const { isDark, toggleTheme } = useTheme();
   const menuRef = useRef(null);
+  const toolsDropdownRef = useRef(null);
+  const companyDropdownRef = useRef(null);
 
   // Handle scroll effect
   useEffect(() => {
@@ -114,7 +117,6 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
       "/team",
       "/contribute",
       "/contact",
-      "/faq",
       "/privacy-policy",
       "/terms-of-service",
     ];
@@ -138,6 +140,20 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isMenuOpen]);
+
+  // Handle click outside for desktop dropdowns
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (toolsDropdownRef.current && !toolsDropdownRef.current.contains(event.target)) {
+        setIsToolsDropdownOpen(false);
+      }
+      if (companyDropdownRef.current && !companyDropdownRef.current.contains(event.target)) {
+        setIsCompanyDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Prevent background scroll when mobile menu is open
   useEffect(() => {
@@ -169,24 +185,18 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
           <div className="flex justify-between items-center">
             {/* Logo */}
             <div className="flex items-center space-x-3 group">
-              <div className="relative">
-                <FaCode className="text-blue-400 text-2xl group-hover:text-purple-400 transition-all duration-300 transform group-hover:scale-110" />
-                <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-              <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                <Link
-                  to="/"
-                  className="hover:from-purple-400 hover:via-pink-400 hover:to-blue-400 transition-all duration-500"
-                  onClick={closeMenu}
-                >
-                  OMEX
-                </Link>
-              </h1>
-              <FaStar className="text-yellow-400 text-sm animate-pulse opacity-70" />
+              <Link to="/" className="flex items-center" onClick={closeMenu}>
+                <img 
+                  src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
+                  alt="Omex AI" 
+                  className="h-16 w-auto transition-transform duration-300 transform group-hover:scale-110" 
+                />
+                <FaStar className="text-yellow-400 text-sm animate-pulse opacity-70 ml-2" />
+              </Link>
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-4">
               <Link
                 to="/"
                 className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 ${isActive("/")}`}
@@ -241,7 +251,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
               </Link>
 
               {/* Enhanced Tools Dropdown */}
-              <div className="relative">
+              <div className="relative" ref={toolsDropdownRef}>
                 <button
                   onClick={toggleToolsDropdown}
                   className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${
@@ -274,7 +284,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                         { to: "/error-debugger", icon: FaBug, label: "Error Debugger", color: "red" },
                         { to: "/performance-analyzer", icon: FaTachometerAlt, label: "Performance Analyzer", color: "yellow" },
                         { to: "/content-summarizer", icon: FaAlignLeft, label: "Content Summarizer", color: "purple" },
-                        { to: "/security-scanner", icon: FaShieldAlt, label: "Security Scanner", color: "red" }
+                        { to: "/security-scanner", icon: FaShieldAlt, label: "Security Scanner", color: "red" },
+                        { to: "/dependency-scanner", icon: GoPackageDependencies, label: "Dependency Scanner", color: "orange" }
                       ].map((item) => (
                         <Link
                           key={item.to}
@@ -296,7 +307,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
               </div>
 
               {/* Enhanced Company Dropdown */}
-              <div className="relative">
+              <div className="relative" ref={companyDropdownRef}>
                 <button
                   onClick={toggleCompanyDropdown}
                   className={`flex items-center space-x-2 py-2 px-3 rounded-lg transition-all duration-300 group ${
@@ -328,7 +339,6 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                         { to: "/contribute", icon: FaHandsHelping, label: "Contribute", color: "yellow" },
                         { to: "/contributor-guide", icon: FaBookOpen, label: "Contributor Guide", color: "indigo" },
                         { to: "/contact", icon: FaEnvelope, label: "Contact Us", color: "purple" },
-                        { to: "/faq", icon: FaQuestionCircle, label: "FAQ", color: "pink" },
                         { to: "/privacy-policy", icon: FaShieldAlt, label: "Privacy Policy", color: "red" },
                         { to: "/terms-of-service", icon: FaFileContract, label: "Terms of Service", color: "gray" }
                       ].map((item) => (
@@ -446,11 +456,15 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
         <div className={`flex justify-between items-center p-6 border-b ${
           isDark ? "border-gray-800/50" : "border-gray-200/50"
         }`}>
-          <div className="flex items-center space-x-3">
-            <FaCode className="text-blue-400 text-xl" />
-            <span className="font-bold text-2xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              OMEX
-            </span>
+          <div className="flex items-center justify-center space-x-3">
+            <Link to="/" className="flex items-center" onClick={closeMenu}>
+              <img 
+                src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
+                alt="Omex AI" 
+                className="h-10 w-auto transition-transform duration-300 transform group-hover:scale-110" 
+              />
+              <FaStar className="text-yellow-400 text-sm animate-pulse opacity-70 ml-2" />
+            </Link>
           </div>
           <button
             onClick={closeMenu}
@@ -531,7 +545,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                   { to: "/error-debugger", icon: FaBug, label: "Error Debugger", color: "red" },
                   { to: "/performance-analyzer", icon: FaTachometerAlt, label: "Performance Analyzer", color: "yellow" },
                   { to: "/content-summarizer", icon: FaAlignLeft, label: "Content Summarizer", color: "purple" },
-                  { to: "/security-scanner", icon: FaShieldAlt, label: "Security Scanner", color: "red" }
+                  { to: "/security-scanner", icon: FaShieldAlt, label: "Security Scanner", color: "red" },
+                  { to: "/dependency-scanner", icon: GoPackageDependencies, label: "Dependency Scanner", color: "orange" }
                 ].map((item) => (
                   <Link
                     key={item.to}
@@ -584,7 +599,6 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                   { to: "/contribute", icon: FaHandsHelping, label: "Contribute", color: "yellow" },
                   { to: "/contributor-guide", icon: FaBookOpen, label: "Contributor Guide", color: "indigo" },
                   { to: "/contact", icon: FaEnvelope, label: "Contact Us", color: "purple" },
-                  { to: "/faq", icon: FaQuestionCircle, label: "FAQ", color: "pink" },
                   { to: "/privacy-policy", icon: FaShieldAlt, label: "Privacy Policy", color: "red" },
                   { to: "/terms-of-service", icon: FaFileContract, label: "Terms of Service", color: "gray" }
                 ].map((item) => (
@@ -636,87 +650,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
       </div>
       {/* End Mobile Navigation Sidebar */}
       {/* Custom Styles */}
-      <style jsx>{`
-        @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
 
-        @keyframes glow {
-          0%, 100% { 
-            box-shadow: 0 0 15px rgba(147,51,234,0.5),
-                       0 0 30px rgba(147,51,234,0.3); 
-          }
-          50% { 
-            box-shadow: 0 0 25px rgba(147,51,234,0.8),
-                       0 0 40px rgba(147,51,234,0.5); 
-          }
-        }
-
-        .animate-in {
-          animation: slideInRight 0.3s ease-out forwards;
-        }
-
-        .slide-in-from-top-2 {
-          animation: slideInFromTop 0.2s ease-out forwards;
-        }
-
-        @keyframes slideInFromTop {
-          from {
-            opacity: 0;
-            transform: translateY(-8px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        /* Ensure backdrop blur works properly */
-        .backdrop-blur-xl {
-          backdrop-filter: blur(24px);
-          -webkit-backdrop-filter: blur(24px);
-        }
-
-        .backdrop-blur-md {
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-        }
-
-        .backdrop-blur-2xl {
-          backdrop-filter: blur(40px);
-          -webkit-backdrop-filter: blur(40px);
-        }
-
-        .backdrop-blur-sm {
-          backdrop-filter: blur(4px);
-          -webkit-backdrop-filter: blur(4px);
-        }
-
-        /* Custom scrollbar for mobile menu */
-        .overflow-y-auto::-webkit-scrollbar {
-          width: 4px;
-        }
-
-        .overflow-y-auto::-webkit-scrollbar-track {
-          background: transparent;
-        }
-
-        .overflow-y-auto::-webkit-scrollbar-thumb {
-          background: rgba(156, 163, 175, 0.3);
-          border-radius: 2px;
-        }
-
-        .overflow-y-auto::-webkit-scrollbar-thumb:hover {
-          background: rgba(156, 163, 175, 0.5);
-        }
-      `}</style>
     </>
   );
 }

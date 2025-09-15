@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from '../context/ThemeContext';
 import { FaStar } from 'react-icons/fa';
 
-const testimonials = [
+const testimonialsData = [
   {
     id: 1,
     text: "OMEX has completely transformed my coding workflow. The code optimization tool helped me improve performance by 40% on a critical project. Highly recommended!",
@@ -17,7 +17,7 @@ const testimonials = [
     text: "The code generation feature is a game-changer. It saves me hours of work by creating boilerplate code and helping with complex algorithms. OMEX is now an essential part of my toolkit.",
     name: "Sarah Johnson",
     position: "Freelance Developer",
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    image: "https://randomuser.me/api/portraits/portraits/women/44.jpg",
     rating: 5
   },
   {
@@ -54,6 +54,7 @@ const testimonials = [
   }
 ];
 
+
 const TestimonialCard = ({ text, name, position, image, rating }) => {
   const { isDark } = useTheme();
   
@@ -64,7 +65,7 @@ const TestimonialCard = ({ text, name, position, image, rating }) => {
   };
 
   return (
-    <div className={`flex-none w-72 sm:w-80 sm:w-84 md:w-96 p-4 sm:p-6 md:p-8 h-auto min-h-[280px] sm:min-h-[300px] md:min-h-[320px] rounded-xl shadow-lg bg-gradient-to-br ${
+    <div className={`flex-none w-72 sm:w-80 md:w-96 p-4 sm:p-6 md:p-8 h-auto min-h-[280px] sm:min-h-[300px] md:min-h-[320px] rounded-xl shadow-lg bg-gradient-to-br ${
       isDark 
         ? 'from-gray-800 to-gray-900 text-white border-gray-700' 
         : 'from-blue-50 to-indigo-50 text-gray-900 border-blue-100'
@@ -130,12 +131,14 @@ TestimonialCard.propTypes = {
   position: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
+  isDark: PropTypes.bool.isRequired,
 };
 
-const Testimonials = () => {
+const Testimonials = forwardRef((props, ref) => {
   const { isDark } = useTheme();
   const [isPaused, setIsPaused] = useState(false);
-  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+  const duplicatedTestimonials = [...testimonialsData, ...testimonialsData, ...testimonialsData];
+
 
   return (
     <>
@@ -156,8 +159,8 @@ const Testimonials = () => {
           }
         `
       }} />
-      
-      <section className={`py-16 px-4 ${isDark ? "bg-gray-900" : "bg-gray-50"} relative overflow-hidden`}>
+
+      <section ref={ref} className={`py-16 px-4 ${isDark ? "bg-gray-900" : "bg-gray-50"} relative overflow-hidden`}>
         {/* Background elements */}
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 opacity-5"></div>
@@ -178,7 +181,7 @@ const Testimonials = () => {
                 <FaStar className="text-yellow-400 text-3xl" />
               </div>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 sm:mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 dark:bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 py-2 sm:mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 dark:bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
               What Developers Say
             </h2>
             <p className={`text-sm sm:text-base md:text-lg ${
@@ -224,6 +227,6 @@ const Testimonials = () => {
       </section>
     </>
   );
-};
+});
 
 export default Testimonials;

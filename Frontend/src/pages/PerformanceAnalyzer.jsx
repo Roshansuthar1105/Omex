@@ -9,7 +9,8 @@ import Loader from '../components/Loader';
 import { useTheme } from '../context/ThemeContext';
 
 function PerformanceAnalyzer() {
-  const [code, setCode] = useState(`function findDuplicates(array) {
+  const exampleCodes = {
+  "JavaScript": `function findDuplicates(array) {
   const duplicates = [];
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length; j++) {
@@ -19,7 +20,88 @@ function PerformanceAnalyzer() {
     }
   }
   return duplicates;
-}`);
+}`,
+  "Python": `def find_duplicates(array):
+  duplicates = []
+  for i in range(len(array)):
+    for j in range(len(array)):
+      if i != j and array[i] == array[j] and array[i] not in duplicates:
+        duplicates.append(array[i])
+  return duplicates`,
+  "Java": `import java.util.*;
+public class Main {
+  public static List<Integer> findDuplicates(int[] array) {
+    List<Integer> duplicates = new ArrayList<>();
+    for (int i = 0; i < array.length; i++) {
+      for (int j = 0; j < array.length; j++) {
+        if (i != j && array[i] == array[j] && !duplicates.contains(array[i])) {
+          duplicates.add(array[i]);
+        }
+      }
+    }
+    return duplicates;
+  }
+}`,
+  "C++": `#include <vector>
+#include <algorithm>
+std::vector<int> findDuplicates(const std::vector<int>& array) {
+  std::vector<int> duplicates;
+  for (size_t i = 0; i < array.size(); ++i) {
+    for (size_t j = 0; j < array.size(); ++j) {
+      if (i != j && array[i] == array[j] && std::find(duplicates.begin(), duplicates.end(), array[i]) == duplicates.end()) {
+        duplicates.push_back(array[i]);
+      }
+    }
+  }
+  return duplicates;
+}`,
+  "C#": `using System.Collections.Generic;
+public class Example {
+  public static List<int> FindDuplicates(int[] array) {
+    List<int> duplicates = new List<int>();
+    for (int i = 0; i < array.Length; i++) {
+      for (int j = 0; j < array.Length; j++) {
+        if (i != j && array[i] == array[j] && !duplicates.Contains(array[i])) {
+          duplicates.Add(array[i]);
+        }
+      }
+    }
+    return duplicates;
+  }
+}`,
+  "PHP": '<?php\nfunction findDuplicates($array) {\n    $duplicates = array();\n    for ($i = 0; $i < count($array); $i++) {\n        for ($j = 0; $j < count($array); $j++) {\n            if ($i != $j && $array[$i] == $array[$j] && !in_array($array[$i], $duplicates)) {\n                $duplicates[] = $array[$i];\n            }\n        }\n    }\n    return $duplicates;\n}\n?>',
+  "Go": `func findDuplicates(array []int) []int {
+  duplicates := []int{}
+  for i := 0; i < len(array); i++ {
+    for j := 0; j < len(array); j++ {
+      if i != j && array[i] == array[j] && !contains(duplicates, array[i]) {
+        duplicates = append(duplicates, array[i])
+      }
+    }
+  }
+  return duplicates
+}
+func contains(arr []int, val int) bool {
+  for _, v := range arr {
+    if v == val {
+      return true
+    }
+  }
+  return false
+}`,
+  "Ruby": `def find_duplicates(array)
+  duplicates = []
+  array.each_with_index do |val, i|
+  array.each_with_index do |val2, j|
+    if i != j && val == val2 && !duplicates.include?(val)
+    duplicates << val
+    end
+  end
+  end
+  duplicates
+end`,
+  };
+  const [code, setCode] = useState(exampleCodes["JavaScript"]);
   const [language, setLanguage] = useState('JavaScript');
   const [analysisResult, setAnalysisResult] = useState('');
   const [loading, setLoading] = useState(true);
@@ -105,7 +187,10 @@ function PerformanceAnalyzer() {
               <div className="flex space-x-2">
                 <select
                   value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
+                  onChange={(e) => {
+                    setLanguage(e.target.value);
+                    setCode(exampleCodes[e.target.value] || "");
+                  }}
                   className={`px-3 py-1 rounded ${
                     isDark
                       ? 'bg-gray-800 text-white border-gray-600'

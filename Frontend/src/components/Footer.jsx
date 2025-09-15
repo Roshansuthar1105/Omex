@@ -18,9 +18,14 @@ import {
   FaShieldAlt,
   FaTachometerAlt,
   FaTools,
-  FaTwitter,
   FaUserFriends,
   FaUsers,
+  FaVial,
+} from "react-icons/fa";
+import { BsTwitterX } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
+import { useState } from "react";
   FaVial
 } from 'react-icons/fa';
 import { FaSquareXTwitter } from "react-icons/fa6";
@@ -30,9 +35,34 @@ import { useTheme } from '../context/ThemeContext';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { isDark } = useTheme();
+  const [email, setEmail] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
-  const linkBase = `${isDark ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'} transition duration-200`;
-  const iconClass = 'mr-2 text-sm';
+  const linkBase = `${
+    isDark
+      ? "text-gray-400 hover:text-blue-400"
+      : "text-gray-600 hover:text-blue-600"
+  } transition duration-200`;
+  const iconClass = "mr-2 text-sm";
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email) {
+      alert("Email is required");
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
+    setShowToast(true);
+    setEmail("");
+    setTimeout(() => setShowToast(false), 3000);
+  };
 
   return (
     <footer className={`${isDark ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-800'} py-12 mt-auto transition-colors duration-300`}>
@@ -274,14 +304,22 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className={`border-t ${isDark ? 'border-gray-800' : 'border-gray-300'} mt-6 pt-6 text-center ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>
-          <p className="flex items-center justify-center">
-            &copy; {currentYear} OMEX. All rights reserved. Made with <FaHeart className="text-red-500 mx-1" /> by OMEX Team
-          </p>
+          {/* Copyright */}
+          <div
+            className={`border-t ${
+              isDark ? "border-gray-800" : "border-gray-300"
+            } mt-8 pt-8 text-center ${
+              isDark ? "text-gray-500" : "text-gray-600"
+            }`}
+          >
+            <p className="flex items-center justify-center">
+              &copy; {currentYear} OMEX. All rights reserved. Made with{" "}
+              <FaHeart className="text-red-500 mx-1" /> by OMEX Team
+            </p>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   );
 };
 
