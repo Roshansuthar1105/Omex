@@ -26,11 +26,7 @@ import { BsTwitterX } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { useState } from "react";
-  FaVial
-} from 'react-icons/fa';
 import { FaSquareXTwitter } from "react-icons/fa6";
-import { Link } from 'react-router-dom';
-import { useTheme } from '../context/ThemeContext';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -319,7 +315,6 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-    </>
   );
 };
 

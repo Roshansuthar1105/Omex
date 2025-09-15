@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import LogoShowcase from "./pages/LogoShowcase";
 import "prismjs/themes/prism-tomorrow.css";
 import "./styles/glassmorphism.css";
@@ -49,8 +50,6 @@ import { ThemeProvider } from './context/ThemeContext';
 import BackToTopButton from "./components/BackToTopButton";
 import ContributorGuide from "./pages/ContributorGuide";
 
-// Not found page
-import NotFound from "./pages/NotFound";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
