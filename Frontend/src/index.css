@@ -3,8 +3,8 @@
 /* Global styles */
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -24,31 +24,60 @@ body.light-mode {
 }
 
 /* Scrollbar styling */
+/* Base scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  transition: opacity 0.5s ease;
+  opacity: 0; /* hidden by default */
+}
+
+/* Enlarge scrollbar width on hover */
+::-webkit-scrollbar:hover {
+  width: 14px;
 }
 
 ::-webkit-scrollbar-track {
   background: transparent;
+  transition: opacity 0.5s ease, background-color 0.5s ease;
+  opacity: 0;
 }
 
-body.dark-mode ::-webkit-scrollbar-thumb {
-  background: #4a5568;
-  border-radius: 4px;
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: transparent;
+  transition: opacity 0.5s ease, background-color 0.5s ease;
+  opacity: 0;
 }
 
-body.light-mode ::-webkit-scrollbar-thumb {
-  background: #cbd5e0;
-  border-radius: 4px;
+/* Show when active */
+body.show-scrollbar::-webkit-scrollbar,
+body.show-scrollbar::-webkit-scrollbar-track,
+body.show-scrollbar::-webkit-scrollbar-thumb {
+  opacity: 1;
 }
 
-body.dark-mode ::-webkit-scrollbar-thumb:hover {
-  background: #718096;
+/* Theme colors */
+body.dark-mode.show-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
 }
 
-body.light-mode ::-webkit-scrollbar-thumb:hover {
-  background: #a0aec0;
+body.light-mode.show-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode.show-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #3b3b57;
+}
+
+body.light-mode.show-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #999;
+}
+
+/* Keep visible while hovering scrollbar */
+::-webkit-scrollbar:hover,
+::-webkit-scrollbar-track:hover,
+::-webkit-scrollbar-thumb:hover {
+  opacity: 1 !important;
 }
 
 /* Fix for the gap in the UI */
