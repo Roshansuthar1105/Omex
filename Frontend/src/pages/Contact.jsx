@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaCheck, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaPhone, FaClock, FaStar } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 import Loader from "../components/Loader";
+import toast from 'react-hot-toast';
 
 const Contact = () => {
   const { isDark } = useTheme();

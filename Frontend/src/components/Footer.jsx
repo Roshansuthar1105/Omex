@@ -1,4 +1,9 @@
 import {
+  FaAlignLeft,
+  FaBug,
+  FaChartLine,
+  FaCode,
+  FaComment,
   FaEnvelope,
   FaGithub,
   FaHeart,
@@ -154,7 +159,105 @@ const Footer = () => {
               </div>
             </div>
           </div>
-
+              {/* Company & Legal */}
+              <div className="flex-1">
+                <h3
+                  className={`text-lg font-semibold mb-4 border-b ${
+                    isDark ? "border-gray-700" : "border-gray-300"
+                  } pb-2`}
+                >
+                  Company & Legal
+                </h3>
+                <ul className="space-y-2">
+                  <li>
+                    <Link
+                      to="/about"
+                      onClick={() =>
+                        window.scrollTo({ top: 0, behavior: "smooth" })
+                      }
+                      className={`flex items-center ${linkBase}`}
+                    >
+                      <FaUsers className={iconClass} /> About Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/team"
+                      onClick={() =>
+                        window.scrollTo({ top: 0, behavior: "smooth" })
+                      }
+                      className={`flex items-center ${linkBase}`}
+                    >
+                      <FaUserFriends className={iconClass} /> Our Team
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/contribute"
+                      onClick={() =>
+                        window.scrollTo({ top: 0, behavior: "smooth" })
+                      }
+                      className={`flex items-center ${linkBase}`}
+                    >
+                      <FaHandsHelping className={iconClass} /> Contribute
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/contact"
+                      onClick={() =>
+                        window.scrollTo({ top: 0, behavior: "smooth" })
+                      }
+                      className={`flex items-center ${linkBase}`}
+                    >
+                      <FaEnvelope className={iconClass} /> Contact Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/feedback"
+                      onClick={() =>
+                        window.scrollTo({ top: 0, behavior: "smooth" })
+                      }
+                      className={`flex items-center ${linkBase}`}
+                    >
+                      <FaComment className={iconClass} /> Feedback
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/faq"
+                      onClick={() =>
+                        window.scrollTo({ top: 0, behavior: "smooth" })
+                      }
+                      className={`flex items-center ${linkBase}`}
+                    >
+                      <FaQuestionCircle className={iconClass} /> FAQ
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/privacy-policy"
+                      onClick={() =>
+                        window.scrollTo({ top: 0, behavior: "smooth" })
+                      }
+                      className={`flex items-center ${linkBase}`}
+                    >
+                      <FaShieldAlt className={iconClass} /> Privacy Policy
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/terms-of-service"
+                      onClick={() =>
+                        window.scrollTo({ top: 0, behavior: "smooth" })
+                      }
+                      className={`flex items-center ${linkBase}`}
+                    >
+                      <FaFileContract className={iconClass} /> Terms of Service
+                    </Link>
+                  </li>
+                </ul>
           {/* Bottom Bar */}
           <div 
             className={`py-6 flex flex-col md:flex-row justify-between items-center border-t ${

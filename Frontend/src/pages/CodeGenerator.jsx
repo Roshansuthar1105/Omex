@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import CodeEditor from '../components/CodeEditor'
 import Loader from '../components/Loader'
+import FeedbackButton from '../components/FeedbackButton'
 import { useTheme } from '../context/ThemeContext';
 
 
@@ -29,7 +30,10 @@ function CodeGenerator() {
     <>
     <div className=''>
       <CodeEditor URL={URL} prompt={prompt} />
-      </div>  
+      </div>
+      
+      {/* Feedback Button */}
+      <FeedbackButton toolName="Code Generator" />
     </>
   )
 }

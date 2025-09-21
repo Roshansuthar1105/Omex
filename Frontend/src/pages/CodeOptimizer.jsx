@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import CodeEditor from '../components/CodeEditor.jsx';
 import CodeExamples from '../components/CodeExamples.jsx';
-import FeedbackForm from '../components/FeedbackForm.jsx';
+import FeedbackButton from '../components/FeedbackButton.jsx';
 import CodeHistory from '../components/CodeHistory.jsx';
 import { FaLightbulb, FaCode } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
@@ -108,7 +108,7 @@ function CodeOptimizer() {
       </div>
 
       {/* Feedback Form */}
-      <FeedbackForm isDark={isDark} />
+      <FeedbackButton toolName="Code Optimizer" />
 
       {/* Code History */}
       {/* <CodeHistory
