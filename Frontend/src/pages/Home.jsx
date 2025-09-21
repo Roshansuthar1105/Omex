@@ -285,6 +285,7 @@ function Home() {
       });
 
       // Tools Section Animations
+      console.log('toolsParagraphRef.current in Home.jsx:', toolsParagraphRef.current);
       gsap.from(toolsParagraphRef.current, {
         opacity: 0,
         y: 30,
@@ -296,6 +297,7 @@ function Home() {
         },
       });
 
+      console.log('toolsHeadingRef.current in Home.jsx:', toolsHeadingRef.current);
       gsap.from(toolsHeadingRef.current, {
         y: 100,
         opacity: 0,
@@ -307,6 +309,7 @@ function Home() {
         },
       });
 
+      console.log('toolsIconRef.current in Home.jsx:', toolsIconRef.current);
       gsap.from(toolsIconRef.current, {
         y: 100,
         opacity: 0,

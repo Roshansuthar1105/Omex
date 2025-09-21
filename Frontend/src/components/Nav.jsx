@@ -34,6 +34,7 @@ function Nav({ isMenuOpen, setIsMenuOpen }) {
 
 
   useGSAP(() => {
+    console.log('navbarRef.current in Nav.jsx:', navbarRef.current);
     gsap.from(navbarRef.current, {
       opacity: 0,
       y: -50,

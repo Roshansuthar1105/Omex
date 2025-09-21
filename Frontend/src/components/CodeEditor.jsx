@@ -23,6 +23,14 @@ function CodeEditor(props) {
   const [showSettings, setShowSettings] = useState(false);
   const [fontSize, setFontSize] = useState(16);
   const editorRef = useRef(null);
+  const [loadingMessage, setLoadingMessage] = useState('Processing...');
+
+  const loadingMessages = [
+    "Analyzing your code...",
+    "Identifying potential issues...",
+    "Generating optimization suggestions...",
+    "Finalizing the review..."
+  ];
 
   // Update prompt when props.prompt changes
   useEffect(() => {
@@ -30,6 +38,19 @@ function CodeEditor(props) {
       setPrompt(props.prompt);
     }
   }, [props.prompt]);
+
+  useEffect(() => {
+    let interval;
+    if (loading) {
+      let messageIndex = 0;
+      setLoadingMessage(loadingMessages[messageIndex]);
+      interval = setInterval(() => {
+        messageIndex = (messageIndex + 1) % loadingMessages.length;
+        setLoadingMessage(loadingMessages[messageIndex]);
+      }, 2000); // Change message every 2 seconds
+    }
+    return () => clearInterval(interval);
+  }, [loading]);
 
   const { isDark } = useTheme();
 
@@ -137,11 +158,11 @@ function CodeEditor(props) {
       const response = await axios.post(URL, { prompt });
       setReview(response.data);
       extractRecommendedFix(response.data);
+      toast.success('Operation successful!');
     } catch (err) {
       console.log(err);
       toast.error("An error occurred. Please try again.");
     } finally {
-      toast.success('Operation successful!');
       setLoading(false);
     }
   }
@@ -276,12 +297,8 @@ function CodeEditor(props) {
       <div className="flex flex-col md:flex-row gap-4 md:gap-6 h-[80vh]">
         {/* Editor Panel */}
         <div className="relative h-1/2 md:h-full md:w-1/2">
-          <div className={`h-full overflow-hidden rounded-lg shadow-lg border ${
-            isDark ? 'border-gray-600' : 'border-gray-300'
-          }`}>
-            <div className={`flex items-center justify-between px-4 py-2 ${
-              isDark ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'
-            }`}>
+          <div className={`h-full overflow-hidden rounded-lg shadow-lg border ${isDark ? 'border-gray-600' : 'border-gray-300'}`}>
+            <div className={`flex items-center justify-between px-4 py-2 ${isDark ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'}`}>
               <div className="flex items-center">
                 <FaCode className="mr-2" />
                 <span className="font-medium">{codelang} Editor</span>
@@ -289,18 +306,14 @@ function CodeEditor(props) {
               <div className="flex space-x-2">
                 <button
                   onClick={() => setShowSettings(!showSettings)}
-                  className={`p-2 rounded-md ${
-                    isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-300'
-                  } transition-colors`}
+                  className={`p-2 rounded-md ${isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-300'} transition-colors`}
                   title="Settings"
                 >
                   <MdSettings />
                 </button>
                 <button
                   onClick={handleClearEditor}
-                  className={`p-2 rounded-md ${
-                    isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-300'
-                  } transition-colors`}
+                  className={`p-2 rounded-md ${isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-300'} transition-colors`}
                   title="Clear Editor"
                 >
                   <FaTrash />
@@ -323,16 +336,12 @@ function CodeEditor(props) {
           <button
             onClick={reviewCode}
             disabled={loading}
-            className={`absolute bottom-4 right-4 px-6 py-2 rounded-lg font-medium transition-all duration-200 flex items-center ${
-              loading
-                ? 'bg-gray-500 cursor-not-allowed'
-                : 'bg-blue-500 hover:bg-blue-600 hover:shadow-lg'
-            } text-white`}
+            className={`absolute bottom-4 right-4 px-6 py-2 rounded-lg font-medium transition-all duration-200 flex items-center ${loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600 hover:shadow-lg'} text-white`}
           >
             {loading ? (
               <>
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                Processing...
+                {loadingMessage}
               </>
             ) : (
               <>
@@ -343,20 +352,14 @@ function CodeEditor(props) {
         </div>
 
         {/* Results Panel */}
-        <div className={`h-1/2 md:h-full md:w-1/2 rounded-lg shadow-lg overflow-hidden ${
-          isDark ? 'bg-gray-800' : 'bg-white'
-        }`}>
-          <div className={`px-4 py-2 ${
-            isDark ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-800'
-          } flex justify-between items-center`}>
+        <div className={`h-1/2 md:h-full md:w-1/2 rounded-lg shadow-lg overflow-hidden ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+          <div className={`px-4 py-2 ${isDark ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-800'} flex justify-between items-center`}>
             <span className="font-medium">Review Results</span>
             <div className="flex space-x-2">
               {review && (
                 <button
                   onClick={handleCopyAllClick}
-                  className={`px-3 py-1 rounded-md text-sm ${
-                    isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-300'
-                  } transition-colors flex items-center`}
+                  className={`px-3 py-1 rounded-md text-sm ${isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-300'} transition-colors flex items-center`}
                   title="Copy full review"
                 >
                   {copyAllText ? (
@@ -373,9 +376,7 @@ function CodeEditor(props) {
               {lang && (
                 <button
                   onClick={handleCopyClick}
-                  className={`px-3 py-1 rounded-md text-sm ${
-                    isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-300'
-                  } transition-colors flex items-center`}
+                  className={`px-3 py-1 rounded-md text-sm ${isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-300'} transition-colors flex items-center`}
                   title="Copy optimized code"
                 >
                   {copyText ? (
@@ -392,21 +393,17 @@ function CodeEditor(props) {
             </div>
           </div>
 
-          <div className={`h-[calc(100%-40px)] overflow-y-auto p-4 ${
-            isDark ? 'text-gray-200' : 'text-gray-800'
-          }`}>
+          <div className={`h-[calc(100%-40px)] overflow-y-auto p-4 ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
             {loading ? (
               <div className="flex justify-center items-center h-full">
-                <Loader />
+                <Loader text={loadingMessage} />
               </div>
             ) : review ? (
               <Markdown
                 rehypePlugins={[rehypeHighlight]}
                 components={{
                   code: ({ node, ...props }) => (
-                    <pre {...props} className={`p-4 rounded-lg ${
-                      isDark ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-800'
-                    }`}>
+                    <pre {...props} className={`p-4 rounded-lg ${isDark ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-800'}`}>
                       <code {...props} />
                     </pre>
                   ),

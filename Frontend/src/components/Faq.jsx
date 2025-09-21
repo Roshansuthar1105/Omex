@@ -140,6 +140,7 @@ export default function FAQSection() {
   useEffect(() => {
     if (openIndex !== null) {
       const el = answerRefs.current[openIndex];
+      console.log('answerRef el in Faq.jsx:', el);
       if (el) {
         gsap.fromTo(
           el,
@@ -159,6 +160,7 @@ export default function FAQSection() {
   useEffect(() => {
     if (activeCategory !== null) {
       const el = categoryRefs.current[activeCategory];
+      console.log('categoryRef el in Faq.jsx:', el);
       if (el) {
         gsap.fromTo(
           el.querySelectorAll('.faq-item'),
