@@ -102,7 +102,7 @@ or search for `Roshan Suthar | PA`
 # 📂 Project Folder Structure
 
 ```
-📦 Roshansuthar1105
+📦 Omex
 ├── 📁 .github
 │   ├── 📁 ISSUE_TEMPLATE
 │   │   ├── 🐛 bug_report.md                 # Template for reporting bugs
@@ -351,6 +351,7 @@ This project is licensed under the MIT License - see the [`License`](https://git
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=65&section=footer"/>
 
 **Ready to show off your coding achievements? Get started with Omex today! 🚀**
+
 
 
 
