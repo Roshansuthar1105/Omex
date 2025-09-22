@@ -208,13 +208,13 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
       <nav
         className={`${
           isDark 
-            ? "bg-gray-900/70 text-white border-gray-700/30"
-            : "bg-white/70 text-gray-800 border-gray-200/30"
+            ? "bg-gray-900/70 text-white border-white border-b-2"
+            : "bg-white/70 text-gray-800 border-black/40 border-b-2"
         } ${
           scrolled 
             ? "backdrop-blur-xl shadow-2xl border-b" 
             : "backdrop-blur-lg shadow-xl"
-        } py-2.5 px-3 md:px-4 w-full transition-all duration-500 sticky top-0 z-50 border-b`}
+        } py-2 px-1 sm:px-3 md:px-4 w-full transition-all duration-500 sticky top-0 z-50 border-b`}
         style={{
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.08)'
         }}
@@ -227,7 +227,7 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                 <img 
                   src={isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"}
                   alt="Omex AI" 
-                  className="h-16 w-auto transition-transform duration-300 transform group-hover:scale-110" 
+                  className="h-13 sm:h-16 w-auto transition-transform duration-300 transform group-hover:scale-110" 
                 />
               </Link>
             </div>
@@ -449,8 +449,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                 onClick={toggleTheme}
                 className={`p-2 rounded-xl transition-all duration-300 group ${
                   isDark
-                    ? "bg-gray-800 hover:bg-gray-700"
-                    : "bg-gray-100 hover:bg-gray-200"
+                    ? " hover:bg-gray-700"
+                    : " hover:bg-gray-200"
                 } shadow-md hover:shadow-lg transform hover:scale-105`}
                 aria-label="Toggle theme"
               >
@@ -467,8 +467,8 @@ function NavBar({ isMenuOpen, setIsMenuOpen }) {
                 onClick={toggleMenu}
                 className={`hamburger-button p-3 rounded-xl ${
                   isDark
-                    ? "bg-gray-800/90 text-white hover:bg-gray-700/90"
-                    : "bg-gray-100/90 text-gray-800 hover:bg-gray-200/90"
+                    ?" text-white hover:bg-gray-700/90"
+                    : "text-gray-800 hover:bg-gray-200/90"
                 } focus:outline-none relative z-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105`}
                 aria-label="Toggle mobile menu"
               >
