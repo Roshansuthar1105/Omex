@@ -65,6 +65,11 @@ const dependencyScannerModel = genAI.getGenerativeModel({
   systemInstruction: systemInstructions.dependencyScanner,
 });
 
+const codeExplainer = genAI.getGenerativeModel({
+  model: "gemini-2.0-flash",
+  systemInstruction: systemInstructions.codeExplainer,
+});
+
 /**
  * Generate code based on a prompt
  * @param {string} prompt - The prompt to generate code from
@@ -303,6 +308,26 @@ Please provide details on any vulnerable or deprecated dependencies and suggest 
   return result.response.text();
 }
 
+/**
+ * Generate an explanation for a code snippet
+ * @param {string} code - The code to explain
+ * @param {string} language - The programming language
+ * @returns {Promise<string>} - The explanation
+ */
+async function generateExplanation(code, language = '') {
+  const prompt = `Please explain the following ${language ? language + ' ' : ''}code snippet:
+
+\`\`\`${language}
+${code}
+\`\`\`
+
+Provide a clear, concise explanation of what this code does and how it works.`;
+
+  const result = await codeExplainer.generateContent(prompt);
+  const rawResponse = result.response.text();
+  return cleanAIResponse(rawResponse);
+}
+
 module.exports = {
   generateReview,
   generateCode,
@@ -315,4 +340,5 @@ module.exports = {
   summarizeContent,
   analyzeSecurity,
   scanDependencies,
+  generateExplanation,
 };

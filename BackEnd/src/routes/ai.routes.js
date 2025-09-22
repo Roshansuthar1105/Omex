@@ -15,6 +15,7 @@ router.post("/debug-code", aiController.debugCode)
 router.post("/analyze-performance", aiController.analyzePerformance)
 router.post("/analyze-security", aiController.analyzeSecurity);
 router.post("/dependency-scanner", aiController.scanDependencies);
+router.post("/explain-code", aiController.explainCode);
 
 
 module.exports = router;
