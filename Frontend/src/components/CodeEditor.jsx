@@ -3,7 +3,7 @@ import Markdown from "react-markdown"
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
 import axios from 'axios'
-import { FaCopy, FaTrash, FaCode, FaCheck } from "react-icons/fa";
+import { FaCopy, FaTrash, FaCode, FaCheck, FaQuestionCircle } from "react-icons/fa";
 import { MdDone, MdSettings } from "react-icons/md";
 import Loader from "../components/Loader.jsx"
 import Editor from '@monaco-editor/react';
@@ -22,6 +22,9 @@ function CodeEditor(props) {
   const [codelang, setCodeLang] = useState("JavaScript");
   const [showSettings, setShowSettings] = useState(false);
   const [fontSize, setFontSize] = useState(16);
+  const [explanation, setExplanation] = useState('');
+  const [showExplanationModal, setShowExplanationModal] = useState(false);
+  const [explaining, setExplaining] = useState(false);
   const editorRef = useRef(null);
 
   // Update prompt when props.prompt changes
@@ -143,6 +146,48 @@ function CodeEditor(props) {
     } finally {
       toast.success('Operation successful!');
       setLoading(false);
+    }
+  }
+
+  async function explainCode() {
+    setExplaining(true);
+    try {
+      // Get selected text from Monaco editor
+      const editor = editorRef.current;
+      if (!editor) {
+        toast.error("Editor not ready");
+        setExplaining(false);
+        return;
+      }
+
+      const selection = editor.getSelection();
+      let codeToExplain = '';
+
+      if (selection && !selection.isEmpty()) {
+        // Use selected text
+        codeToExplain = editor.getModel().getValueInRange(selection);
+      } else {
+        // Use all text if nothing selected
+        codeToExplain = prompt;
+      }
+
+      if (codeToExplain.trim() === "") {
+        toast.error("Please select some code or enter code to explain");
+        setExplaining(false);
+        return;
+      }
+
+      const response = await axios.post(`${URL}/explain-code`, { 
+        code: codeToExplain, 
+        language: codelang 
+      });
+      setExplanation(response.data);
+      setShowExplanationModal(true);
+    } catch (err) {
+      console.log(err);
+      toast.error("An error occurred while explaining code. Please try again.");
+    } finally {
+      setExplaining(false);
     }
   }
 
@@ -320,26 +365,50 @@ function CodeEditor(props) {
             </div>
           </div>
 
-          <button
-            onClick={reviewCode}
-            disabled={loading}
-            className={`absolute bottom-4 right-4 px-6 py-2 rounded-lg font-medium transition-all duration-200 flex items-center ${
-              loading
-                ? 'bg-gray-500 cursor-not-allowed'
-                : 'bg-blue-500 hover:bg-blue-600 hover:shadow-lg'
-            } text-white`}
-          >
-            {loading ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                Processing...
-              </>
-            ) : (
-              <>
-                <FaCheck className="mr-2" /> Review
-              </>
-            )}
-          </button>
+          <div className="absolute bottom-4 right-4 flex space-x-2">
+            <button
+              onClick={explainCode}
+              disabled={explaining || loading}
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center ${
+                explaining || loading
+                  ? 'bg-gray-500 cursor-not-allowed'
+                  : 'bg-green-500 hover:bg-green-600 hover:shadow-lg'
+              } text-white`}
+              title="Explain selected code"
+            >
+              {explaining ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                  Explaining...
+                </>
+              ) : (
+                <>
+                  <FaQuestionCircle className="mr-2" /> Explain
+                </>
+              )}
+            </button>
+
+            <button
+              onClick={reviewCode}
+              disabled={loading || explaining}
+              className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center ${
+                loading || explaining
+                  ? 'bg-gray-500 cursor-not-allowed'
+                  : 'bg-blue-500 hover:bg-blue-600 hover:shadow-lg'
+              } text-white`}
+            >
+              {loading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                  Processing...
+                </>
+              ) : (
+                <>
+                  <FaCheck className="mr-2" /> Review
+                </>
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Results Panel */}
@@ -444,6 +513,88 @@ function CodeEditor(props) {
           </div>
         </div>
       </div>
+
+      {/* Explanation Modal */}
+      {showExplanationModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className={`max-w-2xl w-full max-h-[80vh] rounded-lg shadow-xl overflow-hidden ${
+            isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+          }`}>
+            <div className={`px-6 py-4 border-b ${
+              isDark ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-gray-50'
+            }`}>
+              <div className="flex justify-between items-center">
+                <h3 className="text-xl font-semibold flex items-center">
+                  <FaQuestionCircle className="mr-2 text-green-500" />
+                  Code Explanation
+                </h3>
+                <div className="flex space-x-2">
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(explanation);
+                      toast.success("Explanation copied to clipboard!");
+                    }}
+                    className={`p-2 rounded-md ${
+                      isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+                    } transition-colors`}
+                    title="Copy explanation"
+                  >
+                    <FaCopy />
+                  </button>
+                  <button
+                    onClick={() => setShowExplanationModal(false)}
+                    className={`p-2 rounded-md ${
+                      isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+                    } transition-colors`}
+                    title="Close"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="p-6 overflow-y-auto max-h-[60vh]">
+              <div className="prose prose-sm max-w-none">
+                <Markdown
+                  rehypePlugins={[rehypeHighlight]}
+                  components={{
+                    code: ({ node, ...props }) => (
+                      <pre {...props} className={`p-3 rounded-lg ${
+                        isDark ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-800'
+                      }`}>
+                        <code {...props} />
+                      </pre>
+                    ),
+                    p: ({ node, ...props }) => (
+                      <p {...props} className="mb-3" />
+                    ),
+                    h1: ({ node, ...props }) => (
+                      <h1 {...props} className="text-xl font-bold mb-3" />
+                    ),
+                    h2: ({ node, ...props }) => (
+                      <h2 {...props} className="text-lg font-bold mb-2" />
+                    ),
+                    h3: ({ node, ...props }) => (
+                      <h3 {...props} className="text-base font-bold mb-2" />
+                    ),
+                    ul: ({ node, ...props }) => (
+                      <ul {...props} className="list-disc pl-5 mb-3" />
+                    ),
+                    ol: ({ node, ...props }) => (
+                      <ol {...props} className="list-decimal pl-5 mb-3" />
+                    ),
+                    li: ({ node, ...props }) => (
+                      <li {...props} className="mb-1" />
+                    ),
+                  }}
+                >
+                  {explanation}
+                </Markdown>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
