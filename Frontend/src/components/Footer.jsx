@@ -191,36 +191,35 @@ const Footer = () => {
     </div>
   </div>
 
-  {/* Bottom Bar */}
-  <div
-    className={`mt-6 py-6 flex flex-col md:flex-row justify-between items-center border-t ${
-      isDark ? "border-gray-800" : "border-gray-200"
+<div
+  className={`mt-6 py-6 flex flex-col items-center border-t ${
+    isDark ? "border-gray-800" : "border-gray-200"
+  }`}
+>
+  <a
+    href="mailto:contact@omex.com"
+    className={`flex items-center gap-2 text-xs mb-3 ${
+      isDark ? "text-gray-400 hover:text-gray-200" : "text-gray-600 hover:text-gray-900"
     }`}
   >
-    <p className={`text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-      © {currentYear} OMEX. All rights reserved.
-    </p>
-    <div className="flex items-center space-x-2 my-2 md:my-0">
-      <span className="text-xs text-gray-500">Made with</span>
-      <FaHeart className="text-red-500 text-xs animate-pulse" />
-      <span className={`text-xs ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-        by OMEX Team
-      </span>
-    </div>
-    <a
-      href="mailto:contact@omex.com"
-      className={`flex items-center gap-2 text-sm ${
-        isDark ? "text-gray-400 hover:text-gray-200" : "text-gray-600 hover:text-gray-900"
-      }`}
-    >
-      <FaEnvelope size={14} /> contact@omex.com
-    </a>
-  </div>
-</div>
+    <FaEnvelope size={10} /> contact@omex.com
+  </a>
 
-      </footer>
-    </>
-  );
+  <p
+    className={`flex flex-col md:flex-row items-center text-center gap-1 text-xs ${
+      isDark ? "text-gray-400" : "text-gray-600"
+    }`}
+  >
+    © {currentYear} OMEX. All rights reserved.
+    <span className="flex items-center gap-1 text-[10px] text-gray-500 md:text-xs">
+      Made with <FaHeart className="text-red-500 text-[10px] md:text-xs animate-pulse" /> by OMEX Team
+    </span>
+  </p>
+</div>
+</div>
+</footer>
+</>
+);
 };
 
 export default Footer;
