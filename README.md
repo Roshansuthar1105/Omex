@@ -98,6 +98,50 @@ or search for `Roshan Suthar | PA`
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="150%">
 
+
+# 📂 Project Folder Structure
+
+```
+📦 Omex
+├── 📁 .github
+│   ├── 📁 ISSUE_TEMPLATE
+│   │   ├── 🐛 bug_report.md                 # Template for reporting bugs
+│   │   ├── 🌟 feature_request.md            # Template for requesting new features
+│   │   └── 🎨 style_enhencement.md          # Template for style/enhancement issues
+│   ├── 📁 workflows
+│   │   ├── ⚙️ issue-create-automate-message.yml  # GitHub Actions workflow to automate issue messages
+│   │   └── ⚙️ pr-create-automate-message.yml     # GitHub Actions workflow to automate PR messages
+│   └── 📝 PULL_REQUEST_TEMPLATE.md          # Template for pull requests
+├── 📁 BackEnd
+│   ├── 📁 src                              # Backend source code (routes, controllers, utils)
+│   ├── 🔑 .env.example                     # Sample environment variables
+│   ├── eng.traineddata                      # (AI/NLP training data file)
+│   ├── 📦 package-lock.json                # Locks installed dependency versions
+│   ├── 📦 package.json                      # Backend dependencies and scripts
+│   └── 🖥️ server.js                         # Backend server entry point
+├── 📁 Frontend
+│   ├── 📁 public                            # Static assets (images, favicon, index.html)
+│   ├── 📁 src                               # Frontend source code (React components, pages, CSS)
+│   ├── 🔑 .env.example                      # Sample frontend environment variables
+│   ├── .gitignore                            # Git ignore rules for frontend
+│   ├── 📝 README.md                          # Frontend documentation
+│   ├── ⚡ eslint.config.js                   # ESLint configuration for code quality
+│   ├── 🌐 index.html                         # Main HTML file
+│   ├── 🛠️ netlify.toml                      # Netlify deployment configuration
+│   ├── 📦 package-lock.json                 # Locks frontend dependency versions
+│   ├── 📦 package.json                       # Frontend dependencies and scripts
+│   └── ⚡ vite.config.js                     # Vite configuration for frontend build
+├── .gitignore                                # Git ignore rules at root
+├── .DS_Store                                 # macOS system file (can be ignored)
+├── 📝 CONTRIBUTING.md                        # Guidelines for contributing
+├── 📜 LICENSE                                # Project license
+├── 📝 README.md                               # Main project documentation
+├── 🐞 npm-debug.log                           # npm error log file
+└── ✨ Contributor Covenant Code of Conduct — G  # Guidelines for contributor behavior and community standards
+
+
+```
+
 🌟 **Exciting News...**
 
 🚀 This project is now an official part of GirlScript Summer of Code – GSSoC'25! 💃🎉💻 We're thrilled to welcome contributors from all over India and beyond to collaborate, build, and grow Omex! Let’s make learning and career development smarter – together! 🌟👨‍💻👩‍💻
@@ -307,5 +351,7 @@ This project is licensed under the MIT License - see the [`License`](https://git
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=65&section=footer"/>
 
 **Ready to show off your coding achievements? Get started with Omex today! 🚀**
+
+
 
 
