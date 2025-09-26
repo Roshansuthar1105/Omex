@@ -101,14 +101,14 @@ const Contribute = () => {
               <li>
                 💻 <strong>Clone</strong> your fork locally:
                 <br />
-                <code className="break-all p-1 rounded bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100">
+                <code className="break-all p-1 rounded bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100"> //code block styled for both dark and light mode
                   git clone https://github.com/YOUR-USERNAME/Omex.git
                 </code>
               </li>
               <li>
                 🌿 <strong>Create a feature branch</strong>:
                 <br />
-                <code className="break-all p-1 rounded bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100">
+                <code className="break-all p-1 rounded bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100"> //code block styled for both dark and light mode
                   git checkout -b feature/YourFeatureName
                 </code>
               </li>
@@ -120,7 +120,7 @@ const Contribute = () => {
               <li>
                 💾 Commit:
                 <br />
-                <code className="break-all p-1 rounded bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100">
+                <code className="break-all p-1 rounded bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100"> //code block styled for both dark and light mode
                   git add . <br />
                   git commit -m "Add your feature"
                 </code>
@@ -128,7 +128,7 @@ const Contribute = () => {
               <li>
                 🛫 Push:
                 <br />
-                <code className="break-all p-1 rounded bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100">
+                <code className="break-all p-1 rounded bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-100"> //code block styled for both dark and light mode
                   git push origin feature/YourFeatureName
                 </code>
               </li>
