@@ -102,7 +102,14 @@ function CodeEditor(props) {
     setTimeout(() => setCopyAllButtonText(true), 2000);
   };
 
-  const handleClearEditor = () => {
+
+  const handleClearEditor = (e) => {
+    // Prevent event bubbling and default behavior
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    
     setPrompt('');
     setReview('');
     setOptimisedCode('');
@@ -343,12 +350,30 @@ function CodeEditor(props) {
                 </button>
                 <button
                   onClick={handleClearEditor}
-                  className={`p-2 rounded-md ${
-                    isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-300'
-                  } transition-colors`}
+                  onTouchStart={(e) => {
+                    // Prevent touch delay and ensure immediate response
+                    e.currentTarget.style.transform = 'scale(0.95)';
+                  }}
+                  onTouchEnd={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    // Trigger click for touch devices if needed
+                    if (e.type === 'touchend') {
+                      e.preventDefault();
+                      handleClearEditor(e);
+                    }
+                  }}
+                  className={`p-3 min-h-[44px] min-w-[44px] rounded-md flex items-center justify-center ${
+                    isDark ? 'hover:bg-gray-700 active:bg-gray-600' : 'hover:bg-gray-300 active:bg-gray-400'
+                  } transition-all duration-150 touch-manipulation`}
+                  style={{
+                    WebkitTapHighlightColor: 'transparent',
+                    userSelect: 'none',
+                    touchAction: 'manipulation'
+                  }}
                   title="Clear Editor"
+                  aria-label="Clear Editor"
                 >
-                  <FaTrash />
+                  <FaTrash className="text-sm" />
                 </button>
               </div>
             </div>

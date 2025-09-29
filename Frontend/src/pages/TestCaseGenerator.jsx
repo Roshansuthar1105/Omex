@@ -80,7 +80,13 @@ end`,
     toast.success('Test cases copied to clipboard!');
   };
 
-  const handleClearAll = () => {
+  const handleClearAll = (e) => {
+    // Prevent event bubbling and default behavior for better mobile compatibility
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    
     setCode('');
     setTestCases('');
     toast.success('All cleared!');
@@ -162,11 +168,27 @@ end`,
             <div className="flex justify-between">
               <button
                 onClick={handleClearAll}
-                className={`px-4 py-2 rounded ${
+                onTouchStart={(e) => {
+                  e.currentTarget.style.transform = 'scale(0.98)';
+                }}
+                onTouchEnd={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  if (e.type === 'touchend') {
+                    e.preventDefault();
+                    handleClearAll(e);
+                  }
+                }}
+                className={`px-4 py-3 min-h-[44px] rounded flex items-center justify-center ${
                   isDark
-                    ? 'bg-gray-600 hover:bg-gray-500'
-                    : 'bg-gray-200 hover:bg-gray-300'
-                } transition-colors`}
+                    ? 'bg-gray-600 hover:bg-gray-500 active:bg-gray-400'
+                    : 'bg-gray-200 hover:bg-gray-300 active:bg-gray-400'
+                } transition-all duration-150 touch-manipulation`}
+                style={{
+                  WebkitTapHighlightColor: 'transparent',
+                  userSelect: 'none',
+                  touchAction: 'manipulation'
+                }}
+                aria-label="Clear All"
               >
                 Clear All
               </button>

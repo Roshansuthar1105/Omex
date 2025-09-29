@@ -98,3 +98,22 @@ body.light-mode.show-scrollbar::-webkit-scrollbar-thumb {
 .grid-cols-1.lg\\:grid-cols-2 {
   gap: 0 !important;
 }
+
+/* Mobile touch optimization for buttons */
+@media (pointer: coarse) {
+  button {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Touch-friendly button class */
+.touch-manipulation {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}

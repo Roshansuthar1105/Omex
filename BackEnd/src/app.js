@@ -18,8 +18,9 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-app.use('/ai', aiRoutes);
-app.use('/ai', mediaRoutes); // Using the same /ai prefix for consistency
+app.use('/ai', aiRoutes);       // -> /ai/code-metrics-analyzer
+app.use('/media', mediaRoutes); // -> /media/...
+ // Using the same /ai prefix for consistency
 
 // Error handling middleware
 app.use((err, req, res, next) => {
