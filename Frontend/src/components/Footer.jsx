@@ -1,5 +1,4 @@
 import {
-  FaAlignLeft,
   FaBug,
   FaChartLine,
   FaCode,
@@ -20,12 +19,18 @@ import { BsTwitterX } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { useState } from "react";
-import { Toaster, toast } from 'react-hot-toast';
+import { Toaster, toast } from "react-hot-toast";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { isDark } = useTheme();
   const [email, setEmail] = useState("");
+
+  const linkBase = `flex items-center space-x-2 transition-colors duration-200 ${
+    isDark ? "text-gray-400 hover:text-white" : "text-gray-600 hover:text-gray-900"
+  }`;
+
+  const iconClass = "text-lg mr-2";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +40,6 @@ const Footer = () => {
       toast.error("Email is required");
       return;
     }
-
     if (!emailRegex.test(email)) {
       toast.error("Please enter a valid email address");
       return;
@@ -45,33 +49,22 @@ const Footer = () => {
     setEmail("");
   };
 
-  const linkBase = `flex items-center space-x-2 transition-colors duration-200 ${
-    isDark ? "text-gray-400 hover:text-white" : "text-gray-600 hover:text-gray-900"
-  }`;
-
-  const iconClass = "text-lg mr-2";
-
   return (
     <>
       <Toaster position="top-right" />
 
-      {/* Footer - Clean Design with Purple Backdrop Shadow */}
       <footer
         className={`relative border-t ${
-          isDark
-            ? 'bg-gray-900 border-gray-800'
-            : 'bg-gray-50 border-gray-200'
+          isDark ? "bg-gray-900 border-gray-800" : "bg-gray-50 border-gray-200"
         }`}
         style={{
           boxShadow: isDark
-            ? '0 -12px 40px rgba(99, 102, 241, 0.3), 0 -8px 24px rgba(139, 92, 246, 0.2), 0 -4px 16px rgba(0, 0, 0, 0.3)'
-            : '0 -12px 40px rgba(99, 102, 241, 0.2), 0 -8px 24px rgba(139, 92, 246, 0.15), 0 -4px 16px rgba(0, 0, 0, 0.06)'
+            ? "0 -12px 40px rgba(99, 102, 241, 0.3), 0 -8px 24px rgba(139, 92, 246, 0.2), 0 -4px 16px rgba(0, 0, 0, 0.3)"
+            : "0 -12px 40px rgba(99, 102, 241, 0.2), 0 -8px 24px rgba(139, 92, 246, 0.15), 0 -4px 16px rgba(0, 0, 0, 0.06)",
         }}
       >
         <div className="max-w-7xl mx-auto px-6">
-          {/* Main Footer Content */}
           <div className="py-12 grid grid-cols-1 lg:grid-cols-2 gap-12">
-            
             {/* Left Half - Brand Section */}
             <div className="space-y-6">
               <div className="flex items-center space-x-3">
@@ -81,19 +74,24 @@ const Footer = () => {
                   className="h-12 w-auto"
                 />
               </div>
-              <p className={`text-base leading-relaxed max-w-lg ${
-                isDark ? "text-gray-400" : "text-gray-600"
-              }`}>
-                Elevate your code with AI-powered optimization, analysis, and generation tools. OMEX helps developers write better, cleaner, and more efficient code with intelligent automation and advanced debugging capabilities.
+              <p
+                className={`text-base leading-relaxed max-w-lg ${
+                  isDark ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                Elevate your code with AI-powered optimization, analysis, and
+                generation tools. OMEX helps developers write better, cleaner,
+                and more efficient code with intelligent automation and advanced
+                debugging capabilities.
               </p>
-              
+
               {/* Social Links */}
               <div className="flex space-x-3">
                 {[
                   { href: "https://github.com/Roshansuthar1105/Omex", icon: FaGithub },
                   { href: "https://twitter.com", icon: BsTwitterX },
                   { href: "https://linkedin.com/in/roshansuthar", icon: FaLinkedin },
-                  { href: "https://discord.com/users/1317732270047498343", icon: FaDiscord }
+                  { href: "https://discord.com/users/1317732270047498343", icon: FaDiscord },
                 ].map((social, index) => (
                   <a
                     key={index}
@@ -112,17 +110,21 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Right Half - Newsletter Section */}
+            {/* Right Half - Newsletter */}
             <div className="flex justify-end">
               <div className="w-full max-w-sm">
-                <h3 className={`text-sm font-medium mb-4 ${
-                  isDark ? "text-gray-200" : "text-gray-900"
-                }`}>
+                <h3
+                  className={`text-sm font-medium mb-4 ${
+                    isDark ? "text-gray-200" : "text-gray-900"
+                  }`}
+                >
                   Stay Updated
                 </h3>
-                <p className={`text-sm mb-6 ${
-                  isDark ? "text-gray-400" : "text-gray-600"
-                }`}>
+                <p
+                  className={`text-sm mb-6 ${
+                    isDark ? "text-gray-400" : "text-gray-600"
+                  }`}
+                >
                   Get the latest updates and features.
                 </p>
                 <form onSubmit={handleSubmit} className="space-y-3">
@@ -142,8 +144,8 @@ const Footer = () => {
                     type="submit"
                     className="w-full px-3 py-2 text-sm font-medium text-white rounded-md transition-all duration-200 transform hover:scale-105 active:scale-95"
                     style={{
-                      background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
-                      boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
+                      background:
+                        "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
                     }}
                   >
                     Subscribe
@@ -153,9 +155,8 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Additional Sections */}
+          {/* Company & Legal */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 py-12">
-            {/* Company & Legal */}
             <div>
               <h3
                 className={`text-lg font-semibold mb-4 border-b ${
@@ -165,83 +166,54 @@ const Footer = () => {
                 Company & Legal
               </h3>
               <ul className="space-y-2">
-                <li>
-                  <Link to="/about" className={linkBase} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                    <FaUsers className={iconClass} /> About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/team" className={linkBase} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                    <FaUserFriends className={iconClass} /> Our Team
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/contribute" className={linkBase} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                    <FaHandsHelping className={iconClass} /> Contribute
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/contact" className={linkBase} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                    <FaEnvelope className={iconClass} /> Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/feedback" className={linkBase} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                    <FaComment className={iconClass} /> Feedback
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/faq" className={linkBase} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                    <FaQuestionCircle className={iconClass} /> FAQ
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/privacy-policy" className={linkBase} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                    <FaShieldAlt className={iconClass} /> Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/terms-of-service" className={linkBase} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                    <FaFileContract className={iconClass} /> Terms of Service
-                  </Link>
-                </li>
+                {[
+                  { to: "/about", label: "About Us", icon: FaUsers },
+                  { to: "/team", label: "Our Team", icon: FaUserFriends },
+                  { to: "/contribute", label: "Contribute", icon: FaHandsHelping },
+                  { to: "/contact", label: "Contact Us", icon: FaEnvelope },
+                  { to: "/feedback", label: "Feedback", icon: FaComment },
+                  { to: "/faq", label: "FAQ", icon: FaQuestionCircle },
+                  { to: "/privacy-policy", label: "Privacy Policy", icon: FaShieldAlt },
+                  { to: "/terms-of-service", label: "Terms of Service", icon: FaFileContract },
+                ].map((item, i) => (
+                  <li key={i}>
+                    <Link
+                      to={item.to}
+                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                      className={linkBase}
+                    >
+                      <item.icon className={iconClass} /> <span>{item.label}</span>
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
-          
+
           {/* Bottom Bar */}
-          <div className={`py-6 flex flex-col md:flex-row justify-between items-center border-t ${
-            isDark ? "border-gray-800" : "border-gray-200"
-          }`}>
+          <div
+            className={`py-6 flex flex-col md:flex-row justify-between items-center border-t ${
+              isDark ? "border-gray-800" : "border-gray-200"
+            }`}
+          >
             <div className="flex items-center space-x-4 mb-4 md:mb-0">
-              <p className={`text-sm ${
-                isDark ? "text-gray-400" : "text-gray-600"
-              }`}>
+              <p className={`text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}>
                 © {currentYear} OMEX. All rights reserved.
               </p>
               <div className="flex items-center space-x-1">
-                <span className={`text-xs ${
-                  isDark ? "text-gray-500" : "text-gray-500"
-                }`}>
-                  Made with
-                </span>
+                <span className="text-xs text-gray-500">Made with</span>
                 <FaHeart className="text-red-500 text-xs animate-pulse" />
-                <span className={`text-xs ${
-                  isDark ? "text-gray-400" : "text-gray-600"
-                }`}>
+                <span className={`text-xs ${isDark ? "text-gray-400" : "text-gray-600"}`}>
                   by OMEX Team
                 </span>
               </div>
             </div>
 
-            {/* Contact */}
             <div className="flex items-center space-x-4">
               <a
                 href="mailto:contact@omex.com"
-                className={`flex items-center space-x-2 text-sm transition-colors duration-200 ${
-                  isDark
-                    ? "text-gray-400 hover:text-gray-200"
-                    : "text-gray-600 hover:text-gray-900"
+                className={`flex items-center space-x-2 text-sm ${
+                  isDark ? "text-gray-400 hover:text-gray-200" : "text-gray-600 hover:text-gray-900"
                 }`}
               >
                 <FaEnvelope size={14} />

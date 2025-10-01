@@ -1,76 +1,76 @@
-import { useState } from "react";
-import { Route, BrowserRouter as Router, Routes, Outlet } from "react-router-dom";
-import React from "react";
-import { Link } from "react-router-dom";
+// React & Router
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
+
+// Styles & Themes
 import "prismjs/themes/prism-tomorrow.css";
 import "./styles/glassmorphism.css";
+import "./utils/scrollbar.js";
+
+// Theme context
+import { ThemeProvider } from "./context/ThemeContext";
 
 // Components
-import LogoShowcase from "./pages/LogoShowcase";
-import NotFound from "./pages/notFound";
-import Home from "./pages/Home";
 import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { Toaster } from "react-hot-toast";
-import ScrollToTop from "./components/ScrollToTop";
 import BackToTopButton from "./components/BackToTopButton";
+import ScrollToTop from "./components/ScrollToTop";
+import { Toaster } from "react-hot-toast";
+import ContributorsLeaderboard from "./components/ContributorsLeaderboard";
+
+// Pages
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Team from "./pages/Team";
+import Feedback from "./pages/Feedback";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import Contribute from "./pages/Contribute";
 import ContributorGuide from "./pages/ContributorGuide";
+import LogoShowcase from "./pages/LogoShowcase";
 
 // Code tools pages
-import CodeBeautifier from "./pages/CodeBeautifier";
 import CodeTools from "./pages/CodeTools";
-import ContentSummarizer from "./pages/ContentSummarizer";
+import CodeBeautifier from "./pages/CodeBeautifier";
 import ErrorDebugger from "./pages/ErrorDebugger";
 import PerformanceAnalyzer from "./pages/PerformanceAnalyzer";
 import SecurityScanner from "./pages/SecurityScanner";
 import TestCaseGenerator from "./pages/TestCaseGenerator";
 import DependencyScanner from "./pages/DependencyScanner";
-
-// Other pages
-import About from "./pages/About";
 import CodeCompare from "./pages/CodeCompare";
 import CodeComplexity from "./pages/CodeComplexity";
 import CodeGenerator from "./pages/CodeGenerator";
 import CodeOptimizer from "./pages/CodeOptimizer";
-import Contact from "./pages/Contact";
-import Feedback from "./pages/Feedback";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import Team from "./pages/Team";
-import TermsOfService from "./pages/TermsOfService";
-import Contribute from "./pages/Contribute";
-import ContributorsLeaderboard from "./components/ContributorsLeaderboard";
-
-// Theme context
-import { ThemeProvider } from "./context/ThemeContext";
-
-// Scrollbar
-import "./utils/scrollbar.js";
+import ContentSummarizer from "./pages/ContentSummarizer";
 
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Layout wrapper for all routes
+  const Layout = () => (
+    <div className="flex flex-col min-h-screen">
+      <nav className="w-full fixed top-0 left-0 z-50">
+        <NavBar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      </nav>
+      <main className="flex-grow pt-20">
+        <Outlet />
+      </main>
+      <Footer />
+      {!isMenuOpen && <BackToTopButton />}
+      <Toaster position="top-right" />
+    </div>
+  );
 
   return (
     <ThemeProvider>
       <Router>
         <ScrollToTop />
         <Routes>
-          <Route
-            element={
-              <div className="flex flex-col min-h-screen">
-                <nav className="w-full fixed top-0 left-0 z-50">
-                  <NavBar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-                </nav>
-                <main className="flex-grow pt-20">
-                  <Outlet />
-                </main>
-                <Footer />
-                {!isMenuOpen && <BackToTopButton />}
-                <Toaster position="top-right" />
-              </div>
-            }
-          >
-            {/* Main routes */}
+          <Route element={<Layout />}>
+            {/* Main pages */}
             <Route path="/" element={<Home />} />
             <Route path="/optimiser" element={<CodeOptimizer />} />
             <Route path="/codegenerator" element={<CodeGenerator />} />
@@ -79,6 +79,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contributors" element={<ContributorsLeaderboard />} />
             <Route path="/contribute" element={<Contribute />} />
+
 
             {/* Code tools */}
             <Route path="/code-tools" element={<CodeTools />} />
@@ -90,6 +91,7 @@ function App() {
             <Route path="/security-scanner" element={<SecurityScanner />} />
             <Route path="/dependency-scanner" element={<DependencyScanner />} />
 
+
             {/* Company pages */}
             <Route path="/team" element={<Team />} />
             <Route path="/contact" element={<Contact />} />
@@ -98,8 +100,8 @@ function App() {
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/contributor-guide" element={<ContributorGuide />} />
             <Route path="/logo-showcase" element={<LogoShowcase />} />
-            
-            {/* Catch-all 404 route */}
+
+            {/* Catch-all 404 */}
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
