@@ -329,7 +329,7 @@ async function run() {
       commentBody += `@${newIssue.user.login}, your edit has been processed and the issue still appears to be unique. Our duplicate detection database has been updated with your changes.\n\n`;
       commentBody += `Thank you for keeping your issue up to date! 🔄\n\n`;
     } else {
-      commentBody += `Thank you @${newIssue.user.login} for finding and contributing this unique issue! This appears to be a new problem that hasn't been reported before.\n\n`;
+      commentBody = `Thank you @${newIssue.user.login} for finding and contributing this unique issue! This appears to be a new problem that hasn't been reported before.\n\n`;
       commentBody += `Your contribution helps make this project better. We appreciate you taking the time to report this! 🙏\n\n`;
       commentBody += `Meanwhile make sure you've visited the README.md, CONTRIBUTING.md, and CODE_OF_CONDUCT.md before creating a PR for this. Also, please do NOT create a PR until this issue has been assigned to you.\n\n`;
     }
