@@ -14,7 +14,11 @@
   "license": "ISC",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@octokit/rest": "^22.0.0",
+    "@pinecone-database/pinecone": "^6.1.2",
+    "dotenv": "^17.2.3",
     "framer-motion": "^12.23.12",
+    "node-fetch": "^3.3.2",
     "react-icons": "^5.5.0"
   },
   "devDependencies": {
