@@ -5,15 +5,15 @@ import "prismjs/themes/prism-tomorrow.css";
 import "./styles/glassmorphism.css";
 import "./utils/scrollbar.js";
 
+// Theme context
+import { ThemeProvider } from "./context/ThemeContext";
+
 // Layout components
 import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
 import BackToTopButton from "./components/BackToTopButton";
 import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
-
-// Theme context
-import { ThemeProvider } from "./context/ThemeContext";
 
 // Pages
 import Home from "./pages/Home";
@@ -27,7 +27,6 @@ import TermsOfService from "./pages/TermsOfService";
 import Contribute from "./pages/Contribute";
 import ContributorGuide from "./pages/ContributorGuide";
 import LogoShowcase from "./pages/LogoShowcase";
-import ContributorsLeaderboard from "./components/ContributorsLeaderboard";
 
 // Code tools pages
 import CodeTools from "./pages/CodeTools";
@@ -37,65 +36,22 @@ import PerformanceAnalyzer from "./pages/PerformanceAnalyzer";
 import SecurityScanner from "./pages/SecurityScanner";
 import TestCaseGenerator from "./pages/TestCaseGenerator";
 import DependencyScanner from "./pages/DependencyScanner";
-// Pages
-import LogoShowcase from "./pages/LogoShowcase";
-import Home from "./pages/Home";
-import NotFound from "./pages/notFound";
-import About from "./pages/About";
+
 import CodeCompare from "./pages/CodeCompare";
 import CodeComplexity from "./pages/CodeComplexity";
 import CodeGenerator from "./pages/CodeGenerator";
 import CodeOptimizer from "./pages/CodeOptimizer";
 import ContentSummarizer from "./pages/ContentSummarizer";
 
-// 🚀 NEW PAGE
+// NEW PAGE
 import CodeMetrics from "./pages/CodeMetrics";
 import CodeMetricsAnalyzer from "./components/CodeMetricsAnalyzer.jsx";
-import Contact from "./pages/Contact";
-import Feedback from "./pages/Feedback";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import Team from "./pages/Team";
-import TermsOfService from "./pages/TermsOfService";
-import Contribute from "./pages/Contribute";
-import ContributorGuide from "./pages/ContributorGuide";
 
-// Code tools pages
-import CodeBeautifier from "./pages/CodeBeautifier";
-import CodeTools from "./pages/CodeTools";
-import ContentSummarizer from "./pages/ContentSummarizer";
-import ErrorDebugger from "./pages/ErrorDebugger";
-import PerformanceAnalyzer from "./pages/PerformanceAnalyzer";
-import SecurityScanner from "./pages/SecurityScanner";
-import TestCaseGenerator from "./pages/TestCaseGenerator";
-import DependencyScanner from "./pages/DependencyScanner";
-
-// insights page
+// Insights page
 import AiInsights from "./pages/AiInsights.jsx";
 
 // Components
-import { Toaster } from "react-hot-toast";
 import ContributorsLeaderboard from "./components/ContributorsLeaderboard";
-import BackToTopButton from "./components/BackToTopButton";
-import ScrollToTop from "./components/ScrollToTop";
-import NavBar from "./components/Navbar";
-import Footer from "./components/Footer";
-
-// React & Router
-import { useState } from "react";
-import { Route, BrowserRouter as Router, Routes, Outlet } from "react-router-dom";
-
-// Styles & Themes
-import "prismjs/themes/prism-tomorrow.css";
-import "./styles/glassmorphism.css";
-
-// Theme context
-import { ThemeProvider } from "./context/ThemeContext";
- 
-
-// Not found page
-// import NotFound from "./pages/NotFound"; 
-// Utils
-import "./utils/scrollbar.js"; 
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -120,23 +76,6 @@ function App() {
       <Router>
         <ScrollToTop />
         <Routes>
-          <Route
-            element={
-              <div className="flex flex-col min-h-screen">
-                <nav className="w-full fixed top-0 left-0 z-50">
-                  <NavBar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-                </nav>
-                <main className="flex-grow pt-20">
-                  <Outlet />
-                </main>
-                <Footer />
-                {!isMenuOpen && <BackToTopButton />}
-                <Toaster position="top-right" />
-              </div>
-            }
-          >
-            {/* Main routes */}
-          {/* All routes use Layout */}
           <Route element={<Layout />}>
             {/* Main pages */}
             <Route path="/" element={<Home />} />
@@ -148,7 +87,7 @@ function App() {
             <Route path="/contributors" element={<ContributorsLeaderboard />} />
 
             {/* AiInsights */}
-            <Route path="/insights" element={<AiInsights/>} />
+            <Route path="/insights" element={<AiInsights />} />
 
             {/* Code tools */}
             <Route path="/code-tools" element={<CodeTools />} />
@@ -161,7 +100,7 @@ function App() {
             <Route path="/security-scanner" element={<SecurityScanner />} />
             <Route path="/dependency-scanner" element={<DependencyScanner />} />
 
-            {/* 🚀 New route for Code Metrics Analyzer */}
+            {/* New route for Code Metrics */}
             <Route path="/code-metrics" element={<CodeMetrics />} />
 
             {/* Company pages */}

@@ -72,6 +72,7 @@ const Loader = ({
 
   const currentColors = colorSystem[color] || colorSystem.blue;
   const currentSize = sizeClasses[size] || sizeClasses.medium;
+  console.log("current colors is ",currentColors)
 
   const containerClasses = centered
     ? "flex flex-col items-center justify-center"
