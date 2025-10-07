@@ -1,71 +1,62 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./bulb.png" alt="OMEX Icon" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <!-- Move the meta charset to the top -->
+    <meta charset="UTF-8">
 
-    <!-- Primary Meta Tags -->
-    <title>OMEX - AI-Powered Code Optimization & Development Tools</title>
-    <meta name="title" content="OMEX - AI-Powered Code Optimization & Development Tools">
-    <meta name="description" content="Enhance your code with AI-powered optimization, analysis, and generation tools. OMEX helps developers write better, cleaner, and more efficient code.">
-    <meta name="keywords" content="code optimization, AI code tools, code analysis, code generation, code complexity, code comparison, test case generator, code beautifier, error debugger, performance analyzer">
-    <meta name="author" content="OMEX Team">
+    <!-- Title of the page -->
+    <title>User Registration</title>
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://omex.dev/">
-    <meta property="og:title" content="OMEX - AI-Powered Code Optimization & Development Tools">
-    <meta property="og:description" content="Enhance your code with AI-powered optimization, analysis, and generation tools. OMEX helps developers write better, cleaner, and more efficient code.">
-    <meta property="og:image" content="./omex-preview.png">
+    <!-- Favicon with no alt attribute -->
+    <link rel="icon" href="https://yourdomain.com/favicon.ico">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://omex.dev/">
-    <meta property="twitter:title" content="OMEX - AI-Powered Code Optimization & Development Tools">
-    <meta property="twitter:description" content="Enhance your code with AI-powered optimization, analysis, and generation tools. OMEX helps developers write better, cleaner, and more efficient code.">
-    <meta property="twitter:image" content="./omex-preview.png">
+    <!-- Open Graph and Twitter meta tags with absolute image URLs -->
+    <meta property="og:image" content="https://yourdomain.com/omex-preview.png">
+    <meta name="twitter:image" content="https://yourdomain.com/omex-preview.png">
+    
+    <!-- Description for SEO purposes -->
+    <meta name="description" content="Sign up to register for our service.">
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://omex.dev/">
-
-    <!-- Robots -->
-    <meta name="robots" content="index, follow">
-
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#1F2937">
-
-    <!-- Preconnect to API -->
-    <link rel="preconnect" href="https://api.omex.dev">
-  </head>
-  <body>
-    <div id="root">
-      <noscript>Please enable JavaScript to view the app.</noscript>
-    </div>
-    <script type="module" src="./src/main.jsx"></script>
-
-    <!-- Structured Data for SEO -->
+    <!-- Structured Data (adjust or remove if you don't have actual reviews) -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "OMEX",
-        "url": "https://omex.dev/",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Web",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "120"
-        },
-        "description": "AI-powered code optimization and development tools to help developers write better, cleaner, and more efficient code."
-      }
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "User Registration",
+      "description": "Sign up to register for our service.",
+      "image": "https://yourdomain.com/omex-preview.png"
+    }
     </script>
-  </body>
-</html>
 
+    <!-- Styles -->
+    <style>
+        body { font-family: Arial, sans-serif; background: #f9f9f9; }
+        .container { max-width: 400px; margin: 40px auto; background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        h2 { text-align: center; margin-bottom: 24px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%; padding: 8px; margin-bottom: 16px; border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button { width: 100%; background: #007bff; color: #fff; border: none; padding: 12px; border-radius: 4px; font-size: 16px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form action="/submit_registration" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>
