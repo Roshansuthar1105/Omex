@@ -203,150 +203,150 @@ export default function CodeTools() {
 
   return (
     <div
-      className={`min-h-screen w-full ${
-        isDark ? "bg-gray-800" : "bg-gray-100"
+  className={`min-h-screen w-full ${
+    isDark ? "bg-gray-800" : "bg-gray-100"
+  }`}
+>
+  <div className="container mx-auto px-4 py-12">
+    {/* Header */}
+    <div className="mb-12 text-center">
+      <div className="inline-block p-3 rounded-full bg-blue-200/20 mb-4">
+        <FaTools className="text-blue-400 text-3xl" />
+      </div>
+      <h1
+        ref={headerRef}
+        className={`text-4xl font-bold mb-4 ${
+          isDark ? "text-white" : "text-gray-800"
+        }`}
+      >
+        OMEX Code Tools
+      </h1>
+      <p
+        ref={paragraphRef}
+        className={`text-xl max-w-3xl mx-auto ${
+          isDark ? "text-gray-300" : "text-gray-600"
+        }`}
+      >
+        Powerful tools to enhance your coding experience and improve code
+        quality.
+      </p>
+    </div>
+
+    {/* Tools Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+      {tools.map((tool, index) => (
+        <a
+          key={index}
+          href={tool.link}
+          className={`group relative flex flex-col justify-between h-full p-6 rounded-2xl border
+            transition-transform duration-300 ease-out
+            ${
+              isDark
+                ? "bg-gray-700 hover:bg-gray-600 border-gray-600"
+                : "bg-white hover:bg-gray-100 border border-gray-200"
+            }
+            hover:-translate-y-2 hover:scale-[1.02]
+            hover:shadow-2xl hover:border-transparent`}
+          style={{ transformOrigin: "center" }}
+        >
+          {/* Icon */}
+          <div
+            className="flex items-center justify-center w-12 h-12 mx-auto rounded-xl 
+              bg-gradient-to-tr from-gray-100 to-gray-200 
+              dark:from-gray-800 dark:to-gray-700 
+              transform transition-transform duration-300 
+              group-hover:scale-110 group-hover:rotate-6"
+          >
+            {tool.icon}
+          </div>
+
+          {/* Title */}
+          <h3
+            className={`mt-6 text-lg font-semibold ${
+              isDark ? "text-gray-100" : "text-gray-900"
+            } transition-colors duration-300 
+              group-hover:text-indigo-600 dark:group-hover:text-indigo-400`}
+          >
+            {tool.title}
+          </h3>
+
+          {/* Description */}
+          <p
+            className="mt-3 text-sm 
+              text-gray-600 dark:text-gray-400 
+              transition-colors duration-300 
+              group-hover:text-gray-800 dark:group-hover:text-gray-300"
+          >
+            {tool.description}
+          </p>
+
+          {/* CTA */}
+          <div
+            className="mt-6 inline-flex items-center text-sm font-medium 
+              text-indigo-600 dark:text-indigo-400 
+              transition-colors duration-300 
+              group-hover:text-indigo-700 dark:group-hover:text-indigo-300"
+          >
+            Try it now
+            <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {/* Coming Soon Section */}
+    <div
+      className={`mt-16 p-8 rounded-lg mb-12 ${
+        isDark ? "bg-gray-700" : "bg-white border border-gray-200"
       }`}
     >
-      <div className="container mx-auto px-4 py-12">
-        {/* Header */}
-        <div className="mb-12 text-center">
-          <div className="inline-block p-3 rounded-full bg-blue-200 bg-opacity-20 mb-4">
-            <FaTools className="text-blue-400 text-3xl" />
-          </div>
-          <h1
-            ref={headerRef}
-            className={`text-4xl font-bold mb-4 ${
-              isDark ? "text-white" : "text-gray-800"
-            }`}
-          >
-            OMEX Code Tools
-          </h1>
-          <p
-            ref={paragraphRef}
-            className={`text-xl max-w-3xl mx-auto ${
-              isDark ? "text-gray-300" : "text-gray-600"
-            }`}
-          >
-            Powerful tools to enhance your coding experience and improve code
-            quality
-          </p>
-        </div>
-
-        {/* Tools Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {tools.map((tool, index) => (
-            <a
-              key={index}
-              href={tool.link}
-              className={`group relative p-6 rounded-2xl border 
-                 transition-all duration-300 
-                ${
-                  isDark
-                    ? "bg-gray-700 hover:bg-gray-600"
-                    : "bg-white hover:bg-gray-100 border border-gray-200"
-                } 
-                 hover:-translate-y-2 hover:scale-[1.02] 
-                 hover:shadow-2xl hover:border-transparent`}
-            >
-              {/* Icon */}
-              <div
-                className="flex items-center justify-center w-12 h-12 rounded-xl 
-                   bg-gradient-to-tr from-gray-100 to-gray-200 
-                   isDark:from-gray-800 isDark:to-gray-700 
-                   transform transition-transform duration-300 
-                   group-hover:scale-110 group-hover:rotate-6"
-              >
-                {tool.icon}
-              </div>
-
-              {/* Title */}
-              <h3
-                className={`mt-6 text-lg font-semibold ${isDark ? 'text-gray-100' : 'text-gray-900'} 
-                   transition-colors duration-300 
-                   group-hover:text-indigo-600 dark:group-hover:text-indigo-400`}
-              >
-                {tool.title}
-              </h3>
-
-              {/* Description */}
-              <p
-                className="mt-3 text-sm 
-                   text-gray-600 dark:text-gray-400 
-                   transition-colors duration-300 
-                   group-hover:text-gray-800 dark:group-hover:text-gray-300"
-              >
-                {tool.description}
-              </p>
-
-              {/* CTA */}
-              <div
-                className="mt-6 inline-flex items-center text-sm font-medium 
-                   text-indigo-600 dark:text-indigo-400 
-                   transition-colors duration-300 
-                   group-hover:text-indigo-700 dark:group-hover:text-indigo-300"
-              >
-                Try it now
-                <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </div>
-            </a>
-          ))}
-        </div>
-
-        {/* Coming Soon Section */}
-        <div
-          className={`mt-10 p-8 rounded-lg mb-12 ${
-            isDark ? "bg-gray-700" : "bg-white border border-gray-200"
-          }`}
-        >
-          <h2
-            className={`text-2xl font-bold mb-4 ${
-              isDark ? "text-white" : "text-gray-800"
-            }`}
-          >
-            More Tools Coming Soon
-          </h2>
-          <p className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}>
-            We're constantly working on new tools to help you write better code.
-            Stay tuned for these upcoming features:
-          </p>
-          <ul
-            className={`grid grid-cols-1 md:grid-cols-2 gap-3 ${
-              isDark ? "text-gray-300" : "text-gray-600"
-            }`}
-          >
-            <li className="flex items-center">
-              <span className="mr-2 text-green-400">•</span> Code Refactoring
-              Tool
-            </li>
-            <li className="flex items-center">
-              <span className="mr-2 text-green-400">•</span> Design Pattern
-              Suggestions
-            </li>
-            <li className="flex items-center">
-              <span className="mr-2 text-green-400">•</span> Security
-              Vulnerability Scanner
-            </li>
-            <li className="flex items-center">
-              <span className="mr-2 text-green-400">•</span> Code Documentation
-              Generator
-            </li>
-            <li className="flex items-center">
-              <span className="mr-2 text-green-400">•</span> API Documentation
-              Generator
-            </li>
-            <li className="flex items-center">
-              <span className="mr-2 text-green-400">•</span> Code Explanation
-              Tool
-            </li>
-            <li className="flex items-center">
-              <span className="mr-2 text-green-400">•</span> Algorithm
-              Visualizer
-            </li>
-          </ul>
-        </div>
-      </div>
+      <h2
+        className={`text-2xl font-bold mb-4 ${
+          isDark ? "text-white" : "text-gray-800"
+        }`}
+      >
+        More Tools Coming Soon
+      </h2>
+      <p className={`mb-6 ${isDark ? "text-gray-300" : "text-gray-600"}`}>
+        We're constantly working on new tools to help you write better code.
+        Stay tuned for these upcoming features:
+      </p>
+      <ul
+        className={`grid grid-cols-1 md:grid-cols-2 gap-3 ${
+          isDark ? "text-gray-300" : "text-gray-600"
+        }`}
+      >
+        <li className="flex items-center">
+          <span className="mr-2 text-green-400">•</span> Code Refactoring Tool
+        </li>
+        <li className="flex items-center">
+          <span className="mr-2 text-green-400">•</span> Design Pattern
+          Suggestions
+        </li>
+        <li className="flex items-center">
+          <span className="mr-2 text-green-400">•</span> Security Vulnerability
+          Scanner
+        </li>
+        <li className="flex items-center">
+          <span className="mr-2 text-green-400">•</span> Code Documentation
+          Generator
+        </li>
+        <li className="flex items-center">
+          <span className="mr-2 text-green-400">•</span> API Documentation
+          Generator
+        </li>
+        <li className="flex items-center">
+          <span className="mr-2 text-green-400">•</span> Code Explanation Tool
+        </li>
+        <li className="flex items-center">
+          <span className="mr-2 text-green-400">•</span> Algorithm Visualizer
+        </li>
+      </ul>
     </div>
+  </div>
+</div>
+
   );
 }
