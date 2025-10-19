@@ -101,14 +101,14 @@ const Contribute = () => {
               <li>
                 💻 <strong>Clone</strong> your fork locally:
                 <br />
-                <code className="break-all dark:bg-gray-700 p-1 rounded">
+                <code className="break-all dark:bg-gray-700 dark:text-gray-100 p-1 rounded">
                   git clone https://github.com/YOUR-USERNAME/Omex.git
                 </code>
               </li>
               <li>
                 🌿 <strong>Create a feature branch</strong>:
                 <br />
-                <code className="break-all dark:bg-gray-700 p-1 rounded">
+                <code className="break-all dark:bg-gray-700 dark:text-gray-100  p-1 rounded">
                   git checkout -b feature/YourFeatureName
                 </code>
               </li>
@@ -120,7 +120,7 @@ const Contribute = () => {
               <li>
                 💾 Commit:
                 <br />
-                <code className="break-all dark:bg-gray-700 p-1 rounded">
+                <code className="break-all dark:bg-gray-700 dark:text-gray-100  p-1 rounded">
                   git add . <br />
                   git commit -m "Add your feature"
                 </code>
@@ -128,7 +128,7 @@ const Contribute = () => {
               <li>
                 🛫 Push:
                 <br />
-                <code className="break-all dark:bg-gray-700 p-1 rounded">
+                <code className="break-all dark:bg-gray-700 dark:text-gray-100  p-1 rounded">
                   git push origin feature/YourFeatureName
                 </code>
               </li>
