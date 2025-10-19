@@ -59,16 +59,35 @@ end`,
     }
 
     setLoading(true);
+    setTestCases(''); // Clear previous results immediately
+
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/ai/generate-test-cases`, {
         code,
         language
       });
 
-      setTestCases(response.data);
-      toast.success('Test cases generated successfully!');
+      // Store the response data in a variable
+      const responseData = response.data;
+
+      // --- START: MODIFIED LOGIC ---
+
+      // Always update the state to show the message (whether error or success)
+      setTestCases(responseData);
+
+      // Now, check the content of the response to decide the toast
+      if (responseData.startsWith("Error:")) {
+        // It's the backend error message, so show an error toast
+        toast.error(responseData);
+      } else {
+        // It's a valid test case, show the success toast
+        toast.success('Test cases generated successfully!');
+      }
+      // --- END: MODIFIED LOGIC ---
+
     } catch (error) {
       console.error('Error generating test cases:', error);
+      // This catches network errors or server 500 errors
       toast.error('Failed to generate test cases. Please try again.');
     } finally {
       setLoading(false);
@@ -86,7 +105,7 @@ end`,
       e.preventDefault();
       e.stopPropagation();
     }
-    
+
     setCode('');
     setTestCases('');
     toast.success('All cleared!');
@@ -139,11 +158,10 @@ end`,
                     setLanguage(e.target.value);
                     setCode(exampleCodes[e.target.value] || "");
                   }}
-                  className={`px-3 py-1 rounded ${
-                    isDark
-                      ? 'bg-gray-800 text-white border-gray-600'
-                      : 'bg-gray-100 text-gray-800 border-gray-300'
-                  } border`}
+                  className={`px-3 py-1 rounded ${isDark
+                    ? 'bg-gray-800 text-white border-gray-600'
+                    : 'bg-gray-100 text-gray-800 border-gray-300'
+                    } border`}
                 >
                   {languages.map((lang) => (
                     <option key={lang} value={lang}>
@@ -158,9 +176,8 @@ end`,
               <textarea
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
-                className={`w-full h-64 p-4 font-mono text-sm ${
-                  isDark ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-800'
-                }`}
+                className={`w-full h-64 p-4 font-mono text-sm ${isDark ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-800'
+                  }`}
                 placeholder="Paste your code here..."
               />
             </div>
@@ -178,11 +195,10 @@ end`,
                     handleClearAll(e);
                   }
                 }}
-                className={`px-4 py-3 min-h-[44px] rounded flex items-center justify-center ${
-                  isDark
-                    ? 'bg-gray-600 hover:bg-gray-500 active:bg-gray-400'
-                    : 'bg-gray-200 hover:bg-gray-300 active:bg-gray-400'
-                } transition-all duration-150 touch-manipulation`}
+                className={`px-4 py-3 min-h-[44px] rounded flex items-center justify-center ${isDark
+                  ? 'bg-gray-600 hover:bg-gray-500 active:bg-gray-400'
+                  : 'bg-gray-200 hover:bg-gray-300 active:bg-gray-400'
+                  } transition-all duration-150 touch-manipulation`}
                 style={{
                   WebkitTapHighlightColor: 'transparent',
                   userSelect: 'none',
@@ -211,11 +227,10 @@ end`,
               {testCases && (
                 <button
                   onClick={handleCopyTestCases}
-                  className={`px-3 py-1 rounded ${
-                    isDark
-                      ? 'bg-gray-600 hover:bg-gray-500'
-                      : 'bg-gray-200 hover:bg-gray-300'
-                  } transition-colors text-sm`}
+                  className={`px-3 py-1 rounded ${isDark
+                    ? 'bg-gray-600 hover:bg-gray-500'
+                    : 'bg-gray-200 hover:bg-gray-300'
+                    } transition-colors text-sm`}
                 >
                   Copy to Clipboard
                 </button>
@@ -248,7 +263,7 @@ end`,
           </div>
         </div>
       </div>
-      
+
       {/* Feedback Button */}
       <FeedbackButton toolName="Test Case Generator" />
     </div>
