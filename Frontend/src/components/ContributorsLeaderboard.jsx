@@ -610,7 +610,7 @@ export default function LeaderBoard() {
                 href="https://gssoc.girlscript.tech/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center px-3 sm:px-4 py-2 ${isDark ? "bg-blue-500 hover:bg-blue-600" : "bg-primary-600 hover:bg-primary-700"} text-white text-xs sm:text-sm font-medium rounded-lg transition-colors`}
+                className={`inline-flex items-center px-3 sm:px-4 py-2 ${isDark ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-950 hover:bg-gray-700"} text-white text-xs sm:text-sm font-medium rounded-lg transition-colors`}
               >
                 <FaGithub className="mr-1.5 sm:mr-2" /> Join GSSoC'25
               </a>
