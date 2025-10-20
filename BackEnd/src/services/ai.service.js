@@ -138,9 +138,8 @@ async function generateComplexity(prompt) {
  * @returns {Promise<string>} - The comparison result
  */
 async function compareCode(code1, code2, language) {
-  const prompt = `Please compare these two code snippets written in ${
-    language || "the provided language"
-  }:
+  const prompt = `Please compare these two code snippets written in ${language || "the provided language"
+    }:
 
 Code Snippet 1:
 \`\`\`
@@ -163,19 +162,43 @@ Provide a line-by-line analysis of the errors with brief explanations.`;
 /**
  * Generate test cases for code
  * @param {string} code - The code to generate test cases for
- * @param {string} language - The programming language
- * @returns {Promise<string>} - The generated test cases
+ * @param {string} language - The programming language specified by the user
+ * @returns {Promise<string>} - The generated test cases or an error message
  */
 async function generateTestCases(code, language) {
-  const prompt = `Generate comprehensive test cases for the following ${
-    language || "code"
-  }:
+  const specifiedLanguage = language || "the provided";
 
+  const prompt = `
+Analyze the code snippet below based on the specified language.
+
+**Specified Language:** ${specifiedLanguage}
+**Code Snippet:**
 \`\`\`
 ${code}
 \`\`\`
 
-Please provide a variety of test cases including normal cases, edge cases, and error cases.`;
+---
+**Task:**
+
+**IF** the code's syntax **DOES NOT** match the \`${specifiedLanguage}\`:
+Respond with **only** this exact text:
+"Error: The provided code does not match the specified programming language (${specifiedLanguage})."
+
+**ELSE IF** the code's syntax **DOES** match the \`${specifiedLanguage}\`:
+Generate a response with these exact sections:
+
+1.  **Confirmation Statement and a short analysis:**
+    (Confirm language match and state the testing framework used, e.g., Jest, pytest).
+
+2.  **Test Code:**
+    (Provide the complete, commented, and executable test file).
+
+3.  **Explanation of Test Cases:**
+    (List and explain the Base, Normal, Edge, and Error cases).
+
+4.  **Key Improvements in Test Cases:**
+    (Briefly list why the test suite is robust, e.g., "Comprehensive Error Handling," "Complete Coverage").
+`;
 
   const result = await testCaseGenerator.generateContent(prompt);
   const rawResponse = result.response.text();
@@ -189,9 +212,8 @@ Please provide a variety of test cases including normal cases, edge cases, and e
  * @returns {Promise<string>} - The beautified code
  */
 async function beautifyCode(code, language) {
-  const prompt = `Beautify and format the following ${
-    language || "code"
-  } to improve readability:
+  const prompt = `Beautify and format the following ${language || "code"
+    } to improve readability:
 
 \`\`\`
 ${code}
@@ -210,9 +232,8 @@ Please maintain the original functionality while making it more readable and wel
  * @returns {Promise<string>} - The debugging result
  */
 async function debugCode(code, language) {
-  const prompt = `Debug the following ${
-    language || "code"
-  } and identify any errors or issues:
+  const prompt = `Debug the following ${language || "code"
+    } and identify any errors or issues:
 
 \`\`\`
 ${code}
@@ -231,9 +252,8 @@ Please provide a detailed analysis of any errors found and suggest fixes.`;
  * @returns {Promise<string>} - The performance analysis
  */
 async function analyzePerformance(code, language) {
-  const prompt = `Analyze the execution time and memory usage of the following ${
-    language || "code"
-  }:
+  const prompt = `Analyze the execution time and memory usage of the following ${language || "code"
+    }:
 
 \`\`\`
 ${code}
@@ -276,9 +296,8 @@ Please provide a ${summaryLength} summary in ${summaryType} style.`;
  * @returns {Promise<string>} - The security analysis
  */
 async function analyzeSecurity(code, language) {
-  const prompt = `Analyze the following ${
-    language || "code"
-  } for security vulnerabilities:
+  const prompt = `Analyze the following ${language || "code"
+    } for security vulnerabilities:
 
 \`\`\`
 ${code}
@@ -355,6 +374,6 @@ module.exports = {
   summarizeContent,
   analyzeSecurity,
   scanDependencies,
- codeMetricsAnalyzer,
+  codeMetricsAnalyzer,
   generateExplanation,
 };
