@@ -686,7 +686,7 @@ function Home() {
           </p>
 
           <div className="">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {toolsData.map((tool, index) => (
                 <FeatureCard
                   key={tool.id}
@@ -703,14 +703,11 @@ function Home() {
             <div className="flex justify-center mt-10">
               <Link
                 to="/code-tools"
-                className={`
-          inline-flex items-center gap-2
-          bg-blue-600 hover:bg-blue-700
-          text-white px-6 py-3 rounded-lg font-semibold
-          shadow-md hover:shadow-xl
-          transition-all duration-200
-          focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2
-        `}
+                className={`inline-flex items-center gap-2 px-6 py-2 rounded-full font-semibold transition-all duration-200 border-2 ${
+                isDark
+                  ? "border-gray-700 text-blue-200 bg-black/30 hover:bg-blue-900 hover:border-blue-700"
+                  : "border-blue-300 text-blue-700 bg-blue-50/60 hover:bg-blue-100 hover:border-blue-600"
+              } hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2`}
                 tabIndex={0}
                 role="button"
               >
